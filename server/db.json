@@ -5,6 +5,14 @@
       "email": "admin",
       "password": "admin",
       "type": "carrier"
+    },
+    {
+      "id": "581a",
+      "name": "dsa",
+      "lastName": "dsa",
+      "email": "asd",
+      "password": "a",
+      "type": "businessman"
     }
   ]
 }

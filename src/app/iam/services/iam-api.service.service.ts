@@ -7,7 +7,7 @@ import {BaseService} from "../../shared/services/base.service.service";
   providedIn: 'root'
 })
 export class IamApiService {
-  baseUrl="http://localhost:3000"
+  baseUrl="https://my-json-server.typicode.com/upc-OpenSource-BicasTeam/open-json-endpoints"
   constructor(private http:HttpClient){
   }
   findUserWithEmailAndPassword(email:any,password:any){
