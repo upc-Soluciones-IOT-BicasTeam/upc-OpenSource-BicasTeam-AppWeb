@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {IamLoginComponentComponent} from "./iam/components/iam-login/iam-login.component.component";
-import {IamRegisterComponent} from "./iam/components/iam-register/iam-register.component";
-import {IamRegisterUserInfoComponent} from "./iam/components/iam-register-user-info/iam-register-user-info.component";
-import {
-  IamRegisterSuccessfullyComponent
-} from "./iam/components/iam-register-successfully/iam-register-successfully.component";
+import {PgLoginComponent} from "./public/pages/pg-login/pg-login.component";
+import {PgRegisterComponent} from "./public/pages/pg-register/pg-register.component";
+import {PgRegisterSuccesComponent} from "./public/pages/pg-register-succes/pg-register-succes.component";
+import {PgRegisterInfoComponent} from "./public/pages/pg-register-info/pg-register-info.component";
+import {SidebarPublicComponent} from "./public/components/sidebar-public/sidebar-public.component";
+
 
 const routes: Routes = [
-  {path: 'login',component: IamLoginComponentComponent},
-  {path: 'register',component: IamRegisterComponent},
-  {path: 'register/successfully',component: IamRegisterSuccessfullyComponent},
-  {path: 'register/:type',component: IamRegisterUserInfoComponent},
+  {path: 'login',component: PgLoginComponent},
+  {path: 'register',component: PgRegisterComponent},
+  {path: 'register/successfully',component: PgRegisterSuccesComponent},
+  {path: 'register/:type',component: PgRegisterInfoComponent},
+  {path: 'sidebarViewTemporalPath/:id',component: SidebarPublicComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full'}
 ];
 

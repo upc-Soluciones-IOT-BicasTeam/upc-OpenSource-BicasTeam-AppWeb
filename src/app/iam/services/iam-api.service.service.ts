@@ -19,4 +19,7 @@ export class IamApiService {
   createUser(jsonUser:any){
     return this.http.post(`${this.baseUrl}/users`,jsonUser)
   }
+  findUserById(id:any){
+   return this.http.get(`${this.baseUrl}/users?id=${id}`)
+  }
 }
