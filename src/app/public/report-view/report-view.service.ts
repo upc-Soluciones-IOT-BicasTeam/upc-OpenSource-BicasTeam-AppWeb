@@ -17,4 +17,7 @@ export class ReportsApiService {
   getAllReports(): Observable<any> {
     return this.http.get(`${this.baseURL}/reports`);
   }
+  getReportsById(id:any){
+    return this.http.get(`${this.baseURL}/reports?idUser=${id}`);
+  }
 }

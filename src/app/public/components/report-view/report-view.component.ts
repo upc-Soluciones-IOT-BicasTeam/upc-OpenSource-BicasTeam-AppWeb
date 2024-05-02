@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportsApiService} from "../../report-view/report-view.service";
 import {Observable} from "rxjs";
+import {ActivatedRoute, Router} from "@angular/router";
+import {UserEntity} from "../../../iam/model/user.entity";
 
 @Component({
   selector: 'app-report-view',
@@ -11,17 +13,19 @@ import {Observable} from "rxjs";
 
 export class ReportViewComponent implements OnInit {
   reports: any[] = [];
+  driversNames: any[]=[];
+  user: UserEntity = {} as UserEntity;
 
-  constructor(private reportsApi: ReportsApiService) { }
+  constructor(private route: ActivatedRoute, private router: Router,private reportsApi: ReportsApiService) {
+    this.user.id = this.route.snapshot.params['id'];
+  }
 
   ngOnInit(): void {
     this.getDataReport();
   }
 
   async getDataReport() {
-    /*this.reportsApi.getAllReports().subscribe((data:any)=>{
-      console.log(data)
-    })*/
+
     try {
       const response: Observable<any> =  this.reportsApi.getAllReports();
       const reports = await response.toPromise();
@@ -32,8 +36,11 @@ export class ReportViewComponent implements OnInit {
       }
       this.reports = reports;
       this.reports.map((data:any)=>{
-        console.log(data)
+        this.reportsApi.findUserByID(data.idUser).subscribe((data:any)=>{
+          this.driversNames.push(data[0].name + data[0].lastName)
+        })
       })
+      console.log(this.driversNames)
     } catch (error) {
       console.error('Error fetching reports:', error);
     }

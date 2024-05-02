@@ -14,15 +14,17 @@
       <table class="table">
         <thead>
         <tr>
-          <th>Driver’s Name</th>
+          <th>Driver's Name</th>
           <th>Description</th>
+          <th>Type Report</th>
           <th>Date</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let report of reports">
-          <td>{{ report.name }}</td>
+        <tr *ngFor="let report of reports; let i = index">
+          <td>{{ driversNames[i] }}</td> <!-- Change from report.idUser to report.name -->
           <td>{{ report.description }}</td>
+          <td>{{ report.type }}</td>
           <td>{{ report.dateTime.date }}</td>
         </tr>
         </tbody>

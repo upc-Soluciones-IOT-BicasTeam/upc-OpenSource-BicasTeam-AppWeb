@@ -10,15 +10,17 @@
         <table class="table">
           <thead>
           <tr>
-            <th>Driver’s ID</th>
+            <th>Driver’s Name and Last Name</th>
             <th>Description</th>
+            <th>Report Type</th>
             <th>Date</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let report of reports">
-            <td>{{ report.idUser }}</td>
+          <tr *ngFor="let report of reports;let i = index">
+            <td>{{ driversNames[i] }}</td>
             <td>{{ report.description }}</td>
+            <td>{{ report.type }}</td>
             <td>{{ report.dateTime.date }}</td>
           </tr>
           </tbody>
