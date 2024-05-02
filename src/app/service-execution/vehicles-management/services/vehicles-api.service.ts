@@ -14,6 +14,6 @@ export class VehiclesApiService {
     return this.http.post(`${this.baseUrl}/vehicle`,vehicle);
   }
   deleteVehicle(id:any){
-    return this.http.delete(`${this.baseUrl}/vehicle/${id}`);
+    return this.http.delete(`${this.baseUrl}/vehicle?id=${id}`);
   }
 }

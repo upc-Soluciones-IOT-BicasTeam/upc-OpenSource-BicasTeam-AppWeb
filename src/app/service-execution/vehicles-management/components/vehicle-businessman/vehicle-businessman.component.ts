@@ -35,7 +35,12 @@ export class VehicleBusinessmanComponent {
 
 
   addVehicle() {
-    this.vehiclesApi.addVehicle(this.vehicle)
+    const json = {
+      licensePlate: this.vehicle.licensePlate,
+      model: this.vehicle.model,
+      serialNumber: this.vehicle.serialNumber
+    };
+    this.vehiclesApi.addVehicle(json)
       .subscribe((response:any) => {
         this.vehicle.serialNumber="";
         this.vehicle.licensePlate="";
@@ -67,7 +72,6 @@ export class VehicleBusinessmanComponent {
   }
   async getVehicleInfo(id:any){
     this.vehiclesApi.getVehicleById(id).subscribe((data:any)=>{
-      console.log(data)
       this.vehicles.push(data);
     })
 
