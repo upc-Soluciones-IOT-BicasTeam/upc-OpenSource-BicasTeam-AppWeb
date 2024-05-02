@@ -15,7 +15,6 @@ export class ShipmentBusinessmanComponent {
   showDeleteForm: boolean = false;
   deleteShipmentId: string = '';
   shipments: any[] = [];
-  shipmentsId:any[] = [];
   shipment: ShipmentEntity = {} as ShipmentEntity;
   user: UserEntity = {} as UserEntity;
 
@@ -57,16 +56,12 @@ export class ShipmentBusinessmanComponent {
   }
 
   async getDataShipment(userId: string) {
-    this.iamApi.findUserById(userId).subscribe(async(data:any)=>{
-      data[0].shipments.map((data:any)=>{
-        this.shipmentsId.push(data.idVehicle);
-      });
-      this.shipmentsId.map(async(data:any)=>{
-        await this.getInfoAll(this.shipmentsId[data-1])
+    this.shipmentApiService.getAllShipments().subscribe((data:any)=>{
+      data.map((data:any)=>{
+        console.log(data);
+        this.shipments.push(data)
       })
-
-    });
-
+    })
 
   }
 

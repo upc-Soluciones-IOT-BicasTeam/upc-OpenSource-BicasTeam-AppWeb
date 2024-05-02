@@ -11,6 +11,4 @@ export class VehicleEntity {
     this.serialNumber='';
   }
 
-
-
 }
