@@ -1,10 +1,10 @@
 .p-sidebar{
-  background-color: #303841;
+  background-color: #5D6D7E;
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
 }
 
-body{
+mat-sidenav-container{
   background-color: #5D6D7E;
 }
 
