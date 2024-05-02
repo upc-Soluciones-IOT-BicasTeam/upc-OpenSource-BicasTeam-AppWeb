@@ -56,9 +56,9 @@ export class SidebarPublicComponent {
 
   goToShipments(): void {
     if (this.type === 'businessman') {
-      this.router.navigate([`/${this.user.id}/organization`]);
+      this.router.navigate([ this.user.id,`shipment-businessman`]);
     } else {
-      this.router.navigate([`/${this.user.id}/organization/view`]);
+      this.router.navigate([ this.user.id,`shipment-carrier`]);
     }
   }
 

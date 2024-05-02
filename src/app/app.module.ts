@@ -34,6 +34,10 @@ import { VehicleCarrierComponent } from './service-execution/vehicles-management
 import { PgVehiclesCarrierComponent } from './public/pages/pg-vehicles-carrier/pg-vehicles-carrier.component';
 import { ProfileEditionComponent } from './profiles-managment/components/profile-edition/profile-edition.component';
 import { PgProfileEditionComponent } from './public/pages/pg-profile-edition/pg-profile-edition.component';
+import { ShipmentBusinessmanComponent } from './service-execution/shipment-management/components/shipment-businessman/shipment-businessman.component';
+import { ShipmentCarrierComponent } from './service-execution/shipment-management/components/shipment-carrier/shipment-carrier.component';
+import { PgShipmentBusinessmanComponent } from './public/pages/pg-shipment-businessman/pg-shipment-businessman.component';
+import { PgShipmentCarrierComponent } from './public/pages/pg-shipment-carrier/pg-shipment-carrier.component';
 
 
 
@@ -60,6 +64,10 @@ import { PgProfileEditionComponent } from './public/pages/pg-profile-edition/pg-
     PgVehiclesCarrierComponent,
     ProfileEditionComponent,
     PgProfileEditionComponent,
+    ShipmentBusinessmanComponent,
+    ShipmentCarrierComponent,
+    PgShipmentBusinessmanComponent,
+    PgShipmentCarrierComponent,
   ],
   imports: [
     HttpClientModule,
