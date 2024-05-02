@@ -6,6 +6,7 @@ import {PgRegisterSuccesComponent} from "./public/pages/pg-register-succes/pg-re
 import {PgRegisterInfoComponent} from "./public/pages/pg-register-info/pg-register-info.component";
 import {SidebarPublicComponent} from "./public/components/sidebar-public/sidebar-public.component";
 import {PgHomeBusinessmanComponent} from "./public/pages/pg-home-businessman/pg-home-businessman.component";
+import {PgHomeDriverComponent} from "./public/pages/pg-home-driver/pg-home-driver.component";
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'register/:type',component: PgRegisterInfoComponent},
   {path: 'sidebarViewTemporalPath/:id',component: SidebarPublicComponent},
   {path: 'Home-businessman',component: PgHomeBusinessmanComponent},
+  {path: 'Home-driver',component: PgHomeDriverComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full'}
 ];
 
