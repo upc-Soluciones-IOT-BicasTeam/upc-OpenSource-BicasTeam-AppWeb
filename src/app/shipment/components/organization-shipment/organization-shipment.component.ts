@@ -7,31 +7,24 @@ import { ShipmentApiService } from '../../services/shipment-api.service';
   templateUrl: './organization-shipment.component.html',
   styleUrl: './organization-shipment.component.css'
 })
-
 export class OrganizationShipmentComponent implements OnInit {
   //shipmentsApi: ShipmentApiService;
-  shipments: any[];
-  shipment: any;
-  submitted: boolean;
-  shipmentDialog: boolean;
-  selectedShipment: any;
-  shipmentDetailsDialog: boolean;
+  shipments: any[] = [];
+  shipment: any = {};
+  submitted = false;
+  shipmentDialog = false;
+  selectedShipment: any = null;
+  shipmentDetailsDialog = false;
 
   constructor() {
     //this.shipmentsApi = new ShipmentApiService();
-    this.shipments = [];
-    this.shipment = {};
-    this.submitted = false;
-    this.shipmentDialog = false;
-    this.selectedShipment = null;
-    this.shipmentDetailsDialog = false;
   }
 
   ngOnInit(): void {
     this.getDataShipment();
   }
 
-  async getDataShipment() {
+  async getDataShipment(): Promise<void> {
     const response = await this.shipmentsApi.getAllShipments();
     const shipments = response.data;
     for (let shipment of shipments) {
@@ -42,16 +35,16 @@ export class OrganizationShipmentComponent implements OnInit {
     this.shipments = shipments;
   }
 
-  showShipmentDetails(shipment: any) {
+  showShipmentDetails(shipment: any): void {
     this.selectedShipment = shipment;
     this.shipmentDetailsDialog = true;
   }
 
-  hideShipmentDetailsDialog() {
+  hideShipmentDetailsDialog(): void {
     this.shipmentDetailsDialog = false;
   }
 
-  newItem() {
+  newItem(): void {
     this.shipment = {
       driverName: '',
       destiny: '',
@@ -66,20 +59,20 @@ export class OrganizationShipmentComponent implements OnInit {
     this.shipmentDialog = true;
   }
 
-  hideDialog() {
+  hideDialog(): void {
     this.shipmentDialog = false;
     this.submitted = false;
   }
 
-  saveShipment() {
+  saveShipment(): void {
     if (!this.shipment.driverName || !this.shipment.destiny || !this.shipment.description || !this.shipment.dateTime.date || !this.shipment.dateTime.time) {
       this.submitted = true;
       return;
     }
-    // Logic to save shipment
     this.shipmentDialog = false;
     this.submitted = false;
-    alert("Successfully added.");
+    alert('Se agregó con éxito');
   }
 }
+
 

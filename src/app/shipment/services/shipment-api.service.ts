@@ -15,7 +15,7 @@ export class ShipmentApiService {
   }
 
   getAllShipments(){
-    return this.http.get('https://my-json-server.typicode.com/upc-OpenSource-BicasTeam/open-json-endpoints/shipment');
+    return this.http.get(`https://my-json-server.typicode.com/upc-OpenSource-BicasTeam/open-json-endpoints/shipment\`);
   }
 }
 
