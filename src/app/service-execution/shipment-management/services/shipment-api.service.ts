@@ -18,6 +18,6 @@ export class ShipmentApiService {
     return this.http.delete(`${this.baseUrl}/shipment?id=${id}`);
   }
   getShipmentsByIdOfUser(id:any){
-    return this.http.get(`${this.baseUrl}/shipment?id-user=${id}`)
+    return this.http.get(`${this.baseUrl}/shipment?idUser=${id}`)
   }
 }

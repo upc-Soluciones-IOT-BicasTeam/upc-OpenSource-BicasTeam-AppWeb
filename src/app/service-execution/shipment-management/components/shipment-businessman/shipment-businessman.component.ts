@@ -15,7 +15,6 @@ export class ShipmentBusinessmanComponent {
   showDeleteForm: boolean = false;
   deleteShipmentId: string = '';
   shipments: any[] = [];
-  shipmentsId:any[] = [];
   shipment: ShipmentEntity = {} as ShipmentEntity;
   user: UserEntity = {} as UserEntity;
 
