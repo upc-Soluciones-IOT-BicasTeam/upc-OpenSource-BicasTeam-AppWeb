@@ -30,7 +30,7 @@ export class SidebarPublicComponent {
     if (this.type === 'businessman') {
       this.router.navigate([ this.user.id,`home-businessman`]);
     } else {
-      this.router.navigate([`/${this.user.id}/home-driver-menu`]);
+      this.router.navigate([ this.user.id,`home-carrier`]);
     }
   }
 
@@ -42,7 +42,7 @@ export class SidebarPublicComponent {
     if (this.type === 'businessman') {
       this.router.navigate([ this.user.id,`vehicles-businessman`]);
     } else {
-      this.router.navigate([`/${this.user.id}/vehicles-carrier`]);
+      this.router.navigate([ this.user.id,`vehicles-carrier`]);
     }
   }
 

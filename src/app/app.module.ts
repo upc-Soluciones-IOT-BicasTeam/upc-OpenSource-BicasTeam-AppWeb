@@ -30,6 +30,8 @@ import { VehicleBusinessmanComponent } from './service-execution/vehicles-manage
 import { PgVehiclesBusinessmanComponent } from './public/pages/pg-vehicles-businessman/pg-vehicles-businessman.component';
 import {MatCard, MatCardContent, MatCardTitle} from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
+import { VehicleCarrierComponent } from './service-execution/vehicles-management/components/vehicle-carrier/vehicle-carrier.component';
+import { PgVehiclesCarrierComponent } from './public/pages/pg-vehicles-carrier/pg-vehicles-carrier.component';
 
 
 
@@ -52,6 +54,8 @@ import {MatButton} from "@angular/material/button";
     PgHomeDriverComponent,
     VehicleBusinessmanComponent,
     PgVehiclesBusinessmanComponent,
+    VehicleCarrierComponent,
+    PgVehiclesCarrierComponent,
   ],
   imports: [
     HttpClientModule,
