@@ -8,6 +8,7 @@ import {PgHomeBusinessmanComponent} from "./public/pages/pg-home-businessman/pg-
 import {PgHomeDriverComponent} from "./public/pages/pg-home-driver/pg-home-driver.component";
 import {PgVehiclesBusinessmanComponent} from "./public/pages/pg-vehicles-businessman/pg-vehicles-businessman.component";
 import {PgVehiclesCarrierComponent} from "./public/pages/pg-vehicles-carrier/pg-vehicles-carrier.component";
+import {PgProfileEditionComponent} from "./public/pages/pg-profile-edition/pg-profile-edition.component";
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: ':id/home-carrier',component: PgHomeDriverComponent},
   {path:':id/vehicles-businessman',component:PgVehiclesBusinessmanComponent},
   {path:':id/vehicles-carrier',component: PgVehiclesCarrierComponent},
+  {path:':id/profile',component:PgProfileEditionComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full'}
 ];
 

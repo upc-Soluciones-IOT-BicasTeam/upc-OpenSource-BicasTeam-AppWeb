@@ -32,6 +32,8 @@ import {MatCard, MatCardContent, MatCardTitle} from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
 import { VehicleCarrierComponent } from './service-execution/vehicles-management/components/vehicle-carrier/vehicle-carrier.component';
 import { PgVehiclesCarrierComponent } from './public/pages/pg-vehicles-carrier/pg-vehicles-carrier.component';
+import { ProfileEditionComponent } from './profiles-managment/components/profile-edition/profile-edition.component';
+import { PgProfileEditionComponent } from './public/pages/pg-profile-edition/pg-profile-edition.component';
 
 
 
@@ -56,6 +58,8 @@ import { PgVehiclesCarrierComponent } from './public/pages/pg-vehicles-carrier/p
     PgVehiclesBusinessmanComponent,
     VehicleCarrierComponent,
     PgVehiclesCarrierComponent,
+    ProfileEditionComponent,
+    PgProfileEditionComponent,
   ],
   imports: [
     HttpClientModule,

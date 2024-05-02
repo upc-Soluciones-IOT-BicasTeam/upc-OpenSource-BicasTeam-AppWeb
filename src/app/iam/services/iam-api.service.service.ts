@@ -22,4 +22,7 @@ export class IamApiService {
   findUserById(id:any){
    return this.http.get(`${this.baseUrl}/users?id=${id}`)
   }
+  updateUser(id:any,jsonUser:JSON){
+    return this.http.put(`${this.baseUrl}/users?id=${id}`,jsonUser)
+  }
 }
