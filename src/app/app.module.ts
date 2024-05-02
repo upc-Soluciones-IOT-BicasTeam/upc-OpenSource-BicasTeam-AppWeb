@@ -38,6 +38,8 @@ import { ShipmentBusinessmanComponent } from './service-execution/shipment-manag
 import { ShipmentCarrierComponent } from './service-execution/shipment-management/components/shipment-carrier/shipment-carrier.component';
 import { PgShipmentBusinessmanComponent } from './public/pages/pg-shipment-businessman/pg-shipment-businessman.component';
 import { PgShipmentCarrierComponent } from './public/pages/pg-shipment-carrier/pg-shipment-carrier.component';
+import { ReportDriverComponent } from './public/components/report-driver/report-driver.component';
+import { ReportViewComponent } from './public/components/report-view/report-view.component';
 
 
 
@@ -68,6 +70,8 @@ import { PgShipmentCarrierComponent } from './public/pages/pg-shipment-carrier/p
     ShipmentCarrierComponent,
     PgShipmentBusinessmanComponent,
     PgShipmentCarrierComponent,
+    ReportDriverComponent,
+    ReportViewComponent,
   ],
   imports: [
     HttpClientModule,
