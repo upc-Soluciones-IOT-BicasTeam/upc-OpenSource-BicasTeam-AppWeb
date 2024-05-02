@@ -32,7 +32,7 @@ export class IamLoginComponentComponent {
         this.error = true;
         this.error_msg = 'Email or Password incorrect';
       } else {
-        info.type === 'businessman' ? this.router.navigate(['sidebarViewTemporalPath', info.id]) : console.log('push hacia home de carrier');
+        info.type === 'businessman' ? this.router.navigate([ info.id,`home-businessman`]) : this.router.navigate([info.id,`home-carrier`]);
       }
     });
   }
