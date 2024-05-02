@@ -1,5 +1,6 @@
-/*import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReportsApiService} from "../../report-view/report-view.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-report-view',
@@ -19,11 +20,11 @@ export class ReportViewComponent implements OnInit {
 
   async getDataReport() {
     try {
-      const response = await this.reportsApi.getAllReports();
-      const reports = response.data;
+      const response: Observable<any> =  this.reportsApi.getAllReports();
+      const reports = await response.toPromise();
       for (let report of reports) {
-        const userResponse = await this.reportsApi.findUserByID(report['id-user']);
-        const user = userResponse.data[0];
+        const userResponse: Observable<any>  =  this.reportsApi.findUserByID(report['id-user']);
+        const user = await userResponse.toPromise();
         report.name = `${user.name} ${user.lastName}`;
       }
       this.reports = reports;
@@ -32,4 +33,4 @@ export class ReportViewComponent implements OnInit {
     }
   }
 }
-}*/
+

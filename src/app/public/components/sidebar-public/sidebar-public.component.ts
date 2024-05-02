@@ -48,9 +48,9 @@ export class SidebarPublicComponent {
 
   goToReports(): void {
     if (this.type === 'businessman') {
-      this.router.navigate([`/${this.user.id}/report/businessman`]);
+      this.router.navigate([ this.user.id,`report-businessman`]);
     } else {
-      this.router.navigate([`/${this.user.id}/report/carrier`]);
+      this.router.navigate([ this.user.id,`report-carrier`]);
     }
   }
 
