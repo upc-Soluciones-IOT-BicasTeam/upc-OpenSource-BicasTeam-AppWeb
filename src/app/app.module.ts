@@ -22,6 +22,10 @@ import {MatSidenav, MatSidenavContainer, MatSidenavModule} from "@angular/materi
 import {MatListItem, MatListModule, MatNavList} from "@angular/material/list";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {MatDivider, MatDividerModule} from "@angular/material/divider";
+import { ProfileHomeBusinessmanComponent } from './profiles-managment/components/profile-home-businessman/profile-home-businessman.component';
+import { ProfileHomeDriverComponent } from './profiles-managment/components/profile-home-driver/profile-home-driver.component';
+import { PgHomeDriverComponent } from './public/pages/pg-home-driver/pg-home-driver.component';
+import {PgHomeBusinessmanComponent} from "./public/pages/pg-home-businessman/pg-home-businessman.component";
 
 @NgModule({
   declarations: [
@@ -34,7 +38,11 @@ import {MatDivider, MatDividerModule} from "@angular/material/divider";
     PgLoginComponent,
     PgRegisterComponent,
     PgRegisterInfoComponent,
-    PgRegisterSuccesComponent
+    PgRegisterSuccesComponent,
+    PgHomeBusinessmanComponent,
+    ProfileHomeBusinessmanComponent,
+    ProfileHomeDriverComponent,
+    PgHomeDriverComponent
   ],
   imports: [
     HttpClientModule,
