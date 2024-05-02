@@ -6,15 +6,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ReportsApiService {
-  private baseURL = 'http://localhost:3000';
+  private baseURL = 'https://my-json-server.typicode.com/upc-OpenSource-BicasTeam/open-json-endpoints';
 
   constructor(private http: HttpClient) { }
 
   findUserByID(id: number): Observable<any> {
-    return this.http.get(`${this.baseURL}/moviGestion-iam/users?id=${id}`);
+    return this.http.get(`${this.baseURL}/users?id=${id}`);
   }
 
   getAllReports(): Observable<any> {
-    return this.http.get(`${this.baseURL}/moviGestion-cya/reports`);
+    return this.http.get(`${this.baseURL}/reports`);
   }
 }

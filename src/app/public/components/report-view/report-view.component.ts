@@ -19,6 +19,9 @@ export class ReportViewComponent implements OnInit {
   }
 
   async getDataReport() {
+    /*this.reportsApi.getAllReports().subscribe((data:any)=>{
+      console.log(data)
+    })*/
     try {
       const response: Observable<any> =  this.reportsApi.getAllReports();
       const reports = await response.toPromise();
@@ -28,6 +31,9 @@ export class ReportViewComponent implements OnInit {
         report.name = `${user.name} ${user.lastName}`;
       }
       this.reports = reports;
+      this.reports.map((data:any)=>{
+        console.log(data)
+      })
     } catch (error) {
       console.error('Error fetching reports:', error);
     }

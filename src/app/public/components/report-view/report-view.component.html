@@ -10,14 +10,14 @@
         <table class="table">
           <thead>
           <tr>
-            <th>Driver’s Name</th>
+            <th>Driver’s ID</th>
             <th>Description</th>
             <th>Date</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let report of reports">
-            <td>{{ report.name }}</td>
+            <td>{{ report.idUser }}</td>
             <td>{{ report.description }}</td>
             <td>{{ report.dateTime.date }}</td>
           </tr>
