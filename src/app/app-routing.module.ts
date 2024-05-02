@@ -6,6 +6,7 @@ import {PgRegisterSuccesComponent} from "./public/pages/pg-register-succes/pg-re
 import {PgRegisterInfoComponent} from "./public/pages/pg-register-info/pg-register-info.component";
 import {PgHomeBusinessmanComponent} from "./public/pages/pg-home-businessman/pg-home-businessman.component";
 import {PgHomeDriverComponent} from "./public/pages/pg-home-driver/pg-home-driver.component";
+import {PgVehiclesBusinessmanComponent} from "./public/pages/pg-vehicles-businessman/pg-vehicles-businessman.component";
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'register/:type',component: PgRegisterInfoComponent},
   {path: ':id/home-businessman',component: PgHomeBusinessmanComponent},
   {path: ':id/home-carrier',component: PgHomeDriverComponent},
+  {path:':id/vehicles-businessman',component:PgVehiclesBusinessmanComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full'}
 ];
 

@@ -28,7 +28,7 @@ export class SidebarPublicComponent {
 
   goToHome(): void {
     if (this.type === 'businessman') {
-      this.router.navigate([`/${this.user.id}/home-businessman-menu`]);
+      this.router.navigate([ this.user.id,`home-businessman`]);
     } else {
       this.router.navigate([`/${this.user.id}/home-driver-menu`]);
     }
@@ -40,7 +40,7 @@ export class SidebarPublicComponent {
 
   goToVehicles(): void {
     if (this.type === 'businessman') {
-      this.router.navigate([`/${this.user.id}/vehicles-businessman`]);
+      this.router.navigate([ this.user.id,`vehicles-businessman`]);
     } else {
       this.router.navigate([`/${this.user.id}/vehicles-carrier`]);
     }

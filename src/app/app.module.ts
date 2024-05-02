@@ -26,6 +26,13 @@ import { ProfileHomeBusinessmanComponent } from './profiles-managment/components
 import { ProfileHomeDriverComponent } from './profiles-managment/components/profile-home-driver/profile-home-driver.component';
 import { PgHomeDriverComponent } from './public/pages/pg-home-driver/pg-home-driver.component';
 import {PgHomeBusinessmanComponent} from "./public/pages/pg-home-businessman/pg-home-businessman.component";
+import { VehicleBusinessmanComponent } from './service-execution/vehicles-management/components/vehicle-businessman/vehicle-businessman.component';
+import { PgVehiclesBusinessmanComponent } from './public/pages/pg-vehicles-businessman/pg-vehicles-businessman.component';
+import {MatCard, MatCardContent, MatCardTitle} from "@angular/material/card";
+import {MatButton} from "@angular/material/button";
+
+
+
 
 @NgModule({
   declarations: [
@@ -42,7 +49,9 @@ import {PgHomeBusinessmanComponent} from "./public/pages/pg-home-businessman/pg-
     PgHomeBusinessmanComponent,
     ProfileHomeBusinessmanComponent,
     ProfileHomeDriverComponent,
-    PgHomeDriverComponent
+    PgHomeDriverComponent,
+    VehicleBusinessmanComponent,
+    PgVehiclesBusinessmanComponent,
   ],
   imports: [
     HttpClientModule,
@@ -58,7 +67,11 @@ import {PgHomeBusinessmanComponent} from "./public/pages/pg-home-businessman/pg-
     MatSidenavModule,
     MatListModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    MatCard,
+    MatCardTitle,
+    MatCardContent,
+    MatButton
   ],
   providers: [
     provideAnimationsAsync(),IamApiService
