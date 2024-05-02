@@ -24,6 +24,7 @@ export class VehicleBusinessmanComponent {
 
 
 
+
   constructor(private route: ActivatedRoute, private router: Router,private vehiclesApi: VehiclesApiService, private iamApi: IamApiService) {
     this.user.id = this.route.snapshot.params['id'];
   }
@@ -32,10 +33,10 @@ export class VehicleBusinessmanComponent {
     this.getVehicles(this.user.id);
   }
 
+
   addVehicle() {
     this.vehiclesApi.addVehicle(this.vehicle)
       .subscribe((response:any) => {
-        this.vehicle.idVehicle="";
         this.vehicle.serialNumber="";
         this.vehicle.licensePlate="";
         this.vehicle.model="";
@@ -52,17 +53,24 @@ export class VehicleBusinessmanComponent {
 
 
   async getVehicles(userId: string) {
-    this.iamApi.findUserById(userId).subscribe((data:any)=>{
-      data[0].vehicles.map(async(data:any)=>{
+    this.iamApi.findUserById(userId).subscribe(async(data:any)=>{
+      data[0].vehicles.map((data:any)=>{
         this.vehiclesId.push(data.idVehicle);
-        await this.getVehicleInfo(this.vehiclesId)
       });
+      this.vehiclesId.map(async(data:any)=>{
+        await this.getVehicleInfo(this.vehiclesId[data-1])
+      })
+
     });
+
+
   }
   async getVehicleInfo(id:any){
     this.vehiclesApi.getVehicleById(id).subscribe((data:any)=>{
-      this.vehicles.push(data)
+      console.log(data)
+      this.vehicles.push(data);
     })
+
   }
 
 }

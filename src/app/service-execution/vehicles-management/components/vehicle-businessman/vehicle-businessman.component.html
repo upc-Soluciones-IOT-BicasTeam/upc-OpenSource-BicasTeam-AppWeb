@@ -26,11 +26,10 @@
   </div>
   <div *ngFor="let vehicle of this.vehicles">
     <mat-card class="card">
-      <mat-card-title>{{vehicle.model}}</mat-card-title>
+      <mat-card-title>{{vehicle[0].model}}</mat-card-title>
       <mat-card-content>
-        <p>License Plate: {{vehicle.licensePlate}}</p>
-        <p>Serial Number: {{vehicle.serialNumber}}</p>
-        <p>Id: {{vehicle.id}}</p>
+        <p>License Plate: {{vehicle[0].licensePlate}}</p>
+        <p>Serial Number: {{vehicle[0].serialNumber}}</p>
       </mat-card-content>
     </mat-card>
   </div>
