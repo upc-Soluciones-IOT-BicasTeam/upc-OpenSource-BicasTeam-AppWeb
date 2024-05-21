@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportsApiService} from "../../report-view/report-view.service";
+import { ReportsApiService} from "../reports-services/report-view.service";
 import {Observable} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserEntity} from "../../../iam/model/user.entity";

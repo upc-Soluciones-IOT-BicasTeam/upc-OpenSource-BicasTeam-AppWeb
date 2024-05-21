@@ -38,8 +38,8 @@ import { ShipmentBusinessmanComponent } from './service-execution/shipment-manag
 import { ShipmentCarrierComponent } from './service-execution/shipment-management/components/shipment-carrier/shipment-carrier.component';
 import { PgShipmentBusinessmanComponent } from './public/pages/pg-shipment-businessman/pg-shipment-businessman.component';
 import { PgShipmentCarrierComponent } from './public/pages/pg-shipment-carrier/pg-shipment-carrier.component';
-import { ReportDriverComponent } from './public/components/report-driver/report-driver.component';
-import { ReportViewComponent } from './public/components/report-view/report-view.component';
+import { ReportDriverComponent } from './service-execution/reports-management/report-driver/report-driver.component';
+import { ReportViewComponent } from './service-execution/reports-management/report-view/report-view.component';
 import { PgReportBusinessmanComponent } from './public/pages/pg-report-businessman/pg-report-businessman.component';
 import { PgReportCarrierComponent } from './public/pages/pg-report-carrier/pg-report-carrier.component';
 
