@@ -26,6 +26,25 @@ import { ProfileHomeBusinessmanComponent } from './profiles-managment/components
 import { ProfileHomeDriverComponent } from './profiles-managment/components/profile-home-driver/profile-home-driver.component';
 import { PgHomeDriverComponent } from './public/pages/pg-home-driver/pg-home-driver.component';
 import {PgHomeBusinessmanComponent} from "./public/pages/pg-home-businessman/pg-home-businessman.component";
+import { VehicleBusinessmanComponent } from './service-execution/vehicles-management/components/vehicle-businessman/vehicle-businessman.component';
+import { PgVehiclesBusinessmanComponent } from './public/pages/pg-vehicles-businessman/pg-vehicles-businessman.component';
+import {MatCard, MatCardContent, MatCardTitle} from "@angular/material/card";
+import {MatButton} from "@angular/material/button";
+import { VehicleCarrierComponent } from './service-execution/vehicles-management/components/vehicle-carrier/vehicle-carrier.component';
+import { PgVehiclesCarrierComponent } from './public/pages/pg-vehicles-carrier/pg-vehicles-carrier.component';
+import { ProfileEditionComponent } from './profiles-managment/components/profile-edition/profile-edition.component';
+import { PgProfileEditionComponent } from './public/pages/pg-profile-edition/pg-profile-edition.component';
+import { ShipmentBusinessmanComponent } from './service-execution/shipment-management/components/shipment-businessman/shipment-businessman.component';
+import { ShipmentCarrierComponent } from './service-execution/shipment-management/components/shipment-carrier/shipment-carrier.component';
+import { PgShipmentBusinessmanComponent } from './public/pages/pg-shipment-businessman/pg-shipment-businessman.component';
+import { PgShipmentCarrierComponent } from './public/pages/pg-shipment-carrier/pg-shipment-carrier.component';
+import { ReportDriverComponent } from './service-execution/reports-management/report-driver/report-driver.component';
+import { ReportViewComponent } from './service-execution/reports-management/report-view/report-view.component';
+import { PgReportBusinessmanComponent } from './public/pages/pg-report-businessman/pg-report-businessman.component';
+import { PgReportCarrierComponent } from './public/pages/pg-report-carrier/pg-report-carrier.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -42,7 +61,21 @@ import {PgHomeBusinessmanComponent} from "./public/pages/pg-home-businessman/pg-
     PgHomeBusinessmanComponent,
     ProfileHomeBusinessmanComponent,
     ProfileHomeDriverComponent,
-    PgHomeDriverComponent
+    PgHomeDriverComponent,
+    VehicleBusinessmanComponent,
+    PgVehiclesBusinessmanComponent,
+    VehicleCarrierComponent,
+    PgVehiclesCarrierComponent,
+    ProfileEditionComponent,
+    PgProfileEditionComponent,
+    ShipmentBusinessmanComponent,
+    ShipmentCarrierComponent,
+    PgShipmentBusinessmanComponent,
+    PgShipmentCarrierComponent,
+    ReportDriverComponent,
+    ReportViewComponent,
+    PgReportBusinessmanComponent,
+    PgReportCarrierComponent,
   ],
   imports: [
     HttpClientModule,
@@ -58,7 +91,11 @@ import {PgHomeBusinessmanComponent} from "./public/pages/pg-home-businessman/pg-
     MatSidenavModule,
     MatListModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    MatCard,
+    MatCardTitle,
+    MatCardContent,
+    MatButton
   ],
   providers: [
     provideAnimationsAsync(),IamApiService

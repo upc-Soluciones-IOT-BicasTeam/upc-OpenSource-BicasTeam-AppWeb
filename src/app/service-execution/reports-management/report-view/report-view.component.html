@@ -1,0 +1,31 @@
+<!-- report-view.component.html -->
+<div class="container">
+  <div class="header">
+    <h1>Reports</h1>
+    <p>Driver report list</p>
+  </div>
+  <div class="card-container">
+    <div class="card">
+      <div class="card-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Driver’s Name and Last Name</th>
+            <th>Description</th>
+            <th>Report Type</th>
+            <th>Date</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let report of reports;let i = index">
+            <td>{{ driversNames[i] }}</td>
+            <td>{{ report.description }}</td>
+            <td>{{ report.type }}</td>
+            <td>{{ report.dateTime.date }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

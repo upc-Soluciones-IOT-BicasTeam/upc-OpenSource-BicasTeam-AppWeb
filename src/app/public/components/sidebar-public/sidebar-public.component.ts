@@ -28,37 +28,37 @@ export class SidebarPublicComponent {
 
   goToHome(): void {
     if (this.type === 'businessman') {
-      this.router.navigate([`/${this.user.id}/home-businessman-menu`]);
+      this.router.navigate([ this.user.id,`home-businessman`]);
     } else {
-      this.router.navigate([`/${this.user.id}/home-driver-menu`]);
+      this.router.navigate([ this.user.id,`home-carrier`]);
     }
   }
 
   goToProfile(): void {
-    this.router.navigate([`/${this.user.id}/userprofile`]);
+    this.router.navigate([ this.user.id,`profile`]);
   }
 
   goToVehicles(): void {
     if (this.type === 'businessman') {
-      this.router.navigate([`/${this.user.id}/vehicles-businessman`]);
+      this.router.navigate([ this.user.id,`vehicles-businessman`]);
     } else {
-      this.router.navigate([`/${this.user.id}/vehicles-carrier`]);
+      this.router.navigate([ this.user.id,`vehicles-carrier`]);
     }
   }
 
   goToReports(): void {
     if (this.type === 'businessman') {
-      this.router.navigate([`/${this.user.id}/report/businessman`]);
+      this.router.navigate([ this.user.id,`report-businessman`]);
     } else {
-      this.router.navigate([`/${this.user.id}/report/carrier`]);
+      this.router.navigate([ this.user.id,`report-carrier`]);
     }
   }
 
   goToShipments(): void {
     if (this.type === 'businessman') {
-      this.router.navigate([`/${this.user.id}/organization`]);
+      this.router.navigate([ this.user.id,`shipment-businessman`]);
     } else {
-      this.router.navigate([`/${this.user.id}/organization/view`]);
+      this.router.navigate([ this.user.id,`shipment-carrier`]);
     }
   }
 
