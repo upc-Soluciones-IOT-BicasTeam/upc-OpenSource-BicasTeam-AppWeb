@@ -31,7 +31,7 @@
             <div class="delivery" *ngFor="let delivery of deliveries.slice(0, 1)">
               <h3>{{ delivery.destiny }}</h3>
               <p>Responsible: {{ delivery.description }}</p>
-              <p>Start time: {{ delivery.dateTime.date }}</p>
+              <p>Start time: {{ delivery.dateTime }}</p>
               <p>Delivery time: {{ delivery.status }}</p>
             </div>
           </div>

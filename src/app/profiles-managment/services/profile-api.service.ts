@@ -20,6 +20,6 @@ export class ProfileApiService {
   }
 
   getAllDeliveries(): Observable<any> {
-    return this.http.get('https://my-json-server.typicode.com/upc-OpenSource-BicasTeam/open-json-endpoints/shipment');
+    return this.http.get('https://movigestion.azurewebsites.net/shipments');
   }
 }
