@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Activity, Condition, Delivery } from "../../model/profile.entity";
 import {ProfileApiService} from "../../services/profile-api.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-home-driver',
@@ -13,7 +14,8 @@ export class ProfileHomeDriverComponent implements OnInit  {
   conditions: Condition[] = [];
   deliveries: Delivery[] = [];
 
-  constructor(private apiService: ProfileApiService) { }
+  constructor(private apiService: ProfileApiService ,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.apiService.getAllActivities().subscribe(data => {
@@ -23,4 +25,13 @@ export class ProfileHomeDriverComponent implements OnInit  {
       this.deliveries = data;
     });
   }
+  onSeeMoreActivities() {
+
+    this.router.navigate([ `:id/report-carrier`]);
+  }
+  onSeeMoreDeliveries() {
+
+    this.router.navigate([ `:id/shipment-carrier`]);
+  }
+
 }

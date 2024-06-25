@@ -12,11 +12,11 @@ export class ProfileApiService {
   constructor(private http: HttpClient) { }
 
   getAllActivities(): Observable<any> {
-    return this.http.get('https://my-json-server.typicode.com/upc-OpenSource-BicasTeam/open-json-endpoints/reports');
+    return this.http.get('https://movigestion.azurewebsites.net/reports');
   }
 
   getAllCondition(): Observable<any> {
-    return this.http.get('https://my-json-server.typicode.com/upc-OpenSource-BicasTeam/open-json-endpoints/vehicle');
+    return this.http.get('https://movigestion.azurewebsites.net/vehicles');
   }
 
   getAllDeliveries(): Observable<any> {

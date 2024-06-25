@@ -16,7 +16,7 @@ export interface Activity {
 export interface Condition {
   id: number;
   licensePlate: string;
-  model: string;
+  modelSerialNumber: string;
   serialNumber: string;
 }
 
