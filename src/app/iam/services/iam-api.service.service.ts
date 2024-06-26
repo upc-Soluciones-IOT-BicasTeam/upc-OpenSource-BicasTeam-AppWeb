@@ -17,7 +17,7 @@ export class IamApiService {
     return this.http.get(`${this.baseUrl}/users?email=${email}`)
   }
   createUser(jsonUser:any){
-    return this.http.post(`${this.baseUrl}/users`,jsonUser)
+    return this.http.post(`https://movigestion.azurewebsites.net/api/users`,jsonUser)
   }
   findUserById(id:any){
    return this.http.get(`${this.baseUrl}/users?id=${id}`)
