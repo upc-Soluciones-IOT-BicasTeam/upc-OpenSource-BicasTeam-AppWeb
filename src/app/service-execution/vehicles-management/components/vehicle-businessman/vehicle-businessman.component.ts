@@ -37,14 +37,12 @@ export class VehicleBusinessmanComponent {
   addVehicle() {
     const json = {
       licensePlate: this.vehicle.licensePlate,
-      model: this.vehicle.model,
-      serialNumber: this.vehicle.serialNumber
+      modelSerialNumber: this.vehicle.modelSerialNumber
     };
     this.vehiclesApi.addVehicle(json)
       .subscribe((response:any) => {
-        this.vehicle.serialNumber="";
         this.vehicle.licensePlate="";
-        this.vehicle.model="";
+        this.vehicle.modelSerialNumber="";
       });
   }
 

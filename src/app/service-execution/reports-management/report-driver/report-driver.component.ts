@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReportsApiService} from "../reports-services/report-view.service";
 import {Observable} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ReportEntity} from "../model/reports.entity";
 import {UserEntity} from "../../../iam/model/user.entity";
 
 @Component({
@@ -12,9 +13,9 @@ styleUrls: ['./report-driver.component.css']
 export class ReportDriverComponent implements OnInit {
   driversNames: any[]=[];
   reports: any[] = [];
-  report: any = {};
   submitted: boolean = false;
   reportDialog: boolean = false;
+  report: ReportEntity = {} as ReportEntity;
   user: UserEntity = {} as UserEntity;
 
   constructor(private route: ActivatedRoute, private router: Router,private reportsApi: ReportsApiService) {
@@ -47,7 +48,7 @@ export class ReportDriverComponent implements OnInit {
   }
 
   openNew() {
-    this.report = {};
+    this.report = {} as ReportEntity;
     this.submitted = false;
     this.reportDialog = true;
   }

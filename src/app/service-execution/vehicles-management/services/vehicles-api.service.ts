@@ -5,15 +5,15 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class VehiclesApiService {
-  baseUrl="https://my-json-server.typicode.com/upc-OpenSource-BicasTeam/open-json-endpoints"
+  baseUrl="https://movigestion.azurewebsites.net"
   constructor(private http:HttpClient) { }
   getVehicleById(id:any){
-    return this.http.get(`${this.baseUrl}/vehicle?id=${id}`)
+    return this.http.get(`${this.baseUrl}/vehicles?id=${id}`)
   }
   addVehicle(vehicle:any){
-    return this.http.post(`${this.baseUrl}/vehicle`,vehicle);
+    return this.http.post(`${this.baseUrl}/vehicles`,vehicle);
   }
   deleteVehicle(id:any){
-    return this.http.delete(`${this.baseUrl}/vehicle?id=${id}`);
+    return this.http.delete(`${this.baseUrl}/vehiclesy?id=${id}`);
   }
 }

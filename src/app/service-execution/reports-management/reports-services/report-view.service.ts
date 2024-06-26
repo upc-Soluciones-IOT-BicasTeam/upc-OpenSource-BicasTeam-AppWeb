@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ReportsApiService {
-  private baseURL = 'https://my-json-server.typicode.com/upc-OpenSource-BicasTeam/open-json-endpoints';
+  private baseURL = 'https://movigestion.azurewebsites.net';
 
   constructor(private http: HttpClient) { }
 
