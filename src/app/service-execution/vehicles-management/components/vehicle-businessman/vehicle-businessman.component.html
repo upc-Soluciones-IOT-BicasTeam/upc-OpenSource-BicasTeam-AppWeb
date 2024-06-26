@@ -8,11 +8,9 @@
     <form *ngIf="showAddForm" (submit)="addVehicle()" class="form-card">
       <h2 class="title-card">New Vehicle</h2>
       <label >Model</label>
-      <input [(ngModel)]="vehicle.model" name="model" placeholder="Model" required>
+      <input [(ngModel)]="vehicle.modelSerialNumber" name="model" placeholder="Model" required>
       <label >License Plate</label>
       <input [(ngModel)]="vehicle.licensePlate" name="licensePlate" placeholder="License Plate" required>
-      <label >Serial Number</label>
-      <input [(ngModel)]="vehicle.serialNumber" name="serialNumber" placeholder="Serial Number" required>
       <button mat-raised-button type="submit">Confirm</button>
       <button mat-raised-button (click)="showAddForm = false">Close</button>
     </form>
@@ -29,8 +27,7 @@
       <mat-card-title>Vehicle ID: {{vehicle[0].id}}</mat-card-title>
       <mat-card-content>
         <p>License Plate: {{vehicle[0].licensePlate}}</p>
-        <p>Serial Number: {{vehicle[0].serialNumber}}</p>
-        <p>Model: {{vehicle[0].model}}</p>
+        <p>Model and Serial Number: {{vehicle[0].modelSerialNumber}}</p>
       </mat-card-content>
     </mat-card>
   </div>

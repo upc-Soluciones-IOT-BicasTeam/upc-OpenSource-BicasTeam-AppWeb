@@ -1,14 +1,13 @@
 export class VehicleEntity {
   idVehicle: any;
-  model: string;
   licensePlate: string;
-  serialNumber: string;
+  modelSerialNumber: string;
 
   constructor() {
     this.idVehicle='';
-    this.model='';
+    this.modelSerialNumber='';
     this.licensePlate='';
-    this.serialNumber='';
+
   }
 
 }

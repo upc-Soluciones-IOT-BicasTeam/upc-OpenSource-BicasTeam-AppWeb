@@ -12,7 +12,7 @@
       <label >Shipment Destiny:</label>
       <input [(ngModel)]="shipment.destiny" name="destiny" placeholder="Shipment Destiny" required>
       <label >Shipment Id Carrier</label>
-      <input [(ngModel)]="shipment.idUser" name="IdCarrier" placeholder="Id Carrier" required>
+      <input [(ngModel)]="shipment.idUserDestiny" name="IdCarrier" placeholder="Id Carrier" required>
       <button mat-raised-button type="submit">Confirm</button>
       <button mat-raised-button (click)="showAddForm = false">Close</button>
     </form>
@@ -28,11 +28,10 @@
     <mat-card class="card">
       <mat-card-title>Shipment ID: {{shipment.id}}</mat-card-title>
       <mat-card-content>
-        <p>Carrier ID: {{shipment.idUser }}</p>
+        <p>Carrier ID: {{shipment.idUserDestiny }}</p>
         <p>Shipment Description: {{shipment.description}}</p>
         <p>Shipment destiny: {{shipment.destiny}}</p>
-        <p>Registration Time: {{shipment.dateTime.time}}</p>
-        <p>Registration Date: {{shipment.dateTime.date}}</p>
+        <p>Registration Time: {{shipment.dateTime}}</p>
       </mat-card-content>
     </mat-card>
   </div>

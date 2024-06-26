@@ -5,7 +5,7 @@ export class ShipmentEntity {
   dateShipment:string;
   time:string;
   shipmentStatus:string;
-  idUser:string;
+  idUserDestiny:string;
 
   constructor() {
     this.idShipment='';
@@ -14,7 +14,7 @@ export class ShipmentEntity {
     this.dateShipment='';
     this.time='';
     this.shipmentStatus='';
-    this.idUser=''
+    this.idUserDestiny=''
 
   }
 
