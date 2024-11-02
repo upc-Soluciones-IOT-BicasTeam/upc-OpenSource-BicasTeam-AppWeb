@@ -28,30 +28,30 @@ export class ShipmentBusinessmanComponent {
 
   addShipment() {
     const json = {
-      dateShipment: this.shipment.dateShipment,
-      time: this.shipment.time,
-      description: this.shipment.description,
-      idShipment: this.shipment.idShipment,
+      idUser: this.user.id,
       destiny: this.shipment.destiny,
-      shipmentStatus: this.shipment.shipmentStatus,
-
+      description: this.shipment.description,
+      dateTime: {
+        date: new Date().toISOString().split('T')[0],
+        time: new Date().toLocaleTimeString(),
+      },
+      status: this.shipment.status
     };
-    this.shipmentApiService.addShipment(json)
-      .subscribe((response:any) => {
-        this.shipment.dateShipment="";
-        this.shipment.time="";
-        this.shipment.description="";
-        this.shipment.idShipment="";
-        this.shipment.destiny="";
-        this.shipment.shipmentStatus="";
-
-      });
+    this.shipmentApiService.addShipment(json).subscribe((response: any) => {
+      console.log(response);
+      this.shipment = {} as ShipmentEntity;
+      this.shipments.push(response);
+      this.showAddForm = false;
+    });
   }
 
   deleteShipment() {
-    this.shipmentApiService.deleteShipment(this.deleteShipmentId)
+    const idToDelete = Number(this.deleteShipmentId);
+    this.shipmentApiService.deleteShipment(idToDelete)
       .subscribe(() => {
+        this.shipments = this.shipments.filter(shipment => shipment.id !== idToDelete);
         this.deleteShipmentId = '';
+        this.showDeleteForm = false;
       });
   }
 

@@ -15,7 +15,7 @@ export class ShipmentApiService {
     return this.http.post(`${this.baseUrl}/shipment`,shipment)
   }
   deleteShipment(id:any){
-    return this.http.delete(`${this.baseUrl}/shipment?id=${id}`);
+    return this.http.delete(`${this.baseUrl}/shipment/${id}`);
   }
   getShipmentsByIdOfUser(id:any){
     return this.http.get(`${this.baseUrl}/shipment?idUser=${id}`)
