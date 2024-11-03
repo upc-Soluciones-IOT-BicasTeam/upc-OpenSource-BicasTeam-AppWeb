@@ -15,12 +15,14 @@ export class ShipmentBusinessmanComponent {
   showDeleteForm: boolean = false;
   deleteShipmentId: string = '';
   shipments: any[] = [];
-  shipment: ShipmentEntity = {} as ShipmentEntity;
+  shipment: ShipmentEntity = new ShipmentEntity();
   user: UserEntity = {} as UserEntity;
+
 
   constructor(private route: ActivatedRoute, private router: Router,private shipmentApiService: ShipmentApiService,private iamApi: IamApiService) {
     this.user.id = this.route.snapshot.params['id'];
   }
+
 
   ngOnInit(): void {
     this.getDataShipment(this.user.id);
@@ -28,7 +30,7 @@ export class ShipmentBusinessmanComponent {
 
   addShipment() {
     const json = {
-      idUser: this.user.id,
+      idUser: this.shipment.idUser,
       destiny: this.shipment.destiny,
       description: this.shipment.description,
       dateTime: {
@@ -39,7 +41,7 @@ export class ShipmentBusinessmanComponent {
     };
     this.shipmentApiService.addShipment(json).subscribe((response: any) => {
       console.log(response);
-      this.shipment = {} as ShipmentEntity;
+      this.shipment = new ShipmentEntity();
       this.shipments.push(response);
       this.showAddForm = false;
     });

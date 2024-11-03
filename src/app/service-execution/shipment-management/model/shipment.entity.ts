@@ -15,6 +15,6 @@ export class ShipmentEntity {
     this.destiny = '';
     this.description = '';
     this.dateTime = { date: '', time: '' };
-    this.status = '';
+    this.status = 'Programmed';
   }
 }
