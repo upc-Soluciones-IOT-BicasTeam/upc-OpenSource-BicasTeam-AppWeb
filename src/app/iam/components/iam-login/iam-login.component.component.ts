@@ -27,7 +27,7 @@ export class IamLoginComponentComponent {
 
   login() {
     this.iamApi.findUserWithEmailAndPassword(this.user.email, this.user.password).subscribe((data:any)=>{
-      const info = data[0];
+      const info = data;
       if (info === undefined) {
         this.error = true;
         this.error_msg = 'Email or Password incorrect';

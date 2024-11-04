@@ -7,20 +7,20 @@ import {BaseService} from "../../shared/services/base.service.service";
   providedIn: 'root'
 })
 export class IamApiService {
-  baseUrl="https://my-json-server.typicode.com/upc-OpenSource-BicasTeam/open-json-endpoints"
+  baseUrl="https://localhost:44391/profile"
   constructor(private http:HttpClient){
   }
   findUserWithEmailAndPassword(email:any,password:any){
-    return this.http.get(`${this.baseUrl}/users?email=${email}&password=${password}`)
+    return this.http.get(`${this.baseUrl}/email/${email}/password/${password}`)
   }
   findUserWithEmail(email:any){
-    return this.http.get(`${this.baseUrl}/users?email=${email}`)
+    return this.http.get(`${this.baseUrl}/email/${email}`)
   }
   createUser(jsonUser:any){
-    return this.http.post(`https://movigestion.azurewebsites.net/api/users`,jsonUser)
+    return this.http.post(`${this.baseUrl}`,jsonUser)
   }
   findUserById(id:any){
-   return this.http.get(`${this.baseUrl}/users?id=${id}`)
+    return this.http.get(`${this.baseUrl}/${id}`)
   }
   updateUser(id:any,jsonUser:JSON){
     return this.http.put(`${this.baseUrl}/users?id=${id}`,jsonUser)

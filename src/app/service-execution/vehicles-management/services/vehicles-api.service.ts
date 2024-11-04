@@ -5,15 +5,15 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class VehiclesApiService {
-  baseUrl="https://movigestion.azurewebsites.net"
+  baseUrl="https://localhost:44391/profile"
   constructor(private http:HttpClient) { }
   getVehicleById(id:any){
-    return this.http.get(`${this.baseUrl}/vehicles?id=${id}`)
+    return this.http.get(`${this.baseUrl}/vehicle/${id}`)
   }
   addVehicle(vehicle:any){
-    return this.http.post(`${this.baseUrl}/vehicles`,vehicle);
+    return this.http.post(`${this.baseUrl}/vehicle`,vehicle);
   }
   deleteVehicle(id:any){
-    return this.http.delete(`${this.baseUrl}/vehiclesy?id=${id}`);
+    return this.http.delete(`${this.baseUrl}/vehicle/${id}`);
   }
 }
