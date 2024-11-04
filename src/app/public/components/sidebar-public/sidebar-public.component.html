@@ -1,9 +1,9 @@
-<div class="sidebar" [@fadeInFromLeft]="true">
+<div class="sidebar">
   <div class="user-info" (click)="goToProfile()">
     <img src="https://www.capitalcoahuila.com.mx/wp-content/uploads/2022/11/CARL-e1669117013260.jpeg" alt="User Icon">
     <div class="user-name">
-      <h2>{{ name }}, {{ lastName }}</h2>
-      <h2>{{type}}</h2>
+      <h2>{{ name }} {{ lastName }}</h2>
+      <p>{{ type }}</p>
     </div>
   </div>
   <ul class="menu">
@@ -24,10 +24,12 @@
       <span>Vehicles</span>
     </li>
   </ul>
-  <ul class="menu">
-    <li (click)="goToProfile()">
-      <mat-icon>settings</mat-icon>
-      <span>Settings</span>
-    </li>
-  </ul>
+  <div class="settings-section">
+    <ul class="menu">
+      <li (click)="goToProfile()">
+        <mat-icon>settings</mat-icon>
+        <span>Settings</span>
+      </li>
+    </ul>
+  </div>
 </div>

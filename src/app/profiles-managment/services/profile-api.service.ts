@@ -12,14 +12,14 @@ export class ProfileApiService {
   constructor(private http: HttpClient) { }
 
   getAllActivities(): Observable<any> {
-    return this.http.get('https://movigestion.azurewebsites.net/reports');
+    return this.http.get('http://localhost:5102/report');
   }
 
   getAllCondition(): Observable<any> {
-    return this.http.get('https://movigestion.azurewebsites.net/vehicles');
+    return this.http.get('http://localhost:5102/vehicle');
   }
 
   getAllDeliveries(): Observable<any> {
-    return this.http.get('https://movigestion.azurewebsites.net/shipments');
+    return this.http.get('http://localhost:5102/shipment');
   }
 }
