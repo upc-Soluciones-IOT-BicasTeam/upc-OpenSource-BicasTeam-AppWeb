@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import {VehicleEntity} from "../../model/vehicle.entity";
 import {UserEntity} from "../../../../iam/model/user.entity";
@@ -25,23 +26,11 @@ export class VehicleCarrierComponent {
   }
 
   async getVehicles(userId: string) {
-    this.iamApi.findUserById(userId).subscribe(async(data:any)=>{
-      data[0].vehicles.map((data:any)=>{
-        this.vehiclesId.push(data.idVehicle);
-      });
-      this.vehiclesId.map(async(data:any)=>{
-        await this.getVehicleInfo(this.vehiclesId[0])
-      })
-
-    });
-
-
-  }
-  async getVehicleInfo(id:any){
-    this.vehiclesApi.getVehicleById(id).subscribe((data:any)=>{
+    this.vehiclesApi.getVehicleById(userId).subscribe((data:any)=>{
+      console.log(data)
       this.vehicles.push(data);
     })
-
   }
+
 
 }

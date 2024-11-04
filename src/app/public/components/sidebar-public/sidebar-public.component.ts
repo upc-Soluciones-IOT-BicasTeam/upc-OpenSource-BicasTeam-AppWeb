@@ -20,9 +20,9 @@ export class SidebarPublicComponent {
 
   ngOnInit(): void {
     this.api.findUserById(this.user.id).subscribe((data: any) => {
-      this.type = data[0].type;
-      this.name = data[0].name;
-      this.lastName = data[0].lastName;
+      this.type = data.type;
+      this.name = data.name;
+      this.lastName = data.lastName;
     });
   }
 
