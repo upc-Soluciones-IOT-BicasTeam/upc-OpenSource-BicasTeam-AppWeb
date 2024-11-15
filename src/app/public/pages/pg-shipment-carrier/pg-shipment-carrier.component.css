@@ -9,7 +9,7 @@ mat-sidenav-container {
 .p-sidebar {
   width: 280px; /* Ancho fijo */
   max-width: 280px; /* Máximo ancho */
-  background-color: #303841;
+  background-color: rgba(255, 255, 255, 0.1);
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   flex-shrink: 0; /* Evita que el sidebar se reduzca */
