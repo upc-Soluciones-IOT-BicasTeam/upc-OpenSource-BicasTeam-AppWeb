@@ -80,6 +80,7 @@
   font-size: 20px;
 }
 
+
 .card-content {
 
   margin-bottom: 22px;
@@ -87,18 +88,25 @@
   margin-left: 60px;
 
 }
+
+.activity-description {
+  font-size: 9px; /* Cambia el tamaño según tus necesidades */
+}
+
+
+
 .card-content1{
 
-  font-size: 12px;
+  font-size: 8px;
   color: white;
   background-color: #303841;
   border-radius: 20px;
-  padding: 5px;
+  padding: 10px;
   width: 310px; /* Ajusta este valor a tu gusto */
   height: 45px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
+  margin-bottom: 15px;
   margin-top: 19px;
 
 

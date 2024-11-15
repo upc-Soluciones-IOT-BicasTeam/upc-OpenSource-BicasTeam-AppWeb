@@ -1,36 +1,36 @@
-import { Component } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {ShipmentApiService} from "../../services/shipment-api.service";
-import {IamApiService} from "../../../../iam/services/iam-api.service.service";
-import {ShipmentEntity} from "../../model/shipment.entity";
-import {UserEntity} from "../../../../iam/model/user.entity";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
+import { ShipmentApiService } from "../../services/shipment-api.service";
+import { ShipmentEntity } from "../../model/shipment.entity";
 
 @Component({
   selector: 'app-shipment-carrier',
   templateUrl: './shipment-carrier.component.html',
-  styleUrl: './shipment-carrier.component.css'
+  styleUrls: ['./shipment-carrier.component.css']
 })
-export class ShipmentCarrierComponent {
-  shipments: any[] = [];
-  shipment: ShipmentEntity = {} as ShipmentEntity;
-  user: UserEntity = {} as UserEntity;
+export class ShipmentCarrierComponent implements OnInit {
+  shipments: ShipmentEntity[] = [];
+  userId: number;
 
-  constructor(private route: ActivatedRoute, private router: Router,private shipmentApiService: ShipmentApiService,private iamApi: IamApiService) {
-    this.user.id = this.route.snapshot.params['id'];
-
+  constructor(
+    private route: ActivatedRoute,
+    private shipmentApiService: ShipmentApiService
+  ) {
+    this.userId = +this.route.snapshot.params['id']; // Convierte el parámetro a número
   }
+
   ngOnInit(): void {
-    this.getDataShipment(this.user.id);
+    this.getShipmentsByUserId(this.userId);
   }
 
-
-  async getDataShipment(userId: string) {
-    this.shipmentApiService.getShipmentsByIdOfUser(userId).subscribe((data:any)=>{
-      data.map((data:any)=>{
-        console.log(data);
-        this.shipments.push(data)
-      })
-    })
-
+  getShipmentsByUserId(userId: number): void {
+    this.shipmentApiService.getShipmentsByUserId(userId).subscribe(
+      (data: ShipmentEntity[]) => {
+        this.shipments = data;
+      },
+      (error) => {
+        console.error('Error fetching shipments:', error);
+      }
+    );
   }
 }

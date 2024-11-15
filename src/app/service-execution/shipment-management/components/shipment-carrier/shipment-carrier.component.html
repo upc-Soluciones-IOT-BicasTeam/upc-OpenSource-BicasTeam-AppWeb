@@ -1,17 +1,18 @@
 <div class="container">
-  <div>
-    <h1 class="title">YOUR SHIPMENTS :D</h1>
+  <h1 class="title">List of Shipments</h1>
+  <div *ngIf="shipments.length > 0; else noShipments">
+    <div class="card-container">
+      <div class="shipment-card" *ngFor="let shipment of shipments">
+        <p><strong>ID:</strong> {{ shipment.id }}</p>
+        <p><strong>Destiny:</strong> {{ shipment.destiny }}</p>
+        <p><strong>Description:</strong> {{ shipment.description }}</p>
+        <p><strong>Status:</strong> {{ shipment.status }}</p>
+        <p><strong>Driver:</strong> {{ shipment.driverName }}</p>
+        <p><strong>Created At:</strong> {{ shipment.createdAt | date: 'short' }}</p>
+      </div>
+    </div>
   </div>
-  <div *ngFor="let shipment of this.shipments">
-    <mat-card class="card">
-      <mat-card-title>Shipment ID: {{shipment.id}}</mat-card-title>
-      <mat-card-content>
-        <p>Carrier ID: {{shipment.idUser }}</p>
-        <p>Shipment Description: {{shipment.description}}</p>
-        <p>Shipment destiny: {{shipment.destiny}}</p>
-        <p>Registration Time: {{shipment.dateTime.time}}</p>
-        <p>Registration Date: {{shipment.dateTime.date}}</p>
-      </mat-card-content>
-    </mat-card>
-  </div>
+  <ng-template #noShipments>
+    <p>No shipments available.</p>
+  </ng-template>
 </div>

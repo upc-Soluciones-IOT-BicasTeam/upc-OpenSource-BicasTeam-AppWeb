@@ -1,23 +1,19 @@
 export class ShipmentEntity {
-  idShipment:string;
-  destiny:string;
-  description:string;
-  dateShipment:string;
-  time:string;
-  shipmentStatus:string;
-  idUserDestiny:string;
+  id: number;
+  userId: number;
+  destiny: string;
+  description: string;
+  createdAt: Date;
+  status: string;
+  driverName: string;
 
   constructor() {
-    this.idShipment='';
-    this.destiny='';
-    this.description='';
-    this.dateShipment='';
-    this.time='';
-    this.shipmentStatus='';
-    this.idUserDestiny=''
-
+    this.id = 0;
+    this.userId = 0;
+    this.destiny = '';
+    this.description = '';
+    this.createdAt = new Date();
+    this.status = '';
+    this.driverName = '';
   }
-
-
-
 }

@@ -1,23 +1,38 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ShipmentEntity } from "../model/shipment.entity";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShipmentApiService {
-  baseUrl="https://movigestion.azurewebsites.net"
-  constructor(private http:HttpClient) { }
+  private baseUrl = 'https://app-241114092351funda.azurewebsites.net/api/shipments';
 
-  getAllShipments(){
-    return this.http.get(`${this.baseUrl}/shipments`)
+  constructor(private http: HttpClient) {}
+
+  // Obtener todos los envíos
+  getAllShipments(): Observable<ShipmentEntity[]> {
+    return this.http.get<ShipmentEntity[]>(`${this.baseUrl}`);
   }
-  addShipment(shipment:any){
-    return this.http.post(`${this.baseUrl}/shipments`,shipment)
+
+  // Obtener un envío por su ID
+  getShipmentById(id: number): Observable<ShipmentEntity> {
+    return this.http.get<ShipmentEntity>(`${this.baseUrl}/${id}`);
   }
-  deleteShipment(id:any){
-    return this.http.delete(`${this.baseUrl}/shipments?id=${id}`);
+
+  // Agregar un nuevo envío
+  addShipment(shipment: Partial<ShipmentEntity>): Observable<ShipmentEntity> {
+    return this.http.post<ShipmentEntity>(`${this.baseUrl}`, shipment);
   }
-  getShipmentsByIdOfUser(id:any){
-    return this.http.get(`${this.baseUrl}/shipments?idUser=${id}`)
+
+  // Eliminar un envío por su ID
+  deleteShipment(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+
+  // Obtener envíos por ID de usuario (función personalizada)
+  getShipmentsByUserId(userId: number): Observable<ShipmentEntity[]> {
+    return this.http.get<ShipmentEntity[]>(`${this.baseUrl}?idUser=${userId}`);
   }
 }

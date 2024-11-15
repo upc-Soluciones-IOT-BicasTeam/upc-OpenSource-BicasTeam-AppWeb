@@ -14,10 +14,10 @@
           <div class="card-content">
             <div class="activity" *ngFor="let activity of activities.slice(0, 3)">
               <div class="card-content1">
-                <h3>{{ activity.description }}</h3>
+                <h3 class="activity-description">{{ activity.description }}</h3>
                 <div class="date-time">
                   <p>{{ activity.type }}</p>
-                  <p>{{ activity.dateTime }}</p>
+                  <p>{{ activity.createdAt }}</p>
                 </div>
               </div>
             </div>
@@ -31,7 +31,7 @@
             <div class="delivery" *ngFor="let delivery of deliveries.slice(0, 1)">
               <h3>{{ delivery.destiny }}</h3>
               <p>Responsible: {{ delivery.description }}</p>
-              <p>Start time: {{ delivery.dateTime }}</p>
+              <p>Start time: {{ delivery.createdAt }}</p>
               <p>Delivery time: {{ delivery.status }}</p>
             </div>
           </div>
@@ -43,7 +43,7 @@
         <div class="card-content3">
           <div class="condition" *ngFor="let condition of conditions.slice(0, 1)">
             <div class="date-time2">
-              <p>Model and Serial Number: {{ condition.modelSerialNumber }}</p>
+              <p>Model and Serial Number: {{ condition.model }}</p>
               <p>License Plate: {{ condition.licensePlate }}</p>
             </div>
           </div>
@@ -53,4 +53,3 @@
     </div>
   </div>
 </div>
-

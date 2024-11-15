@@ -7,7 +7,7 @@ import {BaseService} from "../../shared/services/base.service.service";
   providedIn: 'root'
 })
 export class IamApiService {
-  baseUrl="https://localhost:44391/profile"
+  baseUrl="http://localhost:5102/profile"
   constructor(private http:HttpClient){
   }
   findUserWithEmailAndPassword(email:any,password:any){

@@ -89,6 +89,12 @@
 
 
 }
+
+.activity-description {
+  font-size: 9px; /* Cambia el tamaño según tus necesidades */
+}
+
+
 .card-content1{
 
   font-size: 12px;
@@ -171,6 +177,8 @@ h3 {
   margin-left: 12px;
   display: flex; /* Se utiliza flexbox para el diseño */
   gap: 1px; /* Ajusta este valor a tu gusto para modificar la separación */
+  font-size: 9px; /* Cambia el tamaño según tus necesidades */
+
 }
 
 .date-time2{
