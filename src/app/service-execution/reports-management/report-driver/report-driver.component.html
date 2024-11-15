@@ -22,10 +22,10 @@
         </thead>
         <tbody>
         <tr *ngFor="let report of reports; let i = index">
-          <td>{{ driversNames[i] }}</td> <!-- Change from report.idUser to report.name -->
+          <td>{{ report.driverName }}</td> <!-- Change from report.idUser to report.name -->
           <td>{{ report.description }}</td>
           <td>{{ report.type }}</td>
-          <td>{{ report.dateTime }}</td>
+          <td>{{ report.createdAt }}</td>
         </tr>
         </tbody>
       </table>
@@ -45,8 +45,8 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" [(ngModel)]="report.name" required>
-            <small *ngIf="submitted && !report.name" class="error">Name is required.</small>
+            <input type="text" class="form-control" id="name" [(ngModel)]="report.driverName" required>
+            <small *ngIf="submitted && !report.driverName" class="error">Name is required.</small>
           </div>
           <div class="form-group">
             <label for="description">Description</label>

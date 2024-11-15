@@ -1,70 +1,84 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportsApiService} from "../reports-services/report-view.service";
-import {Observable} from "rxjs";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ReportEntity} from "../model/reports.entity";
-import {UserEntity} from "../../../iam/model/user.entity";
+import { ReportsApiService } from '../reports-services/report-view.service';
+import { ReportEntity } from '../model/reports.entity';
+import { Observable } from 'rxjs';
 
 @Component({
-selector: 'app-report-driver',
-templateUrl: './report-driver.component.html',
-styleUrls: ['./report-driver.component.css']
+  selector: 'app-report-driver',
+  templateUrl: './report-driver.component.html',
+  styleUrls: ['./report-driver.component.css']
 })
 export class ReportDriverComponent implements OnInit {
-  driversNames: any[]=[];
-  reports: any[] = [];
-  submitted: boolean = false;
+  reports: ReportEntity[] = [];
+  report: ReportEntity = new ReportEntity();
   reportDialog: boolean = false;
-  report: ReportEntity = {} as ReportEntity;
-  user: UserEntity = {} as UserEntity;
+  submitted: boolean = false;
 
-  constructor(private route: ActivatedRoute, private router: Router,private reportsApi: ReportsApiService) {
-    this.user.id = this.route.snapshot.params['id'];
-  }
+  constructor(private reportsApi: ReportsApiService) {}
 
   ngOnInit(): void {
-    this.getDataReport(this.user.id);
+    this.getReports();
   }
 
-  async getDataReport(userId:any) {
-    try {
-      const response: Observable<any> = this.reportsApi.getReportsById(userId);
-      const reports = await response.toPromise();
-      console.log(reports);
-      for (let report of reports) {
-        const userResponse: Observable<any> = this.reportsApi.findUserByID(userId);
-        const user = await userResponse.toPromise();
-        report.name = `${user.name} ${user.lastName}`;
+  getReports(): void {
+    this.reportsApi.getAllReports().subscribe(
+      (data: ReportEntity[]) => {
+        this.reports = data;
+        console.log('Reports:', data);
+      },
+      (error: any) => {
+        console.error('Error fetching reports:', error);
       }
-      this.reports = reports;
-      this.reports.map((data:any)=>{
-        this.reportsApi.findUserByID(data.idUser).subscribe((data:any)=>{
-          this.driversNames.push(data[0].name + data[0].lastName)
-        })
-      })
-    } catch (error) {
-      console.error('Error fetching reports:', error);
-    }
+    );
   }
 
-  openNew() {
-    this.report = {} as ReportEntity;
+  openNew(): void {
+    this.report = new ReportEntity();
     this.submitted = false;
     this.reportDialog = true;
   }
 
-  hideDialog() {
+  hideDialog(): void {
     this.reportDialog = false;
     this.submitted = false;
   }
 
-  saveReport() {
-    if (!this.report.name || !this.report.description) {
-      this.submitted = true;
-      return;
+  saveReport(): void {
+    this.submitted = true;
+    if (this.report.type && this.report.description) {
+      if (this.report.id) {
+        this.reportsApi.updateReport(this.report.id, this.report).subscribe(
+          (updatedReport: ReportEntity) => {
+            this.reports = this.reports.map(r => r.id === updatedReport.id ? updatedReport : r);
+            this.reportDialog = false;
+          },
+          (error: any) => {
+            console.error('Error updating report:', error);
+          }
+        );
+      } else {
+        this.reportsApi.createReport(this.report).subscribe(
+          (newReport: ReportEntity) => {
+            this.reports.push(newReport);
+            this.reportDialog = false;
+          },
+          (error: any) => {
+            console.error('Error creating report:', error);
+          }
+        );
+      }
     }
-    this.reportDialog = false;
-    this.submitted = false;
-    this.reports.push(this.report); // Push the new report into the reports array
+  }
+
+  deleteReport(id: number): void {
+    this.reportsApi.deleteReport(id).subscribe(
+      () => {
+        this.reports = this.reports.filter(r => r.id !== id);
+        console.log('Report deleted');
+      },
+      (error: any) => {
+        console.error('Error deleting report:', error);
+      }
+    );
   }
 }

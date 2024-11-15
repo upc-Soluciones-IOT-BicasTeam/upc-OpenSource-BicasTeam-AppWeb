@@ -1,78 +1,101 @@
-import { Component } from '@angular/core';
-import {IamApiService} from "../../../../iam/services/iam-api.service.service";
-import {VehiclesApiService} from "../../services/vehicles-api.service";
-import {VehicleEntity} from "../../model/vehicle.entity";
-import {UserEntity} from "../../../../iam/model/user.entity";
-import {ActivatedRoute, Router} from "@angular/router";
-
-
-
+import { Component, OnInit } from '@angular/core';
+import { VehicleEntity } from '../../model/vehicle.entity';
+import { VehiclesApiService } from '../../services/vehicles-api.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-vehicle-businessman',
   templateUrl: './vehicle-businessman.component.html',
-  styleUrl: './vehicle-businessman.component.css'
+  styleUrls: ['./vehicle-businessman.component.css']
 })
-export class VehicleBusinessmanComponent {
+export class VehicleBusinessmanComponent implements OnInit {
   showAddForm: boolean = false;
+  showEditForm: boolean = false;
   showDeleteForm: boolean = false;
-  deleteVehicleId: string = '';
-  vehicles: any[] = [];
-  vehiclesId:any[] = [];
-  vehicle: VehicleEntity = {} as VehicleEntity;
-  user: UserEntity = {} as UserEntity;
+  deleteVehicleId: number | null = null;
+  vehicles: VehicleEntity[] = [];
+  vehicle: VehicleEntity = new VehicleEntity();
 
-
-
-
-  constructor(private route: ActivatedRoute, private router: Router,private vehiclesApi: VehiclesApiService, private iamApi: IamApiService) {
-    this.user.id = this.route.snapshot.params['id'];
-  }
+  constructor(
+    private vehiclesApi: VehiclesApiService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.getVehicles(this.user.id);
+    this.getVehicles();
   }
 
-
-  addVehicle() {
-    const json = {
-      licensePlate: this.vehicle.licensePlate,
-      modelSerialNumber: this.vehicle.modelSerialNumber
-    };
-    this.vehiclesApi.addVehicle(json)
-      .subscribe((response:any) => {
-        this.vehicle.licensePlate="";
-        this.vehicle.modelSerialNumber="";
-      });
+  getVehicles(): void {
+    this.vehiclesApi.getAllVehicles().subscribe(
+      (data: VehicleEntity[]) => {
+        this.vehicles = data;
+      },
+      (error: any) => {
+        console.error('Error fetching vehicles:', error);
+      }
+    );
   }
 
-  deleteVehicle() {
-    this.vehiclesApi.deleteVehicle(this.deleteVehicleId)
-      .subscribe(() => {
-        this.deleteVehicleId = '';
-      });
+  addVehicle(): void {
+    this.vehiclesApi.addVehicle(this.vehicle).subscribe(
+      (response: VehicleEntity) => {
+        this.vehicles.push(response);
+        this.vehicle = new VehicleEntity(); // Reset the form
+        this.showAddForm = false;
+      },
+      (error: any) => {
+        console.error('Error adding vehicle:', error);
+      }
+    );
   }
 
-
-
-  async getVehicles(userId: string) {
-    this.iamApi.findUserById(userId).subscribe(async(data:any)=>{
-      data[0].vehicles.map((data:any)=>{
-        this.vehiclesId.push(data.idVehicle);
-      });
-      this.vehiclesId.map(async(data:any)=>{
-        await this.getVehicleInfo(this.vehiclesId[data-1])
-      })
-
-    });
-
-
-  }
-  async getVehicleInfo(id:any){
-    this.vehiclesApi.getVehicleById(id).subscribe((data:any)=>{
-      this.vehicles.push(data);
-    })
-
+  editVehicle(vehicle: VehicleEntity): void {
+    this.vehicle = { ...vehicle }; // Copy the selected vehicle
+    this.showEditForm = true;
   }
 
+  updateVehicle(): void {
+    this.vehiclesApi.updateVehicle(this.vehicle.id, this.vehicle).subscribe(
+      (updatedVehicle: VehicleEntity) => {
+        this.vehicles = this.vehicles.map(v => (v.id === updatedVehicle.id ? updatedVehicle : v));
+        this.showEditForm = false;
+        this.vehicle = new VehicleEntity();
+      },
+      (error: any) => {
+        console.error('Error updating vehicle:', error);
+      }
+    );
+  }
+
+  confirmDelete(id: number): void {
+    this.deleteVehicleId = id;
+    this.showDeleteForm = true;
+  }
+
+  deleteVehicle(): void {
+    if (this.deleteVehicleId !== null) {
+      this.vehiclesApi.deleteVehicle(this.deleteVehicleId).subscribe(
+        () => {
+          this.vehicles = this.vehicles.filter(v => v.id !== this.deleteVehicleId);
+          this.deleteVehicleId = null;
+          this.showDeleteForm = false;
+        },
+        (error: any) => {
+          console.error('Error deleting vehicle:', error);
+        }
+      );
+    }
+  }
+
+  cancelForm(): void {
+    this.showAddForm = false;
+    this.showEditForm = false;
+    this.vehicle = new VehicleEntity();
+  }
+
+  cancelDelete(): void {
+    this.showDeleteForm = false;
+    this.deleteVehicleId = null;
+  }
 }

@@ -1,17 +1,33 @@
 export class VehicleEntity {
-  idVehicle: any;
+  id: number;
+  userId: number;
   licensePlate: string;
-  modelSerialNumber: string;
-  idPropietario: number;
-  idTransportista: number;
-
+  model: string;
+  engine: number;
+  fuel: number;
+  tires: number;
+  electricalSystem: number;
+  transmissionTemperature: number;
+  driverName: string;
+  vehicleImage: string;
+  color: string;
+  lastTechnicalInspectionDate: string;
+  createdAt: string;
 
   constructor() {
-    this.idVehicle='';
-    this.modelSerialNumber='';
-    this.licensePlate='';
-    this.idPropietario=0;
-    this.idTransportista=0;
+    this.id = 0;
+    this.userId = 0;
+    this.licensePlate = '';
+    this.model = '';
+    this.engine = 0;
+    this.fuel = 0;
+    this.tires = 0;
+    this.electricalSystem = 0;
+    this.transmissionTemperature = 0;
+    this.driverName = '';
+    this.vehicleImage = '';
+    this.color = '';
+    this.lastTechnicalInspectionDate = '';
+    this.createdAt = '';
   }
-
 }

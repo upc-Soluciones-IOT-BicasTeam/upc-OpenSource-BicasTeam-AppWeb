@@ -1,23 +1,23 @@
-
-import { Component } from '@angular/core';
-import {VehicleEntity} from "../../model/vehicle.entity";
-import {UserEntity} from "../../../../iam/model/user.entity";
-import {ActivatedRoute, Router} from "@angular/router";
-import {VehiclesApiService} from "../../services/vehicles-api.service";
-import {IamApiService} from "../../../../iam/services/iam-api.service.service";
+import { Component, OnInit } from '@angular/core';
+import { VehicleEntity } from '../../model/vehicle.entity';
+import { UserEntity } from '../../../../iam/model/user.entity';
+import { ActivatedRoute, Router } from '@angular/router';
+import { VehiclesApiService } from '../../services/vehicles-api.service';
 
 @Component({
   selector: 'app-vehicle-carrier',
   templateUrl: './vehicle-carrier.component.html',
-  styleUrl: './vehicle-carrier.component.css'
+  styleUrls: ['./vehicle-carrier.component.css']
 })
-export class VehicleCarrierComponent {
-  vehicles: any[] = [];
-  vehiclesId:any[] = [];
-  vehicle: VehicleEntity = {} as VehicleEntity;
+export class VehicleCarrierComponent implements OnInit {
+  vehicles: VehicleEntity[] = [];
   user: UserEntity = {} as UserEntity;
 
-  constructor(private route: ActivatedRoute, private router: Router,private vehiclesApi: VehiclesApiService, private iamApi: IamApiService) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private vehiclesApi: VehiclesApiService
+  ) {
     this.user.id = this.route.snapshot.params['id'];
   }
 
@@ -25,12 +25,15 @@ export class VehicleCarrierComponent {
     this.getVehicles(this.user.id);
   }
 
-  async getVehicles(userId: string) {
-    this.vehiclesApi.getVehicleById(userId).subscribe((data:any)=>{
-      console.log(data)
-      this.vehicles.push(data);
-    })
+  getVehicles(userId: number): void {
+    this.vehiclesApi.getAllVehicles().subscribe(
+      (vehicles: VehicleEntity[]) => {
+        this.vehicles = vehicles.filter(vehicle => vehicle.userId === userId);
+        console.log('Vehicles:', this.vehicles);
+      },
+      (error: any) => {
+        console.error('Error fetching vehicles:', error);
+      }
+    );
   }
-
-
 }

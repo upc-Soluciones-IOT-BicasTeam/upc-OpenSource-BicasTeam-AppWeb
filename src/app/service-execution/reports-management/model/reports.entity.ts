@@ -1,17 +1,17 @@
 export class ReportEntity {
-  idReport: string;
-  name: string;
+  id: number;
   type: string;
   description: string;
-  dateReport: string;
-  time: string;
+  userId: number;
+  createdAt: string;
+  driverName: string;
 
   constructor() {
-    this.idReport = '';
-    this.name = '';
-    this.type = ''
+    this.id = 0;
+    this.type = '';
     this.description = '';
-    this.dateReport = '';
-    this.time = '';
+    this.userId = 0;
+    this.createdAt = '';
+    this.driverName = '';
   }
 }

@@ -1,34 +1,56 @@
 <div class="container">
-  <div>
-    <h1 class="title">Vehicles</h1>
-    <div class="button-group">
-      <button mat-raised-button class="p-button" (click)="showAddForm = !showAddForm">Add Vehicle</button>
-      <button mat-raised-button class="p-button" (click)="showDeleteForm = !showDeleteForm">Delete Vehicle</button>
-    </div>
-    <form *ngIf="showAddForm" (submit)="addVehicle()" class="form-card">
-      <h2 class="title-card">New Vehicle</h2>
-      <label >Model</label>
-      <input [(ngModel)]="vehicle.modelSerialNumber" name="model" placeholder="Model" required>
-      <label >License Plate</label>
-      <input [(ngModel)]="vehicle.licensePlate" name="licensePlate" placeholder="License Plate" required>
-      <button mat-raised-button type="submit">Confirm</button>
-      <button mat-raised-button (click)="showAddForm = false">Close</button>
-    </form>
-    <form *ngIf="showDeleteForm" class="form-card">
-      <h2 class="title-card">Delete Vehicle</h2>
-      <label >Vehicle ID</label>
-      <input [(ngModel)]="deleteVehicleId" name="vehicleId" placeholder="Vehicle ID" required>
-      <button mat-raised-button (click)="deleteVehicle()">Confirm</button>
-      <button mat-raised-button (click)="showDeleteForm = false">Close</button>
+  <h1>Gestión de Vehículos</h1>
+
+  <!-- Sección de Visualización de Vehículos -->
+  <div class="vehicle-list">
+    <h2>Lista de Vehículos</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Placa</th>
+        <th>Modelo</th>
+        <th>Propietario (ID)</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let vehicle of vehicles">
+        <td>{{ vehicle.id }}</td>
+        <td>{{ vehicle.licensePlate }}</td>
+        <td>{{ vehicle.model }}</td>
+        <td>{{ vehicle.userId }}</td>
+        <td>
+          <button (click)="editVehicle(vehicle)">Editar</button>
+          <button (click)="confirmDelete(vehicle.id)">Eliminar</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Formulario para Agregar/Editar Vehículo -->
+  <div *ngIf="showAddForm || showEditForm" class="vehicle-form">
+    <h2>{{ showEditForm ? 'Editar Vehículo' : 'Agregar Vehículo' }}</h2>
+    <form (ngSubmit)="showEditForm ? updateVehicle() : addVehicle()">
+      <label for="licensePlate">Placa:</label>
+      <input type="text" id="licensePlate" [(ngModel)]="vehicle.licensePlate" name="licensePlate" required />
+
+      <label for="model">Modelo:</label>
+      <input type="text" id="model" [(ngModel)]="vehicle.model" name="model" required />
+
+      <label for="userId">Propietario (ID):</label>
+      <input type="number" id="userId" [(ngModel)]="vehicle.userId" name="userId" required />
+
+      <button type="submit">{{ showEditForm ? 'Actualizar' : 'Agregar' }}</button>
+      <button type="button" (click)="cancelForm()">Cancelar</button>
     </form>
   </div>
-  <div *ngFor="let vehicle of this.vehicles">
-    <mat-card class="card">
-      <mat-card-title>Vehicle ID: {{vehicle[0].id}}</mat-card-title>
-      <mat-card-content>
-        <p>License Plate: {{vehicle[0].licensePlate}}</p>
-        <p>Model and Serial Number: {{vehicle[0].modelSerialNumber}}</p>
-      </mat-card-content>
-    </mat-card>
+
+  <!-- Confirmación de Eliminación -->
+  <div *ngIf="showDeleteForm" class="delete-confirmation">
+    <p>¿Estás seguro de que deseas eliminar este vehículo?</p>
+    <button (click)="deleteVehicle()">Sí</button>
+    <button (click)="cancelDelete()">No</button>
   </div>
 </div>

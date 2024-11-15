@@ -1,79 +1,112 @@
 .container {
-  justify-content: space-between;
-  gap: 20px; /* Agrega espacio entre los elementos */
+  margin: 20px;
+  font-family: Arial, sans-serif;
 }
 
-.card,
-.mat-card {
-  background-color: #F39C12;
-  border: 2px solid #fff; /* Borde blanco */
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Agrega sombreado */
-  overflow: hidden; /* Evita que el contenido sobresalga del card */
-  transition: transform 0.3s ease-in-out; /* Agrega animación de despliegue */
-  width: calc(50% - 10px); /* Ancho del card */
-  margin-top: 40px; /* Aumenta el margen entre los cards */
+h1, h2 {
+  color: #333;
+  margin-bottom: 15px;
 }
 
-.card:hover,
-.mat-card:hover {
-  transform: translateY(-5px); /* Desplaza ligeramente hacia arriba al hacer hover */
+.vehicle-list {
+  margin-bottom: 30px;
 }
 
-.mat-card-title,
-.mat-card-content {
-  background-color: #F39C12; /* Color de fondo */
-  color: #fff; /* Color del texto */
-  padding: 10px;
-}
-
-.mat-card-title {
-  border-bottom: 2px solid #fff; /* Borde inferior blanco */
-}
-
-.form-card {
-  background-color: #F39C12; /* Color de fondo del formulario */
-  border: 2px solid #fff; /* Borde blanco */
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Agrega sombreado */
-  padding: 20px;
-  margin-top: 10px; /* Aumenta el margen superior */
-}
-.input-container {
-  margin-bottom: 20px; /* Espacio entre inputs */
-}
-
-input[type="text"],
-input[type="number"] {
+.vehicle-list table {
   width: 100%;
-  padding: 10px;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+}
+
+.vehicle-list th, .vehicle-list td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.vehicle-list th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.vehicle-list tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.vehicle-list tr:hover {
+  background-color: #e2e2e2;
+}
+
+.vehicle-form {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.vehicle-form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.vehicle-form input {
+  width: calc(100% - 20px);
+  padding: 8px;
   margin-top: 5px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc; /* Borde gris */
-  border-radius: 5px;
-  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-input[type="text"]:focus,
-input[type="number"]:focus {
-  outline: none; /* Elimina el contorno al enfocar */
-  border-color: #F39C12; /* Cambia el color del borde al enfocar */
-  box-shadow: 0 0 5px #F39C12; /* Agrega sombra al enfocar */
-}
-
-input[type="submit"],
-button {
-  background-color: #fff; /* Fondo blanco */
-  color: #F39C12; /* Texto naranja */
-  border: 2px solid #F39C12; /* Borde naranja */
-  border-radius: 5px;
+.vehicle-form button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
   padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s; /* Transición suave */
+  margin-top: 10px;
+  margin-right: 10px;
+  transition: background-color 0.3s;
 }
 
-input[type="submit"]:hover,
-button:hover {
-  background-color: #F39C12; /* Fondo naranja al hacer hover */
-  color: #fff; /* Texto blanco al hacer hover */
+.vehicle-form button:hover {
+  background-color: #45a049;
+}
+
+.delete-confirmation {
+  background-color: #ffdddd;
+  padding: 15px;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.delete-confirmation p {
+  color: #a94442;
+  margin-bottom: 10px;
+}
+
+.delete-confirmation button {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s;
+}
+
+.delete-confirmation button:hover {
+  background-color: #c9302c;
+}
+
+button.cancel {
+  background-color: #6c757d;
+}
+
+button.cancel:hover {
+  background-color: #5a6268;
 }
