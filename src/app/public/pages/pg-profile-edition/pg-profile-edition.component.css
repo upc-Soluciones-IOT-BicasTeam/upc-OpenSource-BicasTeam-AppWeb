@@ -1,20 +1,31 @@
-.p-sidebar{
+
+mat-sidenav-container {
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  display: flex;
+  overflow: hidden; /* Evita el desbordamiento */
+  background-color: #1B2631; /* Fondo del contenido */
+}
+
+.p-sidebar {
+  width: 280px; /* Ancho fijo */
+  max-width: 280px; /* Máximo ancho */
   background-color: #303841;
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
+  flex-shrink: 0; /* Evita que el sidebar se reduzca */
+  overflow: hidden; /* Asegura que el contenido no desborde */
 }
 
-body{
-  background-color: #5D6D7E;
+mat-sidenav-content {
+  flex: 1; /* Usa el espacio restante */
+  overflow: auto; /* Permite el desplazamiento si es necesario */
+  background-color: #1B2631;
+  padding: 20px; /* Agrega espaciado interno */
 }
 
-.mr-6 {
-  margin-right: 2px;
-  margin-left: -200px;
-}
-mat-sidenav-content
-{
-  background-color: #5D6D7E;
 
 
-}
+
+
+
+

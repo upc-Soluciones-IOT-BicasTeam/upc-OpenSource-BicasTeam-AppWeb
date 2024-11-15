@@ -1,7 +1,6 @@
 <div class="container">
   <h1 class="title">Shipment Management</h1>
 
-  <!-- Formulario para agregar envío -->
   <button class="btn-add" (click)="showAddForm = !showAddForm">Add Shipment</button>
   <div *ngIf="showAddForm" class="form-container">
     <h2>Create New Shipment</h2>
@@ -26,11 +25,9 @@
     </form>
   </div>
 
-  <!-- Lista de envíos -->
   <h2 class="list-title">Current Shipments</h2>
   <div class="shipment-list" *ngIf="shipments.length > 0; else noShipments">
     <div class="shipment-card" *ngFor="let shipment of shipments">
-      <p><strong>ID:</strong> {{ shipment.id }}</p>
       <p><strong>Destiny:</strong> {{ shipment.destiny }}</p>
       <p><strong>Description:</strong> {{ shipment.description }}</p>
       <p><strong>Status:</strong> {{ shipment.status }}</p>
@@ -39,6 +36,6 @@
     </div>
   </div>
   <ng-template #noShipments>
-    <p>No shipments available.</p>
+    <p class="no-shipments">No shipments available.</p>
   </ng-template>
 </div>

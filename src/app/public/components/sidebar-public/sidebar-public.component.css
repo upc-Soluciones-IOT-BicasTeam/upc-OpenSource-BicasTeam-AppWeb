@@ -1,7 +1,7 @@
 .sidebar {
   width: 260px; /* Ancho adecuado */
   height: 100vh; /* Ocupa toda la altura de la ventana */
-  background-color: #2C3E50; /* Fondo oscuro */
+  background-color: #303841; /* Fondo oscuro */
   color: #ECF0F1;
   display: flex;
   flex-direction: column;

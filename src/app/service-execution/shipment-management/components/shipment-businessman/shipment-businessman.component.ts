@@ -18,6 +18,7 @@ export class ShipmentBusinessmanComponent implements OnInit {
   shipment: ShipmentEntity = new ShipmentEntity();
   user: UserEntity = {} as UserEntity;
 
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,

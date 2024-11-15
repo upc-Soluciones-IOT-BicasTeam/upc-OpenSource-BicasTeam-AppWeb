@@ -3,16 +3,17 @@
   <div *ngIf="shipments.length > 0; else noShipments">
     <div class="card-container">
       <div class="shipment-card" *ngFor="let shipment of shipments">
-        <p><strong>ID:</strong> {{ shipment.id }}</p>
-        <p><strong>Destiny:</strong> {{ shipment.destiny }}</p>
-        <p><strong>Description:</strong> {{ shipment.description }}</p>
-        <p><strong>Status:</strong> {{ shipment.status }}</p>
-        <p><strong>Driver:</strong> {{ shipment.driverName }}</p>
-        <p><strong>Created At:</strong> {{ shipment.createdAt | date: 'short' }}</p>
+        <div class="card-body">
+          <p><i class="icon-destiny"></i> <strong>Destiny:</strong> {{ shipment.destiny }}</p>
+          <p><i class="icon-description"></i> <strong>Description:</strong> {{ shipment.description }}</p>
+          <p><i class="icon-status"></i> <strong>Status:</strong> {{ shipment.status }}</p>
+          <p><i class="icon-driver"></i> <strong>Driver:</strong> {{ shipment.driverName }}</p>
+          <p><i class="icon-date"></i> <strong>Created At:</strong> {{ shipment.createdAt | date: 'short' }}</p>
+        </div>
       </div>
     </div>
   </div>
   <ng-template #noShipments>
-    <p>No shipments available.</p>
+    <p class="no-shipments"><i class="icon-info"></i> No shipments available.</p>
   </ng-template>
 </div>
