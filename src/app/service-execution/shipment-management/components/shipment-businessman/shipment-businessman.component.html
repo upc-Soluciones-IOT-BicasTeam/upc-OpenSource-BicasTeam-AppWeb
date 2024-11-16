@@ -1,8 +1,8 @@
 <div class="container">
-  <h1 class="title">Shipment Management</h1>
+  <h1 class="title gradient-text">Shipment Management</h1>
 
   <button class="btn-add" (click)="showAddForm = !showAddForm">Add Shipment</button>
-  <div *ngIf="showAddForm" class="form-container">
+  <div *ngIf="showAddForm" class="form-container glass-effect">
     <h2>Create New Shipment</h2>
     <form (ngSubmit)="addShipment()">
       <div class="form-group">
@@ -27,12 +27,14 @@
 
   <h2 class="list-title">Current Shipments</h2>
   <div class="shipment-list" *ngIf="shipments.length > 0; else noShipments">
-    <div class="shipment-card" *ngFor="let shipment of shipments">
+    <div class="card-body">
+    <div class="shipment-card glass-card" *ngFor="let shipment of shipments">
       <p><strong>Destiny:</strong> {{ shipment.destiny }}</p>
       <p><strong>Description:</strong> {{ shipment.description }}</p>
       <p><strong>Status:</strong> {{ shipment.status }}</p>
       <p><strong>Driver:</strong> {{ shipment.driverName }}</p>
       <button class="btn-delete" (click)="deleteShipmentId = shipment.id; deleteShipment()">Delete</button>
+    </div>
     </div>
   </div>
   <ng-template #noShipments>

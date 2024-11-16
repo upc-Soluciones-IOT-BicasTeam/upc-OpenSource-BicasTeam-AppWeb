@@ -35,8 +35,13 @@ export class SidebarPublicComponent {
   }
 
   goToProfile(): void {
+    this.router.navigate([ this.user.id,`profile`]);
+  }
+
+  goTologout(): void {
     this.router.navigate([ `login`]);
   }
+
 
   goToVehicles(): void {
     if (this.type === 'businessman') {

@@ -1,8 +1,8 @@
 <div class="container">
-  <h1 class="title">List of Shipments</h1>
+  <h1 class="title gradient-text">List of Shipments</h1>
   <div *ngIf="shipments.length > 0; else noShipments">
     <div class="card-container">
-      <div class="shipment-card" *ngFor="let shipment of shipments">
+      <div class="shipment-card glass-card" *ngFor="let shipment of shipments">
         <div class="card-body">
           <p><i class="icon-destiny"></i> <strong>Destiny:</strong> {{ shipment.destiny }}</p>
           <p><i class="icon-description"></i> <strong>Description:</strong> {{ shipment.description }}</p>

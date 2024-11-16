@@ -1,44 +1,61 @@
+@import 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap';
+
+/* Estilos generales */
 body {
-  background-color: #f0f4f8;
+  background: linear-gradient(135deg, #f8f9fa, #e0f7fa);
   font-family: 'Poppins', sans-serif;
   color: #333F50;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
+/* Contenedor principal */
 .container {
   max-width: 1100px;
+  width: 90%;
   margin: 40px auto;
   padding: 30px;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 15px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
 }
 
 .container:hover {
-  transform: scale(1.01);
+  transform: scale(1.02);
 }
 
+/* Gradiente para el título */
 .title {
   text-align: center;
-  font-size: 3rem;
-  color: #1A202C;
+  font-size: 2.5rem;
   margin-bottom: 30px;
   font-weight: 700;
+  background: linear-gradient(90deg, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
+/* Estilo de las tarjetas */
 .card-container {
   display: flex;
-  flex-direction: column; /* Disposición en columna para apilar las tarjetas verticalmente */
-  gap: 20px; /* Espacio entre las tarjetas */
-  width: 100%; /* Ancho completo del contenedor */
+  flex-direction: column; /* Apila las tarjetas verticalmente */
+  gap: 20px;
+  width: 100%;
 }
 
+
 .shipment-card {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.7);
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s, box-shadow 0.3s;
+  backdrop-filter: blur(10px); /* Efecto glassmorphism */
 }
 
 .shipment-card:hover {
@@ -46,14 +63,7 @@ body {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-.card-header {
-  margin-bottom: 15px;
-  border-bottom: 2px solid #e2e8f0;
-  padding-bottom: 10px;
-  font-size: 1.5rem;
-  color: #1A202C;
-}
-
+/* Efectos en los párrafos */
 .card-body p {
   margin: 8px 0;
   font-size: 1rem;
@@ -62,15 +72,17 @@ body {
   gap: 5px;
 }
 
+/* Estilo de iconos */
 .icon-destiny, .icon-description, .icon-status, .icon-driver, .icon-date, .icon-info {
   font-size: 1.2rem;
-  color: #00ADB5;
+  color: #FFA500;
 }
 
 strong {
   color: #333F50;
 }
 
+/* Mensaje de no envíos */
 .no-shipments {
   text-align: center;
   font-size: 1.5rem;
@@ -78,8 +90,17 @@ strong {
   margin-top: 20px;
 }
 
+/* Diseño responsivo */
 @media (max-width: 768px) {
-  .card-container {
-    grid-template-columns: 1fr;
+  .title {
+    font-size: 2rem;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  .shipment-card {
+    padding: 15px;
   }
 }

@@ -1,57 +1,81 @@
+@import 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap';
+
+/* Estilos globales */
 body {
-  background-color: #F1F5F9; /* Fondo suave */
+  background: linear-gradient(135deg, #e0f7fa, #cfd8dc);
   font-family: 'Poppins', sans-serif;
-  color: #333F50; /* Color de texto principal */
+  color: #333F50;
+  margin: 0;
+  padding: 0;
 }
 
+/* Contenedor principal */
 .container {
-  max-width: 1000px;
+  max-width: 1100px;
+  width: 90%;
   margin: 50px auto;
   padding: 30px;
   background: rgba(255, 255, 255, 0.85);
   border-radius: 20px;
-  backdrop-filter: blur(20px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(15px);
+  transition: transform 0.3s;
+}
+.card-container {
+  display: flex;
+  flex-direction: column; /* Apila las tarjetas verticalmente */
+  gap: 20px;
+  width: 100%;
 }
 
+.container:hover {
+  transform: scale(1.02);
+}
+
+/* Gradiente para el título */
 .title {
   text-align: center;
   font-size: 3.5rem;
-  color: #1A202C; /* Azul oscuro */
+  color: #1A202C;
   margin-bottom: 40px;
   font-weight: 700;
 }
 
+.gradient-text {
+
+}
+
+/* Botón "Add Shipment" */
 .btn-add {
   display: block;
   margin: 20px auto;
   padding: 14px 30px;
-  background: linear-gradient(135deg, #F7B500, #F7B500);
-  color: #ffffff;
+  background: linear-gradient(135deg, #FFEB3B, #FBC02D);  color: #ffffff;
   border: none;
   border-radius: 30px;
   cursor: pointer;
   font-size: 1.2rem;
-  box-shadow: 0 4px 15px rgba(0, 173, 181, 0.3);
+  box-shadow: 0 4px 15px rgba(41, 182, 246, 0.3);
   transition: all 0.4s ease;
 }
 
 .btn-add:hover {
-  background: linear-gradient(135deg, #F7B500, #F7B500);
+  background: linear-gradient(135deg, #FBC02D, #F9A825);
   transform: scale(1.05);
 }
 
+/* Formulario */
 .form-container {
   margin-bottom: 30px;
   padding: 25px;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 20px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .form-group label {
   font-size: 1.2rem;
-  color: #1A202C; /* Azul oscuro */
+  color: #1A202C;
 }
 
 input {
@@ -61,7 +85,7 @@ input {
   border: 2px solid #E2E8F0;
   border-radius: 12px;
   background-color: #f9f9f9;
-  transition: all 0.3s;
+  transition: border-color 0.3s;
 }
 
 input:focus {
@@ -69,9 +93,10 @@ input:focus {
   outline: none;
 }
 
+/* Botón "Submit" */
 .btn-submit {
   display: block;
-  background: linear-gradient(135deg, #F7B500, #F7B500);
+  background: linear-gradient(135deg, #FF7043, #FF5722);
   color: #ffffff;
   border: none;
   padding: 14px 30px;
@@ -79,25 +104,27 @@ input:focus {
   cursor: pointer;
   font-size: 1.2rem;
   margin: 20px auto;
-  box-shadow: 0 4px 15px rgba(0, 173, 181, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 112, 67, 0.3);
   transition: all 0.4s ease;
 }
 
 .btn-submit:hover {
+  background: linear-gradient(135deg, #E64A19, #D84315);
   transform: scale(1.05);
-  background: linear-gradient(135deg, #F7B500, #F7B500);
 }
 
+/* Título de lista */
 .list-title {
   font-size: 2.5rem;
   color: #1A202C;
   margin: 40px 0 20px;
 }
 
+/* Lista de envíos */
 .shipment-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
 }
 
 .shipment-card {
@@ -113,8 +140,9 @@ input:focus {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
+/* Botón "Delete" */
 .btn-delete {
-  background-color: #C0392B; /* Coral */
+  background-color: #C0392B;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -124,12 +152,29 @@ input:focus {
 }
 
 .btn-delete:hover {
-  background-color: #E63946; /* Coral oscuro */
+  background-color: #E63946;
   transform: translateY(-2px);
 }
 
+/* Mensaje de no envíos */
 .no-shipments {
   text-align: center;
   font-size: 1.8rem;
   color: #666;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .btn-add, .btn-submit {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .shipment-card {
+    padding: 15px;
+  }
 }
