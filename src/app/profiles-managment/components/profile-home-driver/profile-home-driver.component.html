@@ -1,42 +1,42 @@
-<div class="p-5 flex flex-row flex-auto container z-1">
-  <div class="w-full">
-    <div class="welcome-container">
-      <h1 class="title">Welcome, John Doe!</h1>
-      <img src="https://i.ibb.co/RCDQZnJ/logo.png" id="icon" alt="User Icon" class="custom-image">
-    </div>
-    <p class="subtitle">Let's start</p>
-
-    <!-- Card for Today's Activities -->
-    <div class="card-container">
-      <div class="card" *ngIf="activities.length > 0">
-        <h2 class="card-title"><i class="fa fa-list" aria-hidden="true"></i> Today's Activities</h2>
-        <div class="card-content">
-          <div class="activity" *ngFor="let activity of activities.slice(0, 3)">
-            <div class="card-content1">
-              <h3 class="activity-description">{{ activity.description }}</h3>
-              <div class="date-time">
-                <p><strong>Type:</strong> {{ activity.type }}</p>
-                <p> {{ activity.createdAt | date: 'short' }}</p>
+<div class="p-5 flex flex-col flex-auto container z-1 main-container">
+  <div class="glass-effect">
+    <div class="w-full align-content-center">
+      <div class="welcome-container">
+        <h1 class="title gradient-text">Welcome, Jhon Doe!</h1>
+        <img src="https://i.ibb.co/RCDQZnJ/logo.png" id="icon" alt="User Icon" class="custom-image rounded-shadow">
+      </div>
+      <p class="subtitle">Let's start</p>
+      <div class="card-container">
+        <div class="card glass-card" *ngIf="activities.length">
+          <h2 class="card-title"><i class="fa fa-list"></i> Today's activities</h2>
+          <div class="card-content">
+            <div class="activity card-hover" *ngFor="let activity of activities.slice(0, 3)">
+              <div class="card-content1">
+                <h3 class="activity-description">{{ activity.description }}</h3>
+                <div class="date-time">
+                  <p>{{ activity.type }}</p>
+                  <p>{{ activity.createdAt }}</p>
+                </div>
               </div>
             </div>
           </div>
+          <button class="see-more-button hover-scale" (click)="onSeeMoreActivities()">See More</button>
         </div>
-        <button class="see-more-button1" (click)="onSeeMoreActivities()">See More</button>
+
+        <div class="card glass-card" *ngIf="deliveries.length">
+          <h2 class="card-title"><i class="fa fa-truck"></i> Deliveries on the move</h2>
+          <div class="card-content2">
+            <div class="delivery card-hover" *ngFor="let delivery of deliveries.slice(0, 1)">
+              <h3>{{ delivery.destiny }}</h3>
+              <p>Responsible: {{ delivery.description }}</p>
+              <p>Start time: {{ delivery.createdAt }}</p>
+              <p>Delivery time: {{ delivery.status }}</p>
+            </div>
+          </div>
+          <button class="see-more-button hover-scale" (click)="onSeeMoreDeliveries()">See More</button>
+        </div>
       </div>
 
-      <!-- Card for Deliveries on the Move -->
-      <div class="card" *ngIf="deliveries.length > 0">
-        <h2 class="card-title"><i class="fa fa-truck" aria-hidden="true"></i> Deliveries on the Move</h2>
-        <div class="card-content2">
-          <div class="delivery" *ngFor="let delivery of deliveries.slice(0, 1)">
-            <h3>{{ delivery.destiny }}</h3>
-            <p><strong>Description:</strong> {{ delivery.description }}</p>
-            <p><strong>Start Time:</strong> {{ delivery.createdAt | date: 'short' }}</p>
-            <p><strong>Status:</strong> {{ delivery.status }}</p>
-          </div>
-        </div>
-        <button class="see-more-button1" (click)="onSeeMoreDeliveries()">See More</button>
-      </div>
     </div>
   </div>
 </div>
