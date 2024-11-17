@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
-import {Router} from "@angular/router";
+import { Router } from '@angular/router';
+import { IamApiService } from '../../services/iam-api.service.service';
+import { UserEntity } from '../../model/user.entity';
 
 @Component({
   selector: 'app-iam-register',
   templateUrl: './iam-register.component.html',
-  styleUrl: './iam-register.component.css'
+  styleUrls: ['./iam-register.component.css']
 })
 export class IamRegisterComponent {
-  constructor(private router: Router) {}
+  user: UserEntity = new UserEntity();
+
+  constructor(private router: Router, private iamApiService: IamApiService) {}
 
   ngOnInit() {
     document.body.style.backgroundColor = '#303841';
@@ -22,10 +26,21 @@ export class IamRegisterComponent {
   }
 
   typeSelection(type: string) {
-    console.log(type);
+    this.user.type = type;
+    console.log(`Selected type: ${type}`);
   }
 
   goToRegisterUserInformation(type: string) {
-    this.router.navigate(['register', type]);
+    this.typeSelection(type);
+    this.iamApiService.createUser(this.user).subscribe(
+      (data: UserEntity) => {
+        console.log('User registered successfully:', data);
+        this.router.navigate(['login']); // Redirigir al login después del registro exitoso
+      },
+      (error) => {
+        console.error('Error registering user:', error);
+        alert('Registration failed. Please try again later.');
+      }
+    );
   }
 }

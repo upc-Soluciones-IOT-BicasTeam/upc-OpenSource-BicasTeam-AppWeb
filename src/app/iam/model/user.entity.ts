@@ -1,16 +1,17 @@
 export class UserEntity {
-  id: any;
+  id: number | null;
   email: string;
   password: string;
   type: string;
   name: string;
   lastName: string;
-  constructor() {
-    this.email='';
-    this.password='';
-    this.type='';
-    this.name='';
-    this.lastName ='';
-  }
 
+  constructor() {
+    this.id = null; // Inicializa id como null para representar que no está asignado
+    this.email = '';
+    this.password = '';
+    this.type = '';
+    this.name = '';
+    this.lastName = '';
+  }
 }

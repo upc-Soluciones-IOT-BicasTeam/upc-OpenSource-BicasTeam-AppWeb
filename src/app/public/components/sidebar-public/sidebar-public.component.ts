@@ -19,15 +19,20 @@ export class SidebarPublicComponent {
   }
 
   ngOnInit(): void {
-    this.api.findUserById(this.user.id).subscribe((data: any) => {
-      this.type = data.type;
-      this.name = data.name;
-      this.lastName = data.lastName;
-    });
+    this.api.findUserById(this.user.id!).subscribe(
+      (data: UserEntity) => {
+        this.type = data.type;
+        this.name = data.name;
+        this.lastName = data.lastName;
+      },
+      (error) => {
+        console.error('Error fetching user data:', error);
+      }
+    );
   }
 
   goToHome(): void {
-    if (this.type === 'businessman') {
+    if (this.type === 'Gerente') {
       this.router.navigate([ this.user.id,`home-businessman`]);
     } else {
       this.router.navigate([ this.user.id,`home-carrier`]);
@@ -44,7 +49,7 @@ export class SidebarPublicComponent {
 
 
   goToVehicles(): void {
-    if (this.type === 'businessman') {
+    if (this.type === 'Gerente') {
       this.router.navigate([ this.user.id,`vehicles-businessman`]);
     } else {
       this.router.navigate([ this.user.id,`vehicles-carrier`]);
@@ -52,7 +57,7 @@ export class SidebarPublicComponent {
   }
 
   goToReports(): void {
-    if (this.type === 'businessman') {
+    if (this.type === 'Gerente') {
       this.router.navigate([ this.user.id,`report-businessman`]);
     } else {
       this.router.navigate([ this.user.id,`report-carrier`]);
@@ -60,7 +65,7 @@ export class SidebarPublicComponent {
   }
 
   goToShipments(): void {
-    if (this.type === 'businessman') {
+    if (this.type === 'Gerente') {
       this.router.navigate([ this.user.id,`shipment-businessman`]);
     } else {
       this.router.navigate([ this.user.id,`shipment-carrier`]);

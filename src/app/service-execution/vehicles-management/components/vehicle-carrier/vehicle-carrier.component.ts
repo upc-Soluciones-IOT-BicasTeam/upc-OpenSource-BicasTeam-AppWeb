@@ -22,8 +22,14 @@ export class VehicleCarrierComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getVehicles(this.user.id);
+    if (this.user.id !== null && this.user.id !== undefined) {
+      this.getVehicles(this.user.id);
+    } else {
+      console.error('User ID is null or undefined.');
+      // Puedes manejar el error aquí, como mostrar un mensaje de error al usuario.
+    }
   }
+
 
   getVehicles(userId: number): void {
     this.vehiclesApi.getAllVehicles().subscribe(

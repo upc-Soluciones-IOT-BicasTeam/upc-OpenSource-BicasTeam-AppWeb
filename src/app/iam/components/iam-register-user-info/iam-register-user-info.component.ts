@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserEntity } from '../../model/user.entity';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IamApiService } from '../../services/iam-api.service.service';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-iam-register-user-info',
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./iam-register-user-info.component.css']
 })
 export class IamRegisterUserInfoComponent implements OnInit, OnDestroy {
-  user: UserEntity = {} as UserEntity;
+  user: UserEntity = new UserEntity();
   error: boolean = false;
   error_msg: string = '';
   privacityPolicy: boolean = false;
@@ -28,40 +28,50 @@ export class IamRegisterUserInfoComponent implements OnInit, OnDestroy {
     document.body.style.backgroundColor = '';
   }
 
-  async createdUser() {
-    await this.errors();
+  async createUser() {
+    await this.validateInputs();
 
     if (!this.error) {
-      const json = {
-        name: this.user.name,
-        lastName: this.user.lastName,
-        email: this.user.email,
-        password: this.user.password,
-        type: this.user.type
-      };
+      // Usa una instancia de UserEntity para garantizar que el objeto pase la validación de tipos
+      const userPayload = new UserEntity();
+      userPayload.name = this.user.name;
+      userPayload.lastName = this.user.lastName;
+      userPayload.email = this.user.email;
+      userPayload.password = this.user.password;
+      userPayload.type = this.user.type;
 
-      this.iamApi.createUser(json).subscribe((data) => {
-        console.log(data);
-        this.router.navigate(['/register/successfully']);
-      });
+      this.iamApi.createUser(userPayload).subscribe(
+        (data: UserEntity) => {
+          console.log('User registered successfully:', data);
+          this.router.navigate(['/register/successfully']);
+        },
+        (error) => {
+          console.error('Error during registration:', error);
+          this.error = true;
+          this.error_msg = 'Registration failed. Please try again later.';
+        }
+      );
     }
   }
 
-  async errors() {
+
+  async validateInputs() {
     this.error = false;
-    this.error_msg="";
+    this.error_msg = '';
 
-    const emailCheck: Observable<any> = this.iamApi.findUserWithEmail(this.user.email);
-    const emailCheckResult = await emailCheck.toPromise();
-
-    if (emailCheckResult[0] !== undefined) {
-      this.error = true;
-      this.error_msg = 'Email already registered';
+    try {
+      const emailCheckResult = await firstValueFrom(this.iamApi.findUserWithEmail(this.user.email));
+      if (emailCheckResult) {
+        this.error = true;
+        this.error_msg = 'Email already registered';
+      }
+    } catch (error) {
+      console.error('Error checking email:', error);
     }
 
     if (!this.privacityPolicy) {
       this.error = true;
-      this.error_msg = 'Accept privacy policy please';
+      this.error_msg = 'Please accept the privacy policy';
     }
 
     if (this.user.password !== this.passwordConfirmation) {

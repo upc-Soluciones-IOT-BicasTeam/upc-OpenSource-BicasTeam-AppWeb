@@ -7,25 +7,27 @@
         <div class="grid formgrid p-fluid">
           <div class="divider col-12"></div>
           <div class="field mb-4 col-12 md:col-6">
-            <label for="bio" class="font-medium">Bio</label>
-            <textarea id="bio" [(ngModel)]="user.bio" rows="5" class="p-inputtextarea p-inputtext"></textarea>
           </div>
           <div class="field mb-4 col-12 md:col-6">
             <label class="font-medium">Avatar</label>
             <div class="flex align-items-center">
-              <img src="https://blocks.primeng.org/assets/images/blocks/avatars/circle/avatar-f-4.png" class="avatar-img">
+              <img src="https://blocks.primeng.org/assets/images/blocks/avatars/circle/avatar-f-4.png" alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%;" />
             </div>
+
           </div>
           <div class="divider col-12"></div>
           <div class="field mb-4 col-12 md:col-6">
             <label for="email" class="font-medium">Email</label>
-            <input id="email" type="text" [(ngModel)]="user.email" class="p-inputtext">
+            <input id="email" type="email" [(ngModel)]="user.email" class="p-inputtext" readonly>
           </div>
           <div class="divider col-12"></div>
           <div class="col-12">
             <button type="button" class="p-button hover-scale" (click)="updateUser()">Save Changes</button>
           </div>
         </div>
+      </div>
+      <div *ngIf="error" class="alert alert-danger">
+        {{ error_msg }}
       </div>
     </div>
   </div>

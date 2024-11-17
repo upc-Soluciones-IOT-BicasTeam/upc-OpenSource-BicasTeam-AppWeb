@@ -8,8 +8,9 @@ h1 {
   text-align: center;
   font-weight: 700;
   text-transform: uppercase;
-  font-family: 'Open Sans', sans-serif;
-  color: white;
+  font-size: 2.5rem;
+  color: #F39C12; /* Acento moderno */
+  margin: 20px 0;
 }
 
 /* Formulario */
@@ -21,41 +22,41 @@ h1 {
 }
 
 #formContent {
-  border-radius: 10px;
-  background: #303841;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #2C3E50, #34495E); /* Gradiente elegante */
   padding: 30px;
   width: 90%;
   max-width: 450px;
   position: relative;
-  border: 1px solid white;
+  border: 1px solid #F39C12;
   text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
 /* Botones */
 .buttons {
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .btn {
-  background-color: #fff;
+  background-color: #F39C12;
   border: none;
-  color: #000;
+  color: white;
   padding: 15px 0;
-  text-align: left;
-  text-decoration: none;
+  text-align: center;
   display: block;
-  width: calc(100% - 10px);
-  font-size: 16px;
-  margin: auto auto 40px auto;
-  border-radius: 5px;
+  width: 100%;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
   font-family: 'Open Sans', sans-serif;
 }
 
 .btn:hover {
-  background-color: #F39C12;
-  color: #fff;
+  background-color: #F1C40F;
+  transform: translateY(-3px);
   font-weight: 700;
 }
 
@@ -81,5 +82,7 @@ h1 {
 }
 
 #icon {
-  width: 60%;
+  width: 50%;
+  border-radius: 50%; /* Mejora el diseño de la imagen */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
