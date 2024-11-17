@@ -1,56 +1,80 @@
 <div class="container">
-  <h1>Gestión de Vehículos</h1>
+  <div class="header">
+    <h1 class="title gradient-text">Gestión de Vehículos</h1>
+    <button type="button" class="btn primary-btn hover-scale" (click)="showAddVehicleForm()">Agregar Vehículo</button>
+  </div>
 
-  <!-- Sección de Visualización de Vehículos -->
+  <!-- Lista de Vehículos -->
   <div class="vehicle-list">
-    <h2>Lista de Vehículos</h2>
-    <table>
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Placa</th>
-        <th>Modelo</th>
-        <th>Propietario (ID)</th>
-        <th>Acciones</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let vehicle of vehicles">
-        <td>{{ vehicle.id }}</td>
-        <td>{{ vehicle.licensePlate }}</td>
-        <td>{{ vehicle.model }}</td>
-        <td>{{ vehicle.userId }}</td>
-        <td>
-          <button (click)="editVehicle(vehicle)">Editar</button>
-          <button (click)="confirmDelete(vehicle.id)">Eliminar</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+    <div class="vehicle-card" *ngFor="let vehicle of vehicles">
+      <img [src]="vehicle.vehicleImage || 'https://via.placeholder.com/150'" alt="Vehicle Image" class="vehicle-image">
+      <div class="vehicle-info">
+        <h3>{{ vehicle.licensePlate }}</h3>
+        <p>Modelo: {{ vehicle.model }}</p>
+        <button type="button" class="btn view-btn hover-scale" (click)="viewVehicleDetails(vehicle)">Ver más</button>
+        <button type="button" class="btn edit-btn hover-scale" (click)="editVehicle(vehicle)">Editar</button>
+      </div>
+    </div>
   </div>
 
   <!-- Formulario para Agregar/Editar Vehículo -->
-  <div *ngIf="showAddForm || showEditForm" class="vehicle-form">
-    <h2>{{ showEditForm ? 'Editar Vehículo' : 'Agregar Vehículo' }}</h2>
-    <form (ngSubmit)="showEditForm ? updateVehicle() : addVehicle()">
+  <div *ngIf="showForm" class="vehicle-form">
+    <h2>{{ isEditing ? 'Editar Vehículo' : 'Agregar Vehículo' }}</h2>
+    <form (ngSubmit)="isEditing ? updateVehicle() : addVehicle()">
       <label for="licensePlate">Placa:</label>
-      <input type="text" id="licensePlate" [(ngModel)]="vehicle.licensePlate" name="licensePlate" required />
+      <input type="text" id="licensePlate" [(ngModel)]="vehicle.licensePlate" name="licensePlate" required>
 
       <label for="model">Modelo:</label>
-      <input type="text" id="model" [(ngModel)]="vehicle.model" name="model" required />
+      <input type="text" id="model" [(ngModel)]="vehicle.model" name="model" required>
 
-      <label for="userId">Propietario (ID):</label>
-      <input type="number" id="userId" [(ngModel)]="vehicle.userId" name="userId" required />
+      <label for="engine">Motor (%):</label>
+      <input type="number" id="engine" [(ngModel)]="vehicle.engine" name="engine" required min="0" max="100">
 
-      <button type="submit">{{ showEditForm ? 'Actualizar' : 'Agregar' }}</button>
-      <button type="button" (click)="cancelForm()">Cancelar</button>
+      <label for="fuel">Combustible (%):</label>
+      <input type="number" id="fuel" [(ngModel)]="vehicle.fuel" name="fuel" required min="0" max="100">
+
+      <label for="tires">Llantas (%):</label>
+      <input type="number" id="tires" [(ngModel)]="vehicle.tires" name="tires" required min="0" max="100">
+
+      <label for="electricalSystem">Sistema Eléctrico (%):</label>
+      <input type="number" id="electricalSystem" [(ngModel)]="vehicle.electricalSystem" name="electricalSystem" required min="0" max="100">
+
+      <label for="transmissionTemperature">Temperatura de Transmisión (%):</label>
+      <input type="number" id="transmissionTemperature" [(ngModel)]="vehicle.transmissionTemperature" name="transmissionTemperature" required min="0" max="100">
+
+      <label for="driverName">Nombre del Conductor:</label>
+      <input type="text" id="driverName" [(ngModel)]="vehicle.driverName" name="driverName" required>
+
+      <label for="color">Color:</label>
+      <input type="text" id="color" [(ngModel)]="vehicle.color" name="color">
+
+      <label for="lastTechnicalInspectionDate">Fecha de Última Inspección Técnica:</label>
+      <input type="date" id="lastTechnicalInspectionDate" [(ngModel)]="vehicle.lastTechnicalInspectionDate" name="lastTechnicalInspectionDate">
+
+      <!-- Otros campos -->
+
+      <label for="vehicleImage">Imagen del Vehículo (archivo):</label>
+      <input type="file" id="vehicleImage" (change)="handleFileInput($event)">
+      <img *ngIf="uploadedImageUrl" [src]="uploadedImageUrl" alt="Preview Image" class="preview-image">
+
+      <button type="submit" class="btn save-btn hover-scale">{{ isEditing ? 'Actualizar' : 'Agregar' }}</button>
+      <button type="button" class="btn cancel-btn hover-scale" (click)="cancelForm()">Cancelar</button>
     </form>
   </div>
 
-  <!-- Confirmación de Eliminación -->
-  <div *ngIf="showDeleteForm" class="delete-confirmation">
-    <p>¿Estás seguro de que deseas eliminar este vehículo?</p>
-    <button (click)="deleteVehicle()">Sí</button>
-    <button (click)="cancelDelete()">No</button>
-  </div>
+  <!-- Detalles del Vehículo -->
+  <div *ngIf="showDetails" class="vehicle-details">
+    <h2>Detalles del Vehículo</h2>
+    <img [src]="selectedVehicle?.vehicleImage || 'https://via.placeholder.com/250'" alt="Vehicle Image">
+    <p><strong>Placa:</strong> {{ selectedVehicle?.licensePlate }}</p>
+    <p><strong>Modelo:</strong> {{ selectedVehicle?.model }}</p>
+    <p><strong>Motor:</strong> {{ selectedVehicle?.engine }}%</p>
+    <p><strong>Combustible:</strong> {{ selectedVehicle?.fuel }}%</p>
+    <p><strong>Llantas:</strong> {{ selectedVehicle?.tires }}%</p>
+    <p><strong>Sistema Eléctrico:</strong> {{ selectedVehicle?.electricalSystem }}%</p>
+    <p><strong>Temperatura de la Transmisión:</strong> {{ selectedVehicle?.transmissionTemperature }}%</p>
+    <p><strong>Nombre del Conductor:</strong> {{ selectedVehicle?.driverName }}</p>
+    <p><strong>Color:</strong> {{ selectedVehicle?.color }}</p>
+    <p><strong>Última Inspección Técnica:</strong> {{ selectedVehicle?.lastTechnicalInspectionDate | date: 'mediumDate' }}</p>
+    <button type="button" class="btn close-btn hover-scale" (click)="closeDetails()">Cerrar</button>  </div>
 </div>

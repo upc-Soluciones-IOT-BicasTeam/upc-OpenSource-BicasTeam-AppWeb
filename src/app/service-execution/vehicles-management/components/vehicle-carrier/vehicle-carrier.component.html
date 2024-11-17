@@ -1,15 +1,27 @@
 <div class="container">
   <div>
-    <h1 class="title">Your Vehicle :D</h1>
+    <h1 class="title">Your Vehicle Details</h1>
   </div>
-  <div *ngFor="let vehicle of this.vehicles">
-    <mat-card class="card">
-      <mat-card-title>Vehicle ID: {{vehicle.id}}</mat-card-title>
-      <mat-card-content>
-        <p>License Plate: {{vehicle.licensePlate}}</p>
-        <p>Serial Number: {{vehicle.color}}</p>
-        <p>Model: {{vehicle.model}}</p>
-      </mat-card-content>
-    </mat-card>
+  <div *ngIf="vehicles.length > 0; else noVehicle">
+    <div *ngFor="let vehicle of vehicles">
+      <mat-card class="card">
+        <mat-card-title>{{ vehicle.model }}</mat-card-title>
+        <mat-card-content>
+          <img [src]="vehicle.vehicleImage || 'https://via.placeholder.com/300'" alt="Vehicle Image" class="vehicle-image">
+          <p><strong>License Plate:</strong> {{ vehicle.licensePlate }}</p>
+          <p><strong>Engine:</strong> {{ vehicle.engine }}%</p>
+          <p><strong>Fuel:</strong> {{ vehicle.fuel }}%</p>
+          <p><strong>Tires:</strong> {{ vehicle.tires }}%</p>
+          <p><strong>Electrical System:</strong> {{ vehicle.electricalSystem }}%</p>
+          <p><strong>Transmission Temperature:</strong> {{ vehicle.transmissionTemperature }}%</p>
+          <p><strong>Driver Name:</strong> {{ vehicle.driverName }}</p>
+          <p><strong>Color:</strong> {{ vehicle.color }}</p>
+          <p><strong>Last Technical Inspection Date:</strong> {{ vehicle.lastTechnicalInspectionDate | date: 'mediumDate' }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
+  <ng-template #noVehicle>
+    <p>No vehicles found for the current user.</p>
+  </ng-template>
 </div>

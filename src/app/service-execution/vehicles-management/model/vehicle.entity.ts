@@ -9,12 +9,13 @@ export class VehicleEntity {
   electricalSystem: number;
   transmissionTemperature: number;
   driverName: string;
-  vehicleImage: string;
+  vehicleImage?: string | null; // Permite que sea opcional o `null`
   color: string;
   lastTechnicalInspectionDate: string;
   createdAt: string;
 
   constructor() {
+    // Inicializa valores por defecto si es necesario
     this.id = 0;
     this.userId = 0;
     this.licensePlate = '';
@@ -25,7 +26,7 @@ export class VehicleEntity {
     this.electricalSystem = 0;
     this.transmissionTemperature = 0;
     this.driverName = '';
-    this.vehicleImage = '';
+    this.vehicleImage = null; // Puede ser `null` por defecto
     this.color = '';
     this.lastTechnicalInspectionDate = '';
     this.createdAt = '';
