@@ -111,6 +111,16 @@ export class VehicleBusinessmanComponent implements OnInit {
     this.selectedVehicle = null;
   }
 
+  deleteVehicle(id: number): void {
+     {
+      this.vehiclesApi.deleteVehicle(id).subscribe(
+        () => {
+          this.vehicles = this.vehicles.filter(vehicle => vehicle.id !== id);
+        },
+      );
+    }
+  }
+
   cancelForm(): void {
     this.showForm = false;
     this.vehicle = new VehicleEntity();

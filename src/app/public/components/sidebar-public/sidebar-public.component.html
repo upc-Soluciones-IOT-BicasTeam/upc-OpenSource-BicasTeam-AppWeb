@@ -1,6 +1,6 @@
 <div class="sidebar">
   <div class="user-info" (click)="goToProfile()">
-    <img src="https://www.capitalcoahuila.com.mx/wp-content/uploads/2022/11/CARL-e1669117013260.jpeg" alt="User Icon">
+    <img [src]="getUserImage(type)" alt="User Icon">
     <div class="user-name">
       <h2>{{ name }} {{ lastName }}</h2>
       <p>{{ type }}</p>

@@ -7,74 +7,106 @@
   <!-- Lista de Vehículos -->
   <div class="vehicle-list">
     <div class="vehicle-card" *ngFor="let vehicle of vehicles">
-      <img [src]="vehicle.vehicleImage || 'https://via.placeholder.com/150'" alt="Vehicle Image" class="vehicle-image">
+      <img [src]="vehicle.vehicleImage || 'https://via.placeholder.com/400x200'" alt="Vehicle Image" class="vehicle-image">
       <div class="vehicle-info">
-        <h3>{{ vehicle.licensePlate }}</h3>
-        <p>Modelo: {{ vehicle.model }}</p>
-        <button type="button" class="btn view-btn hover-scale" (click)="viewVehicleDetails(vehicle)">Ver más</button>
-        <button type="button" class="btn edit-btn hover-scale" (click)="editVehicle(vehicle)">Editar</button>
+        <h3 class="vehicle-title">{{ vehicle.licensePlate }}</h3>
+        <p class="vehicle-model">Modelo: {{ vehicle.model }}</p>
+        <div class="action-buttons">
+          <button type="button" class="btn view-btn hover-scale" (click)="viewVehicleDetails(vehicle)">Ver más</button>
+          <button type="button" class="btn edit-btn hover-scale" (click)="editVehicle(vehicle)">Editar</button>
+          <button type="button" class="btn delete-btn hover-scale" (click)="deleteVehicle(vehicle.id)">Eliminar</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Formulario para Agregar/Editar Vehículo -->
-  <div *ngIf="showForm" class="vehicle-form">
-    <h2>{{ isEditing ? 'Editar Vehículo' : 'Agregar Vehículo' }}</h2>
-    <form (ngSubmit)="isEditing ? updateVehicle() : addVehicle()">
-      <label for="licensePlate">Placa:</label>
-      <input type="text" id="licensePlate" [(ngModel)]="vehicle.licensePlate" name="licensePlate" required>
+  <!-- Modal de Formulario para Agregar/Editar Vehículo -->
+  <div class="modal" *ngIf="showForm">
+    <div class="modal-content">
+      <span class="close" (click)="cancelForm()">&times;</span>
+      <h2 class="form-title">{{ isEditing ? 'Editar Vehículo' : 'Agregar Vehículo' }}</h2>
+      <form (ngSubmit)="isEditing ? updateVehicle() : addVehicle()">
+        <div class="input-group">
+          <label for="licensePlate">Placa:</label>
+          <input type="text" id="licensePlate" [(ngModel)]="vehicle.licensePlate" name="licensePlate" required>
+        </div>
 
-      <label for="model">Modelo:</label>
-      <input type="text" id="model" [(ngModel)]="vehicle.model" name="model" required>
+        <div class="input-group">
+          <label for="model">Modelo:</label>
+          <input type="text" id="model" [(ngModel)]="vehicle.model" name="model" required>
+        </div>
 
-      <label for="engine">Motor (%):</label>
-      <input type="number" id="engine" [(ngModel)]="vehicle.engine" name="engine" required min="0" max="100">
+        <div class="input-group">
+          <label for="engine">Motor (%):</label>
+          <input type="number" id="engine" [(ngModel)]="vehicle.engine" name="engine" required min="0" max="100">
+        </div>
 
-      <label for="fuel">Combustible (%):</label>
-      <input type="number" id="fuel" [(ngModel)]="vehicle.fuel" name="fuel" required min="0" max="100">
+        <div class="input-group">
+          <label for="fuel">Combustible (%):</label>
+          <input type="number" id="fuel" [(ngModel)]="vehicle.fuel" name="fuel" required min="0" max="100">
+        </div>
 
-      <label for="tires">Llantas (%):</label>
-      <input type="number" id="tires" [(ngModel)]="vehicle.tires" name="tires" required min="0" max="100">
+        <div class="input-group">
+          <label for="tires">Llantas (%):</label>
+          <input type="number" id="tires" [(ngModel)]="vehicle.tires" name="tires" required min="0" max="100">
+        </div>
 
-      <label for="electricalSystem">Sistema Eléctrico (%):</label>
-      <input type="number" id="electricalSystem" [(ngModel)]="vehicle.electricalSystem" name="electricalSystem" required min="0" max="100">
+        <div class="input-group">
+          <label for="electricalSystem">Sistema Eléctrico (%):</label>
+          <input type="number" id="electricalSystem" [(ngModel)]="vehicle.electricalSystem" name="electricalSystem" required min="0" max="100">
+        </div>
 
-      <label for="transmissionTemperature">Temperatura de Transmisión (%):</label>
-      <input type="number" id="transmissionTemperature" [(ngModel)]="vehicle.transmissionTemperature" name="transmissionTemperature" required min="0" max="100">
+        <div class="input-group">
+          <label for="transmissionTemperature">Temperatura de Transmisión (%):</label>
+          <input type="number" id="transmissionTemperature" [(ngModel)]="vehicle.transmissionTemperature" name="transmissionTemperature" required min="0" max="100">
+        </div>
 
-      <label for="driverName">Nombre del Conductor:</label>
-      <input type="text" id="driverName" [(ngModel)]="vehicle.driverName" name="driverName" required>
+        <div class="input-group">
+          <label for="driverName">Nombre del Conductor:</label>
+          <input type="text" id="driverName" [(ngModel)]="vehicle.driverName" name="driverName" required>
+        </div>
 
-      <label for="color">Color:</label>
-      <input type="text" id="color" [(ngModel)]="vehicle.color" name="color">
+        <div class="input-group">
+          <label for="color">Color:</label>
+          <input type="text" id="color" [(ngModel)]="vehicle.color" name="color">
+        </div>
 
-      <label for="lastTechnicalInspectionDate">Fecha de Última Inspección Técnica:</label>
-      <input type="date" id="lastTechnicalInspectionDate" [(ngModel)]="vehicle.lastTechnicalInspectionDate" name="lastTechnicalInspectionDate">
+        <div class="input-group">
+          <label for="lastTechnicalInspectionDate">Fecha de Última Inspección Técnica:</label>
+          <input type="date" id="lastTechnicalInspectionDate" [(ngModel)]="vehicle.lastTechnicalInspectionDate" name="lastTechnicalInspectionDate">
+        </div>
 
-      <!-- Otros campos -->
+        <label for="vehicleImage">Imagen del Vehículo (archivo):</label>
+        <input type="file" id="vehicleImage" (change)="handleFileInput($event)" class="file-input">
+        <img *ngIf="uploadedImageUrl" [src]="uploadedImageUrl" alt="Preview Image" class="preview-image">
 
-      <label for="vehicleImage">Imagen del Vehículo (archivo):</label>
-      <input type="file" id="vehicleImage" (change)="handleFileInput($event)">
-      <img *ngIf="uploadedImageUrl" [src]="uploadedImageUrl" alt="Preview Image" class="preview-image">
-
-      <button type="submit" class="btn save-btn hover-scale">{{ isEditing ? 'Actualizar' : 'Agregar' }}</button>
-      <button type="button" class="btn cancel-btn hover-scale" (click)="cancelForm()">Cancelar</button>
-    </form>
+        <div class="form-buttons">
+          <button type="submit" class="btn save-btn hover-scale">{{ isEditing ? 'Actualizar' : 'Agregar' }}</button>
+          <button type="button" class="btn cancel-btn hover-scale" (click)="cancelForm()">Cancelar</button>
+        </div>
+      </form>
+    </div>
   </div>
 
-  <!-- Detalles del Vehículo -->
-  <div *ngIf="showDetails" class="vehicle-details">
-    <h2>Detalles del Vehículo</h2>
-    <img [src]="selectedVehicle?.vehicleImage || 'https://via.placeholder.com/250'" alt="Vehicle Image">
-    <p><strong>Placa:</strong> {{ selectedVehicle?.licensePlate }}</p>
-    <p><strong>Modelo:</strong> {{ selectedVehicle?.model }}</p>
-    <p><strong>Motor:</strong> {{ selectedVehicle?.engine }}%</p>
-    <p><strong>Combustible:</strong> {{ selectedVehicle?.fuel }}%</p>
-    <p><strong>Llantas:</strong> {{ selectedVehicle?.tires }}%</p>
-    <p><strong>Sistema Eléctrico:</strong> {{ selectedVehicle?.electricalSystem }}%</p>
-    <p><strong>Temperatura de la Transmisión:</strong> {{ selectedVehicle?.transmissionTemperature }}%</p>
-    <p><strong>Nombre del Conductor:</strong> {{ selectedVehicle?.driverName }}</p>
-    <p><strong>Color:</strong> {{ selectedVehicle?.color }}</p>
-    <p><strong>Última Inspección Técnica:</strong> {{ selectedVehicle?.lastTechnicalInspectionDate | date: 'mediumDate' }}</p>
-    <button type="button" class="btn close-btn hover-scale" (click)="closeDetails()">Cerrar</button>  </div>
+  <!-- Modal para Detalles del Vehículo -->
+  <div class="modal" *ngIf="showDetails">
+    <div class="modal-content">
+      <span class="close" (click)="closeDetails()">&times;</span>
+      <h2>Detalles del Vehículo</h2>
+      <img [src]="selectedVehicle?.vehicleImage || 'https://via.placeholder.com/800x400'" alt="Vehicle Image" class="vehicle-details-image">
+      <div class="vehicle-details-content">
+        <p><strong>Placa:</strong> {{ selectedVehicle?.licensePlate }}</p>
+        <p><strong>Modelo:</strong> {{ selectedVehicle?.model }}</p>
+        <p><strong>Motor:</strong> {{ selectedVehicle?.engine }}%</p>
+        <p><strong>Combustible:</strong> {{ selectedVehicle?.fuel }}%</p>
+        <p><strong>Llantas:</strong> {{ selectedVehicle?.tires }}%</p>
+        <p><strong>Sistema Eléctrico:</strong> {{ selectedVehicle?.electricalSystem }}%</p>
+        <p><strong>Temperatura de la Transmisión:</strong> {{ selectedVehicle?.transmissionTemperature }}%</p>
+        <p><strong>Nombre del Conductor:</strong> {{ selectedVehicle?.driverName }}</p>
+        <p><strong>Color:</strong> {{ selectedVehicle?.color }}</p>
+        <p><strong>Última Inspección Técnica:</strong> {{ selectedVehicle?.lastTechnicalInspectionDate | date: 'mediumDate' }}</p>
+        <button type="button" class="btn close-btn hover-scale" (click)="closeDetails()">Cerrar</button>
+      </div>
+    </div>
+  </div>
 </div>

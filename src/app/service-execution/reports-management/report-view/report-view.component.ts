@@ -27,4 +27,18 @@ export class ReportViewComponent implements OnInit {
       }
     );
   }
+
+  deleteReport(reportId: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar este reporte?')) {
+      this.reportsApi.deleteReport(reportId).subscribe(
+        () => {
+          console.log(`Reporte con ID ${reportId} eliminado.`);
+          this.reports = this.reports.filter(report => report.id !== reportId);
+        },
+        (error) => {
+          console.error('Error al eliminar el reporte:', error);
+        }
+      );
+    }
+  }
 }

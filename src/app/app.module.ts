@@ -28,7 +28,7 @@ import { PgHomeDriverComponent } from './public/pages/pg-home-driver/pg-home-dri
 import {PgHomeBusinessmanComponent} from "./public/pages/pg-home-businessman/pg-home-businessman.component";
 import { VehicleBusinessmanComponent } from './service-execution/vehicles-management/components/vehicle-businessman/vehicle-businessman.component';
 import { PgVehiclesBusinessmanComponent } from './public/pages/pg-vehicles-businessman/pg-vehicles-businessman.component';
-import {MatCard, MatCardContent, MatCardTitle} from "@angular/material/card";
+import {MatCard, MatCardContent, MatCardHeader, MatCardSubtitle, MatCardTitle} from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
 import { VehicleCarrierComponent } from './service-execution/vehicles-management/components/vehicle-carrier/vehicle-carrier.component';
 import { PgVehiclesCarrierComponent } from './public/pages/pg-vehicles-carrier/pg-vehicles-carrier.component';
@@ -95,7 +95,9 @@ import { PgReportCarrierComponent } from './public/pages/pg-report-carrier/pg-re
     MatCard,
     MatCardTitle,
     MatCardContent,
-    MatButton
+    MatButton,
+    MatCardSubtitle,
+    MatCardHeader
   ],
   providers: [
     provideAnimationsAsync(),IamApiService

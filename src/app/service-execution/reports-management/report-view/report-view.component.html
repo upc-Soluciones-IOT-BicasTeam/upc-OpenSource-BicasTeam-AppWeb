@@ -9,10 +9,11 @@
         <table class="table">
           <thead>
           <tr>
-            <th>Driver’s Name and Last Name</th>
+            <th>Driver’s Name</th>
             <th>Description</th>
             <th>Report Type</th>
             <th>Date</th>
+            <th>Actions</th> <!-- Nueva columna para acciones -->
           </tr>
           </thead>
           <tbody>
@@ -21,6 +22,15 @@
             <td>{{ report.description }}</td>
             <td>{{ report.type }}</td>
             <td>{{ report.createdAt | date: 'shortDate' }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn delete-btn hover-scale"
+                (click)="deleteReport(report.id)"
+              >
+                Eliminar
+              </button>
+            </td>
           </tr>
           </tbody>
         </table>

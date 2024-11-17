@@ -1,20 +1,25 @@
-import { Component } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {IamApiService} from "../../../iam/services/iam-api.service.service";
-import {UserEntity} from "../../../iam/model/user.entity";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
+import { IamApiService } from "../../../iam/services/iam-api.service.service";
+import { UserEntity } from "../../../iam/model/user.entity";
 
 @Component({
   selector: 'app-sidebar-public',
   templateUrl: './sidebar-public.component.html',
-  styleUrl: './sidebar-public.component.css'
+  styleUrls: ['./sidebar-public.component.css']
 })
-export class SidebarPublicComponent {
+export class SidebarPublicComponent implements OnInit {
   user: UserEntity = {} as UserEntity;
   name: string = '';
   lastName: string = '';
   type: string = '';
   visible: boolean = true;
-  constructor(private route: ActivatedRoute, private router: Router, private api: IamApiService){
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private api: IamApiService
+  ) {
     this.user.id = this.route.snapshot.params['id'];
   }
 
@@ -31,45 +36,53 @@ export class SidebarPublicComponent {
     );
   }
 
+  getUserImage(type: string): string {
+    if (type === 'Gerente') {
+      return 'https://www.capitalcoahuila.com.mx/wp-content/uploads/2022/11/CARL-e1669117013260.jpeg';
+    } else if (type === 'Transportista') {
+      return 'https://img.freepik.com/fotos-premium/conductor-entregas-usando-tableta-furgoneta-paquetes_1004054-19689.jpg';
+    } else {
+      return 'https://via.placeholder.com/150'; // Imagen por defecto si el tipo no coincide
+    }
+  }
+
   goToHome(): void {
     if (this.type === 'Gerente') {
-      this.router.navigate([ this.user.id,`home-businessman`]);
+      this.router.navigate([this.user.id, `home-businessman`]);
     } else {
-      this.router.navigate([ this.user.id,`home-carrier`]);
+      this.router.navigate([this.user.id, `home-carrier`]);
     }
   }
 
   goToProfile(): void {
-    this.router.navigate([ this.user.id,`profile`]);
+    this.router.navigate([this.user.id, `profile`]);
   }
 
   goTologout(): void {
-    this.router.navigate([ `login`]);
+    this.router.navigate([`login`]);
   }
-
 
   goToVehicles(): void {
     if (this.type === 'Gerente') {
-      this.router.navigate([ this.user.id,`vehicles-businessman`]);
+      this.router.navigate([this.user.id, `vehicles-businessman`]);
     } else {
-      this.router.navigate([ this.user.id,`vehicles-carrier`]);
+      this.router.navigate([this.user.id, `vehicles-carrier`]);
     }
   }
 
   goToReports(): void {
     if (this.type === 'Gerente') {
-      this.router.navigate([ this.user.id,`report-businessman`]);
+      this.router.navigate([this.user.id, `report-businessman`]);
     } else {
-      this.router.navigate([ this.user.id,`report-carrier`]);
+      this.router.navigate([this.user.id, `report-carrier`]);
     }
   }
 
   goToShipments(): void {
     if (this.type === 'Gerente') {
-      this.router.navigate([ this.user.id,`shipment-businessman`]);
+      this.router.navigate([this.user.id, `shipment-businessman`]);
     } else {
-      this.router.navigate([ this.user.id,`shipment-carrier`]);
+      this.router.navigate([this.user.id, `shipment-carrier`]);
     }
   }
-
 }
