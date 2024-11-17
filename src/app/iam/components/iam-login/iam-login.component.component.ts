@@ -25,7 +25,7 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
 
   login() {
     this.error = false; // Reinicia el estado de error al intentar un nuevo login
-    this.iamApi.findUserWithEmailAndPassword(this.user.email, this.user.password).subscribe(
+    this.iamApi.authenticateUser(this.user.email, this.user.password).subscribe(
       (data: UserEntity) => {
         if (data) {
           data.type === 'Gerente'

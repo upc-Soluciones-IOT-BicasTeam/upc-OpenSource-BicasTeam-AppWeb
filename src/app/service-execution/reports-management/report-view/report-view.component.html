@@ -1,11 +1,10 @@
-<!-- report-view.component.html -->
 <div class="container">
   <div class="header">
-    <h1>Reports</h1>
-    <p>Driver report list</p>
+    <h1 class="title gradient-text">Reports</h1>
+    <p class="subtitle">Driver report list</p>
   </div>
   <div class="card-container">
-    <div class="card">
+    <div class="card glass-card hover-scale">
       <div class="card-body">
         <table class="table">
           <thead>
@@ -17,11 +16,11 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let report of reports;let i = index">
-            <td>{{ report.driverName}}</td>
+          <tr *ngFor="let report of reports; let i = index" class="table-row">
+            <td>{{ report.driverName }}</td>
             <td>{{ report.description }}</td>
             <td>{{ report.type }}</td>
-            <td>{{ report.createdAt }}</td>
+            <td>{{ report.createdAt | date: 'shortDate' }}</td>
           </tr>
           </tbody>
         </table>

@@ -26,7 +26,7 @@ export class IamRegisterComponent {
   }
 
   typeSelection(type: string) {
-    this.user.type = type;
+    this.user.type = type; // Guarda el tipo de usuario
     console.log(`Selected type: ${type}`);
   }
 
@@ -35,7 +35,7 @@ export class IamRegisterComponent {
     this.iamApiService.createUser(this.user).subscribe(
       (data: UserEntity) => {
         console.log('User registered successfully:', data);
-        this.router.navigate(['login']); // Redirigir al login después del registro exitoso
+        this.router.navigate([`register/${type}`]); // Redirigir al registro exitoso
       },
       (error) => {
         console.error('Error registering user:', error);

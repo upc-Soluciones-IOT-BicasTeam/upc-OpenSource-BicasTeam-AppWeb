@@ -11,8 +11,8 @@ export class IamApiService {
 
   constructor(private http: HttpClient) {}
 
-  // Encontrar un usuario por email y password
-  findUserWithEmailAndPassword(email: string, password: string): Observable<UserEntity> {
+  // Autenticar al usuario con email y password
+  authenticateUser(email: string, password: string): Observable<UserEntity> {
     return this.http.get<UserEntity>(`${this.baseUrl}/email/${email}/password/${password}`);
   }
 
@@ -31,9 +31,10 @@ export class IamApiService {
     return this.http.get<UserEntity>(`${this.baseUrl}/${id}`);
   }
 
-  // Actualizar un usuario por email y password (ajustado según tu API)
-  updateUser(email: string, password: string, user: Partial<UserEntity>): Observable<UserEntity> {
-    return this.http.put<UserEntity>(`${this.baseUrl}/email/${email}/password/${password}`, user);
+  // Actualizar un usuario usando email y password
+  updateUser(email: string, password: string, userUpdates: Partial<UserEntity>): Observable<UserEntity> {
+    const url = `${this.baseUrl}/email/${email}/password/${password}`;
+    return this.http.put<UserEntity>(url, userUpdates);
   }
 
   // Eliminar un usuario por ID
