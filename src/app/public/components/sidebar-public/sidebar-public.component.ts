@@ -74,7 +74,7 @@ export class SidebarPublicComponent implements OnInit {
     if (this.type === 'Gerente') {
       this.router.navigate([this.user.id, `report-businessman`]);
     } else {
-      this.router.navigate([this.user.id, `report-carrier`]);
+      this.router.navigate([this.user.id, `report-businessman`]);
     }
   }
 
