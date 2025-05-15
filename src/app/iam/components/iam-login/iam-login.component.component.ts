@@ -28,6 +28,7 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
     this.iamApi.authenticateUser(this.user.email, this.user.password).subscribe(
       (data: UserEntity) => {
         if (data) {
+
           data.type === 'Gerente'
             ? this.router.navigate([`${data.id}/home-businessman`])
             : this.router.navigate([`${data.id}/home-carrier`]);
@@ -46,5 +47,11 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
 
   cleanCss() {
     document.body.style.backgroundColor = '';
+  }
+
+  goToRegisterUserInformation(type: string) {
+    this.user.type = type; // Guarda el tipo de usuario
+    console.log(type)
+    this.router.navigate([`register/${type}`]); // Redirigir al registro exitoso
   }
 }
