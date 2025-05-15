@@ -1,15 +1,14 @@
-@import 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap';
+/* src/app/service-execution/shipment-management/components/shipment-businessman/shipment-businessman.component.css */
 
-/* Estilos globales */
-body {
-  background: linear-gradient(135deg, #e0f7fa, #cfd8dc);
+/* 1. Importa Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+/* 2. Host y contenedor principal */
+:host {
+  display: block;
   font-family: 'Poppins', sans-serif;
   color: #333F50;
-  margin: 0;
-  padding: 0;
 }
-
-/* Contenedor principal */
 .container {
   max-width: 1100px;
   width: 90%;
@@ -19,162 +18,253 @@ body {
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(15px);
-  transition: transform 0.3s;
-}
-.card-container {
-  display: flex;
-  flex-direction: column; /* Apila las tarjetas verticalmente */
-  gap: 20px;
-  width: 100%;
 }
 
-.container:hover {
-  transform: scale(1.02);
-}
-
-/* Gradiente para el título */
+/* 3. Título */
 .title {
-  text-align: center;
-  font-size: 3.5rem;
-  color: #1A202C;
-  margin-bottom: 40px;
+  font-size: 3rem;
   font-weight: 700;
+  margin-bottom: 20px;
 }
 
-.gradient-text {
-
+/* 4. Controles de filtro y búsqueda */
+.controls.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.filter-group {
+  display: flex;
+  flex-direction: column;
+}
+.filter-group label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.filter-group select,
+.filter-group input {
+  padding: 8px 12px;
+  border: 2px solid #E2E8F0;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.filter-group select:focus,
+.filter-group input:focus {
+  border-color: #F7B500;
 }
 
-/* Botón "Add Shipment" */
+/* 5. Botón "Add Shipment" */
 .btn-add {
-  display: block;
-  margin: 20px auto;
-  padding: 14px 30px;
-  background: linear-gradient(135deg, #FFEB3B, #FBC02D);  color: #ffffff;
+  margin-left: auto;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #FFEB3B, #FBC02D);
+  color: #fff;
   border: none;
   border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 1.2rem;
   box-shadow: 0 4px 15px rgba(41, 182, 246, 0.3);
-  transition: all 0.4s ease;
+  transition: transform 0.2s, background 0.2s;
 }
-
 .btn-add:hover {
   background: linear-gradient(135deg, #FBC02D, #F9A825);
   transform: scale(1.05);
 }
 
-/* Formulario */
-.form-container {
-  margin-bottom: 30px;
-  padding: 25px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 20px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+/* 6. Modal de formulario (Create/Edit) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  z-index: 1000;
 }
-
-.form-group label {
-  font-size: 1.2rem;
-  color: #1A202C;
-}
-
-input {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border: 2px solid #E2E8F0;
+.modal-content {
+  background: #fff;
   border-radius: 12px;
-  background-color: #f9f9f9;
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+.modal-content h2 {
+  margin: 0 0 1rem;
+  font-size: 1.75rem;
+}
+.form-group {
+  margin-bottom: 1rem;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #E2E8F0;
+  border-radius: 8px;
+  font-size: 1rem;
   transition: border-color 0.3s;
 }
-
-input:focus {
+.form-group input:focus,
+.form-group select:focus {
   border-color: #F7B500;
-  outline: none;
 }
-
-/* Botón "Submit" */
-.btn-submit {
-  display: block;
-  background: linear-gradient(135deg, #FF7043, #FF5722);
-  color: #ffffff;
-  border: none;
-  padding: 14px 30px;
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+.btn-submit,
+.btn-cancel {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
   border-radius: 30px;
+  border: none;
   cursor: pointer;
-  font-size: 1.2rem;
-  margin: 20px auto;
-  box-shadow: 0 4px 15px rgba(255, 112, 67, 0.3);
-  transition: all 0.4s ease;
+  transition: transform 0.2s, background 0.2s;
 }
-
+.btn-submit {
+  background: linear-gradient(135deg, #FF7043, #FF5722);
+  color: #fff;
+}
 .btn-submit:hover {
   background: linear-gradient(135deg, #E64A19, #D84315);
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
-
-/* Título de lista */
-.list-title {
-  font-size: 2.5rem;
-  color: #1A202C;
-  margin: 40px 0 20px;
-}
-
-/* Lista de envíos */
-.shipment-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.shipment-card {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.shipment-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-/* Botón "Delete" */
-.btn-delete {
-  background-color: #C0392B;
+.btn-cancel {
+  background: #B0BEC5;
   color: #fff;
+}
+.btn-cancel:hover {
+  background: #90A4AE;
+  transform: scale(1.03);
+}
+
+/* 7. Tabla de envíos */
+.shipment-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.shipment-table th,
+.shipment-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #E0E0E0;
+  text-align: left;
+}
+.shipment-table thead {
+  background: #f5f5f5;
+}
+.shipment-table thead th {
+  font-weight: 600;
+}
+.shipment-table tbody tr:hover {
+  background: #FAFAFA;
+}
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.btn-action {
+  background: transparent;
   border: none;
-  padding: 10px 20px;
-  border-radius: 25px;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
+  transition: color 0.2s;
+}
+.btn-action:hover {
+  color: #F44336;
 }
 
-.btn-delete:hover {
-  background-color: #E63946;
-  transform: translateY(-2px);
-}
 
-/* Mensaje de no envíos */
+/* 9. Mensaje "No shipments" */
 .no-shipments {
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   color: #666;
+  margin-top: 40px;
 }
 
-/* Responsive design */
+/* 10. Modal de confirmación de borrado */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+}
+.confirm-modal {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  width: 90%;
+  max-width: 360px;
+}
+.confirm-modal p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+.confirm-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.btn-confirm-yes,
+.btn-confirm-no {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-confirm-yes {
+  background: #d32f2f;
+  color: #fff;
+}
+.btn-confirm-yes:hover {
+  background: #b71c1c;
+  transform: scale(1.03);
+}
+.btn-confirm-no {
+  background: #757575;
+  color: #fff;
+}
+.btn-confirm-no:hover {
+  background: #424242;
+  transform: scale(1.03);
+}
+
+/* 11. Responsive */
 @media (max-width: 768px) {
-  .title {
-    font-size: 2.5rem;
+  .controls.filters {
+    flex-direction: column;
+    align-items: stretch;
   }
-
-  .btn-add, .btn-submit {
+  .btn-add,
+  .btn-submit,
+  .btn-cancel {
     width: 100%;
-    font-size: 1rem;
   }
-
-  .shipment-card {
-    padding: 15px;
+  .shipment-table th,
+  .shipment-table td {
+    padding: 10px 8px;
   }
 }

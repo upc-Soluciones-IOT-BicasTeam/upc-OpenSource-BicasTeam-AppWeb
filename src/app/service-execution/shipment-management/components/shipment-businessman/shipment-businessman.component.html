@@ -1,43 +1,142 @@
+<!-- src/app/service-execution/shipment-management/components/shipment-businessman/shipment-businessman.component.html -->
+
 <div class="container">
-  <h1 class="title gradient-text">Shipment Management</h1>
+  <!-- Título principal -->
+  <h1 class="title gradient-text">Shipments</h1>
 
-  <button class="btn-add" (click)="showAddForm = !showAddForm">Add Shipment</button>
-  <div *ngIf="showAddForm" class="form-container glass-effect">
-    <h2>Create New Shipment</h2>
-    <form (ngSubmit)="addShipment()">
-      <div class="form-group">
-        <label for="destiny">Destiny:</label>
-        <input type="text" id="destiny" [(ngModel)]="shipment.destiny" name="destiny" required>
-      </div>
-      <div class="form-group">
-        <label for="description">Description:</label>
-        <input type="text" id="description" [(ngModel)]="shipment.description" name="description" required>
-      </div>
-      <div class="form-group">
-        <label for="status">Status:</label>
-        <input type="text" id="status" [(ngModel)]="shipment.status" name="status" required>
-      </div>
-      <div class="form-group">
-        <label for="driverName">Driver Name:</label>
-        <input type="text" id="driverName" [(ngModel)]="shipment.driverName" name="driverName" required>
-      </div>
-      <button type="submit" class="btn-submit">Submit</button>
-    </form>
+  <!-- Controles: filtro por estado + búsqueda + orden por fecha -->
+  <div class="controls filters">
+    <div class="filter-group">
+      <label for="statusFilter">Filter by status:</label>
+      <select
+        id="statusFilter"
+        [(ngModel)]="filterStatus"
+        (ngModelChange)="onStatusChange($event)"
+      >
+        <option value="">All</option>
+        <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="searchBox">Search:</label>
+      <input
+        id="searchBox"
+        type="text"
+        placeholder="Destiny or description..."
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="onSearch($event)"
+      />
+    </div>
+
+
+
+    <button class="btn-add" (click)="openForm()">Add Shipment</button>
   </div>
 
+  <!-- Modal de formulario (create/edit) -->
+  <div class="modal-overlay" *ngIf="isFormOpen" (click)="closeForm()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>{{ isEditMode ? 'Edit Shipment' : 'Create New Shipment' }}</h2>
+      <form [formGroup]="shipmentForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="destiny">Destiny</label>
+          <input id="destiny" formControlName="destiny" />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input id="description" formControlName="description" />
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select id="status" formControlName="status">
+            <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="driverName">Driver Name</label>
+          <input id="driverName" formControlName="driverName" />
+        </div>
+        <div class="form-actions">
+          <button
+            type="submit"
+            class="btn-submit"
+            [disabled]="shipmentForm.invalid"
+          >
+            {{ isEditMode ? 'Update' : 'Create' }}
+          </button>
+          <button type="button" class="btn-cancel" (click)="closeForm()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Tabla de envíos -->
   <h2 class="list-title">Current Shipments</h2>
-  <div class="shipment-list" *ngIf="shipments.length > 0; else noShipments">
-    <div class="card-body">
-    <div class="shipment-card glass-card" *ngFor="let shipment of shipments">
-      <p><strong>Destiny:</strong> {{ shipment.destiny }}</p>
-      <p><strong>Description:</strong> {{ shipment.description }}</p>
-      <p><strong>Status:</strong> {{ shipment.status }}</p>
-      <p><strong>Driver:</strong> {{ shipment.driverName }}</p>
-      <button class="btn-delete" (click)="deleteShipmentId = shipment.id; deleteShipment()">Delete</button>
-    </div>
-    </div>
-  </div>
+  <table
+    class="shipment-table"
+    *ngIf="filteredShipments.length; else noShipments"
+  >
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Destiny</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Driver</th>
+      <th
+        class="sortable-header"
+        (click)="toggleSortOrder()"
+      >
+        Created At
+        <span *ngIf="sortDirection==='desc'">▼</span>
+        <span *ngIf="sortDirection==='asc'">▲</span>
+      </th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let s of filteredShipments">
+      <td>{{ s.id }}</td>
+      <td>{{ s.destiny }}</td>
+      <td>{{ s.description }}</td>
+      <td>
+          <span
+            class="status-badge"
+            [ngClass]="'status-badge--' + s.status.toLowerCase().replace(' ', '-')"
+          >
+            {{ s.status }}
+          </span>
+      </td>
+      <td>{{ s.driverName }}</td>
+      <td>{{ s.createdAt | date: 'dd/MM/yyyy hh:mm a' }}</td>
+      <td class="actions">
+        <button class="btn-action" (click)="openDeleteConfirm(s)">
+          🗑️
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
   <ng-template #noShipments>
     <p class="no-shipments">No shipments available.</p>
   </ng-template>
+
+  <!-- Modal de confirmación de borrado -->
+  <div class="confirm-overlay" *ngIf="showConfirmModal">
+    <div class="confirm-modal">
+      <p>¿Estás seguro de que deseas eliminar este envío?</p>
+      <div class="confirm-buttons">
+        <button class="btn-confirm-yes" (click)="confirmDelete()">
+          Aceptar
+        </button>
+        <button class="btn-confirm-no" (click)="cancelDelete()">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

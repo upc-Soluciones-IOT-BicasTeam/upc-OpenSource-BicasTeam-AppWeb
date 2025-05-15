@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -35,9 +38,7 @@ import { PgVehiclesCarrierComponent } from './public/pages/pg-vehicles-carrier/p
 import { ProfileEditionComponent } from './profiles-managment/components/profile-edition/profile-edition.component';
 import { PgProfileEditionComponent } from './public/pages/pg-profile-edition/pg-profile-edition.component';
 import { ShipmentBusinessmanComponent } from './service-execution/shipment-management/components/shipment-businessman/shipment-businessman.component';
-import { ShipmentCarrierComponent } from './service-execution/shipment-management/components/shipment-carrier/shipment-carrier.component';
 import { PgShipmentBusinessmanComponent } from './public/pages/pg-shipment-businessman/pg-shipment-businessman.component';
-import { PgShipmentCarrierComponent } from './public/pages/pg-shipment-carrier/pg-shipment-carrier.component';
 import { ReportDriverComponent } from './service-execution/reports-management/report-driver/report-driver.component';
 import { ReportViewComponent } from './service-execution/reports-management/report-view/report-view.component';
 import { PgReportBusinessmanComponent } from './public/pages/pg-report-businessman/pg-report-businessman.component';
@@ -69,9 +70,7 @@ import { PgReportCarrierComponent } from './public/pages/pg-report-carrier/pg-re
     ProfileEditionComponent,
     PgProfileEditionComponent,
     ShipmentBusinessmanComponent,
-    ShipmentCarrierComponent,
     PgShipmentBusinessmanComponent,
-    PgShipmentCarrierComponent,
     ReportDriverComponent,
     ReportViewComponent,
     PgReportBusinessmanComponent,
@@ -97,7 +96,8 @@ import { PgReportCarrierComponent } from './public/pages/pg-report-carrier/pg-re
     MatCardContent,
     MatButton,
     MatCardSubtitle,
-    MatCardHeader
+    MatCardHeader,
+    ReactiveFormsModule
   ],
   providers: [
     provideAnimationsAsync(),IamApiService
