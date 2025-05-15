@@ -1,38 +1,40 @@
+// src/app/services/shipment-api.service.ts
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ShipmentEntity } from "../model/shipment.entity";
+import { ShipmentEntity } from '../model/shipment.entity';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShipmentApiService {
-  private baseUrl = 'https://app-241114092351funda.azurewebsites.net/api/shipments';
+  private baseUrl = 'https://shipments.free.beeceptor.com/api/shipments';
 
   constructor(private http: HttpClient) {}
 
-  // Obtener todos los envíos
   getAllShipments(): Observable<ShipmentEntity[]> {
     return this.http.get<ShipmentEntity[]>(`${this.baseUrl}`);
+
   }
 
-  // Obtener un envío por su ID
+  getShipmentsByUserId(userId: number): Observable<ShipmentEntity[]> {
+    return this.http.get<ShipmentEntity[]>(`${this.baseUrl}?idUser=${userId}`);
+  }
+
   getShipmentById(id: number): Observable<ShipmentEntity> {
     return this.http.get<ShipmentEntity>(`${this.baseUrl}/${id}`);
   }
 
-  // Agregar un nuevo envío
   addShipment(shipment: Partial<ShipmentEntity>): Observable<ShipmentEntity> {
-    return this.http.post<ShipmentEntity>(`${this.baseUrl}`, shipment);
+    return this.http.post<ShipmentEntity>(this.baseUrl, shipment);
   }
 
-  // Eliminar un envío por su ID
+  updateShipment(id: number, shipment: Partial<ShipmentEntity>): Observable<ShipmentEntity> {
+    return this.http.put<ShipmentEntity>(`${this.baseUrl}/${id}`, shipment);
+  }
+
   deleteShipment(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
-  }
-
-  // Obtener envíos por ID de usuario (función personalizada)
-  getShipmentsByUserId(userId: number): Observable<ShipmentEntity[]> {
-    return this.http.get<ShipmentEntity[]>(`${this.baseUrl}?idUser=${userId}`);
   }
 }
