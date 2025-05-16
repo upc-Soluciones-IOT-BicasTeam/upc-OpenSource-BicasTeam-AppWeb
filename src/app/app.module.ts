@@ -92,6 +92,7 @@ import { PgAnalyticsComponent } from './public/pages/pg-analytics/pg-analytics.c
     PlatformStaffHomeComponent,
     PgStaffHomeComponent,
     SidebarStaffComponent,
+    PgAnalyticsComponent
   ],
   imports: [
     HttpClientModule,
