@@ -7,7 +7,7 @@ import { UserEntity } from '../model/user.entity';
   providedIn: 'root'
 })
 export class IamApiService {
-  private baseUrl = 'https://cacf2cca4fa62707c02d.free.beeceptor.com/api/users';
+  private baseUrl = 'https://mxuricio-asd1.free.beeceptor.com/api/users';
 
   constructor(private http: HttpClient) {}
 

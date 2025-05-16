@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -57,9 +56,7 @@ import { PlatformStaffHomeComponent } from './subscription&payments/components/p
 import { PgStaffHomeComponent } from './public/pages/pg-staff-home/pg-staff-home.component';
 import { SidebarStaffComponent } from './public/components/sidebar-staff/sidebar-staff.component';
 import { PgAnalyticsComponent } from './public/pages/pg-analytics/pg-analytics.component';
-
-
-
+import { AnalyticsComponent } from './analytics/components/analytics/analytics.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +89,8 @@ import { PgAnalyticsComponent } from './public/pages/pg-analytics/pg-analytics.c
     PlatformStaffHomeComponent,
     PgStaffHomeComponent,
     SidebarStaffComponent,
-    PgAnalyticsComponent
+    PgAnalyticsComponent,
+    AnalyticsComponent,
   ],
   imports: [
     HttpClientModule,
@@ -115,7 +113,7 @@ import { PgAnalyticsComponent } from './public/pages/pg-analytics/pg-analytics.c
     MatButton,
     MatCardSubtitle,
     MatCardHeader,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [provideAnimationsAsync(), IamApiService],
   bootstrap: [AppComponent],

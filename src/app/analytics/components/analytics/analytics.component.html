@@ -1,0 +1,46 @@
+<div class="analytics-dashboard">
+  <div class="analytics-message">
+    <span>Seleccione una categoría para visualizar los datos</span>
+  </div>
+  <div class="analytics-cards">
+    <div
+      class="analytics-card"
+      [class.selected]="viewMode === 'reports'"
+      (click)="setView('reports')"
+    >
+      <span class="analytics-emoji">📊</span>
+      <h3>Reportes por Transportista</h3>
+    </div>
+    <div
+      class="analytics-card"
+      [class.selected]="viewMode === 'shipments'"
+      (click)="setView('shipments')"
+    >
+      <span class="analytics-emoji">🚚</span>
+      <h3>Envíos por Transportista</h3>
+    </div>
+    <div
+      class="analytics-card"
+      [class.selected]="viewMode === 'vehicles'"
+      (click)="setView('vehicles')"
+    >
+      <span class="analytics-emoji">🚗</span>
+      <h3>Vehículos por Transportista</h3>
+    </div>
+  </div>
+
+  <div class="analytics-content">
+    <div *ngIf="viewMode === 'reports'">
+      <h2>Reportes por Transportista</h2>
+      <!-- Aquí irá la tabla/lista de reportes -->
+    </div>
+    <div *ngIf="viewMode === 'shipments'">
+      <h2>Envíos por Transportista</h2>
+      <!-- Aquí irá la tabla/lista de envíos -->
+    </div>
+    <div *ngIf="viewMode === 'vehicles'">
+      <h2>Vehículos por Transportista</h2>
+      <!-- Aquí irá la tabla/lista de vehículos -->
+    </div>
+  </div>
+</div>
