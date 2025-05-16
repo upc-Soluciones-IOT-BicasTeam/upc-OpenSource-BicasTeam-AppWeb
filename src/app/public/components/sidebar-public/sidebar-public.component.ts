@@ -45,7 +45,6 @@ export class SidebarPublicComponent implements OnInit {
 
   goToHome(): void {
     this.router.navigate([this.user.id, `home-businessman`]);
-
   }
 
   goToProfile(): void {
@@ -58,17 +57,14 @@ export class SidebarPublicComponent implements OnInit {
 
   goToVehicles(): void {
     this.router.navigate([this.user.id, `vehicles-businessman`]);
-
   }
 
   goToReports(): void {
     this.router.navigate([this.user.id, `report-businessman`]);
-
   }
 
   goToShipments(): void {
     this.router.navigate([this.user.id, `shipment-businessman`]);
-
   }
 
   goToPricing():void{
