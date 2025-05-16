@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { VehiclesApiService } from '../../services/vehicles-api.service';
 import { VehicleEntity } from '../../model/vehicle.entity';
 import { Router } from '@angular/router';
+import * as  L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 @Component({
   selector: 'app-vehicle-businessman',
   templateUrl: './vehicle-businessman.component.html',
   styleUrls: ['./vehicle-businessman.component.css']
 })
-export class VehicleBusinessmanComponent implements OnInit {
+export class VehicleBusinessmanComponent implements OnInit, OnDestroy {
   vehicles: VehicleEntity[] = [];
   selectedVehicle: VehicleEntity | null = null;
   showForm: boolean = false;
@@ -16,11 +18,19 @@ export class VehicleBusinessmanComponent implements OnInit {
   showDetails: boolean = false;
   vehicle: VehicleEntity = new VehicleEntity();
   uploadedImageUrl: string | null = null;
+  private map: L.Map | null = null;
+  private marker: L.Marker | null = null;
+
+  @ViewChild('mapContainer') mapContainer: ElementRef | undefined;
 
   constructor(private vehiclesApi: VehiclesApiService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadVehicles();
+  }
+
+  ngOnDestroy(): void {
+    this.destroyMap();
   }
 
   loadVehicles(): void {
@@ -104,11 +114,40 @@ export class VehicleBusinessmanComponent implements OnInit {
   viewVehicleDetails(vehicle: VehicleEntity): void {
     this.selectedVehicle = vehicle;
     this.showDetails = true;
+    setTimeout(() => {
+      this.initMap();
+    }, 0);
   }
 
   closeDetails(): void {
     this.showDetails = false;
     this.selectedVehicle = null;
+    this.destroyMap();
+  }
+
+  private initMap(): void {
+    if (this.selectedVehicle && this.mapContainer?.nativeElement && !this.map) {
+      this.map = L.map(this.mapContainer.nativeElement).setView([this.selectedVehicle.latitude, this.selectedVehicle.longitude], 15);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(this.map);
+
+      this.marker = L.marker([this.selectedVehicle.latitude, this.selectedVehicle.longitude]).addTo(this.map);
+      this.marker.bindPopup(`<b>${this.selectedVehicle.licensePlate}</b>`).openPopup();
+    } else if (this.selectedVehicle && this.map && this.marker) {
+      this.map.setView([this.selectedVehicle.latitude, this.selectedVehicle.longitude], 15);
+      this.marker.setLatLng([this.selectedVehicle.latitude, this.selectedVehicle.longitude]);
+      this.marker.bindPopup(`<b>${this.selectedVehicle.licensePlate}</b>`).openPopup();
+    }
+  }
+
+  private destroyMap(): void {
+    if (this.map) {
+      this.map.remove();
+      this.map = null;
+      this.marker = null;
+    }
   }
 
   deleteVehicle(id: number): void {

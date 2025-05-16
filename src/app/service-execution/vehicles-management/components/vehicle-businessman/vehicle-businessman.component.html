@@ -115,18 +115,7 @@
         <p><strong>Última Inspección Técnica:</strong> {{ selectedVehicle?.lastTechnicalInspectionDate | date: 'mediumDate' }}</p>
 
         <h3><i class="pi pi-map-marker"></i> Ubicación Actual</h3>
-        <div class="map-container">
-          <!-- Mapa simulado con animación de ubicación en tiempo real -->
-          <div class="map-placeholder" [style.background-image]="'url(https://maps.googleapis.com/maps/api/staticmap?center=' + selectedVehicle?.latitude + ',' + selectedVehicle?.longitude + '&zoom=15&size=600x300&maptype=roadmap&markers=color:red%7C' + selectedVehicle?.latitude + ',' + selectedVehicle?.longitude + '&key=YOUR_API_KEY)'">
-            <div class="vehicle-marker pulse-animation">
-              <i class="pi pi-car" style="color: red; font-size: 24px;"></i>
-            </div>
-            <div class="coordinates-overlay">
-              <p>Lat: {{ selectedVehicle?.latitude | number:'1.6-6' }}</p>
-              <p>Lon: {{ selectedVehicle?.longitude | number:'1.6-6' }}</p>
-            </div>
-          </div>
-        </div>
+        <div #mapContainer id="map" style="height: 300px; width: 100%;"></div>
         <button type="button" class="btn close-btn hover-scale" (click)="closeDetails()">Cerrar</button>
 
     </div>

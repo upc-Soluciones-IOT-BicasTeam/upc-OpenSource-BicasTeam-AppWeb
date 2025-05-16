@@ -7,41 +7,33 @@ import { UserEntity } from '../model/user.entity';
   providedIn: 'root'
 })
 export class IamApiService {
-  /*private mockUsers: UserEntity[] = [
-    {
-      id: 1,
-      email: 'aldhair@gmail.com',
-      password: '123456',
-      type: 'Gerente',
-      name: 'Aldhair',
-      lastName: 'Valenzuela'
-    },
-    {
-      id: 2,
-      email: 'usuario2@example.com',
-      password: 'abc123',
-      type: 'Carrier',
-      name: 'Juan',
-      lastName: 'Pérez'
-    }
-  ];*/
+  /*
+[
+  {
+    "id": 1,
+    "email": "aldhair@gmail.com",
+    "password": "123456",
+    "type": "Gerente",
+    "name": "Aldhair",
+    "lastName": "Valenzuela"
+  },
+  {
+    "id": 2,
+    "email": "usuario2@example.com",
+    "password": "abc123",
+    "type": "Gerente",
+    "name": "Juan",
+    "lastName": "Pérez"
+  }
+]
+*/
   private baseUrl = 'https://movigestion-vehicles.free.beeceptor.com/api/users';
 
   constructor(private http: HttpClient) {}
 
   // Autenticar al usuario con email y password
   authenticateUser(email: string, password: string): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${this.baseUrl}/email/${email}/password/${password}`);
-    //Para datos estáticos dentro del código
-    /*const user = this.mockUsers.find(u =>
-      u.email === email && u.password === password
-    );
-
-    if (user) {
-      return of(user); // Simula una respuesta exitosa
-    } else {
-      return throwError(() => new Error('Credenciales incorrectas')); // Simula un error
-    }*/
+    return this.http.get<UserEntity>(`${this.baseUrl}?email=${email}&password=${password}`);
   }
 
   // Encontrar un usuario por email
