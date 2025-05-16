@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import { UserEntity } from '../model/user.entity';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class IamApiService {
 
   // Autenticar al usuario con email y password
   authenticateUser(email: string, password: string): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${this.baseUrl}?email="${email}"&password="${password}"`);
+    return this.http.get<UserEntity>(`${this.baseUrl}?email=${email}&password=${password}`);
   }
 
   // Encontrar un usuario por email

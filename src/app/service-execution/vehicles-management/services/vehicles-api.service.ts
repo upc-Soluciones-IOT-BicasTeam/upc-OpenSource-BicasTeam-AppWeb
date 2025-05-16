@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable, of} from 'rxjs';
 import { VehicleEntity } from '../model/vehicle.entity';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class VehiclesApiService {
 
   // Obtener todos los vehículos
   getAllVehicles(): Observable<VehicleEntity[]> {
-    return this.http.get<VehicleEntity[]>(`${this.baseUrl}`);
+     return this.http.get<VehicleEntity[]>(`${this.baseUrl}`);
   }
 
   // Obtener un vehículo por ID
