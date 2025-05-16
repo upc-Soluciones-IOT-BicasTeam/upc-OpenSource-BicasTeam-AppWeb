@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IamApiService } from '../../../iam/services/iam-api.service.service';
 import { UserEntity } from '../../../iam/model/user.entity';
+import {ProfileEntity} from "../../../iam/model/profile.entity";
 
 @Component({
   selector: 'app-profile-edition',
@@ -10,6 +11,7 @@ import { UserEntity } from '../../../iam/model/user.entity';
 })
 export class ProfileEditionComponent implements OnInit {
   user: UserEntity = new UserEntity();
+  profile: ProfileEntity = new ProfileEntity();
   authEmail: string = '';
   authPassword: string = '';
   authenticated: boolean = false;

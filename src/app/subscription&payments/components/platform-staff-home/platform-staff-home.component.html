@@ -1,0 +1,15 @@
+<div class="staff-container">
+  <h1>Platform Users</h1>
+
+  <div class="card-list">
+    <div class="user-card" *ngFor="let user of usersData">
+      <h2>{{ user.name }} {{ user.lastName }}</h2>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Password:</strong> {{ user.password }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    Error loading user data. Please try again later.
+  </div>
+</div>

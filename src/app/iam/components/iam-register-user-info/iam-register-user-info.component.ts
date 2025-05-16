@@ -2,7 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserEntity } from '../../model/user.entity';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IamApiService } from '../../services/iam-api.service.service';
+
 import { Observable, firstValueFrom } from 'rxjs';
+import {ProfileApiServiceService} from "../../services/profile-api.service.service";
+import {ProfileEntity} from "../../model/profile.entity";
 
 @Component({
   selector: 'app-iam-register-user-info',
@@ -11,12 +14,13 @@ import { Observable, firstValueFrom } from 'rxjs';
 })
 export class IamRegisterUserInfoComponent implements OnInit, OnDestroy {
   user: UserEntity = new UserEntity();
+  profile: ProfileEntity = new ProfileEntity();
   error: boolean = false;
   error_msg: string = '';
   privacityPolicy: boolean = false;
   passwordConfirmation: string = '';
 
-  constructor(private route: ActivatedRoute, private iamApi: IamApiService, private router: Router) {
+  constructor(private route: ActivatedRoute, private profileApi: ProfileApiServiceService, private router: Router,private iamApi: IamApiService) {
     this.user.type = this.route.snapshot.params['type'];
   }
 
@@ -28,31 +32,37 @@ export class IamRegisterUserInfoComponent implements OnInit, OnDestroy {
     document.body.style.backgroundColor = '';
   }
 
-  async createUser() {
+  async createProfile() {
     await this.validateInputs();
 
     if (!this.error) {
-      // Usa una instancia de UserEntity para garantizar que el objeto pase la validación de tipos
-      const userPayload = new UserEntity();
-      userPayload.name = this.user.name;
-      userPayload.lastName = this.user.lastName;
-      userPayload.email = this.user.email;
-      userPayload.password = this.user.password;
-      userPayload.type = this.user.type;
+      try {
+        // Esperar a que el usuario sea creado y el id esté disponible
+        await this.createUser();
 
-      this.iamApi.createUser(userPayload).subscribe(
-        (data: UserEntity) => {
-          console.log('User registered successfully:', data);
-          this.router.navigate(['/register/successfully']);
-        },
-        (error) => {
-          console.error('Error during registration:', error);
-          this.error = true;
-          this.error_msg = 'Registration failed. Please try again later.';
-        }
-      );
+        const profilePayload = new ProfileEntity();
+        profilePayload.idCredentials = this.profile.idCredentials;
+        profilePayload.name = this.profile.name;
+        profilePayload.lastName = this.profile.lastName;
+
+        this.profileApi.createUser(profilePayload).subscribe(
+          (data: ProfileEntity) => {
+            console.log('Profile created successfully:', data);
+            this.router.navigate(['/register/successfully']);
+          },
+          (error) => {
+            console.error('Error during profile creation:', error);
+            this.error = true;
+            this.error_msg = 'Profile creation failed. Please try again later.';
+          }
+        );
+      } catch (error) {
+        this.error = true;
+        this.error_msg = 'Error creating user. Please try again later.';
+      }
     }
   }
+
 
 
   async validateInputs() {
@@ -79,4 +89,26 @@ export class IamRegisterUserInfoComponent implements OnInit, OnDestroy {
       this.error_msg = 'Passwords do not match';
     }
   }
+
+
+
+  async createUser() {
+    const userPayload = new UserEntity();
+    userPayload.email = this.user.email;
+    userPayload.password = this.user.password;
+    userPayload.type = this.user.type;
+
+    try {
+      // Cambiar a firstValueFrom para esperar la respuesta de la API
+      const data: UserEntity = await firstValueFrom(this.iamApi.createUser(userPayload));
+      console.log('User created with ID:', data.id);
+      this.profile.idCredentials = data.id; // Establecer el id del usuario recién creado
+    } catch (error) {
+      console.error('Error creating user:', error);
+      throw new Error('Error creating user');
+    }
+  }
+
+
 }
+

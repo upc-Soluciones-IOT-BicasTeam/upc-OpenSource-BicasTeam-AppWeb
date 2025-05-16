@@ -1,0 +1,150 @@
+@import 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap';
+
+/* Estilos globales */
+body {
+  background: linear-gradient(135deg, #e0f7fa, #cfd8dc);
+  font-family: 'Poppins', sans-serif;
+  color: #333F50;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Botón "Delete" */
+.btn-delete {
+  background-color: #C0392B;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.btn-delete:hover {
+  background-color: #E63946;
+  transform: translateY(-2px);
+}
+
+/* Mensaje de no envíos */
+.no-shipments {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #666;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .btn-add, .btn-submit {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .shipment-card {
+    padding: 15px;
+  }
+}
+
+body {
+  background-color: #1B2631;
+  font-family: Arial, sans-serif;
+}
+
+.subscription-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  color: #ffffff;
+}
+
+.card-container {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  background-color: #303841;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card h2 {
+  margin-bottom: 1rem;
+  color: #F7B500;
+}
+
+.card p {
+  margin: 0.5rem 0;
+  color: #ffffff;
+}
+
+.motto {
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+.subscribe-button {
+  background-color: #F7B500;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  color: #1B2631;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.subscribe-button:hover {
+  background-color: #e0a400;
+}
+
+/* Modal styles */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #303841;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.modal input[type="file"] {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.close-button {
+  background-color: #F7B500;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  color: #1B2631;
+  border-radius: 5px;
+  cursor: pointer;
+}
+

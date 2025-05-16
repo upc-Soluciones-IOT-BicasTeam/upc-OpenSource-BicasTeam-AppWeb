@@ -1,6 +1,6 @@
 <div class="sidebar">
   <div class="user-info" (click)="goToProfile()">
-    <img [src]="getUserImage(type)" alt="User Icon">
+    <img [src]="getUserImage(type)" alt="User Icon" />
     <div class="user-name">
       <h2>{{ name }} {{ lastName }}</h2>
       <p>{{ type }}</p>
@@ -17,11 +17,19 @@
     </li>
     <li (click)="goToReports()">
       <mat-icon>bar_chart</mat-icon>
-      <span>Reports</span>
+      <span>Issues</span>
     </li>
     <li (click)="goToVehicles()">
       <mat-icon>local_shipping</mat-icon>
       <span>Vehicles</span>
+    </li>
+    <li (click)="goToPricing()">
+      <mat-icon>payments</mat-icon>
+      <span>Go to PRO</span>
+    </li>
+    <li (click)="goToAnalytics()">
+      <mat-icon>analytics</mat-icon>
+      <span>Analytics</span>
     </li>
   </ul>
   <div class="settings-section">

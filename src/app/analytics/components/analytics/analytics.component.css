@@ -1,0 +1,135 @@
+.analytics-dashboard {
+  padding: 2rem;
+}
+
+.analytics-message {
+  background: #fff;
+  color: #333f50;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  margin: 0 auto 2.5rem auto;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  max-width: 480px;
+}
+
+.analytics-cards {
+  display: flex;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+  justify-content: center;
+}
+
+.analytics-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s, border 0.2s;
+  border: 3px solid transparent;
+  width: 320px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.analytics-emoji {
+  font-size: 4.5rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.analytics-card.selected,
+.analytics-card:hover {
+  border: 3px solid #f7b500;
+  box-shadow: 0 12px 32px rgba(247, 181, 0, 0.13);
+  transform: translateY(-6px) scale(1.04);
+}
+
+.analytics-card h3 {
+  font-size: 1.5rem;
+  color: #333f50;
+  margin: 0;
+}
+
+.analytics-content {
+  background: #f7f7f7;
+  border-radius: 12px;
+  padding: 2rem;
+  min-height: 200px;
+  margin-top: 2rem;
+}
+
+.analytics-summary {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  color: #333f50;
+  background: #fffbe6;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.analytics-summary span {
+  margin-right: 1.5rem;
+}
+
+.analytics-summary strong {
+  color: #f7b500;
+}
+
+.driver-report-group {
+  margin-bottom: 2.5rem;
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.driver-report-group h3 {
+  margin-top: 0;
+  color: #f7b500;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.reports-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.reports-table th,
+.reports-table td {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.reports-table th {
+  background: #f7f7f7;
+  color: #333f50;
+  font-weight: 600;
+}
+
+.no-data-message {
+  text-align: center;
+  color: #888;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+.error-message {
+  color: #c0392b;
+  text-align: center;
+  margin: 1rem 0;
+}
