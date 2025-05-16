@@ -7,10 +7,10 @@ import { UserEntity } from '../model/user.entity';
   providedIn: 'root'
 })
 export class IamApiService {
-  private baseUrl = 'https://caa788009029cd0ee39e.free.beeceptor.com/api/users';
+  private baseUrl = 'https://cacf2cca4fa62707c02d.free.beeceptor.com/api/users';
 
   constructor(private http: HttpClient) {}
-    
+
   // Autenticar al usuario con email y password
   authenticateUser(email: string, password: string): Observable<UserEntity> {
     return this.http.get<UserEntity>(`${this.baseUrl}?email=${email}&password="${password}"`);
