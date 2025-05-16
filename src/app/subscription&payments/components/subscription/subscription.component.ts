@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class SubscriptionComponent {
 
+  showModal = false;
+
+  openModal() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
 }
