@@ -9,7 +9,7 @@ import {ProfileEntity} from "../model/profile.entity";
 })
 export class ProfileApiServiceService {
 
-  private baseUrl = 'https://cafa5b91d047d5197631.free.beeceptor.com/api/profiles';
+  private baseUrl = 'https://huarzu-miguel.free.beeceptor.com/api/profiles';
 
   constructor(private http: HttpClient) {}
 
@@ -19,12 +19,12 @@ export class ProfileApiServiceService {
   }
   // Encontrar un usuario por email
   findUserWithEmail(email: string): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${this.baseUrl}/email/${email}`);
+    return this.http.get<UserEntity>(`${this.baseUrl}?email=${email}`);
   }
 
   // Encontrar un usuario por ID
   findUserById(id: number): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${this.baseUrl}/${id}`);
+    return this.http.get<UserEntity>(`${this.baseUrl}?idCredentials=${id}`);
   }
 
   // Actualizar un usuario usando email y password

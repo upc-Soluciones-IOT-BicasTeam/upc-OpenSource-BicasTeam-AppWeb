@@ -26,12 +26,13 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
   login() {
     this.error = false; // Reinicia el estado de error al intentar un nuevo login
     this.iamApi.authenticateUser(this.user.email, this.user.password).subscribe(
-      (data: UserEntity) => {
+      (data: any) => {
+        console.log(data[0]);
         if (data) {
 
           data.type === 'Gerente'
-            ? this.router.navigate([`${data.id}/home-businessman`])
-            : this.router.navigate([`${data.id}/home-carrier`]);
+            ? this.router.navigate([`${data[0].id}/home-businessman`])
+            : this.router.navigate([`${data[0].id}/home-carrier`]);
         } else {
           this.error = true;
           this.error_msg = 'Email or Password incorrect';
