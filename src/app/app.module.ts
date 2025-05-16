@@ -42,6 +42,8 @@ import { ReportDriverComponent } from './service-execution/reports-management/re
 import { ReportViewComponent } from './service-execution/reports-management/report-view/report-view.component';
 import { PgReportBusinessmanComponent } from './public/pages/pg-report-businessman/pg-report-businessman.component';
 import { PgReportCarrierComponent } from './public/pages/pg-report-carrier/pg-report-carrier.component';
+import { SubscriptionComponent } from './subscription&payments/components/subscription/subscription.component';
+import { PgSubscriptionComponent } from './public/pages/pg-subscription/pg-subscription.component';
 
 
 
@@ -76,6 +78,8 @@ import { PgReportCarrierComponent } from './public/pages/pg-report-carrier/pg-re
     ReportViewComponent,
     PgReportBusinessmanComponent,
     PgReportCarrierComponent,
+    SubscriptionComponent,
+    PgSubscriptionComponent,
   ],
   imports: [
     HttpClientModule,

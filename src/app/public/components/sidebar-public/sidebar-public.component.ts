@@ -44,11 +44,8 @@ export class SidebarPublicComponent implements OnInit {
   }
 
   goToHome(): void {
-    if (this.type === 'Gerente') {
-      this.router.navigate([this.user.id, `home-businessman`]);
-    } else {
-      this.router.navigate([this.user.id, `home-carrier`]);
-    }
+    this.router.navigate([this.user.id, `home-businessman`]);
+
   }
 
   goToProfile(): void {
@@ -60,26 +57,21 @@ export class SidebarPublicComponent implements OnInit {
   }
 
   goToVehicles(): void {
-    if (this.type === 'Gerente') {
-      this.router.navigate([this.user.id, `vehicles-businessman`]);
-    } else {
-      this.router.navigate([this.user.id, `vehicles-carrier`]);
-    }
+    this.router.navigate([this.user.id, `vehicles-businessman`]);
+
   }
 
   goToReports(): void {
-    if (this.type === 'Gerente') {
-      this.router.navigate([this.user.id, `report-businessman`]);
-    } else {
-      this.router.navigate([this.user.id, `report-carrier`]);
-    }
+    this.router.navigate([this.user.id, `report-businessman`]);
+
   }
 
   goToShipments(): void {
-    if (this.type === 'Gerente') {
-      this.router.navigate([this.user.id, `shipment-businessman`]);
-    } else {
-      this.router.navigate([this.user.id, `shipment-carrier`]);
-    }
+    this.router.navigate([this.user.id, `shipment-businessman`]);
+
+  }
+
+  goToPricing():void{
+    this.router.navigate([this.user.id, `subscription`]);
   }
 }

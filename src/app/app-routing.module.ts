@@ -13,6 +13,7 @@ import {PgShipmentCarrierComponent} from "./public/pages/pg-shipment-carrier/pg-
 import {PgShipmentBusinessmanComponent} from "./public/pages/pg-shipment-businessman/pg-shipment-businessman.component";
 import {PgReportBusinessmanComponent} from "./public/pages/pg-report-businessman/pg-report-businessman.component";
 import {PgReportCarrierComponent} from "./public/pages/pg-report-carrier/pg-report-carrier.component";
+import {PgSubscriptionComponent} from "./public/pages/pg-subscription/pg-subscription.component";
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path:':id/profile',component:PgProfileEditionComponent},
   {path:':id/report-businessman',component: PgReportBusinessmanComponent},
   {path:':id/report-carrier',component: PgReportCarrierComponent},
+  {path:':id/subscription',component: PgSubscriptionComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full'}
 ];
 
