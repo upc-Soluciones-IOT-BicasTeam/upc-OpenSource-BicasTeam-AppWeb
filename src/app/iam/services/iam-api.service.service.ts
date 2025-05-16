@@ -18,7 +18,7 @@ export class IamApiService {
 
   // Encontrar un usuario por email
   findUserWithEmail(email: string): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${this.baseUrl}?email=${email}`);
+    return this.http.get<UserEntity>(`${this.baseUrl}/email/${email}`);
   }
 
   // Crear un nuevo usuario
@@ -28,12 +28,12 @@ export class IamApiService {
 
   // Encontrar un usuario por ID
   findUserById(id: number): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${this.baseUrl}?id=${id}`);
+    return this.http.get<UserEntity>(`${this.baseUrl}/${id}`);
   }
 
   // Actualizar un usuario usando email y password
   updateUser(email: string, password: string, userUpdates: Partial<UserEntity>): Observable<UserEntity> {
-    const url = `${this.baseUrl}?=email=${email}&password="${password}"`;
+    const url = `${this.baseUrl}/email/${email}/password/${password}`;
     return this.http.put<UserEntity>(url, userUpdates);
   }
 

@@ -64,6 +64,7 @@ export class IamRegisterUserInfoComponent implements OnInit, OnDestroy {
   }
 
 
+
   async validateInputs() {
     this.error = false;
     this.error_msg = '';
@@ -88,6 +89,7 @@ export class IamRegisterUserInfoComponent implements OnInit, OnDestroy {
       this.error_msg = 'Passwords do not match';
     }
   }
+
 
 
   async createUser() {
