@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { IamApiService } from "../../../iam/services/iam-api.service.service";
-import { UserEntity } from "../../../iam/model/user.entity";
+import { ActivatedRoute, Router } from '@angular/router';
+import { IamApiService } from '../../../iam/services/iam-api.service.service';
+import { UserEntity } from '../../../iam/model/user.entity';
 
 @Component({
   selector: 'app-sidebar-public',
   templateUrl: './sidebar-public.component.html',
-  styleUrls: ['./sidebar-public.component.css']
+  styleUrls: ['./sidebar-public.component.css'],
 })
 export class SidebarPublicComponent implements OnInit {
   user: UserEntity = {} as UserEntity;
@@ -84,5 +84,9 @@ export class SidebarPublicComponent implements OnInit {
     } else {
       this.router.navigate([this.user.id, `shipment-carrier`]);
     }
+  }
+
+  goToAnalytics(): void {
+    this.router.navigate([this.user.id, 'analytics']);
   }
 }

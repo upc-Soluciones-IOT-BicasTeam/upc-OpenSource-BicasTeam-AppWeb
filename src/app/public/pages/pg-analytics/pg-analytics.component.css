@@ -1,0 +1,37 @@
+.main-container {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+.content {
+  flex: 1;
+  padding: 32px;
+  background: #fff;
+  margin: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+mat-sidenav-container {
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  background-color: #1b2631;
+}
+
+.p-sidebar {
+  width: 280px;
+  max-width: 280px;
+  background-color: #303841;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+mat-sidenav-content {
+  flex: 1;
+  overflow: auto;
+  background-color: #1b2631;
+  padding: 20px;
+}
