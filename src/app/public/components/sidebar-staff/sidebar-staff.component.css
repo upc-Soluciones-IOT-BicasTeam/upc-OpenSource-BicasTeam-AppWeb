@@ -1,0 +1,73 @@
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  backdrop-filter: blur(10px); /* Efecto de desenfoque */
+  color: #ECF0F1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centramos el contenido horizontalmente */
+  justify-content: space-between; /* Espacio uniforme entre elementos */
+  border-radius: 15px; /* Bordes redondeados */
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column; /* Cambiar a columna para centrar el contenido */
+  align-items: center; /* Centrado horizontal */
+  text-align: center; /* Centrado del texto */
+  padding: 15px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-info img {
+  border-radius: 50%;
+  width: 80px; /* Tamaño mayor para mejor visibilidad */
+  height: 80px;
+  margin-bottom: 10px; /* Separación del nombre */
+  border: 2px solid #1B2631;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.user-info h2, .user-info p {
+  margin: 5px 0;
+  font-size: 1.2em; /* Aumento del tamaño de la fuente */
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  width: 100%; /* Hacer que los elementos ocupen todo el ancho */
+  text-align: center;
+}
+
+.menu li {
+  display: flex;
+  justify-content: center; /* Centra los elementos dentro del li */
+  align-items: center;
+  padding: 15px; /* Más espacio para mejorar la interactividad */
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 1.1em; /* Aumento del tamaño de la fuente */
+}
+
+.menu li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.menu li mat-icon {
+  margin-right: 10px;
+  color: #F7B500;
+  font-size: 28px; /* Tamaño mayor de los iconos */
+}
+
+.settings-section {
+  width: 100%; /* Mantener el ancho completo */
+  padding-top: 10px;
+}

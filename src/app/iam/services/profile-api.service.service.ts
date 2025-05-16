@@ -9,32 +9,28 @@ import {ProfileEntity} from "../model/profile.entity";
 })
 export class ProfileApiServiceService {
 
-  private baseUrl = 'https://cab41478f23eef12f275.free.beeceptor.com/api/profiles';
+  private baseUrl = 'https://caa788009029cd0ee39e.free.beeceptor.com/api/profiles';
 
   constructor(private http: HttpClient) {}
 
-  // Crear un nuevo usuario
+  // Crear un nuevo profile
   createUser(user: ProfileEntity): Observable<ProfileEntity> {
     return this.http.post<ProfileEntity>(`${this.baseUrl}`, user);
   }
-  // Encontrar un usuario por email
-  findUserWithEmail(email: string): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${this.baseUrl}?email=${email}`);
-  }
 
-  // Encontrar un usuario por ID
+
+  // Encontrar un profile por ID
   findUserById(id: number): Observable<UserEntity> {
     return this.http.get<UserEntity>(`${this.baseUrl}?idCredentials=${id}`);
   }
 
-  // Actualizar un usuario usando email y password
-  updateUser(email: string, password: string, userUpdates: Partial<UserEntity>): Observable<UserEntity> {
-    const url = `${this.baseUrl}/email/${email}/password/${password}`;
-    return this.http.put<UserEntity>(url, userUpdates);
+
+  // Eliminar un profile por ID
+  deleteProfile(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 
-  // Eliminar un usuario por ID
-  deleteUser(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  getAllProfiles(){
+    return this.http.get<ProfileEntity>(`${this.baseUrl}`);
   }
 }

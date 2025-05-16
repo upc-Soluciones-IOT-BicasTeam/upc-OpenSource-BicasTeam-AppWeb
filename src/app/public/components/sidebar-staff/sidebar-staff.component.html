@@ -1,0 +1,26 @@
+<div class="sidebar">
+  <div class="user-info">
+    <img [src]="getUserImage(type)" alt="User Icon">
+    <div class="user-name">
+      <p>{{ type }}</p>
+    </div>
+  </div>
+  <ul class="menu">
+    <li (click)="goToPricing()">
+      <mat-icon>payments</mat-icon>
+      <span>Subscription Requests</span>
+    </li>
+    <li (click)="goToChangueCredentials()">
+      <mat-icon>groups</mat-icon>
+      <span>Edit user credentials</span>
+    </li>
+  </ul>
+  <div class="settings-section">
+    <ul class="menu">
+      <li (click)="goTologout()">
+        <mat-icon>logout</mat-icon>
+        <span>Log out</span>
+      </li>
+    </ul>
+  </div>
+</div>

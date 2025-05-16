@@ -31,7 +31,7 @@ export class SidebarPublicComponent implements OnInit {
   ngOnInit(): void {
     this.profileApi.findUserById(this.user.id!).subscribe(
       (data: any) => {
-        console.log(data[0]);
+        console.log(data);
         this.type = "Manager";
         this.name = data[0].name;
         this.lastName = data[0].lastName;
