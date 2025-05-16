@@ -1,6 +1,6 @@
 <div class="container responsive-container">
   <h1 class="title gradient-text">Profile Management</h1>
-  
+
   <!-- Formulario de autenticación siempre visible si no está autenticado -->
   <div *ngIf="!authenticated" class="form-container glass-effect">
     <h2>Authentication</h2>
@@ -18,6 +18,38 @@
       </div>
     </div>
     <div *ngIf="error" class="alert alert-danger mt-3">
+      <i class="pi pi-exclamation-triangle"></i> {{ error_msg }}
+    </div>
+  </div>
+  
+  <!-- Formulario de edición de perfil visible si está autenticado -->
+  <h2 class="list-title" *ngIf="authenticated">Edit Your Profile</h2>
+  <div *ngIf="authenticated" class="edit-form-container">
+    <div class="grid formgrid p-fluid">
+      <div class="field mb-4 col-12 md:col-6">
+        <label for="name" class="font-medium">Name</label>
+        <input id="name" type="text" [(ngModel)]="user.name" class="p-inputtext dynamic-input">
+      </div>
+      <div class="field mb-4 col-12 md:col-6">
+        <label for="lastName" class="font-medium">Last Name</label>
+        <input id="lastName" type="text" [(ngModel)]="user.lastName" class="p-inputtext dynamic-input">
+      </div>
+      <div class="field mb-4 col-12 md:col-6">
+        <label for="email" class="font-medium">Email</label>
+        <input id="email" type="email" [(ngModel)]="user.email" class="p-inputtext dynamic-input" readonly>
+      </div>
+      <div class="field mb-4 col-12 md:col-6">
+        <label for="password" class="font-medium">Password</label>
+        <input id="password" type="password" [(ngModel)]="user.password" class="p-inputtext dynamic-input">
+      </div>
+      <div class="col-12">
+        <button type="button" class="p-button hover-scale animated-btn btn-submit" (click)="updateUser()">Save Changes</button>
+      </div>
+    </div>
+    <div *ngIf="success" class="alert alert-success mt-3">
+      <i class="pi pi-check-circle"></i> Profile updated successfully!
+    </div>
+    <div *ngIf="error && !success" class="alert alert-danger mt-3">
       <i class="pi pi-exclamation-triangle"></i> {{ error_msg }}
     </div>
   </div>
