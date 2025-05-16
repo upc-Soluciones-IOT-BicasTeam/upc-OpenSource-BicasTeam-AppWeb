@@ -30,7 +30,7 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
         console.log(data[0]);
         if (data) {
 
-          data.type === 'Gerente'
+          data.type === 'manager'
             ? this.router.navigate([`${data[0].id}/home-businessman`])
             : this.router.navigate([`${data[0].id}/staff-home`]);
         } else {
