@@ -14,6 +14,13 @@ export class VehicleEntity {
   lastTechnicalInspectionDate: string;
   createdAt: string;
 
+  currentTemperature: number;       // Temperatura ambiente en °C
+  cabinTemperature: number;        // Temperatura interior en °C
+  humidity: number;                // Humedad relativa en %
+  latitude: number;
+  longitude: number;
+  altitude?: number;
+
   constructor() {
     // Inicializa valores por defecto si es necesario
     this.id = 0;
@@ -30,5 +37,10 @@ export class VehicleEntity {
     this.color = '';
     this.lastTechnicalInspectionDate = '';
     this.createdAt = '';
+    this.currentTemperature = 0;
+    this.cabinTemperature = 0;
+    this.humidity = 0;
+    this.latitude = 0;
+    this.longitude = 0;
   }
 }
