@@ -9,7 +9,7 @@ import {ImageEntity} from "../model/image.entity";
 })
 export class SubsApiService {
 
-  private baseUrl = 'https://caa788009029cd0ee39e.free.beeceptor.com/api/images';
+  private baseUrl = 'https://upc-iot-2956-bicasteam-movigestion.proxy.beeceptor.com/api/images';
 
   constructor(private http: HttpClient) {}
 //*******

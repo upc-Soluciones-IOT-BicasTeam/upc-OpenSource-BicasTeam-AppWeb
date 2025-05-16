@@ -7,7 +7,7 @@ import { VehicleEntity } from '../model/vehicle.entity';
   providedIn: 'root'
 })
 export class VehiclesApiService {
-  private baseUrl = 'https://app-241114092351funda.azurewebsites.net/api/vehicles';
+  private baseUrl = 'https://upc-iot-2956-bicasteam-movigestion.proxy.beeceptor.com/api/vehicles';
 
   constructor(private http: HttpClient) {}
 
