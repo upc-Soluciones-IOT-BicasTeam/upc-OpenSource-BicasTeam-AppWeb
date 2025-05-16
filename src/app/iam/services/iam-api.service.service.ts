@@ -7,7 +7,7 @@ import { UserEntity } from '../model/user.entity';
   providedIn: 'root'
 })
 export class IamApiService {
-  private baseUrl = 'https://test-mxch.free.beeceptor.com/api/users';
+  private baseUrl = 'https://caa788009029cd0ee39e.free.beeceptor.com/api/users';
 
   constructor(private http: HttpClient) {}
 
@@ -18,7 +18,7 @@ export class IamApiService {
 
   // Encontrar un usuario por email
   findUserWithEmail(email: string): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${this.baseUrl}/email/${email}`);
+    return this.http.get<UserEntity>(`${this.baseUrl}?email=${email}`);
   }
 
   // Crear un nuevo usuario
@@ -28,17 +28,16 @@ export class IamApiService {
 
   // Encontrar un usuario por ID
   findUserById(id: number): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${this.baseUrl}/${id}`);
+    return this.http.get<UserEntity>(`${this.baseUrl}?id=${id}`);
   }
 
   // Actualizar un usuario usando email y password
   updateUser(email: string, password: string, userUpdates: Partial<UserEntity>): Observable<UserEntity> {
-    const url = `${this.baseUrl}/email/${email}/password/${password}`;
+    const url = `${this.baseUrl}?=email=${email}&password="${password}"`;
     return this.http.put<UserEntity>(url, userUpdates);
   }
 
-  // Eliminar un usuario por ID
-  deleteUser(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  getAllUsers(){
+    return this.http.get<UserEntity>(`${this.baseUrl}`);
   }
 }

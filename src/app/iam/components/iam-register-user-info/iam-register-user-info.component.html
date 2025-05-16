@@ -4,15 +4,15 @@
       <img src="https://i.ibb.co/RCDQZnJ/logo.png" id="icon" alt="User Icon" />
     </div>
     <h1>Sign Up</h1>
-    <form (submit)="createUser()">
+    <form (submit)="createProfile()">
       <div class="input-group">
         <div class="input-half">
           <label for="name" class="text-left">Name</label>
-          <input type="text" id="name" class="fadeIn second" name="name" [(ngModel)]="user.name" required>
+          <input type="text" id="name" class="fadeIn second" name="name" [(ngModel)]="profile.name" required>
         </div>
         <div class="input-half">
           <label for="lastName" class="text-left">Last Name</label>
-          <input type="text" id="lastName" class="fadeIn second" name="lastName" [(ngModel)]="user.lastName" required>
+          <input type="text" id="lastName" class="fadeIn second" name="lastName" [(ngModel)]="profile.lastName" required>
         </div>
       </div>
       <label for="email" class="text-left">Email</label>

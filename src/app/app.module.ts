@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -45,14 +48,18 @@ import { PgVehiclesCarrierComponent } from './public/pages/pg-vehicles-carrier/p
 import { ProfileEditionComponent } from './profiles-managment/components/profile-edition/profile-edition.component';
 import { PgProfileEditionComponent } from './public/pages/pg-profile-edition/pg-profile-edition.component';
 import { ShipmentBusinessmanComponent } from './service-execution/shipment-management/components/shipment-businessman/shipment-businessman.component';
-import { ShipmentCarrierComponent } from './service-execution/shipment-management/components/shipment-carrier/shipment-carrier.component';
 import { PgShipmentBusinessmanComponent } from './public/pages/pg-shipment-businessman/pg-shipment-businessman.component';
-import { PgShipmentCarrierComponent } from './public/pages/pg-shipment-carrier/pg-shipment-carrier.component';
-import { ReportDriverComponent } from './service-execution/reports-management/report-driver/report-driver.component';
 import { ReportViewComponent } from './service-execution/reports-management/report-view/report-view.component';
 import { PgReportBusinessmanComponent } from './public/pages/pg-report-businessman/pg-report-businessman.component';
-import { PgReportCarrierComponent } from './public/pages/pg-report-carrier/pg-report-carrier.component';
+import { SubscriptionComponent } from './subscription&payments/components/subscription/subscription.component';
+import { PgSubscriptionComponent } from './public/pages/pg-subscription/pg-subscription.component';
+import { PlatformStaffHomeComponent } from './subscription&payments/components/platform-staff-home/platform-staff-home.component';
+import { PgStaffHomeComponent } from './public/pages/pg-staff-home/pg-staff-home.component';
+import { SidebarStaffComponent } from './public/components/sidebar-staff/sidebar-staff.component';
 import { PgAnalyticsComponent } from './public/pages/pg-analytics/pg-analytics.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -77,14 +84,14 @@ import { PgAnalyticsComponent } from './public/pages/pg-analytics/pg-analytics.c
     ProfileEditionComponent,
     PgProfileEditionComponent,
     ShipmentBusinessmanComponent,
-    ShipmentCarrierComponent,
     PgShipmentBusinessmanComponent,
-    PgShipmentCarrierComponent,
-    ReportDriverComponent,
     ReportViewComponent,
     PgReportBusinessmanComponent,
-    PgReportCarrierComponent,
-    PgAnalyticsComponent,
+    SubscriptionComponent,
+    PgSubscriptionComponent,
+    PlatformStaffHomeComponent,
+    PgStaffHomeComponent,
+    SidebarStaffComponent,
   ],
   imports: [
     HttpClientModule,
@@ -107,6 +114,7 @@ import { PgAnalyticsComponent } from './public/pages/pg-analytics/pg-analytics.c
     MatButton,
     MatCardSubtitle,
     MatCardHeader,
+    ReactiveFormsModule
   ],
   providers: [provideAnimationsAsync(), IamApiService],
   bootstrap: [AppComponent],

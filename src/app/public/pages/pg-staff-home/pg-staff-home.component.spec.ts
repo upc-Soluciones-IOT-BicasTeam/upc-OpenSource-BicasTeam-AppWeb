@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ShipmentCarrierComponent } from './shipment-carrier.component';
+import { PgStaffHomeComponent } from './pg-staff-home.component';
 
-describe('ShipmentCarrierComponent', () => {
-  let component: ShipmentCarrierComponent;
-  let fixture: ComponentFixture<ShipmentCarrierComponent>;
+describe('PgStaffHomeComponent', () => {
+  let component: PgStaffHomeComponent;
+  let fixture: ComponentFixture<PgStaffHomeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ShipmentCarrierComponent]
+      declarations: [PgStaffHomeComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ShipmentCarrierComponent);
+    fixture = TestBed.createComponent(PgStaffHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

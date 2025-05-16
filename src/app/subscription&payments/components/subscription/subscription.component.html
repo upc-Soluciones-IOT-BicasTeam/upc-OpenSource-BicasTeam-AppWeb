@@ -1,0 +1,26 @@
+<div class="subscription-container">
+  <div class="card-container">
+    <div class="card">
+      <h2>FREE Plan</h2>
+      <p>Up to 10 registered drivers</p>
+      <p>Up to 10 registered vehicles</p>
+    </div>
+
+    <div class="card">
+      <h2>UNLIMITED Plan</h2>
+      <p>No limits on drivers or vehicles</p>
+      <p class="motto">Empower your fleet. Focus on growth — we handle the logistics.</p>
+    </div>
+  </div>
+
+  <button class="subscribe-button" (click)="openModal()">Upgrade Now</button>
+
+  <div class="modal-backdrop" *ngIf="showModal">
+    <div class="modal">
+      <h3>Upload Payment Proof</h3>
+      <p>Please upload a photo of your payment receipt.</p>
+      <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+      <button class="close-button" (click)="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
