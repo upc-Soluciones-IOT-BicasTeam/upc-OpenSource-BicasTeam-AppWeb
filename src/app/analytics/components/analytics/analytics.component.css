@@ -66,6 +66,27 @@
   margin-top: 2rem;
 }
 
+.analytics-summary {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  color: #333f50;
+  background: #fffbe6;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.analytics-summary span {
+  margin-right: 1.5rem;
+}
+
+.analytics-summary strong {
+  color: #f7b500;
+}
+
 .driver-report-group {
   margin-bottom: 2.5rem;
   background: #fff;

@@ -32,6 +32,18 @@
   <div class="analytics-content">
     <div *ngIf="viewMode === 'reports'">
       <h2>Reportes por Transportista</h2>
+      <div class="analytics-summary">
+        <span
+          >Total reportes: <strong>{{ totalReports }}</strong></span
+        >
+        <span
+          >Promedio por transportista:
+          <strong>{{ avgReportsPerDriver }}</strong></span
+        >
+        <span
+          >Más reportes: <strong>{{ driverWithMostReports }}</strong></span
+        >
+      </div>
       <div *ngIf="loadingReports">Cargando reportes...</div>
       <div *ngIf="errorReports" class="error-message">
         Error al cargar los reportes.
@@ -65,11 +77,114 @@
     </div>
     <div *ngIf="viewMode === 'shipments'">
       <h2>Envíos por Transportista</h2>
-      <!-- Aquí irá la tabla/lista de envíos -->
+      <div class="analytics-summary">
+        <span
+          >Total envíos: <strong>{{ totalShipments }}</strong></span
+        >
+        <span
+          >Promedio por transportista:
+          <strong>{{ avgShipmentsPerDriver }}</strong></span
+        >
+        <span
+          >Más envíos: <strong>{{ driverWithMostShipments }}</strong></span
+        >
+      </div>
+      <div *ngIf="loadingShipments">Cargando envíos...</div>
+      <div *ngIf="errorShipments" class="error-message">
+        Error al cargar los envíos.
+      </div>
+      <div *ngIf="!loadingShipments && !errorShipments">
+        <div
+          *ngFor="let group of shipmentsByDriver"
+          class="driver-report-group"
+        >
+          <h3>{{ group.driverName }}</h3>
+          <table class="reports-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Destino</th>
+                <th>Descripción</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let shipment of group.shipments">
+                <td>{{ shipment.id }}</td>
+                <td>{{ shipment.destiny }}</td>
+                <td>{{ shipment.description }}</td>
+                <td>{{ shipment.createdAt | date : "dd/MM/yyyy HH:mm" }}</td>
+                <td>{{ shipment.status }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="shipmentsByDriver.length === 0" class="no-data-message">
+          No hay envíos registrados.
+        </div>
+      </div>
     </div>
     <div *ngIf="viewMode === 'vehicles'">
       <h2>Vehículos por Transportista</h2>
-      <!-- Aquí irá la tabla/lista de vehículos -->
+      <div class="analytics-summary">
+        <span
+          >Total vehículos: <strong>{{ totalVehicles }}</strong></span
+        >
+        <span
+          >Promedio por transportista:
+          <strong>{{ avgVehiclesPerDriver }}</strong></span
+        >
+        <span
+          >Más vehículos: <strong>{{ driverWithMostVehicles }}</strong></span
+        >
+      </div>
+      <div *ngIf="loadingVehicles">Cargando vehículos...</div>
+      <div *ngIf="errorVehicles" class="error-message">
+        Error al cargar los vehículos.
+      </div>
+      <div *ngIf="!loadingVehicles && !errorVehicles">
+        <div *ngFor="let group of vehiclesByDriver" class="driver-report-group">
+          <h3>{{ group.driverName }}</h3>
+          <table class="reports-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Placa</th>
+                <th>Modelo</th>
+                <th>Color</th>
+                <th>Motor (%)</th>
+                <th>Combustible (%)</th>
+                <th>Llantas (%)</th>
+                <th>Sistema Eléctrico (%)</th>
+                <th>Temp. Transmisión (%)</th>
+                <th>Última Inspección</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let vehicle of group.vehicles">
+                <td>{{ vehicle.id }}</td>
+                <td>{{ vehicle.licensePlate }}</td>
+                <td>{{ vehicle.model }}</td>
+                <td>{{ vehicle.color }}</td>
+                <td>{{ vehicle.engine }}</td>
+                <td>{{ vehicle.fuel }}</td>
+                <td>{{ vehicle.tires }}</td>
+                <td>{{ vehicle.electricalSystem }}</td>
+                <td>{{ vehicle.transmissionTemperature }}</td>
+                <td>
+                  {{
+                    vehicle.lastTechnicalInspectionDate | date : "dd/MM/yyyy"
+                  }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="vehiclesByDriver.length === 0" class="no-data-message">
+          No hay vehículos registrados.
+        </div>
+      </div>
     </div>
   </div>
 </div>
