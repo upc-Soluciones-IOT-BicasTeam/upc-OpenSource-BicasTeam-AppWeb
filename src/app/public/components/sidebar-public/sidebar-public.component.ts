@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { IamApiService } from "../../../iam/services/iam-api.service.service";
 import { UserEntity } from "../../../iam/model/user.entity";
+import {ProfileEntity} from "../../../iam/model/profile.entity";
 
 @Component({
   selector: 'app-sidebar-public',
@@ -10,6 +11,7 @@ import { UserEntity } from "../../../iam/model/user.entity";
 })
 export class SidebarPublicComponent implements OnInit {
   user: UserEntity = {} as UserEntity;
+  profile: ProfileEntity = new ProfileEntity();
   name: string = '';
   lastName: string = '';
   type: string = '';
@@ -27,8 +29,8 @@ export class SidebarPublicComponent implements OnInit {
     this.api.findUserById(this.user.id!).subscribe(
       (data: UserEntity) => {
         this.type = data.type;
-        this.name = data.name;
-        this.lastName = data.lastName;
+        //this.name = data.name;
+        //this.lastName = data.lastName;
       },
       (error) => {
         console.error('Error fetching user data:', error);

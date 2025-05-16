@@ -48,8 +48,8 @@ export class VehicleCarrierComponent implements OnInit {
     this.vehiclesApi.getAllVehicles().subscribe(
       (vehicles: VehicleEntity[]) => {
         // Filtra los vehículos cuyo `driverName` coincide con el `name` del usuario
-        this.vehicles = vehicles.filter(vehicle => vehicle.driverName === this.user.name);
-        console.log('Vehicles for user:', this.user.name, this.vehicles);
+        //this.vehicles = vehicles.filter(vehicle => vehicle.driverName === this.user.name);
+       // console.log('Vehicles for user:', this.user.name, this.vehicles);
       },
       (error: any) => {
         console.error('Error fetching vehicles:', error);
