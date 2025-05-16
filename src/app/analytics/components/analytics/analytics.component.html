@@ -32,7 +32,36 @@
   <div class="analytics-content">
     <div *ngIf="viewMode === 'reports'">
       <h2>Reportes por Transportista</h2>
-      <!-- Aquí irá la tabla/lista de reportes -->
+      <div *ngIf="loadingReports">Cargando reportes...</div>
+      <div *ngIf="errorReports" class="error-message">
+        Error al cargar los reportes.
+      </div>
+      <div *ngIf="!loadingReports && !errorReports">
+        <div *ngFor="let group of reportsByDriver" class="driver-report-group">
+          <h3>{{ group.driverName }}</h3>
+          <table class="reports-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Descripción</th>
+                <th>Fecha</th>
+                <th>Nivel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let report of group.reports">
+                <td>{{ report.id }}</td>
+                <td>{{ report.description }}</td>
+                <td>{{ report.createdAt | date : "dd/MM/yyyy HH:mm" }}</td>
+                <td>{{ report.level }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="reportsByDriver.length === 0" class="no-data-message">
+          No hay reportes registrados.
+        </div>
+      </div>
     </div>
     <div *ngIf="viewMode === 'shipments'">
       <h2>Envíos por Transportista</h2>

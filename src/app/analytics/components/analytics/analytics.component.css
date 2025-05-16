@@ -65,3 +65,50 @@
   min-height: 200px;
   margin-top: 2rem;
 }
+
+.driver-report-group {
+  margin-bottom: 2.5rem;
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.driver-report-group h3 {
+  margin-top: 0;
+  color: #f7b500;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.reports-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.reports-table th,
+.reports-table td {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.reports-table th {
+  background: #f7f7f7;
+  color: #333f50;
+  font-weight: 600;
+}
+
+.no-data-message {
+  text-align: center;
+  color: #888;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+.error-message {
+  color: #c0392b;
+  text-align: center;
+  margin: 1rem 0;
+}
