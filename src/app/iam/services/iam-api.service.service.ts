@@ -7,13 +7,13 @@ import { UserEntity } from '../model/user.entity';
   providedIn: 'root'
 })
 export class IamApiService {
-  private baseUrl = 'https://app-241114092351funda.azurewebsites.net/api/profiles';
+  private baseUrl = 'https://huarzu-miguel.free.beeceptor.com/api/users';
 
   constructor(private http: HttpClient) {}
 
   // Autenticar al usuario con email y password
   authenticateUser(email: string, password: string): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${this.baseUrl}/email/${email}/password/${password}`);
+    return this.http.get<UserEntity>(`${this.baseUrl}?email=${email}&password="${password}"`);
   }
 
   // Encontrar un usuario por email
