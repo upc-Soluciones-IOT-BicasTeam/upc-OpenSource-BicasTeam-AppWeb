@@ -19,7 +19,7 @@
     <div class="modal">
       <h3>Upload Payment Proof</h3>
       <p>Please upload a photo of your payment receipt.</p>
-      <input type="file" accept="image/*" />
+      <input type="file" accept="image/*" (change)="onFileSelected($event)" />
       <button class="close-button" (click)="closeModal()">Close</button>
     </div>
   </div>
