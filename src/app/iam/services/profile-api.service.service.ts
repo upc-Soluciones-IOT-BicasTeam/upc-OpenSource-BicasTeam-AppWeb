@@ -9,7 +9,7 @@ import {ProfileEntity} from "../model/profile.entity";
 })
 export class ProfileApiServiceService {
 
-  private baseUrl = 'https://huarzu-miguel.free.beeceptor.com/api/profiles';
+  private baseUrl = 'https://ca9a3dc74ff83e275c7c.free.beeceptor.com/api/profiles';
 
   constructor(private http: HttpClient) {}
 

@@ -1,0 +1,50 @@
+@import 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap';
+
+/* Estilos globales */
+body {
+  background: linear-gradient(135deg, #e0f7fa, #cfd8dc);
+  font-family: 'Poppins', sans-serif;
+  color: #333F50;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Botón "Delete" */
+.btn-delete {
+  background-color: #C0392B;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.btn-delete:hover {
+  background-color: #E63946;
+  transform: translateY(-2px);
+}
+
+/* Mensaje de no envíos */
+.no-shipments {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #666;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .btn-add, .btn-submit {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .shipment-card {
+    padding: 15px;
+  }
+}

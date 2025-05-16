@@ -41,6 +41,9 @@ import { ShipmentBusinessmanComponent } from './service-execution/shipment-manag
 import { PgShipmentBusinessmanComponent } from './public/pages/pg-shipment-businessman/pg-shipment-businessman.component';
 import { ReportViewComponent } from './service-execution/reports-management/report-view/report-view.component';
 import { PgReportBusinessmanComponent } from './public/pages/pg-report-businessman/pg-report-businessman.component';
+import { PgReportCarrierComponent } from './public/pages/pg-report-carrier/pg-report-carrier.component';
+import { SubscriptionComponent } from './subscription&payments/components/subscription/subscription.component';
+import { PgSubscriptionComponent } from './public/pages/pg-subscription/pg-subscription.component';
 
 
 
@@ -68,10 +71,12 @@ import { PgReportBusinessmanComponent } from './public/pages/pg-report-businessm
     ProfileEditionComponent,
     PgProfileEditionComponent,
     ShipmentBusinessmanComponent,
-    PgShipmentBusinessmanComponent,
-    
+    PgShipmentBusinessmanComponent,  
     ReportViewComponent,
     PgReportBusinessmanComponent,
+    PgReportCarrierComponent,
+    SubscriptionComponent,
+    PgSubscriptionComponent,
   ],
   imports: [
     HttpClientModule,
