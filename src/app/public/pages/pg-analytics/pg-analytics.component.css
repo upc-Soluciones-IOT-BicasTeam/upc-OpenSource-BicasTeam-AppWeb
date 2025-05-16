@@ -1,37 +1,23 @@
-.main-container {
-  display: flex;
-  min-height: 100vh;
-  background: #f5f5f5;
-}
-.content {
-  flex: 1;
-  padding: 32px;
-  background: #fff;
-  margin: 24px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
 mat-sidenav-container {
-  height: 100vh;
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
   display: flex;
-  overflow: hidden;
-  background-color: #1b2631;
+  overflow: hidden; /* Evita el desbordamiento */
+  background-color: #1b2631; /* Fondo del contenido */
 }
 
 .p-sidebar {
-  width: 280px;
-  max-width: 280px;
+  width: 280px; /* Ancho fijo */
+  max-width: 280px; /* Máximo ancho */
   background-color: #303841;
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
-  flex-shrink: 0;
-  overflow: hidden;
+  flex-shrink: 0; /* Evita que el sidebar se reduzca */
+  overflow: hidden; /* Asegura que el contenido no desborde */
 }
 
 mat-sidenav-content {
-  flex: 1;
-  overflow: auto;
+  flex: 1; /* Usa el espacio restante */
+  overflow: auto; /* Permite el desplazamiento si es necesario */
   background-color: #1b2631;
-  padding: 20px;
+  padding: 20px; /* Agrega espaciado interno */
 }
