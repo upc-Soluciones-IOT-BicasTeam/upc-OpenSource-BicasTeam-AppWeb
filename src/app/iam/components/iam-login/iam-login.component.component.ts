@@ -32,7 +32,7 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
 
           data.type === 'Gerente'
             ? this.router.navigate([`${data[0].id}/home-businessman`])
-            : this.router.navigate([`${data[0].id}/home-carrier`]);
+            : this.router.navigate([`${data[0].id}/staff-home`]);
         } else {
           this.error = true;
           this.error_msg = 'Email or Password incorrect';

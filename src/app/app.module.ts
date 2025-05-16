@@ -43,6 +43,9 @@ import { ReportViewComponent } from './service-execution/reports-management/repo
 import { PgReportBusinessmanComponent } from './public/pages/pg-report-businessman/pg-report-businessman.component';
 import { SubscriptionComponent } from './subscription&payments/components/subscription/subscription.component';
 import { PgSubscriptionComponent } from './public/pages/pg-subscription/pg-subscription.component';
+import { PlatformStaffHomeComponent } from './subscription&payments/components/platform-staff-home/platform-staff-home.component';
+import { PgStaffHomeComponent } from './public/pages/pg-staff-home/pg-staff-home.component';
+import { SidebarStaffComponent } from './public/components/sidebar-staff/sidebar-staff.component';
 
 
 
@@ -75,6 +78,9 @@ import { PgSubscriptionComponent } from './public/pages/pg-subscription/pg-subsc
     PgReportBusinessmanComponent,
     SubscriptionComponent,
     PgSubscriptionComponent,
+    PlatformStaffHomeComponent,
+    PgStaffHomeComponent,
+    SidebarStaffComponent,
   ],
   imports: [
     HttpClientModule,
