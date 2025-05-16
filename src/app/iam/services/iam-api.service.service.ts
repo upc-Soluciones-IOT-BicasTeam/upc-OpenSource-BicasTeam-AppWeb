@@ -18,7 +18,7 @@ export class IamApiService {
 
   // Encontrar un usuario por email
   findUserWithEmail(email: string): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${this.baseUrl}?email=${email}`);
+    return this.http.get<UserEntity>(`${this.baseUrl}/email/${email}`);
   }
 
   // Crear un nuevo usuario
