@@ -1,25 +1,30 @@
+<!-- src/app/shared/components/sidebar-staff/sidebar-staff.component.html -->
 <div class="sidebar">
   <div class="user-info">
-    <img [src]="getUserImage(type)" alt="User Icon">
+    <img
+      [src]="getUserImage(type)"
+      alt="{{ 'SIDEBAR.USER_ICON_ALT' | translate }}"
+    />
     <div class="user-name">
-      <p>{{ type }}</p>
+      <!-- Se asume que `type` será algo como 'BUSINESSMAN' o 'CARRIER' -->
+      <p>{{ ('SIDEBAR.' + type) | translate }}</p>
     </div>
   </div>
   <ul class="menu">
     <li (click)="goToPricing()">
       <mat-icon>payments</mat-icon>
-      <span>Subscription Requests</span>
+      <span>{{ 'SIDEBAR.SUBSCRIPTION_REQUESTS' | translate }}</span>
     </li>
     <li (click)="goToChangueCredentials()">
       <mat-icon>groups</mat-icon>
-      <span>Edit user credentials</span>
+      <span>{{ 'SIDEBAR.EDIT_CREDENTIALS' | translate }}</span>
     </li>
   </ul>
   <div class="settings-section">
     <ul class="menu">
       <li (click)="goTologout()">
         <mat-icon>logout</mat-icon>
-        <span>Log out</span>
+        <span>{{ 'SIDEBAR.LOGOUT' | translate }}</span>
       </li>
     </ul>
   </div>

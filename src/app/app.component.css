@@ -1,0 +1,51 @@
+/* app.component.css */
+
+/* Contenedor fijado en esquina */
+.lang-switcher {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+}
+
+/* Botón principal */
+.lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #e0e0e0; /* base neutra */
+  border: none;
+  border-radius: 2rem;
+
+  cursor: pointer;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.1s ease;
+}
+
+/* Ícono de globo */
+.lang-icon {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* Código de idioma */
+.lang-code {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Hover suavizado */
+.lang-btn:hover {
+
+}
+
+/* Pulsación (efecto pressed) */
+.lang-btn:active {
+  transform: scale(0.97);
+  box-shadow:
+    inset 2px 2px 6px rgba(0,0,0,0.2),
+    inset -2px -2px 6px rgba(255,255,255,0.7);
+}

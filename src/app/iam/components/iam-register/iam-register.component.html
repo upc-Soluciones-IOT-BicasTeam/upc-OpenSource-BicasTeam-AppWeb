@@ -1,23 +1,33 @@
+<!-- src/app/public/pages/pg-register/pg-register.component.html -->
 <div class="wrapper fadeInDown">
   <div id="formContent">
     <div class="fadeIn first">
-      <img src="https://i.ibb.co/RCDQZnJ/logo.png" id="icon" alt="User Icon" />
+      <img src="https://i.ibb.co/RCDQZnJ/logo.png" id="icon" alt="Logo" />
     </div>
-    <h1>Register as</h1>
-    <!-- Botones -->
+
+    <!-- Título traducible -->
+    <h1>{{ 'REGISTER.TITLE' | translate }}</h1>
+
+    <!-- Botones de tipo de registro -->
     <div class="buttons">
       <button class="btn" (click)="goToRegisterUserInformation('Gerente')">
-        &nbsp;<i class="pi pi-user"></i>&nbsp; Businessman
+        &nbsp;<i class="pi pi-user"></i>&nbsp;
+        {{ 'REGISTER.BUSINESSMAN' | translate }}
       </button>
       <button class="btn" (click)="goToRegisterUserInformation('Transportista')">
-        &nbsp;<i class="pi pi-user"></i>&nbsp; Carrier
+        &nbsp;<i class="pi pi-user"></i>&nbsp;
+        {{ 'REGISTER.CARRIER' | translate }}
       </button>
     </div>
-    <!-- Go to Log in-->
+
+    <!-- Enlace al login -->
     <div>
       <p>
-        <i class="pi pi-minus"></i> Already have an account?
-        <a routerLink="/login" (click)="cleanCss()">Log in</a>
+        <i class="pi pi-minus"></i>
+        {{ 'REGISTER.ALREADY_ACCOUNT' | translate }}
+        <a routerLink="/login" (click)="cleanCss()">
+          {{ 'REGISTER.LOGIN_LINK' | translate }}
+        </a>
         <i class="pi pi-minus"></i>
       </p>
     </div>

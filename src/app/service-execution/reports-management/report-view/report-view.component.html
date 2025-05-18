@@ -1,16 +1,15 @@
 <!-- src/app/report-view/report-view.component.html -->
-
 <div class="report-screen">
   <!-- HEADER -->
   <header class="header">
     <div class="header-text">
-      <h1 class="title">Reportes</h1>
-      <p class="subtitle">Click in the list to see details</p>
+      <h1 class="title">{{ 'REPORT.HEADER.TITLE' | translate }}</h1>
+      <p class="subtitle">{{ 'REPORT.HEADER.SUBTITLE' | translate }}</p>
     </div>
     <img
       class="logo"
       src="https://i.ibb.co/RCDQZnJ/logo.png"
-      alt="Logo MoviGestión"
+      alt="{{ 'REPORT.HEADER.LOGO_ALT' | translate }}"
     />
   </header>
 
@@ -22,18 +21,25 @@
         (ngModelChange)="onLevelChange($event)"
         class="filter-select"
       >
-        <option *ngFor="let lvl of levels" [value]="lvl">{{ lvl }}</option>
+        <option
+          *ngFor="let lvl of levels"
+          [value]="lvl"
+        >
+          {{ lvl }}
+        </option>
       </select>
       <i class="icon-chevron-down"></i>
     </div>
     <div class="search">
       <input
         type="text"
-        placeholder="Search"
+        placeholder="{{ 'REPORT.CONTROLS.SEARCH_PLACEHOLDER' | translate }}"
         [(ngModel)]="searchTerm"
         (ngModelChange)="onSearch($event)"
       />
-      <button><i class="icon-search"></i></button>
+      <button>
+        <i class="icon-search"></i>
+      </button>
     </div>
   </div>
 
@@ -42,11 +48,11 @@
     <table>
       <thead>
       <tr>
-        <th scope="col">Driver’s Name</th>
-        <th scope="col">Description</th>
-        <th scope="col">Report date</th>
-        <th scope="col">Report time</th>
-        <th scope="col">Incident level</th>
+        <th scope="col">{{ 'REPORT.TABLE.DRIVER_NAME' | translate }}</th>
+        <th scope="col">{{ 'REPORT.TABLE.DESCRIPTION' | translate }}</th>
+        <th scope="col">{{ 'REPORT.TABLE.DATE' | translate }}</th>
+        <th scope="col">{{ 'REPORT.TABLE.TIME' | translate }}</th>
+        <th scope="col">{{ 'REPORT.TABLE.LEVEL' | translate }}</th>
       </tr>
       </thead>
       <tbody>
@@ -85,36 +91,36 @@
       (click)="$event.stopPropagation()"
     >
       <header class="modal-header">
-        <h2>Incident Report</h2>
+        <h2>{{ 'REPORT.MODAL.TITLE' | translate }}</h2>
         <button class="close-btn" (click)="closeDetails()">&times;</button>
       </header>
 
       <section class="modal-info">
         <div>
-          <strong>Date:</strong>
+          <strong>{{ 'REPORT.MODAL.DATE_LABEL' | translate }}:</strong>
           {{ selectedReport.createdAt | date:'dd/MM/yyyy' }}
         </div>
         <div>
-          <strong>Time of incident:</strong>
+          <strong>{{ 'REPORT.MODAL.TIME_LABEL' | translate }}:</strong>
           {{ selectedReport.createdAt | date:'hh:mm a' }}
         </div>
       </section>
 
       <section class="modal-details">
         <div class="detail-row">
-          <span class="label">Technical Problems:</span>
+          <span class="label">{{ 'REPORT.MODAL.TECHNICAL' | translate }}:</span>
           <span>{{ selectedReport.technicalProblems }}</span>
         </div>
         <div class="detail-row">
-          <span class="label">Vehicular Infractions:</span>
+          <span class="label">{{ 'REPORT.MODAL.INFRACTIONS' | translate }}:</span>
           <span>{{ selectedReport.vehicularInfractions }}</span>
         </div>
         <div class="detail-row">
-          <span class="label">Road Accidents:</span>
+          <span class="label">{{ 'REPORT.MODAL.ACCIDENTS' | translate }}:</span>
           <span>{{ selectedReport.roadAccidents }}</span>
         </div>
         <div class="detail-row">
-          <span class="label">Problems with packages:</span>
+          <span class="label">{{ 'REPORT.MODAL.PACKAGE' | translate }}:</span>
           <span>{{ selectedReport.packageProblems }}</span>
         </div>
       </section>
@@ -124,9 +130,8 @@
           class="btn delete-selected"
           (click)="openDeleteConfirm(selectedReport!)"
         >
-          🗑️ Delete
+          🗑️ {{ 'REPORT.MODAL.DELETE' | translate }}
         </button>
-
       </footer>
     </div>
   </div>
@@ -135,11 +140,15 @@
   <div class="confirm-overlay" *ngIf="showDeleteModal">
     <div class="confirm-modal">
       <p class="confirm-text">
-        ¿Estás seguro de que deseas eliminar este reporte?
+        {{ 'REPORT.DELETE_CONFIRM.TEXT' | translate }}
       </p>
       <div class="confirm-buttons">
-        <button class="btn confirm-yes" (click)="confirmDelete()">Aceptar</button>
-        <button class="btn confirm-no" (click)="cancelDelete()">Cancelar</button>
+        <button class="btn confirm-yes" (click)="confirmDelete()">
+          {{ 'REPORT.DELETE_CONFIRM.YES' | translate }}
+        </button>
+        <button class="btn confirm-no" (click)="cancelDelete()">
+          {{ 'REPORT.DELETE_CONFIRM.NO' | translate }}
+        </button>
       </div>
     </div>
   </div>

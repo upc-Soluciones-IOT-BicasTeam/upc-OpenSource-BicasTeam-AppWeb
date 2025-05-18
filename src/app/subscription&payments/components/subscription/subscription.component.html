@@ -1,26 +1,37 @@
+<!-- src/app/public/pages/pg-subscription/pg-subscription.component.html -->
 <div class="subscription-container">
   <div class="card-container">
     <div class="card">
-      <h2>FREE Plan</h2>
-      <p>Up to 10 registered drivers</p>
-      <p>Up to 10 registered vehicles</p>
+      <h2>{{ 'SUBSCRIPTION.PLAN_FREE.TITLE' | translate }}</h2>
+      <p>{{ 'SUBSCRIPTION.PLAN_FREE.DRIVERS' | translate }}</p>
+      <p>{{ 'SUBSCRIPTION.PLAN_FREE.VEHICLES' | translate }}</p>
     </div>
 
     <div class="card">
-      <h2>UNLIMITED Plan</h2>
-      <p>No limits on drivers or vehicles</p>
-      <p class="motto">Empower your fleet. Focus on growth — we handle the logistics.</p>
+      <h2>{{ 'SUBSCRIPTION.PLAN_UNLIMITED.TITLE' | translate }}</h2>
+      <p>{{ 'SUBSCRIPTION.PLAN_UNLIMITED.DESCRIPTION' | translate }}</p>
+      <p class="motto">
+        {{ 'SUBSCRIPTION.PLAN_UNLIMITED.MOTTO' | translate }}
+      </p>
     </div>
   </div>
 
-  <button class="subscribe-button" (click)="openModal()">Upgrade Now</button>
+  <button class="subscribe-button" (click)="openModal()">
+    {{ 'SUBSCRIPTION.UPGRADE_BUTTON' | translate }}
+  </button>
 
   <div class="modal-backdrop" *ngIf="showModal">
     <div class="modal">
-      <h3>Upload Payment Proof</h3>
-      <p>Please upload a photo of your payment receipt.</p>
-      <input type="file" accept="image/*" (change)="onFileSelected($event)" />
-      <button class="close-button" (click)="closeModal()">Close</button>
+      <h3>{{ 'SUBSCRIPTION.MODAL.TITLE' | translate }}</h3>
+      <p>{{ 'SUBSCRIPTION.MODAL.DESCRIPTION' | translate }}</p>
+      <input
+        type="file"
+        accept="image/*"
+        (change)="onFileSelected($event)"
+      />
+      <button class="close-button" (click)="closeModal()">
+        {{ 'SUBSCRIPTION.MODAL.CLOSE_BUTTON' | translate }}
+      </button>
     </div>
   </div>
 </div>

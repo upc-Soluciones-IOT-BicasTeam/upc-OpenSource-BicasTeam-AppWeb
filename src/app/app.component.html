@@ -1,1 +1,10 @@
+<!-- src/app/app.component.html -->
+<div class="lang-switcher">
+  <button type="button" class="lang-btn" (click)="toggleLang()" aria-label="Switch language">
+    <!-- Puedes usar PrimeIcons, FontAwesome, o un emoji 🌐 -->
+    <i class="pi pi-globe lang-icon"></i>
+    <span class="lang-code">{{ currentLang.toUpperCase() }}</span>
+  </button>
+</div>
+
 <router-outlet></router-outlet>

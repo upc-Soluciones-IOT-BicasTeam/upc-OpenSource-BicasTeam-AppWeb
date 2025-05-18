@@ -1,57 +1,126 @@
 <div class="container responsive-container">
-  <h1 class="title gradient-text">Profile Management</h1>
+  <!-- Título general -->
+  <h1 class="title gradient-text">
+    {{ 'PROFILE.TITLE' | translate }}
+  </h1>
 
-  <!-- Formulario de autenticación siempre visible si no está autenticado -->
+  <!-- Formulario de autenticación -->
   <div *ngIf="!authenticated" class="form-container glass-effect">
-    <h2>Authentication</h2>
+    <h2>{{ 'PROFILE.AUTH.TITLE' | translate }}</h2>
     <div class="grid formgrid p-fluid">
       <div class="field mb-4 col-12 md:col-6">
-        <label for="authEmail" class="font-medium">Email</label>
-        <input id="authEmail" type="email" [(ngModel)]="authEmail" class="p-inputtext dynamic-input" required>
+        <label for="authEmail" class="font-medium">
+          {{ 'PROFILE.AUTH.EMAIL_LABEL' | translate }}
+        </label>
+        <input
+          id="authEmail"
+          type="email"
+          [(ngModel)]="authEmail"
+          class="p-inputtext dynamic-input"
+          placeholder="{{ 'PROFILE.AUTH.EMAIL_PLACEHOLDER' | translate }}"
+          required
+        />
       </div>
       <div class="field mb-4 col-12 md:col-6">
-        <label for="authPassword" class="font-medium">Password</label>
-        <input id="authPassword" type="password" [(ngModel)]="authPassword" class="p-inputtext dynamic-input" required>
+        <label for="authPassword" class="font-medium">
+          {{ 'PROFILE.AUTH.PASSWORD_LABEL' | translate }}
+        </label>
+        <input
+          id="authPassword"
+          type="password"
+          [(ngModel)]="authPassword"
+          class="p-inputtext dynamic-input"
+          placeholder="{{ 'PROFILE.AUTH.PASSWORD_PLACEHOLDER' | translate }}"
+          required
+        />
       </div>
       <div class="col-12">
-        <button type="button" class="p-button hover-scale animated-btn btn-submit" (click)="authenticateUser()">Submit</button>
+        <button
+          type="button"
+          class="p-button hover-scale animated-btn btn-submit"
+          (click)="authenticateUser()"
+        >
+          {{ 'PROFILE.AUTH.SUBMIT' | translate }}
+        </button>
       </div>
     </div>
     <div *ngIf="error" class="alert alert-danger mt-3">
-      <i class="pi pi-exclamation-triangle"></i> {{ error_msg }}
-    </div>
-  </div>
-  
-  <!-- Formulario de edición de perfil visible si está autenticado -->
-  <h2 class="list-title" *ngIf="authenticated">Edit Your Profile</h2>
-  <div *ngIf="authenticated" class="edit-form-container">
-    <div class="grid formgrid p-fluid">
-      <div class="field mb-4 col-12 md:col-6">
-        <label for="name" class="font-medium">Name</label>
-        <input id="name" type="text" [(ngModel)]="profile.name" class="p-inputtext dynamic-input">
-      </div>
-      <div class="field mb-4 col-12 md:col-6">
-        <label for="lastName" class="font-medium">Last Name</label>
-        <input id="lastName" type="text" [(ngModel)]="profile.lastName" class="p-inputtext dynamic-input">
-      </div>
-      <div class="field mb-4 col-12 md:col-6">
-        <label for="email" class="font-medium">Email</label>
-        <input id="email" type="email" [(ngModel)]="user.email" class="p-inputtext dynamic-input" readonly>
-      </div>
-      <div class="field mb-4 col-12 md:col-6">
-        <label for="password" class="font-medium">Password</label>
-        <input id="password" type="password" [(ngModel)]="user.password" class="p-inputtext dynamic-input">
-      </div>
-      <div class="col-12">
-        <button type="button" class="p-button hover-scale animated-btn btn-submit" (click)="updateUser()">Save Changes</button>
-      </div>
-    </div>
-    <div *ngIf="success" class="alert alert-success mt-3">
-      <i class="pi pi-check-circle"></i> Profile updated successfully!
-    </div>
-    <div *ngIf="error && !success" class="alert alert-danger mt-3">
-      <i class="pi pi-exclamation-triangle"></i> {{ error_msg }}
+      <i class="pi pi-exclamation-triangle"></i>
+      {{ error_msg }}
     </div>
   </div>
 
+  <!-- Formulario de edición -->
+  <h2 class="list-title" *ngIf="authenticated">
+    {{ 'PROFILE.EDIT.TITLE' | translate }}
+  </h2>
+  <div *ngIf="authenticated" class="edit-form-container">
+    <div class="grid formgrid p-fluid">
+      <div class="field mb-4 col-12 md:col-6">
+        <label for="name" class="font-medium">
+          {{ 'PROFILE.EDIT.NAME_LABEL' | translate }}
+        </label>
+        <input
+          id="name"
+          type="text"
+          [(ngModel)]="profile.name"
+          class="p-inputtext dynamic-input"
+          placeholder="{{ 'PROFILE.EDIT.NAME_PLACEHOLDER' | translate }}"
+        />
+      </div>
+      <div class="field mb-4 col-12 md:col-6">
+        <label for="lastName" class="font-medium">
+          {{ 'PROFILE.EDIT.LASTNAME_LABEL' | translate }}
+        </label>
+        <input
+          id="lastName"
+          type="text"
+          [(ngModel)]="profile.lastName"
+          class="p-inputtext dynamic-input"
+          placeholder="{{ 'PROFILE.EDIT.LASTNAME_PLACEHOLDER' | translate }}"
+        />
+      </div>
+      <div class="field mb-4 col-12 md:col-6">
+        <label for="email" class="font-medium">
+          {{ 'PROFILE.EDIT.EMAIL_LABEL' | translate }}
+        </label>
+        <input
+          id="email"
+          type="email"
+          [(ngModel)]="user.email"
+          class="p-inputtext dynamic-input"
+          readonly
+        />
+      </div>
+      <div class="field mb-4 col-12 md:col-6">
+        <label for="password" class="font-medium">
+          {{ 'PROFILE.EDIT.PASSWORD_LABEL' | translate }}
+        </label>
+        <input
+          id="password"
+          type="password"
+          [(ngModel)]="user.password"
+          class="p-inputtext dynamic-input"
+          placeholder="{{ 'PROFILE.EDIT.PASSWORD_PLACEHOLDER' | translate }}"
+        />
+      </div>
+      <div class="col-12">
+        <button
+          type="button"
+          class="p-button hover-scale animated-btn btn-submit"
+          (click)="updateUser()"
+        >
+          {{ 'PROFILE.EDIT.SAVE_CHANGES' | translate }}
+        </button>
+      </div>
+    </div>
+    <div *ngIf="success" class="alert alert-success mt-3">
+      <i class="pi pi-check-circle"></i>
+      {{ 'PROFILE.EDIT.SUCCESS_MSG' | translate }}
+    </div>
+    <div *ngIf="error && !success" class="alert alert-danger mt-3">
+      <i class="pi pi-exclamation-triangle"></i>
+      {{ error_msg }}
+    </div>
+  </div>
 </div>

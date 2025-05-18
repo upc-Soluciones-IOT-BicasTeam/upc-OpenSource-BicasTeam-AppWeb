@@ -1,25 +1,67 @@
+<!-- src/app/public/pages/pg-login/pg-login.component.html -->
 <div class="wrapper fadeInDown">
   <div id="formContent">
     <div class="fadeIn first">
-      <img src="https://i.ibb.co/RCDQZnJ/logo.png" id="icon" alt="User Icon" />
+      <img src="https://i.ibb.co/RCDQZnJ/logo.png" id="icon" alt="Logo" />
     </div>
-    <h1>Login</h1>
+
+    <!-- Título -->
+    <h1>{{ 'LOGIN.TITLE' | translate }}</h1>
+
     <form (ngSubmit)="login()">
-      <label for="email" class="text-left">Email</label>
-      <input type="email" id="email" class="fadeIn second" name="email" [(ngModel)]="user.email" required>
+      <!-- Email -->
+      <label for="email" class="text-left">
+        {{ 'LOGIN.EMAIL_LABEL' | translate }}
+      </label>
+      <input
+        type="email"
+        id="email"
+        class="fadeIn second"
+        name="email"
+        [(ngModel)]="user.email"
+        required
+        placeholder="{{ 'LOGIN.EMAIL_PLACEHOLDER' | translate }}"
+      />
 
-      <label for="password" class="text-left">Password</label>
-      <input type="password" id="password" class="fadeIn third" name="password" [(ngModel)]="user.password" required>
+      <!-- Password -->
+      <label for="password" class="text-left">
+        {{ 'LOGIN.PASSWORD_LABEL' | translate }}
+      </label>
+      <input
+        type="password"
+        id="password"
+        class="fadeIn third"
+        name="password"
+        [(ngModel)]="user.password"
+        required
+        placeholder="{{ 'LOGIN.PASSWORD_PLACEHOLDER' | translate }}"
+      />
 
-      <input type="submit" class="fadeIn fourth" value="Log In">
+      <!-- Botón -->
+      <input
+        type="submit"
+        class="fadeIn fourth"
+        [value]="'LOGIN.BUTTON' | translate"
+      />
     </form>
+
+    <!-- Error -->
     <div class="alert alert-danger" *ngIf="error">
       {{ error_msg }}
     </div>
+
+    <!-- Enlace a registro -->
     <div>
       <p>
-        <i class="pi pi-minus"></i> Don't have an account?
-        <a routerLink="/register" (click)="cleanCss()" (click)="goToRegisterUserInformation('manager')">Sign up</a>
+        <i class="pi pi-minus"></i>
+        {{ 'LOGIN.NO_ACCOUNT' | translate }}
+        <a
+          routerLink="/register"
+          (click)="cleanCss()"
+          (click)="goToRegisterUserInformation('manager')"
+        >
+          {{ 'LOGIN.SIGNUP_LINK' | translate }}
+        </a>
         <i class="pi pi-minus"></i>
       </p>
     </div>

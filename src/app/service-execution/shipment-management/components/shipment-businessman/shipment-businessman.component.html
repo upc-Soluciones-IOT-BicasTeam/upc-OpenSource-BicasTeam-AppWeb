@@ -1,60 +1,72 @@
 <!-- src/app/service-execution/shipment-management/components/shipment-businessman/shipment-businessman.component.html -->
-
 <div class="container">
   <!-- Título principal -->
-  <h1 class="title gradient-text">Shipments</h1>
+  <h1 class="title gradient-text">
+    {{ 'SHIPMENTS.TITLE' | translate }}
+  </h1>
 
   <!-- Controles: filtro por estado + búsqueda + orden por fecha -->
   <div class="controls filters">
     <div class="filter-group">
-      <label for="statusFilter">Filter by status:</label>
+      <label for="statusFilter">
+        {{ 'SHIPMENTS.FILTER_BY_STATUS' | translate }}
+      </label>
       <select
         id="statusFilter"
         [(ngModel)]="filterStatus"
         (ngModelChange)="onStatusChange($event)"
       >
-        <option value="">All</option>
-        <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+        <option value="">{{ 'SHIPMENTS.ALL' | translate }}</option>
+        <option *ngFor="let s of statuses" [value]="s">
+          {{ s }}
+        </option>
       </select>
     </div>
 
     <div class="filter-group">
-      <label for="searchBox">Search:</label>
+      <label for="searchBox">
+        {{ 'SHIPMENTS.SEARCH_LABEL' | translate }}
+      </label>
       <input
         id="searchBox"
         type="text"
-        placeholder="Destiny or description..."
+        placeholder="{{ 'SHIPMENTS.SEARCH_PLACEHOLDER' | translate }}"
         [(ngModel)]="searchTerm"
         (ngModelChange)="onSearch($event)"
       />
     </div>
 
-
-
-    <button class="btn-add" (click)="openForm()">Add Shipment</button>
+    <button class="btn-add" (click)="openForm()">
+      {{ 'SHIPMENTS.ADD_BUTTON' | translate }}
+    </button>
   </div>
 
   <!-- Modal de formulario (create/edit) -->
   <div class="modal-overlay" *ngIf="isFormOpen" (click)="closeForm()">
     <div class="modal-content" (click)="$event.stopPropagation()">
-      <h2>{{ isEditMode ? 'Edit Shipment' : 'Create New Shipment' }}</h2>
+      <h2>
+        {{ isEditMode
+        ? ('SHIPMENTS.MODAL.EDIT_TITLE' | translate)
+        : ('SHIPMENTS.MODAL.CREATE_TITLE' | translate)
+        }}
+      </h2>
       <form [formGroup]="shipmentForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="destiny">Destiny</label>
+          <label for="destiny">{{ 'SHIPMENTS.FORM.DESTINY' | translate }}</label>
           <input id="destiny" formControlName="destiny" />
         </div>
         <div class="form-group">
-          <label for="description">Description</label>
+          <label for="description">{{ 'SHIPMENTS.FORM.DESCRIPTION' | translate }}</label>
           <input id="description" formControlName="description" />
         </div>
         <div class="form-group">
-          <label for="status">Status</label>
+          <label for="status">{{ 'SHIPMENTS.FORM.STATUS' | translate }}</label>
           <select id="status" formControlName="status">
             <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="driverName">Driver Name</label>
+          <label for="driverName">{{ 'SHIPMENTS.FORM.DRIVER_NAME' | translate }}</label>
           <input id="driverName" formControlName="driverName" />
         </div>
         <div class="form-actions">
@@ -63,10 +75,17 @@
             class="btn-submit"
             [disabled]="shipmentForm.invalid"
           >
-            {{ isEditMode ? 'Update' : 'Create' }}
+            {{ isEditMode
+            ? ('SHIPMENTS.BUTTON.UPDATE' | translate)
+            : ('SHIPMENTS.BUTTON.CREATE' | translate)
+            }}
           </button>
-          <button type="button" class="btn-cancel" (click)="closeForm()">
-            Cancel
+          <button
+            type="button"
+            class="btn-cancel"
+            (click)="closeForm()"
+          >
+            {{ 'SHIPMENTS.BUTTON.CANCEL' | translate }}
           </button>
         </div>
       </form>
@@ -74,27 +93,29 @@
   </div>
 
   <!-- Tabla de envíos -->
-  <h2 class="list-title">Current Shipments</h2>
+  <h2 class="list-title">
+    {{ 'SHIPMENTS.CURRENT_TITLE' | translate }}
+  </h2>
   <table
     class="shipment-table"
     *ngIf="filteredShipments.length; else noShipments"
   >
     <thead>
     <tr>
-      <th>ID</th>
-      <th>Destiny</th>
-      <th>Description</th>
-      <th>Status</th>
-      <th>Driver</th>
+      <th>{{ 'SHIPMENTS.TABLE.ID' | translate }}</th>
+      <th>{{ 'SHIPMENTS.TABLE.DESTINY' | translate }}</th>
+      <th>{{ 'SHIPMENTS.TABLE.DESCRIPTION' | translate }}</th>
+      <th>{{ 'SHIPMENTS.TABLE.STATUS' | translate }}</th>
+      <th>{{ 'SHIPMENTS.TABLE.DRIVER' | translate }}</th>
       <th
         class="sortable-header"
         (click)="toggleSortOrder()"
       >
-        Created At
+        {{ 'SHIPMENTS.TABLE.CREATED_AT' | translate }}
         <span *ngIf="sortDirection==='desc'">▼</span>
         <span *ngIf="sortDirection==='asc'">▲</span>
       </th>
-      <th>Actions</th>
+      <th>{{ 'SHIPMENTS.TABLE.ACTIONS' | translate }}</th>
     </tr>
     </thead>
     <tbody>
@@ -122,19 +143,27 @@
   </table>
 
   <ng-template #noShipments>
-    <p class="no-shipments">No shipments available.</p>
+    <p class="no-shipments">
+      {{ 'SHIPMENTS.NO_SHIPMENTS' | translate }}
+    </p>
   </ng-template>
 
   <!-- Modal de confirmación de borrado -->
   <div class="confirm-overlay" *ngIf="showConfirmModal">
     <div class="confirm-modal">
-      <p>¿Estás seguro de que deseas eliminar este envío?</p>
+      <p>{{ 'SHIPMENTS.DELETE_CONFIRM.TEXT' | translate }}</p>
       <div class="confirm-buttons">
-        <button class="btn-confirm-yes" (click)="confirmDelete()">
-          Aceptar
+        <button
+          class="btn-confirm-yes"
+          (click)="confirmDelete()"
+        >
+          {{ 'SHIPMENTS.DELETE_CONFIRM.YES' | translate }}
         </button>
-        <button class="btn-confirm-no" (click)="cancelDelete()">
-          Cancelar
+        <button
+          class="btn-confirm-no"
+          (click)="cancelDelete()"
+        >
+          {{ 'SHIPMENTS.DELETE_CONFIRM.NO' | translate }}
         </button>
       </div>
     </div>
