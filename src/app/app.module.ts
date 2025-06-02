@@ -42,6 +42,8 @@ import { ReportDriverComponent } from './service-execution/reports-management/re
 import { ReportViewComponent } from './service-execution/reports-management/report-view/report-view.component';
 import { PgReportBusinessmanComponent } from './public/pages/pg-report-businessman/pg-report-businessman.component';
 import { PgReportCarrierComponent } from './public/pages/pg-report-carrier/pg-report-carrier.component';
+import { VehicleDetailsComponent } from './service-execution/vehicles-management/components/vehicle-details/vehicle-details.component';
+import { PgVehiclesDetailsBusinessmanComponent } from './public/pages/pg-vehicles-details-businessman/pg-vehicles-details-businessman.component';
 
 
 
@@ -76,6 +78,8 @@ import { PgReportCarrierComponent } from './public/pages/pg-report-carrier/pg-re
     ReportViewComponent,
     PgReportBusinessmanComponent,
     PgReportCarrierComponent,
+    VehicleDetailsComponent,
+    PgVehiclesDetailsBusinessmanComponent,
   ],
   imports: [
     HttpClientModule,

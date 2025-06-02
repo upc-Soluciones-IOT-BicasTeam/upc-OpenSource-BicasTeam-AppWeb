@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { VehiclesApiService } from '../../services/vehicles-api.service';
 import { VehicleEntity } from '../../model/vehicle.entity';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import * as  L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -23,7 +23,7 @@ export class VehicleBusinessmanComponent implements OnInit, OnDestroy {
 
   @ViewChild('mapContainer') mapContainer: ElementRef | undefined;
 
-  constructor(private vehiclesApi: VehiclesApiService, private router: Router) {}
+  constructor(private vehiclesApi: VehiclesApiService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.loadVehicles();
@@ -60,6 +60,11 @@ export class VehicleBusinessmanComponent implements OnInit, OnDestroy {
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  navigateToDetails(vehicleId: number) {
+    console.log('Botón clickeado, ID:', vehicleId); // ← Añade esto
+    this.router.navigate([':id/vehicles-details-businessman', vehicleId]);
   }
 
   addVehicle(): void {
@@ -111,13 +116,13 @@ export class VehicleBusinessmanComponent implements OnInit, OnDestroy {
     }
   }
 
-  viewVehicleDetails(vehicle: VehicleEntity): void {
+  /*viewVehicleDetails(vehicle: VehicleEntity): void {
     this.selectedVehicle = vehicle;
     this.showDetails = true;
     setTimeout(() => {
       this.initMap();
     }, 0);
-  }
+  }*/
 
   closeDetails(): void {
     this.showDetails = false;
