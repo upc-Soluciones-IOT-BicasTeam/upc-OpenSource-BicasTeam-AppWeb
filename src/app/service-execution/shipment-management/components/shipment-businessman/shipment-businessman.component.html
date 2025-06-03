@@ -67,8 +67,13 @@
           <input id="driverName" formControlName="driverName" />
         </div>
         <div class="form-actions">
-          <button type="button" class="btn-cancel" (click)="closeForm()">
-            Cancel
+
+          <button
+            type="button"
+            class="btn-cancel"
+            (click)="closeForm()"
+          >
+            {{ 'SHIPMENTS.BUTTON.CANCEL' | translate }}
           </button>
           <button
             type="submit"
@@ -79,13 +84,6 @@
             ? ('SHIPMENTS.BUTTON.UPDATE' | translate)
             : ('SHIPMENTS.BUTTON.CREATE' | translate)
             }}
-          </button>
-          <button
-            type="button"
-            class="btn-cancel"
-            (click)="closeForm()"
-          >
-            {{ 'SHIPMENTS.BUTTON.CANCEL' | translate }}
           </button>
 
         </div>
@@ -159,21 +157,21 @@
     <div class="confirm-modal">
       <p>{{ 'SHIPMENTS.DELETE_CONFIRM.TEXT' | translate }}</p>
       <div class="confirm-buttons">
-        <button
-          class="btn-confirm-yes"
-          (click)="confirmDelete()"
-        >
-          {{ 'SHIPMENTS.DELETE_CONFIRM.YES' | translate }}
-        </button>
+        
         <button
           class="btn-confirm-no"
           (click)="cancelDelete()"
         >
           {{ 'SHIPMENTS.DELETE_CONFIRM.NO' | translate }}
         </button>
-        <button class="btn-confirm-yes" (click)="confirmDelete()">
-          Aceptar
+
+        <button
+          class="btn-confirm-yes"
+          (click)="confirmDelete()"
+        >
+          {{ 'SHIPMENTS.DELETE_CONFIRM.YES' | translate }}
         </button>
+
       </div>
     </div>
   </div>
