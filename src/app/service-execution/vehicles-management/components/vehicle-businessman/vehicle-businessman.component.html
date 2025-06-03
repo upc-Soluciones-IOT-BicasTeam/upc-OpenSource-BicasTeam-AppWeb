@@ -38,31 +38,6 @@
         </div>
 
         <div class="input-group">
-          <label for="engine">Motor (%):</label>
-          <input type="number" id="engine" [(ngModel)]="vehicle.engine" name="engine" required min="0" max="100">
-        </div>
-
-        <div class="input-group">
-          <label for="fuel">Combustible (%):</label>
-          <input type="number" id="fuel" [(ngModel)]="vehicle.fuel" name="fuel" required min="0" max="100">
-        </div>
-
-        <div class="input-group">
-          <label for="tires">Llantas (%):</label>
-          <input type="number" id="tires" [(ngModel)]="vehicle.tires" name="tires" required min="0" max="100">
-        </div>
-
-        <div class="input-group">
-          <label for="electricalSystem">Sistema Eléctrico (%):</label>
-          <input type="number" id="electricalSystem" [(ngModel)]="vehicle.electricalSystem" name="electricalSystem" required min="0" max="100">
-        </div>
-
-        <div class="input-group">
-          <label for="transmissionTemperature">Temperatura de Transmisión (%):</label>
-          <input type="number" id="transmissionTemperature" [(ngModel)]="vehicle.transmissionTemperature" name="transmissionTemperature" required min="0" max="100">
-        </div>
-
-        <div class="input-group">
           <label for="driverName">Nombre del Conductor:</label>
           <input type="text" id="driverName" [(ngModel)]="vehicle.driverName" name="driverName" required>
         </div>
@@ -98,11 +73,6 @@
       <div class="vehicle-details-content">
         <p><strong>Placa:</strong> {{ selectedVehicle?.licensePlate }}</p>
         <p><strong>Modelo:</strong> {{ selectedVehicle?.model }}</p>
-        <p><strong>Motor:</strong> {{ selectedVehicle?.engine }}%</p>
-        <p><strong>Combustible:</strong> {{ selectedVehicle?.fuel }}%</p>
-        <p><strong>Llantas:</strong> {{ selectedVehicle?.tires }}%</p>
-        <p><strong>Sistema Eléctrico:</strong> {{ selectedVehicle?.electricalSystem }}%</p>
-        <p><strong>Temperatura de la Transmisión:</strong> {{ selectedVehicle?.transmissionTemperature }}%</p>
         <p><strong>Nombre del Conductor:</strong> {{ selectedVehicle?.driverName }}</p>
         <p><strong>Color:</strong> {{ selectedVehicle?.color }}</p>
         <h3><i class="pi pi-chart-line"></i> Monitoreo en Tiempo Real</h3>
