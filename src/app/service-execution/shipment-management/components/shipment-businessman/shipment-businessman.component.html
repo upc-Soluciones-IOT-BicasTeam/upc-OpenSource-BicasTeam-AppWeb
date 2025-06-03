@@ -23,7 +23,7 @@
       <input
         id="searchBox"
         type="text"
-        placeholder="Destiny or description..."
+        placeholder="Destiny,Driver or description.."
         [(ngModel)]="searchTerm"
         (ngModelChange)="onSearch($event)"
       />
@@ -47,17 +47,17 @@
           <label for="description">Description</label>
           <input id="description" formControlName="description" />
         </div>
-        <div class="form-group">
-          <label for="status">Status</label>
-          <select id="status" formControlName="status">
-            <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
-          </select>
-        </div>
+
+
+
         <div class="form-group">
           <label for="driverName">Driver Name</label>
           <input id="driverName" formControlName="driverName" />
         </div>
         <div class="form-actions">
+          <button type="button" class="btn-cancel" (click)="closeForm()">
+            Cancel
+          </button>
           <button
             type="submit"
             class="btn-submit"
@@ -65,9 +65,7 @@
           >
             {{ isEditMode ? 'Update' : 'Create' }}
           </button>
-          <button type="button" class="btn-cancel" (click)="closeForm()">
-            Cancel
-          </button>
+
         </div>
       </form>
     </div>
@@ -113,6 +111,11 @@
       <td>{{ s.driverName }}</td>
       <td>{{ s.createdAt | date: 'dd/MM/yyyy hh:mm a' }}</td>
       <td class="actions">
+        <!-- Botón editar -->
+        <button class="btn-action" (click)="openForm(s)">
+          ✏️
+        </button>
+        <!-- Botón eliminar -->
         <button class="btn-action" (click)="openDeleteConfirm(s)">
           🗑️
         </button>
@@ -130,11 +133,11 @@
     <div class="confirm-modal">
       <p>¿Estás seguro de que deseas eliminar este envío?</p>
       <div class="confirm-buttons">
-        <button class="btn-confirm-yes" (click)="confirmDelete()">
-          Aceptar
-        </button>
         <button class="btn-confirm-no" (click)="cancelDelete()">
           Cancelar
+        </button>
+        <button class="btn-confirm-yes" (click)="confirmDelete()">
+          Aceptar
         </button>
       </div>
     </div>

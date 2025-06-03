@@ -1,7 +1,10 @@
-// src/app/service-execution/shipment-management/components/shipment-businessman/shipment-businessman.component.ts
-
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ShipmentApiService } from '../../services/shipment-api.service';
 import { ShipmentEntity } from '../../model/shipment.entity';
@@ -9,29 +12,29 @@ import { ShipmentEntity } from '../../model/shipment.entity';
 @Component({
   selector: 'app-shipment-businessman',
   templateUrl: './shipment-businessman.component.html',
-  styleUrls: ['./shipment-businessman.component.css']
+  styleUrls: ['./shipment-businessman.component.css'],
 })
 export class ShipmentBusinessmanComponent implements OnInit {
   // Listado completo y filtrado
-  shipmentsAll: ShipmentEntity[]      = [];
+  shipmentsAll: ShipmentEntity[] = [];
   filteredShipments: ShipmentEntity[] = [];
 
   // Filtros
-  statuses     = ['Pending', 'In Transit', 'Delivered', 'Cancelled'];
+  statuses = ['En Progreso', 'Pending', 'In Transit', 'Delivered', 'Cancelled'];
   filterStatus = '';
-  searchTerm   = '';
+  searchTerm = '';
 
   // Ordenación por fecha
   sortDirection: 'asc' | 'desc' = 'desc';
 
   // Formulario reactivo para create/edit
   shipmentForm: FormGroup;
-  isFormOpen   = false;
-  isEditMode   = false;
+  isFormOpen = false;
+  isEditMode = false;
   selectedShipment: ShipmentEntity | null = null;
 
   // Confirmación de borrado
-  showConfirmModal    = false;
+  showConfirmModal = false;
   shipmentToDelete: ShipmentEntity | null = null;
 
   // ID de usuario leído de la ruta (si aplica)
@@ -40,18 +43,17 @@ export class ShipmentBusinessmanComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private shipmentApi: ShipmentApiService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {
     // Extraemos userId de la ruta (p.ej. /shipments/:id)
     const param = this.route.snapshot.paramMap.get('id');
-    this.userId  = param !== null ? Number(param) : NaN;
+    this.userId = param !== null ? Number(param) : NaN;
 
-    // Inicializamos el formulario
+    // Inicializamos el formulario (sin status; se agrega solo en edición)
     this.shipmentForm = this.fb.group({
-      destiny:     ['', Validators.required],
+      destiny: ['', Validators.required],
       description: ['', Validators.required],
-      status:      ['', Validators.required],
-      driverName:  ['', Validators.required]
+      driverName: ['', Validators.required],
     });
   }
 
@@ -66,22 +68,24 @@ export class ShipmentBusinessmanComponent implements OnInit {
       : this.shipmentApi.getAllShipments();
 
     fetch$.subscribe(
-      list => {
+      (list) => {
         this.shipmentsAll = list;
         this.applyFilters();
       },
-      err => console.error('Error fetching shipments:', err)
+      (err) => console.error('Error fetching shipments:', err),
     );
   }
 
   /** Aplica filtros de estado, búsqueda y orden por fecha */
   applyFilters(): void {
     this.filteredShipments = this.shipmentsAll
-      .filter(s => !this.filterStatus || s.status === this.filterStatus)
-      .filter(s =>
-        !this.searchTerm ||
-        s.destiny.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        s.description.toLowerCase().includes(this.searchTerm.toLowerCase())
+      .filter((s) => !this.filterStatus || s.status === this.filterStatus)
+      .filter(
+        (s) =>
+          !this.searchTerm ||
+          s.destiny.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          s.description.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          s.driverName.toLowerCase().includes(this.searchTerm.toLowerCase()),
       )
       .sort((a, b) => {
         const dateA = new Date(a.createdAt).getTime();
@@ -115,14 +119,31 @@ export class ShipmentBusinessmanComponent implements OnInit {
   /** Abre el modal para crear o editar */
   openForm(shipment?: ShipmentEntity): void {
     this.isFormOpen = true;
+
     if (shipment) {
+      // —— Modo edición ——
       this.isEditMode = true;
       this.selectedShipment = shipment;
+
+      // Aseguramos que el control 'status' exista y tenga validación
+      if (!this.shipmentForm.contains('status')) {
+        this.shipmentForm.addControl(
+          'status',
+          new FormControl(shipment.status, Validators.required),
+        );
+      }
+
       this.shipmentForm.patchValue(shipment);
     } else {
+      // —— Modo creación ——
       this.isEditMode = false;
       this.selectedShipment = null;
       this.shipmentForm.reset();
+
+      // Eliminamos el control 'status' si estuviera presente
+      if (this.shipmentForm.contains('status')) {
+        this.shipmentForm.removeControl('status');
+      }
     }
   }
 
@@ -144,29 +165,29 @@ export class ShipmentBusinessmanComponent implements OnInit {
       this.shipmentApi
         .updateShipment(this.selectedShipment.id, formValue)
         .subscribe(
-          updated => {
-            const idx = this.shipmentsAll.findIndex(s => s.id === updated.id);
+          (updated) => {
+            const idx = this.shipmentsAll.findIndex((s) => s.id === updated.id);
             this.shipmentsAll[idx] = updated;
             this.applyFilters();
             this.closeForm();
           },
-          err => console.error('Error updating shipment:', err)
+          (err) => console.error('Error updating shipment:', err),
         );
     } else {
       // —— Creación ——
       const nextId = this.shipmentsAll.length
-        ? Math.max(...this.shipmentsAll.map(s => s.id)) + 1
+        ? Math.max(...this.shipmentsAll.map((s) => s.id)) + 1
         : 1;
       const now = new Date();
 
       const payload: Partial<ShipmentEntity> = {
-        id:          nextId,
-        userId:      !isNaN(this.userId) ? this.userId : 0,
-        createdAt:   now,
-        destiny:     formValue.destiny!,
+        id: nextId,
+        userId: !isNaN(this.userId) ? this.userId : 0,
+        createdAt: now,
+        destiny: formValue.destiny!,
         description: formValue.description!,
-        status:      formValue.status!,
-        driverName:  formValue.driverName!
+        status: 'En Progreso', // ← estado por defecto
+        driverName: formValue.driverName!,
       };
 
       this.shipmentApi.addShipment(payload).subscribe(
@@ -175,7 +196,7 @@ export class ShipmentBusinessmanComponent implements OnInit {
           this.applyFilters();
           this.closeForm();
         },
-        err => console.error('Error adding shipment:', err)
+        (err) => console.error('Error adding shipment:', err),
       );
     }
   }
@@ -198,12 +219,12 @@ export class ShipmentBusinessmanComponent implements OnInit {
     this.shipmentApi.deleteShipment(this.shipmentToDelete.id).subscribe(
       () => {
         this.shipmentsAll = this.shipmentsAll.filter(
-          s => s.id !== this.shipmentToDelete!.id
+          (s) => s.id !== this.shipmentToDelete!.id,
         );
         this.applyFilters();
         this.cancelDelete();
       },
-      err => console.error('Error deleting shipment:', err)
+      (err) => console.error('Error deleting shipment:', err),
     );
   }
 }
