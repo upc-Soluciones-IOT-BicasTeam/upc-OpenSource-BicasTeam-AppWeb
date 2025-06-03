@@ -59,17 +59,17 @@
           <label for="description">{{ 'SHIPMENTS.FORM.DESCRIPTION' | translate }}</label>
           <input id="description" formControlName="description" />
         </div>
-        <div class="form-group">
-          <label for="status">{{ 'SHIPMENTS.FORM.STATUS' | translate }}</label>
-          <select id="status" formControlName="status">
-            <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
-          </select>
-        </div>
+
+
+
         <div class="form-group">
           <label for="driverName">{{ 'SHIPMENTS.FORM.DRIVER_NAME' | translate }}</label>
           <input id="driverName" formControlName="driverName" />
         </div>
         <div class="form-actions">
+          <button type="button" class="btn-cancel" (click)="closeForm()">
+            Cancel
+          </button>
           <button
             type="submit"
             class="btn-submit"
@@ -87,6 +87,7 @@
           >
             {{ 'SHIPMENTS.BUTTON.CANCEL' | translate }}
           </button>
+
         </div>
       </form>
     </div>
@@ -134,6 +135,11 @@
       <td>{{ s.driverName }}</td>
       <td>{{ s.createdAt | date: 'dd/MM/yyyy hh:mm a' }}</td>
       <td class="actions">
+        <!-- Botón editar -->
+        <button class="btn-action" (click)="openForm(s)">
+          ✏️
+        </button>
+        <!-- Botón eliminar -->
         <button class="btn-action" (click)="openDeleteConfirm(s)">
           🗑️
         </button>
@@ -164,6 +170,9 @@
           (click)="cancelDelete()"
         >
           {{ 'SHIPMENTS.DELETE_CONFIRM.NO' | translate }}
+        </button>
+        <button class="btn-confirm-yes" (click)="confirmDelete()">
+          Aceptar
         </button>
       </div>
     </div>
