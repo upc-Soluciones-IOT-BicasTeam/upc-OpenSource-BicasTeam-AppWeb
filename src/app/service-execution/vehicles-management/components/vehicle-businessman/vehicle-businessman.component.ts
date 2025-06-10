@@ -63,10 +63,14 @@ export class VehicleBusinessmanComponent implements OnInit, OnDestroy {
   }
 
   navigateToDetails(vehicleId: number) {
-    console.log('Botón clickeado, ID:', vehicleId); // ← Añade esto
+    console.log('Botón clickeado, ID:', vehicleId);
     this.router.navigate([':id/vehicles-details-businessman', vehicleId]);
   }
 
+  navigateToCreateVehicle() {
+    this.router.navigate([':id/create-vehicle-businessman']);
+  }
+/*
   addVehicle(): void {
     // Prepara los datos para enviar, estableciendo `vehicleImage` como `undefined`
     const vehicleData = { ...this.vehicle };
@@ -89,7 +93,7 @@ export class VehicleBusinessmanComponent implements OnInit, OnDestroy {
       }
     );
   }
-
+*/
   editVehicle(vehicle: VehicleEntity): void {
     this.vehicle = { ...vehicle }; // Clona el vehículo para evitar modificaciones directas
     this.uploadedImageUrl = vehicle.vehicleImage || null; // Muestra la imagen actual, si existe

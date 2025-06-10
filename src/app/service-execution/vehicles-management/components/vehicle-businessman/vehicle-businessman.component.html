@@ -1,7 +1,7 @@
 <div class="container">
   <div class="header">
     <h1 class="title gradient-text">Gestión de Vehículos</h1>
-    <button type="button" class="btn primary-btn hover-scale" (click)="showAddVehicleForm()">Agregar Vehículo</button>
+    <button type="button" class="btn primary-btn hover-scale" (click)="navigateToCreateVehicle()">Agregar Vehículo</button>
   </div>
 
   <!-- Lista de Vehículos -->
@@ -21,48 +21,7 @@
     </div>
   </div>
 
-  <!-- Modal de Formulario para Agregar/Editar Vehículo -->
-  <div class="modal" *ngIf="showForm">
-    <div class="modal-content">
-      <span class="close" (click)="cancelForm()">&times;</span>
-      <h2 class="form-title">{{ isEditing ? 'Editar Vehículo' : 'Agregar Vehículo' }}</h2>
-      <form (ngSubmit)="isEditing ? updateVehicle() : addVehicle()">
-        <div class="input-group">
-          <label for="licensePlate">Placa:</label>
-          <input type="text" id="licensePlate" [(ngModel)]="vehicle.licensePlate" name="licensePlate" required>
-        </div>
 
-        <div class="input-group">
-          <label for="model">Modelo:</label>
-          <input type="text" id="model" [(ngModel)]="vehicle.model" name="model" required>
-        </div>
-
-        <div class="input-group">
-          <label for="driverName">Nombre del Conductor:</label>
-          <input type="text" id="driverName" [(ngModel)]="vehicle.driverName" name="driverName" required>
-        </div>
-
-        <div class="input-group">
-          <label for="color">Color:</label>
-          <input type="text" id="color" [(ngModel)]="vehicle.color" name="color">
-        </div>
-
-        <div class="input-group">
-          <label for="lastTechnicalInspectionDate">Fecha de Última Inspección Técnica:</label>
-          <input type="date" id="lastTechnicalInspectionDate" [(ngModel)]="vehicle.lastTechnicalInspectionDate" name="lastTechnicalInspectionDate">
-        </div>
-
-        <label for="vehicleImage">Imagen del Vehículo (archivo):</label>
-        <input type="file" id="vehicleImage" (change)="handleFileInput($event)" class="file-input">
-        <img *ngIf="uploadedImageUrl" [src]="uploadedImageUrl" alt="Preview Image" class="preview-image">
-
-        <div class="form-buttons">
-          <button type="submit" class="btn save-btn hover-scale">{{ isEditing ? 'Actualizar' : 'Agregar' }}</button>
-          <button type="button" class="btn cancel-btn hover-scale" (click)="cancelForm()">Cancelar</button>
-        </div>
-      </form>
-    </div>
-  </div>
 
   <!-- Modal para Detalles del Vehículo -->
   <div class="modal" *ngIf="showDetails">
