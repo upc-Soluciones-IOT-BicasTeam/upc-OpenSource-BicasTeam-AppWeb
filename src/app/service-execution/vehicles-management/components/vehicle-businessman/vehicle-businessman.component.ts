@@ -70,6 +70,10 @@ export class VehicleBusinessmanComponent implements OnInit, OnDestroy {
   navigateToCreateVehicle() {
     this.router.navigate([':id/create-vehicle-businessman']);
   }
+
+  navigateToUpdateVehicle(vehicleId: number) {
+    this.router.navigate([':id/vehicles-update', vehicleId]);
+  }
 /*
   addVehicle(): void {
     // Prepara los datos para enviar, estableciendo `vehicleImage` como `undefined`

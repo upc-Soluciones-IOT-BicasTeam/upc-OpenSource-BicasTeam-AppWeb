@@ -35,7 +35,7 @@ export class CreateVehicleComponent {
 
     this.vehiclesApi.addVehicle(vehicleData).subscribe(
       () => {
-        this.router.navigate([':id/vehicles-businessman']); // Ajusta según tu ruta
+        this.router.navigate([':id/vehicles-businessman']);
       },
       error => {
         console.error('Error al agregar vehículo:', error);

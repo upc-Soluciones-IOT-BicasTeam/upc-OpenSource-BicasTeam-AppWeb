@@ -14,7 +14,7 @@
         <p class ="vehicle-model">Ubicación: {{ vehicle.latitude | number:'1.4-4' }}, {{ vehicle.longitude | number:'1.4-4' }}</p>
         <div class="action-buttons">
           <button type="button" class="btn view-btn hover-scale" (click)="navigateToDetails(vehicle.id)">Ver más</button>
-          <button type="button" class="btn edit-btn hover-scale" (click)="editVehicle(vehicle)">Editar</button>
+          <button type="button" class="btn edit-btn hover-scale" (click)="navigateToUpdateVehicle(vehicle.id)">Editar</button>
           <button type="button" class="btn delete-btn hover-scale" (click)="deleteVehicle(vehicle.id)">Eliminar</button>
         </div>
       </div>
