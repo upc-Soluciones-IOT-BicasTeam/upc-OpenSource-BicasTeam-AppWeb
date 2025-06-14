@@ -9,7 +9,7 @@ import { ShipmentEntity } from '../model/shipment.entity';
   providedIn: 'root'
 })
 export class ShipmentApiService {
-  private baseUrl = 'https://upc-iot-2956-bicasteam-movigestion.proxy.beeceptor.com/api/shipments';
+  private baseUrl = 'http://localhost:8080/api/shipments';
 
   constructor(private http: HttpClient) {}
 
