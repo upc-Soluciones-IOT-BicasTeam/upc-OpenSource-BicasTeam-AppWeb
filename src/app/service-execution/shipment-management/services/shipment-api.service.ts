@@ -9,7 +9,7 @@ import { ShipmentEntity } from '../model/shipment.entity';
   providedIn: 'root'
 })
 export class ShipmentApiService {
-  private baseUrl = 'https://shipments.free.beeceptor.com/api/shipments';
+  private baseUrl = 'http://localhost:8080/api/shipments';
 
   constructor(private http: HttpClient) {}
 
