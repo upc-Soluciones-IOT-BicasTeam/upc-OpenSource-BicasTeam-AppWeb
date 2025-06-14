@@ -7,7 +7,7 @@ import { ReportEntity } from '../model/reports.entity';
   providedIn: 'root'
 })
 export class ReportsApiService {
-  private baseURL = 'https://upc-iot-2956-bicasteam-movigestion.proxy.beeceptor.com/api/issues';
+  private baseURL = 'http://localhost:8080/api/reports';
 
   constructor(private http: HttpClient) {}
 
