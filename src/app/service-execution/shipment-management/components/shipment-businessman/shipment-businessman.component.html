@@ -1,9 +1,10 @@
 <!-- src/app/service-execution/shipment-management/components/shipment-businessman/shipment-businessman.component.html -->
 <div class="container">
-  <!-- Título principal -->
-  <h1 class="title gradient-text">
-    {{ 'SHIPMENTS.TITLE' | translate }}
-  </h1>
+
+  <header class="header">
+    <img class="logo" src="https://i.ibb.co/RCDQZnJ/logo.png" alt="{{ 'REPORT.HEADER.LOGO_ALT' | translate }}">
+    <h1 class="title">{{ 'SHIPMENTS.TITLE' | translate }}</h1>
+  </header>
 
   <!-- Controles: filtro por estado + búsqueda + orden por fecha -->
   <div class="controls filters">
@@ -92,9 +93,7 @@
   </div>
 
   <!-- Tabla de envíos -->
-  <h2 class="list-title">
-    {{ 'SHIPMENTS.CURRENT_TITLE' | translate }}
-  </h2>
+
   <table
     class="shipment-table"
     *ngIf="filteredShipments.length; else noShipments"
@@ -157,7 +156,7 @@
     <div class="confirm-modal">
       <p>{{ 'SHIPMENTS.DELETE_CONFIRM.TEXT' | translate }}</p>
       <div class="confirm-buttons">
-        
+
         <button
           class="btn-confirm-no"
           (click)="cancelDelete()"

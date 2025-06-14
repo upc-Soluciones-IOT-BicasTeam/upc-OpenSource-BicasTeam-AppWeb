@@ -102,8 +102,8 @@
       "DRIVER_NAME": "Driver's Name",
       "DESCRIPTION": "Description",
       "DATE": "Report date",
-      "TIME": "Report time",
-      "LEVEL": "Incident level"
+      "TIME": "Confirm action",
+      "LEVEL": "Type of incident"
     },
     "MODAL": {
       "TITLE": "Incident Report",
@@ -118,7 +118,8 @@
     "DELETE_CONFIRM": {
       "TEXT": "Are you sure you want to delete this report?",
       "YES": "Yes",
-      "NO": "No"
+      "NO": "No",
+      "TITLE": "Confirm Resolution"
     }
   },
   "SHIPMENTS": {

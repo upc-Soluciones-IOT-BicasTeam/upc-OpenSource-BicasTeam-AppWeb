@@ -8,7 +8,6 @@
   <!-- CONTROLES -->
   <div class="controls">
     <div class="filter">
-      <label for="typeFilter" class="sr-only">Filtrar por tipo</label>
       <select id="typeFilter"
               [(ngModel)]="selectedType"
               (ngModelChange)="onTypeChange($event)">
@@ -19,7 +18,6 @@
     </div>
 
     <div class="search">
-      <label for="searchTerm" class="sr-only">Buscar conductor o descripción</label>
       <input id="searchTerm"
              type="search"
              placeholder="{{ 'REPORT.CONTROLS.SEARCH_PLACEHOLDER' | translate }}"
@@ -71,7 +69,7 @@
        aria-labelledby="resolveTitle"
        aria-describedby="resolveText">
     <div class="confirm-modal" role="document">
-      <h3 id="resolveTitle" class="confirm-title">Confirmar Resolución</h3>
+      <h3 id="resolveTitle" class="confirm-title">{{ 'REPORT.DELETE_CONFIRM.TITLE' | translate }}</h3>
       <p id="resolveText" class="confirm-text">
         {{ 'REPORT.DELETE_CONFIRM.TEXT' | translate }}
       </p>
