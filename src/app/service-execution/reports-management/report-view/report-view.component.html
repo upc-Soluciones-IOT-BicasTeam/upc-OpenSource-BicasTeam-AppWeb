@@ -1,145 +1,87 @@
-<!-- src/app/report-view/report-view.component.html -->
-
-<div class="report-screen">
+<div class="report-screen" lang="es">
   <!-- HEADER -->
   <header class="header">
-    <div class="header-text">
-      <h1 class="title">Reportes</h1>
-      <p class="subtitle">Click in the list to see details</p>
-    </div>
-    <img
-      class="logo"
-      src="https://i.ibb.co/RCDQZnJ/logo.png"
-      alt="Logo MoviGestión"
-    />
+    <img class="logo" src="https://i.ibb.co/RCDQZnJ/logo.png" alt="Logo MoviGestión">
+    <h1 class="title">Reportes de Incidentes</h1>
   </header>
 
-  <!-- CONTROLES: filtro + búsqueda -->
+  <!-- CONTROLES -->
   <div class="controls">
     <div class="filter">
-      <select
-        [(ngModel)]="selectedLevel"
-        (ngModelChange)="onLevelChange($event)"
-        class="filter-select"
-      >
-        <option *ngFor="let lvl of levels" [value]="lvl">{{ lvl }}</option>
+      <label for="typeFilter" class="sr-only">Filtrar por tipo</label>
+      <select id="typeFilter"
+              [(ngModel)]="selectedType"
+              (ngModelChange)="onTypeChange($event)">
+        <option *ngFor="let t of types" [value]="t">
+          {{ t === 'All' ? 'Todos los tipos' : t }}
+        </option>
       </select>
-      <i class="icon-chevron-down"></i>
     </div>
+
     <div class="search">
-      <input
-        type="text"
-        placeholder="Search"
-        [(ngModel)]="searchTerm"
-        (ngModelChange)="onSearch($event)"
-      />
-      <button><i class="icon-search"></i></button>
+      <label for="searchTerm" class="sr-only">Buscar conductor o descripción</label>
+      <input id="searchTerm"
+             type="search"
+             placeholder="Buscar por conductor o descripción..."
+             [(ngModel)]="searchTerm"
+             (ngModelChange)="onSearch($event)">
+      <i class="icon-search" aria-hidden="true"></i>
     </div>
   </div>
 
-  <!-- TABLA ESTILIZADA -->
+  <!-- TABLA DE REPORTES -->
   <div class="table-container">
     <table>
       <thead>
       <tr>
-        <th scope="col">Driver’s Name</th>
-        <th scope="col">Description</th>
-        <th scope="col">Report date</th>
-        <th scope="col">Report time</th>
-        <th scope="col">Incident level</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Conductor</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Acción</th>
       </tr>
       </thead>
       <tbody>
-      <tr
-        *ngFor="let report of filteredReports"
-        class="clickable-row"
-        (click)="selectReport(report)"
-      >
-        <td>{{ report.driverName }}</td>
+      <tr *ngFor="let report of filteredReports">
+        <td>{{ report.type }}</td>
         <td>{{ report.description }}</td>
-        <td>{{ report.createdAt | date:'dd/MM/yyyy' }}</td>
-        <td>{{ report.createdAt | date:'hh:mm a' }}</td>
+        <td>{{ report.driverName }}</td>
+        <td>{{ report.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
         <td>
-          <div class="badge-container">
-              <span
-                class="badge"
-                [ngClass]="'badge--' + report.level.toLowerCase()"
-              >
-                {{ report.level }}
-              </span>
-          </div>
+          <button class="btn btn--check"
+                  (click)="openResolveConfirm(report)"
+                  aria-label="Marcar como resuelto">
+            <mat-icon>check_circle</mat-icon>
+          </button>
+        </td>
+      </tr>
+
+      <tr *ngIf="!filteredReports.length">
+        <td colspan="5" class="no-results">
+          No se encontraron reportes con los criterios seleccionados.
         </td>
       </tr>
       </tbody>
     </table>
   </div>
 
-  <!-- MODAL DE DETALLES -->
-  <div
-    class="overlay"
-    *ngIf="selectedReport"
-    (click)="closeDetails()"
-  >
-    <div
-      class="modal-window"
-      (click)="$event.stopPropagation()"
-    >
-      <header class="modal-header">
-        <h2>Incident Report</h2>
-        <button class="close-btn" (click)="closeDetails()">&times;</button>
-      </header>
-
-      <section class="modal-info">
-        <div>
-          <strong>Date:</strong>
-          {{ selectedReport.createdAt | date:'dd/MM/yyyy' }}
-        </div>
-        <div>
-          <strong>Time of incident:</strong>
-          {{ selectedReport.createdAt | date:'hh:mm a' }}
-        </div>
-      </section>
-
-      <section class="modal-details">
-        <div class="detail-row">
-          <span class="label">Technical Problems:</span>
-          <span>{{ selectedReport.technicalProblems }}</span>
-        </div>
-        <div class="detail-row">
-          <span class="label">Vehicular Infractions:</span>
-          <span>{{ selectedReport.vehicularInfractions }}</span>
-        </div>
-        <div class="detail-row">
-          <span class="label">Road Accidents:</span>
-          <span>{{ selectedReport.roadAccidents }}</span>
-        </div>
-        <div class="detail-row">
-          <span class="label">Problems with packages:</span>
-          <span>{{ selectedReport.packageProblems }}</span>
-        </div>
-      </section>
-
-      <footer class="modal-footer">
-        <button
-          class="btn delete-selected"
-          (click)="openDeleteConfirm(selectedReport!)"
-        >
-          🗑️ Delete
-        </button>
-
-      </footer>
-    </div>
-  </div>
-
-  <!-- DIALOG DE CONFIRMACIÓN DE BORRADO -->
-  <div class="confirm-overlay" *ngIf="showDeleteModal">
-    <div class="confirm-modal">
-      <p class="confirm-text">
-        ¿Estás seguro de que deseas eliminar este reporte?
+  <!-- MODAL DE CONFIRMACIÓN -->
+  <div class="confirm-overlay" *ngIf="showResolveModal"
+       role="alertdialog" aria-modal="true"
+       aria-labelledby="resolveTitle"
+       aria-describedby="resolveText">
+    <div class="confirm-modal" role="document">
+      <h3 id="resolveTitle" class="confirm-title">Confirmar Resolución</h3>
+      <p id="resolveText" class="confirm-text">
+        ¿Confirmas que este incidente ya fue resuelto y deseas eliminarlo?
       </p>
       <div class="confirm-buttons">
-        <button class="btn confirm-yes" (click)="confirmDelete()">Aceptar</button>
-        <button class="btn confirm-no" (click)="cancelDelete()">Cancelar</button>
+        <button type="button" class="btn btn--secondary" (click)="cancelResolve()">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn--danger" (click)="confirmResolve()">
+          Sí, resolver
+        </button>
       </div>
     </div>
   </div>
