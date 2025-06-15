@@ -30,9 +30,9 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
         console.log(data);
         if (data) {
 
-          data[0].type === 'manager'
-            ? this.router.navigate([`${data[0].id}/home-businessman`])
-            : this.router.navigate([`${data[0].id}/staff-home`]);
+          data.role === 'manager'
+            ? this.router.navigate([`${data.id}/home-businessman`])
+            : this.router.navigate([`${data.id}/staff-home`]);
         } else {
           this.error = true;
           this.error_msg = 'Email or Password incorrect';
@@ -51,7 +51,7 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
   }
 
   goToRegisterUserInformation(type: string) {
-    this.user.type = type; // Guarda el tipo de usuario
+    this.user.role = type; // Guarda el tipo de usuario
     console.log(type)
     this.router.navigate([`register/${type}`]); // Redirigir al registro exitoso
   }

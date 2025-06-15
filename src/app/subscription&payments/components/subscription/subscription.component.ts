@@ -40,7 +40,7 @@ export class SubscriptionComponent {
           payload.filename =  file.name;
           payload.contentType = file.type;
           payload.data = base64String;
-          payload.idManager = this.profile.idCredentials;
+          payload.idManager = this.profile.idCredential;
         const formData = new FormData();
         formData.append('file', file);
         formData.append('extraData', 'valor');

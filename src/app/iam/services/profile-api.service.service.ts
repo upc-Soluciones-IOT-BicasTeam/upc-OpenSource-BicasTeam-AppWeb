@@ -9,7 +9,7 @@ import {ProfileEntity} from "../model/profile.entity";
 })
 export class ProfileApiServiceService {
 
-  private baseUrl = 'https://upc-iot-2956-bicasteam-movigestion.proxy.beeceptor.com/api/profiles';
+  private baseUrl = 'http://localhost:8080/api/profiles';
 
   constructor(private http: HttpClient) {}
 
@@ -20,8 +20,8 @@ export class ProfileApiServiceService {
 
 
   // Encontrar un profile por ID
-  findUserById(id: number): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${this.baseUrl}?idCredentials=${id}`);
+  findUserById(idCredential: number): Observable<UserEntity> {
+    return this.http.get<UserEntity>(`${this.baseUrl}/${idCredential}`);
   }
 
 

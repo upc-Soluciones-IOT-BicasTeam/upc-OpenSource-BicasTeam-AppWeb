@@ -37,7 +37,7 @@ export class PlatformStaffHomeComponent implements OnInit {
       this.profileApi.getAllProfiles().subscribe((profiles: any) => {
         const combined: CombinedUserData[] = users.map((user: UserEntity) => {
           const matchingProfile = profiles.find(
-            (p: ProfileEntity) => p.idCredentials === user.id
+            (p: ProfileEntity) => p.idCredential === user.id
           );
 
           return {

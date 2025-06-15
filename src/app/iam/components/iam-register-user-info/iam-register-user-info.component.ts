@@ -21,7 +21,7 @@ export class IamRegisterUserInfoComponent implements OnInit, OnDestroy {
   passwordConfirmation: string = '';
 
   constructor(private route: ActivatedRoute, private profileApi: ProfileApiServiceService, private router: Router,private iamApi: IamApiService) {
-    this.user.type = this.route.snapshot.params['type'];
+    this.user.role = this.route.snapshot.params['type'];
   }
 
   ngOnInit() {
@@ -41,9 +41,12 @@ export class IamRegisterUserInfoComponent implements OnInit, OnDestroy {
         await this.createUser();
 
         const profilePayload = new ProfileEntity();
-        profilePayload.idCredentials = this.profile.idCredentials;
+        profilePayload.idCredential = this.profile.idCredential;
         profilePayload.name = this.profile.name;
         profilePayload.lastName = this.profile.lastName;
+        profilePayload.telephone= null;
+        profilePayload.idCompany = null;
+        console.log(profilePayload)
 
         this.profileApi.createUser(profilePayload).subscribe(
           (data: ProfileEntity) => {
@@ -96,13 +99,14 @@ export class IamRegisterUserInfoComponent implements OnInit, OnDestroy {
     const userPayload = new UserEntity();
     userPayload.email = this.user.email;
     userPayload.password = this.user.password;
-    userPayload.type = this.user.type;
+    userPayload.role = this.user.role;
 
     try {
       // Cambiar a firstValueFrom para esperar la respuesta de la API
       const data: UserEntity = await firstValueFrom(this.iamApi.createUser(userPayload));
       console.log('User created with ID:', data.id);
-      this.profile.idCredentials = data.id; // Establecer el id del usuario recién creado
+      console.log(data)
+      this.profile.idCredential = data.id; // Establecer el id del usuario recién creado
     } catch (error) {
       console.error('Error creating user:', error);
       throw new Error('Error creating user');
@@ -111,4 +115,3 @@ export class IamRegisterUserInfoComponent implements OnInit, OnDestroy {
 
 
 }
-
