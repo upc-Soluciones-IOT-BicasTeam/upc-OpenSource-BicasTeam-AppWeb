@@ -1,16 +1,16 @@
 export class ImageEntity {
   id: number | null;
-  idManager: number | null;
-  filename: string | any;
-  contentType: string | any;
-  data: string | any;
+  userId: number | null;
+  paymentDate: string | any;
+  state: string | any;
+  url: string | any;
 
   constructor() {
     this.id = null;
-    this.filename = '';
-    this.contentType = '';
-    this.data = '';
-    this.idManager = null;
+    this.paymentDate = '';
+    this.state = '';
+    this.url = '';
+    this.userId = null;
 
   }
 }

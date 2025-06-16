@@ -37,10 +37,10 @@ export class SubscriptionComponent {
         const base64String = reader.result as string;
 
         const payload = new ImageEntity();
-          payload.filename =  file.name;
-          payload.contentType = file.type;
-          payload.data = base64String;
-          payload.idManager = this.profile.idCredential;
+          payload.paymentDate =  file.name;
+          payload.state = file.type;
+          payload.url = base64String;
+          payload.userId = this.profile.idCredential;
         const formData = new FormData();
         formData.append('file', file);
         formData.append('extraData', 'valor');
