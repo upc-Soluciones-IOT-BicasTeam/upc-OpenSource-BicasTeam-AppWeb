@@ -7,18 +7,15 @@
     />
     <div class="user-name">
       <!-- Se asume que `type` será algo como 'BUSINESSMAN' o 'CARRIER' -->
-      <p>{{ ('SIDEBAR.' + type) | translate }}</p>
+      <p>STAFF PLATFORM</p>
     </div>
   </div>
   <ul class="menu">
     <li (click)="goToPricing()">
       <mat-icon>payments</mat-icon>
-      <span>{{ 'SIDEBAR.SUBSCRIPTION_REQUESTS' | translate }}</span>
+      <span>{{ 'Subscription' | translate }}</span>
     </li>
-    <li (click)="goToChangueCredentials()">
-      <mat-icon>groups</mat-icon>
-      <span>{{ 'SIDEBAR.EDIT_CREDENTIALS' | translate }}</span>
-    </li>
+
   </ul>
   <div class="settings-section">
     <ul class="menu">

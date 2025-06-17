@@ -1,4 +1,4 @@
-export class ImageEntity {
+export class SubsData {
   id: number | null;
   userId: number | null;
   paymentDate: string | any;

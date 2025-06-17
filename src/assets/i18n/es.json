@@ -210,9 +210,9 @@
     }
   },
   "STAFF": {
-    "TITLE": "Usuarios de la Plataforma",
+    "TITLE": "Prueba de pagos de subscripcion",
     "EMAIL_LABEL": "Correo electrónico",
-    "PASSWORD_LABEL": "Contraseña",
+    "PROOF_PAYMENT": "URL de la imagen del comprobante de pago",
     "ERROR_MESSAGE": "Error al cargar datos de usuarios. Por favor, inténtalo de nuevo más tarde."
   },
   "SUBSCRIPTION": {

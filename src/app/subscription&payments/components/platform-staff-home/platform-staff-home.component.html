@@ -3,18 +3,31 @@
 
   <div class="card-list">
     <div class="user-card" *ngFor="let user of usersData">
-      <h2>
-        {{ user.name }} {{ user.lastName }}
-      </h2>
+      <h2>{{ user.name }} {{ user.lastName }}</h2>
+
       <p>
         <strong>{{ 'STAFF.EMAIL_LABEL' | translate }}:</strong>
         {{ user.email }}
       </p>
-      <p>
-        <strong>{{ 'STAFF.PASSWORD_LABEL' | translate }}:</strong>
-        {{ user.password }}
+
+      <p *ngIf="user.url">
+        <strong>{{ 'STAFF.PROOF_PAYMENT' | translate }}:</strong>
+        <a [href]="user.url" target="_blank">{{ user.url }}</a>
       </p>
+
+      <p *ngIf="user.state">
+        <strong>Status:</strong> {{ user.state }}
+      </p>
+
+      <div class="action-buttons" *ngIf="user.state === 'PENDIENTE'">
+        <button (click)="updateStatus(user, 'ACEPTADO')">Accept</button>
+        <button (click)="updateStatus(user, 'RECHAZADO')">Decline</button>
+      </div>
     </div>
+  </div>
+
+  <div *ngIf="usersData.length === 0 && !error" class="no-payments">
+    There are no payments made yet
   </div>
 
   <div *ngIf="error" class="error-message">

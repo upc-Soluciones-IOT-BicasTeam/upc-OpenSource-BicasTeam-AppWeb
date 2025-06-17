@@ -3,7 +3,7 @@ import {UserEntity} from "../../../iam/model/user.entity";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProfileApiServiceService} from "../../../iam/services/profile-api.service.service";
 import {IamApiService} from "../../../iam/services/iam-api.service.service";
-import {ImageEntity} from "../../model/image.entity";
+import {SubsData} from "../../model/image.entity";
 import {firstValueFrom} from "rxjs";
 import {ProfileEntity} from "../../../iam/model/profile.entity";
 import {SubsApiService} from "../../services/subs-api.service";
@@ -16,7 +16,7 @@ import {SubsApiService} from "../../services/subs-api.service";
 export class SubscriptionComponent {
   user: UserEntity = new UserEntity();
   profile: ProfileEntity = new ProfileEntity();
-  image: ImageEntity = new ImageEntity();
+  subscription: SubsData = new SubsData();
   showModal = false;
   constructor(private route: ActivatedRoute, private profileApi: ProfileApiServiceService, private imageApi: SubsApiService, private router: Router,private iamApi: IamApiService) {
     this.user.id = this.route.snapshot.params['id'];
@@ -28,28 +28,26 @@ export class SubscriptionComponent {
   closeModal() {
     this.showModal = false;
   }
-  async onFileSelected(event: Event) {
-    await this.idCredential();
-    const file = (event.target as HTMLInputElement).files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const base64String = reader.result as string;
+  async sendUrl() {
+    try {
+      await this.idCredential();
+      this.subscription.userId = this.profile.idCredential ;
+      this.subscription.paymentDate = new Date().toISOString();
+      this.subscription.state = "PENDIENTE";
 
-        const payload = new ImageEntity();
-          payload.paymentDate =  file.name;
-          payload.state = file.type;
-          payload.url = base64String;
-          payload.userId = this.profile.idCredential;
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('extraData', 'valor');
+      console.log("Enviando SubsData con URL:", this.subscription);
 
-
-        console.log("JSON enviado:", payload);
-        this.imageApi.uploadImage(formData).subscribe(data => {console.log(data)});
-      };
-      reader.readAsDataURL(file);
+      this.imageApi.uploadImage(this.subscription).subscribe({
+        next: response => {
+          console.log("Respuesta del backend:", response);
+          this.closeModal();
+        },
+        error: err => {
+          console.error("Error al enviar URL:", err);
+        }
+      });
+    } catch (err) {
+      console.error("Error al preparar envío:", err);
     }
   }
 
@@ -58,7 +56,7 @@ export class SubscriptionComponent {
     try {
       const result:any = await firstValueFrom(this.profileApi.findUserById(this.user.id!));
       if (result) {
-        this.profile = result[0];
+        this.profile = result;
 
       }
     } catch (error) {

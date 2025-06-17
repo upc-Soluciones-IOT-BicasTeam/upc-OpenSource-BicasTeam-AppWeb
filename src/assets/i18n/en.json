@@ -211,9 +211,9 @@
     }
   },
   "STAFF": {
-    "TITLE": "Platform Users",
+    "TITLE": "Platform Users Payments Proofs",
     "EMAIL_LABEL": "Email",
-    "PASSWORD_LABEL": "Password",
+    "PROOF_PAYMENT": "Payment receipt image URL",
     "ERROR_MESSAGE": "Error loading user data. Please try again later."
   },
   "SUBSCRIPTION": {

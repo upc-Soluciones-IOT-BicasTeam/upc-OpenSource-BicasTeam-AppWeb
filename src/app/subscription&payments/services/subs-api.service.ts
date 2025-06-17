@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserEntity} from "../../iam/model/user.entity";
-import {ImageEntity} from "../model/image.entity";
+import {SubsData} from "../model/image.entity";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubsApiService {
 
-  private baseUrl = 'https://upc-iot-2956-bicasteam-movigestion.proxy.beeceptor.com/api/images';
+  private baseUrl = 'http://localhost:8080/api/subscriptions';
 
   constructor(private http: HttpClient) {}
 //*******
@@ -17,19 +17,12 @@ export class SubsApiService {
     return this.http.post<any>(`${this.baseUrl}`, image);
   }
 
-  // Encontrar un usuario por ID
-  findUserById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${id}`);
+
+  updateStatus(id: number, newState: string): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${id}`, { state: newState });
   }
 
-  // Actualizar un usuario usando email y password
-  updateUser(email: string, password: string, userUpdates: Partial<UserEntity>): Observable<UserEntity> {
-    const url = `${this.baseUrl}/email/${email}/password/${password}`;
-    return this.http.put<UserEntity>(url, userUpdates);
-  }
-
-  // Eliminar un usuario por ID
-  deleteUser(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  getAll(): Observable<SubsData[]> {
+    return this.http.get<SubsData[]>(`${this.baseUrl}`);
   }
 }
