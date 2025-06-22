@@ -26,7 +26,7 @@ export class IamRegisterComponent {
   }
 
   typeSelection(type: string) {
-    this.user.type = type; // Guarda el tipo de usuario
+    this.user.role = type; // Guarda el tipo de usuario
     console.log(`Selected type: ${type}`);
   }
 

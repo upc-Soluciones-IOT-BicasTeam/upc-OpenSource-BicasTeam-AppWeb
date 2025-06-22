@@ -1,34 +1,48 @@
 <div class="sidebar">
   <div class="user-info" (click)="goToProfile()">
-    <img [src]="getUserImage(type)" alt="User Icon">
+    <img
+      [src]="getUserImage(type)"
+      alt="{{ 'SIDEBAR.USER_ICON_ALT' | translate }}"
+    />
     <div class="user-name">
       <h2>{{ name }} {{ lastName }}</h2>
-      <p>{{ type }}</p>
+      <!-- Se asume que `type` coincide con una clave de traducción, p. ej. "BUSINESSMAN" o "CARRIER" -->
+      <p>{{  type | translate }}</p>
     </div>
   </div>
+
   <ul class="menu">
     <li (click)="goToHome()">
       <mat-icon>home</mat-icon>
-      <span>Home</span>
+      <span>{{ 'SIDEBAR.HOME' | translate }}</span>
     </li>
     <li (click)="goToShipments()">
       <mat-icon>inventory</mat-icon>
-      <span>Shipments</span>
+      <span>{{ 'SIDEBAR.SHIPMENTS' | translate }}</span>
     </li>
     <li (click)="goToReports()">
       <mat-icon>bar_chart</mat-icon>
-      <span>Reports</span>
+      <span>{{ 'SIDEBAR.ISSUES' | translate }}</span>
     </li>
     <li (click)="goToVehicles()">
       <mat-icon>local_shipping</mat-icon>
-      <span>Vehicles</span>
+      <span>{{ 'SIDEBAR.VEHICLES' | translate }}</span>
+    </li>
+    <li (click)="goToPricing()">
+      <mat-icon>payments</mat-icon>
+      <span>{{ 'SIDEBAR.GO_PRO' | translate }}</span>
+    </li>
+    <li (click)="goToAnalytics()">
+      <mat-icon>analytics</mat-icon>
+      <span>{{ 'SIDEBAR.ANALYTICS' | translate }}</span>
     </li>
   </ul>
+
   <div class="settings-section">
     <ul class="menu">
       <li (click)="goTologout()">
         <mat-icon>logout</mat-icon>
-        <span>Log out</span>
+        <span>{{ 'SIDEBAR.LOGOUT' | translate }}</span>
       </li>
     </ul>
   </div>

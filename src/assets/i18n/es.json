@@ -1,0 +1,296 @@
+{
+  "LOGIN": {
+    "TITLE": "Iniciar sesión",
+    "EMAIL_LABEL": "Correo electrónico",
+    "EMAIL_PLACEHOLDER": "Ingresa tu correo",
+    "PASSWORD_LABEL": "Contraseña",
+    "PASSWORD_PLACEHOLDER": "Ingresa tu contraseña",
+    "BUTTON": "Ingresar",
+    "NO_ACCOUNT": "¿No tienes una cuenta?",
+    "SIGNUP_LINK": "Regístrate"
+  },
+  "REGISTER": {
+    "TITLE": "Registrar como",
+    "BUSINESSMAN": "Empresario",
+    "CARRIER": "Transportista",
+    "ALREADY_ACCOUNT": "¿Ya tienes una cuenta?",
+    "LOGIN_LINK": "Inicia sesión"
+  },
+  "SIGNUP": {
+    "TITLE": "Registro",
+    "NAME_LABEL": "Nombre",
+    "NAME_PLACEHOLDER": "Ingresa tu nombre",
+    "LASTNAME_LABEL": "Apellido",
+    "LASTNAME_PLACEHOLDER": "Ingresa tu apellido",
+    "EMAIL_LABEL": "Correo electrónico",
+    "EMAIL_PLACEHOLDER": "Ingresa tu correo",
+    "PASSWORD_LABEL": "Contraseña",
+    "PASSWORD_PLACEHOLDER": "Ingresa tu contraseña",
+    "CONFIRM_PASSWORD_LABEL": "Confirmar Contraseña",
+    "CONFIRM_PASSWORD_PLACEHOLDER": "Reingresa tu contraseña",
+    "PRIVACY_POLICY": "He leído y acepto la Política de Privacidad",
+    "BUTTON": "Registrarme",
+    "ALREADY_ACCOUNT": "¿Ya tienes una cuenta?",
+    "LOGIN_LINK": "Iniciar sesión"
+  },
+  "REGISTER": {
+    "SUCCESS_TITLE": "¡Registro<br>Exitoso!",
+    "SUCCESS_MESSAGE": "Tu cuenta ha sido registrada con éxito.",
+    "SUCCESS_BUTTON": "Aceptar"
+  },
+  "PROFILE": {
+    "TITLE": "Gestión de Perfil",
+    "AUTH": {
+      "TITLE": "Autenticación",
+      "EMAIL_LABEL": "Correo electrónico",
+      "EMAIL_PLACEHOLDER": "Ingresa tu correo",
+      "PASSWORD_LABEL": "Contraseña",
+      "PASSWORD_PLACEHOLDER": "Ingresa tu contraseña",
+      "SUBMIT": "Enviar"
+    },
+    "EDIT": {
+      "TITLE": "Editar tu Perfil",
+      "NAME_LABEL": "Nombre",
+      "NAME_PLACEHOLDER": "Ingresa tu nombre",
+      "LASTNAME_LABEL": "Apellido",
+      "LASTNAME_PLACEHOLDER": "Ingresa tu apellido",
+      "EMAIL_LABEL": "Correo electrónico",
+      "PASSWORD_LABEL": "Contraseña",
+      "PASSWORD_PLACEHOLDER": "Ingresa una nueva contraseña",
+      "SAVE_CHANGES": "Guardar cambios",
+      "SUCCESS_MSG": "¡Perfil actualizado con éxito!"
+    }
+  },
+  "HOME": {
+    "WELCOME": "¡Bienvenido a Movigestion!",
+    "START": "Comencemos",
+    "TODAYS_ACTIVITIES": "Actividades de hoy",
+    "DELIVERIES_ON_THE_MOVE": "Entregas en curso",
+    "SEE_MORE": "Ver más",
+    "RESPONSIBLE": "Responsable",
+    "START_TIME": "Hora de inicio",
+    "DELIVERY_TIME": "Hora de entrega",
+    "CONDITION_TITLE": "Estado de conductores y vehículos",
+    "MODEL_SERIAL": "Modelo y número de serie",
+    "LICENSE_PLATE": "Placa"
+  },
+  "SIDEBAR": {
+    "USER_ICON_ALT": "Icono de usuario",
+    "BUSINESSMAN": "Empresario",
+    "CARRIER": "Transportista",
+
+    "HOME": "Inicio",
+    "SHIPMENTS": "Envíos",
+    "ISSUES": "Incidencias",
+    "VEHICLES": "Vehículos",
+    "GO_PRO": "Hazte PRO",
+    "ANALYTICS": "Analíticas",
+    "LOGOUT": "Cerrar sesión"
+  },
+
+  "REPORT": {
+    "HEADER": {
+      "TITLE": "Reportes",
+      "SUBTITLE": "Haz clic en la lista para ver detalles",
+      "LOGO_ALT": "Logo de MoviGestión"
+    },
+    "CONTROLS": {
+      "SEARCH_PLACEHOLDER": "Buscar"
+    },
+    "TABLE": {
+      "DRIVER_NAME": "Nombre del conductor",
+      "DESCRIPTION": "Descripción",
+      "DATE": "Fecha del reporte",
+      "TIME": "Confirmar accion",
+      "LEVEL": "Tipo de incidencia"
+    },
+    "MODAL": {
+      "TITLE": "Reporte de incidencia",
+      "DATE_LABEL": "Fecha",
+      "TIME_LABEL": "Hora de la incidencia",
+      "TECHNICAL": "Problemas técnicos",
+      "INFRACTIONS": "Infracciones vehiculares",
+      "ACCIDENTS": "Accidentes viales",
+      "PACKAGE": "Problemas con paquetes",
+      "DELETE": "Eliminar"
+    },
+    "DELETE_CONFIRM": {
+      "TEXT": "¿Estás seguro de que deseas eliminar este reporte?",
+      "YES": "Aceptar",
+      "NO": "Cancelar",
+      "TITLE": "Confirmar Resolución"
+    }
+  },
+  "SHIPMENTS": {
+    "TITLE": "Envíos",
+    "FILTER_BY_STATUS": "Filtrar por estado:",
+    "ALL": "Todos",
+    "SEARCH_LABEL": "Buscar:",
+    "SEARCH_PLACEHOLDER": "Destino o descripción...",
+    "ADD_BUTTON": "Agregar envío",
+    "MODAL": {
+      "EDIT_TITLE": "Editar envío",
+      "CREATE_TITLE": "Crear nuevo envío"
+    },
+    "FORM": {
+      "DESTINY": "Destino",
+      "DESCRIPTION": "Descripción",
+      "STATUS": "Estado",
+      "DRIVER_NAME": "Conductor"
+    },
+    "BUTTON": {
+      "UPDATE": "Actualizar",
+      "CREATE": "Crear",
+      "CANCEL": "Cancelar"
+    },
+    "CURRENT_TITLE": "Envíos actuales",
+    "TABLE": {
+      "ID": "ID",
+      "DESTINY": "Destino",
+      "DESCRIPTION": "Descripción",
+      "STATUS": "Estado",
+      "DRIVER": "Conductor",
+      "CREATED_AT": "Creado el",
+      "ACTIONS": "Acciones"
+    },
+    "NO_SHIPMENTS": "No hay envíos disponibles.",
+    "DELETE_CONFIRM": {
+      "TEXT": "¿Estás seguro de que deseas eliminar este envío?",
+      "YES": "Aceptar",
+      "NO": "Cancelar"
+    }
+  },
+  "VEHICLES": {
+    "TITLE": "Gestión de Vehículos",
+    "ADD_BUTTON": "Agregar Vehículo",
+    "IMAGE_ALT": "Imagen del Vehículo",
+    "MODEL_LABEL": "Modelo",
+    "LOCATION_LABEL": "Ubicación",
+    "VIEW_BUTTON": "Ver más",
+    "EDIT_BUTTON": "Editar",
+    "DELETE_BUTTON": "Eliminar",
+    "MODAL": {
+      "TITLE_ADD": "Agregar Vehículo",
+      "TITLE_EDIT": "Editar Vehículo"
+    },
+    "FORM": {
+      "LICENSE_PLATE": "Placa",
+      "MODEL": "Modelo",
+      "DRIVER_NAME": "Nombre del Conductor",
+      "COLOR": "Color",
+      "LAST_INSPECTION": "Fecha de Última Inspección Técnica",
+      "IMAGE_LABEL": "Imagen del Vehículo (archivo)",
+      "BUTTON_ADD": "Agregar",
+      "BUTTON_UPDATE": "Actualizar",
+      "BUTTON_CANCEL": "Cancelar"
+    },
+    "PREVIEW_ALT": "Imagen de vista previa",
+    "DETAILS": {
+      "TITLE": "Detalles del Vehículo",
+      "IMAGE_ALT": "Imagen del vehículo",
+      "LICENSE_PLATE": "Placa",
+      "MODEL": "Modelo",
+      "ENGINE": "Motor (%)",
+      "FUEL": "Combustible (%)",
+      "TIRES": "Llantas (%)",
+      "ELECTRICAL": "Sistema Eléctrico (%)",
+      "TRANSMISSION_TEMP": "Temperatura de Transmisión (%)",
+      "DRIVER_NAME": "Nombre del Conductor",
+      "COLOR": "Color",
+      "REALTIME_MONITORING": "Monitoreo en Tiempo Real",
+      "CURRENT_TEMP": "Temperatura Actual",
+      "CABIN_TEMP": "Temperatura de la Cabina",
+      "HUMIDITY": "Humedad",
+      "COORDINATES": "Coordenadas",
+      "LATITUDE": "Latitud",
+      "LONGITUDE": "Longitud",
+      "LAST_INSPECTION": "Última Inspección Técnica",
+      "CURRENT_LOCATION": "Ubicación Actual",
+      "CLOSE": "Cerrar"
+    }
+  },
+  "STAFF": {
+    "TITLE": "Prueba de pagos de subscripcion",
+    "EMAIL_LABEL": "Correo electrónico",
+    "PROOF_PAYMENT": "URL de la imagen del comprobante de pago",
+    "ERROR_MESSAGE": "Error al cargar datos de usuarios. Por favor, inténtalo de nuevo más tarde."
+  },
+  "SUBSCRIPTION": {
+    "PLAN_FREE": {
+      "TITLE": "Plan GRATUITO",
+      "DRIVERS": "Hasta 10 conductores registrados",
+      "VEHICLES": "Hasta 10 vehículos registrados"
+    },
+    "PLAN_UNLIMITED": {
+      "TITLE": "Plan ILIMITADO",
+      "DESCRIPTION": "Sin límites de conductores o vehículos",
+      "MOTTO": "Impulsa tu flota. Enfócate en crecer — nosotros nos encargamos de la logística."
+    },
+    "UPGRADE_BUTTON": "Mejorar ahora",
+    "MODAL": {
+      "TITLE": "Subir Comprobante de Pago",
+      "DESCRIPTION": "Por favor sube una foto de tu recibo de pago.",
+      "CLOSE_BUTTON": "Cerrar"
+    }
+  },
+  "ANALYTICS": {
+    "INSTRUCTION": "Seleccione una categoría para visualizar los datos",
+    "CARD": {
+      "REPORTS": "Reportes por Transportista",
+      "SHIPMENTS": "Envíos por Transportista",
+      "VEHICLES": "Vehículos por Transportista"
+    },
+    "SECTIONS": {
+      "REPORTS": {
+        "TITLE": "Reportes por Transportista",
+        "TOTAL": "Total reportes",
+        "AVERAGE": "Promedio por transportista",
+        "MOST": "Más reportes"
+      },
+      "SHIPMENTS": {
+        "TITLE": "Envíos por Transportista",
+        "TOTAL": "Total envíos",
+        "AVERAGE": "Promedio por transportista",
+        "MOST": "Más envíos",
+        "DESTINY": "Destino",
+        "STATUS": "Estado"
+      },
+      "VEHICLES": {
+        "TITLE": "Vehículos por Transportista",
+        "TOTAL": "Total vehículos",
+        "AVERAGE": "Promedio por transportista",
+        "MOST": "Más vehículos",
+        "LICENSE_PLATE": "Placa",
+        "MODEL": "Modelo",
+        "COLOR": "Color",
+        "ENGINE": "Motor (%)",
+        "FUEL": "Combustible (%)",
+        "TIRES": "Llantas (%)",
+        "ELECTRICAL": "Sistema Eléctrico (%)",
+        "TRANSMISSION": "Temp. Transmisión (%)",
+        "LAST_INSPECTION": "Última Inspección"
+      }
+    },
+    "LOADING": {
+      "REPORTS": "Cargando reportes...",
+      "SHIPMENTS": "Cargando envíos...",
+      "VEHICLES": "Cargando vehículos..."
+    },
+    "ERROR": {
+      "REPORTS": "Error al cargar reportes.",
+      "SHIPMENTS": "Error al cargar envíos.",
+      "VEHICLES": "Error al cargar vehículos."
+    },
+    "TABLE": {
+      "ID": "ID",
+      "DESCRIPTION": "Descripción",
+      "DATE": "Fecha",
+      "LEVEL": "Nivel"
+    },
+    "NO_DATA": {
+      "REPORTS": "No hay reportes disponibles.",
+      "SHIPMENTS": "No hay envíos disponibles.",
+      "VEHICLES": "No hay vehículos disponibles."
+    }
+  }
+}

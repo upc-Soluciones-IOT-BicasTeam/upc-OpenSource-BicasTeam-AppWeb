@@ -1,19 +1,38 @@
-<!-- home-businessman.component.html -->
+<!-- src/app/public/pages/pg-home-businessman/home-businessman.component.html -->
 <div class="p-5 flex flex-col flex-auto container z-1 main-container">
   <div class="glass-effect">
     <div class="w-full align-content-center">
       <div class="welcome-container">
-        <h1 class="title gradient-text">Welcome, Jhon Doe!</h1>
-        <img src="https://i.ibb.co/RCDQZnJ/logo.png" id="icon" alt="User Icon" class="custom-image rounded-shadow">
+        <!-- Título con nombre dinámico -->
+        <h1 class="title gradient-text">
+          {{ 'HOME.WELCOME' | translate }}
+        </h1>
+        <img
+          src="https://i.ibb.co/RCDQZnJ/logo.png"
+          id="icon"
+          alt="Logo"
+          class="custom-image rounded-shadow"
+        />
       </div>
-      <p class="subtitle">Let's start</p>
+
+      <p class="subtitle">{{ 'HOME.START' | translate }}</p>
+
       <div class="card-container">
+        <!-- Actividades -->
         <div class="card glass-card" *ngIf="activities.length">
-          <h2 class="card-title"><i class="fa fa-list"></i> Today's activities</h2>
+          <h2 class="card-title">
+            <i class="fa fa-list"></i>
+            {{ 'HOME.TODAYS_ACTIVITIES' | translate }}
+          </h2>
           <div class="card-content">
-            <div class="activity card-hover" *ngFor="let activity of activities.slice(0, 3)">
+            <div
+              class="activity card-hover"
+              *ngFor="let activity of activities.slice(0, 3)"
+            >
               <div class="card-content1">
-                <h3 class="activity-description">{{ activity.description }}</h3>
+                <h3 class="activity-description">
+                  {{ activity.description }}
+                </h3>
                 <div class="date-time">
                   <p>{{ activity.type }}</p>
                   <p>{{ activity.createdAt }}</p>
@@ -21,34 +40,78 @@
               </div>
             </div>
           </div>
-          <button class="see-more-button hover-scale" (click)="onSeeMoreActivities()">See More</button>
+          <button
+            class="see-more-button hover-scale"
+            (click)="onSeeMoreActivities()"
+          >
+            {{ 'HOME.SEE_MORE' | translate }}
+          </button>
         </div>
 
+        <!-- Entregas -->
         <div class="card glass-card" *ngIf="deliveries.length">
-          <h2 class="card-title"><i class="fa fa-truck"></i> Deliveries on the move</h2>
+          <h2 class="card-title">
+            <i class="fa fa-truck"></i>
+            {{ 'HOME.DELIVERIES_ON_THE_MOVE' | translate }}
+          </h2>
           <div class="card-content2">
-            <div class="delivery card-hover" *ngFor="let delivery of deliveries.slice(0, 1)">
+            <div
+              class="delivery card-hover"
+              *ngFor="let delivery of deliveries.slice(0, 1)"
+            >
               <h3>{{ delivery.destiny }}</h3>
-              <p>Responsible: {{ delivery.description }}</p>
-              <p>Start time: {{ delivery.createdAt }}</p>
-              <p>Delivery time: {{ delivery.status }}</p>
+              <p>
+                {{ 'HOME.RESPONSIBLE' | translate }}:
+                {{ delivery.description }}
+              </p>
+              <p>
+                {{ 'HOME.START_TIME' | translate }}:
+                {{ delivery.createdAt }}
+              </p>
+              <p>
+                {{ 'HOME.DELIVERY_TIME' | translate }}:
+                {{ delivery.status }}
+              </p>
             </div>
           </div>
-          <button class="see-more-button hover-scale" (click)="onSeeMoreDeliveries()">See More</button>
+          <button
+            class="see-more-button hover-scale"
+            (click)="onSeeMoreDeliveries()"
+          >
+            {{ 'HOME.SEE_MORE' | translate }}
+          </button>
         </div>
       </div>
 
+      <!-- Condiciones -->
       <div class="card2 glass-card" *ngIf="conditions.length">
-        <h2 class="card-title2"><i class="fa fa-signal"></i> Condition of drivers and vehicles</h2>
+        <h2 class="card-title2">
+          <i class="fa fa-signal"></i>
+          {{ 'HOME.CONDITION_TITLE' | translate }}
+        </h2>
         <div class="card-content3">
-          <div class="condition" *ngFor="let condition of conditions.slice(0, 1)">
+          <div
+            class="condition"
+            *ngFor="let condition of conditions.slice(0, 1)"
+          >
             <div class="date-time2">
-              <p>Model and Serial Number: {{ condition.model }}</p>
-              <p>License Plate: {{ condition.licensePlate }}</p>
+              <p>
+                {{ 'HOME.MODEL_SERIAL' | translate }}:
+                {{ condition.model }}
+              </p>
+              <p>
+                {{ 'HOME.LICENSE_PLATE' | translate }}:
+                {{ condition.licensePlate }}
+              </p>
             </div>
           </div>
         </div>
-        <button class="see-more-button2 hover-scale" (click)="onSeeMoreCondition()">See More</button>
+        <button
+          class="see-more-button2 hover-scale"
+          (click)="onSeeMoreCondition()"
+        >
+          {{ 'HOME.SEE_MORE' | translate }}
+        </button>
       </div>
     </div>
   </div>

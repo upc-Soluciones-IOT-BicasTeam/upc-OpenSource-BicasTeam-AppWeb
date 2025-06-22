@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReportDriverComponent } from './report-driver.component';
+import { SubscriptionComponent } from './subscription.component';
 
-describe('ReportDriverComponent', () => {
-  let component: ReportDriverComponent;
-  let fixture: ComponentFixture<ReportDriverComponent>;
+describe('SubscriptionComponent', () => {
+  let component: SubscriptionComponent;
+  let fixture: ComponentFixture<SubscriptionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ReportDriverComponent]
+      declarations: [SubscriptionComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ReportDriverComponent);
+    fixture = TestBed.createComponent(SubscriptionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

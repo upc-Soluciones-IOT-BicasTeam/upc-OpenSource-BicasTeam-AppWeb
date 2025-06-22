@@ -1,43 +1,177 @@
+<!-- src/app/service-execution/shipment-management/components/shipment-businessman/shipment-businessman.component.html -->
 <div class="container">
-  <h1 class="title gradient-text">Shipment Management</h1>
 
-  <button class="btn-add" (click)="showAddForm = !showAddForm">Add Shipment</button>
-  <div *ngIf="showAddForm" class="form-container glass-effect">
-    <h2>Create New Shipment</h2>
-    <form (ngSubmit)="addShipment()">
-      <div class="form-group">
-        <label for="destiny">Destiny:</label>
-        <input type="text" id="destiny" [(ngModel)]="shipment.destiny" name="destiny" required>
-      </div>
-      <div class="form-group">
-        <label for="description">Description:</label>
-        <input type="text" id="description" [(ngModel)]="shipment.description" name="description" required>
-      </div>
-      <div class="form-group">
-        <label for="status">Status:</label>
-        <input type="text" id="status" [(ngModel)]="shipment.status" name="status" required>
-      </div>
-      <div class="form-group">
-        <label for="driverName">Driver Name:</label>
-        <input type="text" id="driverName" [(ngModel)]="shipment.driverName" name="driverName" required>
-      </div>
-      <button type="submit" class="btn-submit">Submit</button>
-    </form>
+  <header class="header">
+    <img class="logo" src="https://i.ibb.co/RCDQZnJ/logo.png" alt="{{ 'REPORT.HEADER.LOGO_ALT' | translate }}">
+    <h1 class="title">{{ 'SHIPMENTS.TITLE' | translate }}</h1>
+  </header>
+
+  <!-- Controles: filtro por estado + búsqueda + orden por fecha -->
+  <div class="controls filters">
+    <div class="filter-group">
+      <label for="statusFilter">
+        {{ 'SHIPMENTS.FILTER_BY_STATUS' | translate }}
+      </label>
+      <select
+        id="statusFilter"
+        [(ngModel)]="filterStatus"
+        (ngModelChange)="onStatusChange($event)"
+      >
+        <option value="">{{ 'SHIPMENTS.ALL' | translate }}</option>
+        <option *ngFor="let s of statuses" [value]="s">
+          {{ s }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="searchBox">
+        {{ 'SHIPMENTS.SEARCH_LABEL' | translate }}
+      </label>
+      <input
+        id="searchBox"
+        type="text"
+        placeholder="{{ 'SHIPMENTS.SEARCH_PLACEHOLDER' | translate }}"
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="onSearch($event)"
+      />
+    </div>
+
+    <button class="btn-add" (click)="openForm()">
+      {{ 'SHIPMENTS.ADD_BUTTON' | translate }}
+    </button>
   </div>
 
-  <h2 class="list-title">Current Shipments</h2>
-  <div class="shipment-list" *ngIf="shipments.length > 0; else noShipments">
-    <div class="card-body">
-    <div class="shipment-card glass-card" *ngFor="let shipment of shipments">
-      <p><strong>Destiny:</strong> {{ shipment.destiny }}</p>
-      <p><strong>Description:</strong> {{ shipment.description }}</p>
-      <p><strong>Status:</strong> {{ shipment.status }}</p>
-      <p><strong>Driver:</strong> {{ shipment.driverName }}</p>
-      <button class="btn-delete" (click)="deleteShipmentId = shipment.id; deleteShipment()">Delete</button>
-    </div>
+  <!-- Modal de formulario (create/edit) -->
+  <div class="modal-overlay" *ngIf="isFormOpen" (click)="closeForm()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>
+        {{ isEditMode
+        ? ('SHIPMENTS.MODAL.EDIT_TITLE' | translate)
+        : ('SHIPMENTS.MODAL.CREATE_TITLE' | translate)
+        }}
+      </h2>
+      <form [formGroup]="shipmentForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="destiny">{{ 'SHIPMENTS.FORM.DESTINY' | translate }}</label>
+          <input id="destiny" formControlName="destiny" />
+        </div>
+        <div class="form-group">
+          <label for="description">{{ 'SHIPMENTS.FORM.DESCRIPTION' | translate }}</label>
+          <input id="description" formControlName="description" />
+        </div>
+
+
+
+        <div class="form-group">
+          <label for="driverName">{{ 'SHIPMENTS.FORM.DRIVER_NAME' | translate }}</label>
+          <input id="driverName" formControlName="driverName" />
+        </div>
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="btn-cancel"
+            (click)="closeForm()"
+          >
+            {{ 'SHIPMENTS.BUTTON.CANCEL' | translate }}
+          </button>
+          <button
+            type="submit"
+            class="btn-submit"
+            [disabled]="shipmentForm.invalid"
+          >
+            {{ isEditMode
+            ? ('SHIPMENTS.BUTTON.UPDATE' | translate)
+            : ('SHIPMENTS.BUTTON.CREATE' | translate)
+            }}
+          </button>
+
+        </div>
+      </form>
     </div>
   </div>
+
+  <!-- Tabla de envíos -->
+
+  <table
+    class="shipment-table"
+    *ngIf="filteredShipments.length; else noShipments"
+  >
+    <thead>
+    <tr>
+      <th>{{ 'SHIPMENTS.TABLE.ID' | translate }}</th>
+      <th>{{ 'SHIPMENTS.TABLE.DESTINY' | translate }}</th>
+      <th>{{ 'SHIPMENTS.TABLE.DESCRIPTION' | translate }}</th>
+      <th>{{ 'SHIPMENTS.TABLE.STATUS' | translate }}</th>
+      <th>{{ 'SHIPMENTS.TABLE.DRIVER' | translate }}</th>
+      <th
+        class="sortable-header"
+        (click)="toggleSortOrder()"
+      >
+        {{ 'SHIPMENTS.TABLE.CREATED_AT' | translate }}
+        <span *ngIf="sortDirection==='desc'">▼</span>
+        <span *ngIf="sortDirection==='asc'">▲</span>
+      </th>
+      <th>{{ 'SHIPMENTS.TABLE.ACTIONS' | translate }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let s of filteredShipments">
+      <td>{{ s.id }}</td>
+      <td>{{ s.destiny }}</td>
+      <td>{{ s.description }}</td>
+      <td>
+          <span
+            class="status-badge"
+            [ngClass]="'status-badge--' + s.status.toLowerCase().replace(' ', '-')"
+          >
+            {{ s.status }}
+          </span>
+      </td>
+      <td>{{ s.driverName }}</td>
+      <td>{{ s.createdAt | date: 'dd/MM/yyyy hh:mm a' }}</td>
+      <td class="actions">
+        <!-- Botón editar -->
+        <button class="btn-action" (click)="openForm(s)">
+          ✏️
+        </button>
+        <!-- Botón eliminar -->
+        <button class="btn-action" (click)="openDeleteConfirm(s)">
+          🗑️
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
   <ng-template #noShipments>
-    <p class="no-shipments">No shipments available.</p>
+    <p class="no-shipments">
+      {{ 'SHIPMENTS.NO_SHIPMENTS' | translate }}
+    </p>
   </ng-template>
+
+  <!-- Modal de confirmación de borrado -->
+  <div class="confirm-overlay" *ngIf="showConfirmModal">
+    <div class="confirm-modal">
+      <p>{{ 'SHIPMENTS.DELETE_CONFIRM.TEXT' | translate }}</p>
+      <div class="confirm-buttons">
+
+        <button
+          class="btn-confirm-no"
+          (click)="cancelDelete()"
+        >
+          {{ 'SHIPMENTS.DELETE_CONFIRM.NO' | translate }}
+        </button>
+
+        <button
+          class="btn-confirm-yes"
+          (click)="confirmDelete()"
+        >
+          {{ 'SHIPMENTS.DELETE_CONFIRM.YES' | translate }}
+        </button>
+
+      </div>
+    </div>
+  </div>
 </div>

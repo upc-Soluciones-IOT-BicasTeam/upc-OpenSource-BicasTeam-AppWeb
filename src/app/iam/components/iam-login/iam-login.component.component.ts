@@ -26,11 +26,13 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
   login() {
     this.error = false; // Reinicia el estado de error al intentar un nuevo login
     this.iamApi.authenticateUser(this.user.email, this.user.password).subscribe(
-      (data: UserEntity) => {
+      (data: any) => {
+        console.log(data);
         if (data) {
-          data.type === 'Gerente'
+
+          data.role === 'manager'
             ? this.router.navigate([`${data.id}/home-businessman`])
-            : this.router.navigate([`${data.id}/home-carrier`]);
+            : this.router.navigate([`${data.id}/staff-home`]);
         } else {
           this.error = true;
           this.error_msg = 'Email or Password incorrect';
@@ -46,5 +48,11 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
 
   cleanCss() {
     document.body.style.backgroundColor = '';
+  }
+
+  goToRegisterUserInformation(type: string) {
+    this.user.role = type; // Guarda el tipo de usuario
+    console.log(type)
+    this.router.navigate([`register/${type}`]); // Redirigir al registro exitoso
   }
 }

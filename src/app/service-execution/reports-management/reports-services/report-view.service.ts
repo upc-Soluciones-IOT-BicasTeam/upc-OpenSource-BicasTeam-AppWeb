@@ -7,7 +7,7 @@ import { ReportEntity } from '../model/reports.entity';
   providedIn: 'root'
 })
 export class ReportsApiService {
-  private baseURL = 'https://app-241114092351funda.azurewebsites.net/api/reports';
+  private baseURL = 'http://localhost:8080/api/reports';
 
   constructor(private http: HttpClient) {}
 

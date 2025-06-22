@@ -7,11 +7,21 @@
   <!-- Lista de Vehículos -->
   <div class="vehicle-list">
     <div class="vehicle-card" *ngFor="let vehicle of vehicles">
-      <img [src]="vehicle.vehicleImage || 'https://via.placeholder.com/400x200'" alt="Vehicle Image" class="vehicle-image">
+      <img
+        [src]="vehicle.vehicleImage || 'https://via.placeholder.com/400x200'"
+        alt="{{ 'VEHICLES.IMAGE_ALT' | translate }}"
+        class="vehicle-image"
+      />
       <div class="vehicle-info">
         <h3 class="vehicle-title">{{ vehicle.licensePlate }}</h3>
-        <p class="vehicle-model">Modelo: {{ vehicle.model }}</p>
-        <p class ="vehicle-model">Ubicación: {{ vehicle.latitude | number:'1.4-4' }}, {{ vehicle.longitude | number:'1.4-4' }}</p>
+        <p class="vehicle-model">
+          {{ 'VEHICLES.MODEL_LABEL' | translate }}: {{ vehicle.model }}
+        </p>
+        <p class="vehicle-model">
+          {{ 'VEHICLES.LOCATION_LABEL' | translate }}:
+          {{ vehicle.latitude | number:'1.4-4' }},
+          {{ vehicle.longitude | number:'1.4-4' }}
+        </p>
         <div class="action-buttons">
           <button type="button" class="btn view-btn hover-scale" (click)="navigateToDetails(vehicle.id)">Ver más</button>
           <button type="button" class="btn edit-btn hover-scale" (click)="navigateToUpdateVehicle(vehicle.id)">Editar</button>
@@ -22,13 +32,16 @@
   </div>
 
 
-
   <!-- Modal para Detalles del Vehículo -->
   <div class="modal" *ngIf="showDetails">
     <div class="modal-content">
       <span class="close" (click)="closeDetails()">&times;</span>
-      <h2>Detalles del Vehículo</h2>
-      <img [src]="selectedVehicle?.vehicleImage || 'https://via.placeholder.com/800x400'" alt="Vehicle Image" class="vehicle-details-image">
+      <h2>{{ 'VEHICLES.DETAILS.TITLE' | translate }}</h2>
+      <img
+        [src]="selectedVehicle?.vehicleImage || 'https://via.placeholder.com/800x400'"
+        alt="{{ 'VEHICLES.DETAILS.IMAGE_ALT' | translate }}"
+        class="vehicle-details-image"
+      />
       <div class="vehicle-details-content">
         <p><strong>Placa:</strong> {{ selectedVehicle?.licensePlate }}</p>
         <p><strong>Modelo:</strong> {{ selectedVehicle?.model }}</p>
@@ -42,11 +55,19 @@
         <p><strong>Longitude</strong> {{ selectedVehicle?.longitude | number:'1.6-6' }}</p>
         <p><strong>Última Inspección Técnica:</strong> {{ selectedVehicle?.lastTechnicalInspectionDate | date: 'mediumDate' }}</p>
 
-        <h3><i class="pi pi-map-marker"></i> Ubicación Actual</h3>
+        <h3>
+          <i class="pi pi-map-marker"></i>
+          {{ 'VEHICLES.DETAILS.CURRENT_LOCATION' | translate }}
+        </h3>
         <div #mapContainer id="map" style="height: 300px; width: 100%;"></div>
-        <button type="button" class="btn close-btn hover-scale" (click)="closeDetails()">Cerrar</button>
-
+        <button
+          type="button"
+          class="btn close-btn hover-scale"
+          (click)="closeDetails()"
+        >
+          {{ 'VEHICLES.DETAILS.CLOSE' | translate }}
+        </button>
+      </div>
     </div>
   </div>
-</div>
 </div>

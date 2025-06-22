@@ -1,0 +1,201 @@
+<!-- src/app/public/pages/pg-analytics/pg-analytics.component.html -->
+<div class="analytics-dashboard">
+  <div class="analytics-message">
+    <span>{{ 'ANALYTICS.INSTRUCTION' | translate }}</span>
+  </div>
+  <div class="analytics-cards">
+    <div
+      class="analytics-card"
+      [class.selected]="viewMode === 'reports'"
+      (click)="setView('reports')"
+    >
+      <span class="analytics-emoji">📊</span>
+      <h3>{{ 'ANALYTICS.CARD.REPORTS' | translate }}</h3>
+    </div>
+    <div
+      class="analytics-card"
+      [class.selected]="viewMode === 'shipments'"
+      (click)="setView('shipments')"
+    >
+      <span class="analytics-emoji">🚚</span>
+      <h3>{{ 'ANALYTICS.CARD.SHIPMENTS' | translate }}</h3>
+    </div>
+    <div
+      class="analytics-card"
+      [class.selected]="viewMode === 'vehicles'"
+      (click)="setView('vehicles')"
+    >
+      <span class="analytics-emoji">🚗</span>
+      <h3>{{ 'ANALYTICS.CARD.VEHICLES' | translate }}</h3>
+    </div>
+  </div>
+
+  <div class="analytics-content">
+    <!-- Reports view -->
+    <div *ngIf="viewMode === 'reports'">
+      <h2>{{ 'ANALYTICS.SECTIONS.REPORTS.TITLE' | translate }}</h2>
+      <div class="analytics-summary">
+        <span>
+          {{ 'ANALYTICS.SECTIONS.REPORTS.TOTAL' | translate }}:
+          <strong>{{ totalReports }}</strong>
+        </span>
+        <span>
+          {{ 'ANALYTICS.SECTIONS.REPORTS.AVERAGE' | translate }}:
+          <strong>{{ avgReportsPerDriver }}</strong>
+        </span>
+        <span>
+          {{ 'ANALYTICS.SECTIONS.REPORTS.MOST' | translate }}:
+          <strong>{{ driverWithMostReports }}</strong>
+        </span>
+      </div>
+      <div *ngIf="loadingReports">{{ 'ANALYTICS.LOADING.REPORTS' | translate }}</div>
+      <div *ngIf="errorReports" class="error-message">
+        {{ 'ANALYTICS.ERROR.REPORTS' | translate }}
+      </div>
+      <div *ngIf="!loadingReports && !errorReports">
+        <div *ngFor="let group of reportsByDriver" class="driver-report-group">
+          <h3>{{ group.driverName }}</h3>
+          <table class="reports-table">
+            <thead>
+            <tr>
+              <th>{{ 'ANALYTICS.TABLE.ID' | translate }}</th>
+              <th>{{ 'ANALYTICS.TABLE.DESCRIPTION' | translate }}</th>
+              <th>{{ 'ANALYTICS.TABLE.DATE' | translate }}</th>
+              <th>{{ 'ANALYTICS.TABLE.LEVEL' | translate }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let report of group.reports">
+              <td>{{ report.id }}</td>
+              <td>{{ report.description }}</td>
+              <td>{{ report.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
+              <td>{{ report.level }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="reportsByDriver.length === 0" class="no-data-message">
+          {{ 'ANALYTICS.NO_DATA.REPORTS' | translate }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Shipments view -->
+    <div *ngIf="viewMode === 'shipments'">
+      <h2>{{ 'ANALYTICS.SECTIONS.SHIPMENTS.TITLE' | translate }}</h2>
+      <div class="analytics-summary">
+        <span>
+          {{ 'ANALYTICS.SECTIONS.SHIPMENTS.TOTAL' | translate }}:
+          <strong>{{ totalShipments }}</strong>
+        </span>
+        <span>
+          {{ 'ANALYTICS.SECTIONS.SHIPMENTS.AVERAGE' | translate }}:
+          <strong>{{ avgShipmentsPerDriver }}</strong>
+        </span>
+        <span>
+          {{ 'ANALYTICS.SECTIONS.SHIPMENTS.MOST' | translate }}:
+          <strong>{{ driverWithMostShipments }}</strong>
+        </span>
+      </div>
+      <div *ngIf="loadingShipments">{{ 'ANALYTICS.LOADING.SHIPMENTS' | translate }}</div>
+      <div *ngIf="errorShipments" class="error-message">
+        {{ 'ANALYTICS.ERROR.SHIPMENTS' | translate }}
+      </div>
+      <div *ngIf="!loadingShipments && !errorShipments">
+        <div
+          *ngFor="let group of shipmentsByDriver"
+          class="driver-report-group"
+        >
+          <h3>{{ group.driverName }}</h3>
+          <table class="reports-table">
+            <thead>
+            <tr>
+              <th>{{ 'ANALYTICS.TABLE.ID' | translate }}</th>
+              <th>{{ 'ANALYTICS.SECTIONS.SHIPMENTS.DESTINY' | translate }}</th>
+              <th>{{ 'ANALYTICS.TABLE.DESCRIPTION' | translate }}</th>
+              <th>{{ 'ANALYTICS.TABLE.DATE' | translate }}</th>
+              <th>{{ 'ANALYTICS.SECTIONS.SHIPMENTS.STATUS' | translate }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let shipment of group.shipments">
+              <td>{{ shipment.id }}</td>
+              <td>{{ shipment.destiny }}</td>
+              <td>{{ shipment.description }}</td>
+              <td>{{ shipment.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
+              <td>{{ shipment.status }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="shipmentsByDriver.length === 0" class="no-data-message">
+          {{ 'ANALYTICS.NO_DATA.SHIPMENTS' | translate }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Vehicles view -->
+    <div *ngIf="viewMode === 'vehicles'">
+      <h2>{{ 'ANALYTICS.SECTIONS.VEHICLES.TITLE' | translate }}</h2>
+      <div class="analytics-summary">
+        <span>
+          {{ 'ANALYTICS.SECTIONS.VEHICLES.TOTAL' | translate }}:
+          <strong>{{ totalVehicles }}</strong>
+        </span>
+        <span>
+          {{ 'ANALYTICS.SECTIONS.VEHICLES.AVERAGE' | translate }}:
+          <strong>{{ avgVehiclesPerDriver }}</strong>
+        </span>
+        <span>
+          {{ 'ANALYTICS.SECTIONS.VEHICLES.MOST' | translate }}:
+          <strong>{{ driverWithMostVehicles }}</strong>
+        </span>
+      </div>
+      <div *ngIf="loadingVehicles">{{ 'ANALYTICS.LOADING.VEHICLES' | translate }}</div>
+      <div *ngIf="errorVehicles" class="error-message">
+        {{ 'ANALYTICS.ERROR.VEHICLES' | translate }}
+      </div>
+      <div *ngIf="!loadingVehicles && !errorVehicles">
+        <div
+          *ngFor="let group of vehiclesByDriver"
+          class="driver-report-group"
+        >
+          <h3>{{ group.driverName }}</h3>
+          <table class="reports-table">
+            <thead>
+            <tr>
+              <th>{{ 'ANALYTICS.TABLE.ID' | translate }}</th>
+              <th>{{ 'ANALYTICS.SECTIONS.VEHICLES.LICENSE_PLATE' | translate }}</th>
+              <th>{{ 'ANALYTICS.SECTIONS.VEHICLES.MODEL' | translate }}</th>
+              <th>{{ 'ANALYTICS.SECTIONS.VEHICLES.COLOR' | translate }}</th>
+              <th>{{ 'ANALYTICS.SECTIONS.VEHICLES.ENGINE' | translate }}</th>
+              <th>{{ 'ANALYTICS.SECTIONS.VEHICLES.FUEL' | translate }}</th>
+              <th>{{ 'ANALYTICS.SECTIONS.VEHICLES.TIRES' | translate }}</th>
+              <th>{{ 'ANALYTICS.SECTIONS.VEHICLES.ELECTRICAL' | translate }}</th>
+              <th>{{ 'ANALYTICS.SECTIONS.VEHICLES.TRANSMISSION' | translate }}</th>
+              <th>{{ 'ANALYTICS.SECTIONS.VEHICLES.LAST_INSPECTION' | translate }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let vehicle of group.vehicles">
+              <td>{{ vehicle.id }}</td>
+              <td>{{ vehicle.licensePlate }}</td>
+              <td>{{ vehicle.model }}</td>
+              <td>{{ vehicle.color }}</td>
+              <td>{{ vehicle.engine }}%</td>
+              <td>{{ vehicle.fuel }}%</td>
+              <td>{{ vehicle.tires }}%</td>
+              <td>{{ vehicle.electricalSystem }}%</td>
+              <td>{{ vehicle.transmissionTemperature }}%</td>
+              <td>{{ vehicle.lastTechnicalInspectionDate | date:'dd/MM/yyyy' }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="vehiclesByDriver.length === 0" class="no-data-message">
+          {{ 'ANALYTICS.NO_DATA.VEHICLES' | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

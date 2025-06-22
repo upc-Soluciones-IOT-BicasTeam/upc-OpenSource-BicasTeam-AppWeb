@@ -1,14 +1,22 @@
+<!-- src/app/public/pages/pg-register-successful/pg-register-successful.component.html -->
 <div class="wrapper fadeInDown">
   <div id="formContent">
     <!-- Icono de confirmación -->
     <div class="fadeIn first">
-      <img src="https://i.ibb.co/RCDQZnJ/logo.png" id="icon" alt="User Icon" />
+      <img src="https://i.ibb.co/RCDQZnJ/logo.png" id="icon" alt="Logo" />
     </div>
-    <h1>¡SUCCESSFUL <br> REGISTRATION!</h1>
-    <p>Your account has been successfully registered.</p>
+
+    <!-- Título -->
+    <h1 [innerHTML]="'REGISTER.SUCCESS_TITLE' | translate"></h1>
+
+    <!-- Mensaje -->
+    <p>{{ 'REGISTER.SUCCESS_MESSAGE' | translate }}</p>
+
     <!-- Botón de aceptación -->
     <div class="buttons">
-      <button class="btn" (click)="goToLogin()">Accept</button>
+      <button class="btn" (click)="goToLogin()">
+        {{ 'REGISTER.SUCCESS_BUTTON' | translate }}
+      </button>
     </div>
   </div>
 </div>

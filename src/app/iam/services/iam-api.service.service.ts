@@ -7,33 +7,13 @@ import { UserEntity } from '../model/user.entity';
   providedIn: 'root'
 })
 export class IamApiService {
-  /*
-[
-  {
-    "id": 1,
-    "email": "aldhair@gmail.com",
-    "password": "123456",
-    "type": "Gerente",
-    "name": "Aldhair",
-    "lastName": "Valenzuela"
-  },
-  {
-    "id": 2,
-    "email": "usuario2@example.com",
-    "password": "abc123",
-    "type": "Gerente",
-    "name": "Juan",
-    "lastName": "Pérez"
-  }
-]
-*/
-  private baseUrl = 'https://movigestion-vehicles.free.beeceptor.com/api/users';
+  private baseUrl = 'http://localhost:8080/api/users';
 
   constructor(private http: HttpClient) {}
 
   // Autenticar al usuario con email y password
   authenticateUser(email: string, password: string): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${this.baseUrl}?email=${email}&password=${password}`);
+    return this.http.get<UserEntity>(`${this.baseUrl}/email/${email}/password/${password}`);
   }
 
   // Encontrar un usuario por email
@@ -57,6 +37,9 @@ export class IamApiService {
     return this.http.put<UserEntity>(url, userUpdates);
   }
 
+  getAllUsers(){
+    return this.http.get<UserEntity>(`${this.baseUrl}`);
+  }
   // Eliminar un usuario por ID
   deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);

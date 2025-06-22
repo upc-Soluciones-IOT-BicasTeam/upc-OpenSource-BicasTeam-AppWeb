@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PgReportCarrierComponent } from './pg-report-carrier.component';
+import { SidebarStaffComponent } from './sidebar-staff.component';
 
-describe('PgReportCarrierComponent', () => {
-  let component: PgReportCarrierComponent;
-  let fixture: ComponentFixture<PgReportCarrierComponent>;
+describe('SidebarStaffComponent', () => {
+  let component: SidebarStaffComponent;
+  let fixture: ComponentFixture<SidebarStaffComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PgReportCarrierComponent]
+      declarations: [SidebarStaffComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(PgReportCarrierComponent);
+    fixture = TestBed.createComponent(SidebarStaffComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

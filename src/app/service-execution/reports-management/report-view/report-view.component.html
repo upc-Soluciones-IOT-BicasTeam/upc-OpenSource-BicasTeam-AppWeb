@@ -1,39 +1,85 @@
-<div class="container">
-  <div class="header">
-    <h1 class="title gradient-text">Reports</h1>
-    <p class="subtitle">Driver report list</p>
+<div class="report-screen" lang="es">
+  <!-- HEADER -->
+  <header class="header">
+    <img class="logo" src="https://i.ibb.co/RCDQZnJ/logo.png" alt="{{ 'REPORT.HEADER.LOGO_ALT' | translate }}">
+    <h1 class="title">{{ 'REPORT.HEADER.TITLE' | translate }}</h1>
+  </header>
+
+  <!-- CONTROLES -->
+  <div class="controls">
+    <div class="filter">
+      <select id="typeFilter"
+              [(ngModel)]="selectedType"
+              (ngModelChange)="onTypeChange($event)">
+        <option *ngFor="let t of types" [value]="t">
+          {{ t === 'All' ? 'Todos los tipos' : t }}
+        </option>
+      </select>
+    </div>
+
+    <div class="search">
+      <input id="searchTerm"
+             type="search"
+             placeholder="{{ 'REPORT.CONTROLS.SEARCH_PLACEHOLDER' | translate }}"
+             [(ngModel)]="searchTerm"
+             (ngModelChange)="onSearch($event)">
+      <i class="icon-search" aria-hidden="true"></i>
+    </div>
   </div>
-  <div class="card-container">
-    <div class="card glass-card hover-scale">
-      <div class="card-body">
-        <table class="table">
-          <thead>
-          <tr>
-            <th>Driver’s Name</th>
-            <th>Description</th>
-            <th>Report Type</th>
-            <th>Date</th>
-            <th>Actions</th> <!-- Nueva columna para acciones -->
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let report of reports; let i = index" class="table-row">
-            <td>{{ report.driverName }}</td>
-            <td>{{ report.description }}</td>
-            <td>{{ report.type }}</td>
-            <td>{{ report.createdAt | date: 'shortDate' }}</td>
-            <td>
-              <button
-                type="button"
-                class="btn delete-btn hover-scale"
-                (click)="deleteReport(report.id)"
-              >
-                Eliminar
-              </button>
-            </td>
-          </tr>
-          </tbody>
-        </table>
+
+  <!-- TABLA DE REPORTES -->
+  <div class="table-container">
+    <table>
+      <thead>
+      <tr>
+        <th scope="col">{{ 'REPORT.TABLE.LEVEL' | translate }}</th>
+        <th scope="col">{{ 'REPORT.TABLE.DESCRIPTION' | translate }}</th>
+        <th scope="col">{{ 'REPORT.TABLE.DRIVER_NAME' | translate }}</th>
+        <th scope="col">{{ 'REPORT.TABLE.DATE' | translate }}</th>
+        <th scope="col">{{ 'REPORT.TABLE.TIME' | translate }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let report of filteredReports">
+        <td>{{ report.type }}</td>
+        <td>{{ report.description }}</td>
+        <td>{{ report.driverName }}</td>
+        <td>{{ report.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
+        <td>
+          <button class="btn btn--check"
+                  (click)="openResolveConfirm(report)"
+                  aria-label="Marcar como resuelto">
+            <mat-icon>check_circle</mat-icon>
+          </button>
+        </td>
+      </tr>
+
+      <tr *ngIf="!filteredReports.length">
+        <td colspan="5" class="no-results">
+          No se encontraron reportes con los criterios seleccionados.
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MODAL DE CONFIRMACIÓN -->
+  <div class="confirm-overlay" *ngIf="showResolveModal"
+       role="alertdialog" aria-modal="true"
+       aria-labelledby="resolveTitle"
+       aria-describedby="resolveText">
+    <div class="confirm-modal" role="document">
+      <h3 id="resolveTitle" class="confirm-title">{{ 'REPORT.DELETE_CONFIRM.TITLE' | translate }}</h3>
+      <p id="resolveText" class="confirm-text">
+        {{ 'REPORT.DELETE_CONFIRM.TEXT' | translate }}
+      </p>
+      <div class="confirm-buttons">
+        <button type="button" class="btn btn--secondary" (click)="cancelResolve()">
+          {{ 'REPORT.DELETE_CONFIRM.NO' | translate }}
+        </button>
+        <button type="button" class="btn btn--danger" (click)="confirmResolve()">
+          {{ 'REPORT.DELETE_CONFIRM.YES' | translate }}
+        </button>
       </div>
     </div>
   </div>

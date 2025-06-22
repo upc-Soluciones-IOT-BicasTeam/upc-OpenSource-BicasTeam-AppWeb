@@ -1,46 +1,133 @@
 <div class="wrapper fadeInDown">
   <div id="formContent">
+
     <div class="fadeIn first">
-      <img src="https://i.ibb.co/RCDQZnJ/logo.png" id="icon" alt="User Icon" />
+      <img src="https://i.ibb.co/RCDQZnJ/logo.png" id="icon" alt="Logo" />
     </div>
-    <h1>Sign Up</h1>
-    <form (submit)="createUser()">
+
+    <!-- Título -->
+    <h1>{{ 'SIGNUP.TITLE' | translate }}</h1>
+
+    <form (ngSubmit)="createProfile()">
       <div class="input-group">
+        <!-- Nombre -->
         <div class="input-half">
-          <label for="name" class="text-left">Name</label>
-          <input type="text" id="name" class="fadeIn second" name="name" [(ngModel)]="user.name" required>
+          <label for="name" class="text-left">
+            {{ 'SIGNUP.NAME_LABEL' | translate }}
+          </label>
+          <input
+            type="text"
+            id="name"
+            class="fadeIn second"
+            name="name"
+            [(ngModel)]="profile.name"
+            required
+            placeholder="{{ 'SIGNUP.NAME_PLACEHOLDER' | translate }}"
+          />
         </div>
+
+        <!-- Apellido -->
         <div class="input-half">
-          <label for="lastName" class="text-left">Last Name</label>
-          <input type="text" id="lastName" class="fadeIn second" name="lastName" [(ngModel)]="user.lastName" required>
-        </div>
-      </div>
-      <label for="email" class="text-left">Email</label>
-      <input type="email" id="email" class="fadeIn second" name="email" [(ngModel)]="user.email" required>
-      <div class="input-group">
-        <div class="input-half">
-          <label for="password" class="text-left">Password</label>
-          <input type="password" id="password" class="fadeIn third" name="password" [(ngModel)]="user.password" required>
-        </div>
-        <div class="input-half">
-          <label for="passwordConfirmation" class="text-left">Confirm Password</label>
-          <input type="password" id="passwordConfirmation" class="fadeIn third" name="passwordConfirmation" [(ngModel)]="passwordConfirmation" required>
+          <label for="lastName" class="text-left">
+            {{ 'SIGNUP.LASTNAME_LABEL' | translate }}
+          </label>
+          <input
+            type="text"
+            id="lastName"
+            class="fadeIn second"
+            name="lastName"
+            [(ngModel)]="profile.lastName"
+            required
+            placeholder="{{ 'SIGNUP.LASTNAME_PLACEHOLDER' | translate }}"
+          />
         </div>
       </div>
 
+      <!-- Email -->
+      <label for="email" class="text-left">
+        {{ 'SIGNUP.EMAIL_LABEL' | translate }}
+      </label>
+      <input
+        type="email"
+        id="email"
+        class="fadeIn second"
+        name="email"
+        [(ngModel)]="user.email"
+        required
+        placeholder="{{ 'SIGNUP.EMAIL_PLACEHOLDER' | translate }}"
+      />
+
+      <div class="input-group">
+        <!-- Contraseña -->
+        <div class="input-half">
+          <label for="password" class="text-left">
+            {{ 'SIGNUP.PASSWORD_LABEL' | translate }}
+          </label>
+          <input
+            type="password"
+            id="password"
+            class="fadeIn third"
+            name="password"
+            [(ngModel)]="user.password"
+            required
+            placeholder="{{ 'SIGNUP.PASSWORD_PLACEHOLDER' | translate }}"
+          />
+        </div>
+
+        <!-- Confirmar contraseña -->
+        <div class="input-half">
+          <label for="passwordConfirmation" class="text-left">
+            {{ 'SIGNUP.CONFIRM_PASSWORD_LABEL' | translate }}
+          </label>
+          <input
+            type="password"
+            id="passwordConfirmation"
+            class="fadeIn third"
+            name="passwordConfirmation"
+            [(ngModel)]="passwordConfirmation"
+            required
+            placeholder="{{ 'SIGNUP.CONFIRM_PASSWORD_PLACEHOLDER' | translate }}"
+          />
+        </div>
+      </div>
+
+      <!-- Política de privacidad -->
       <div class="checkbox-group">
-        <input type="checkbox" id="Checkbox" name="Checkbox" [(ngModel)]="privacityPolicy">
-        <label for="Checkbox">I have read and agree to the Privacy Policy</label>
+        <input
+          type="checkbox"
+          id="Checkbox"
+          name="Checkbox"
+          [(ngModel)]="privacityPolicy"
+        />
+        <label for="Checkbox">
+          {{ 'SIGNUP.PRIVACY_POLICY' | translate }}
+        </label>
       </div>
 
-      <input type="submit" class="fadeIn fourth" value="Sign Up">
+      <!-- Botón de registro -->
+      <input
+        type="submit"
+        class="fadeIn fourth"
+        [value]="'SIGNUP.BUTTON' | translate"
+      />
     </form>
 
+    <!-- Mensaje de error -->
     <div class="alert alert-danger" *ngIf="error">
       {{ error_msg }}
     </div>
+
+    <!-- Enlace al login -->
     <div>
-      <p><i class="pi pi-minus"></i> Already have an account? <a routerLink="/login">Log in</a> <i class="pi pi-minus"></i></p>
+      <p>
+        <i class="pi pi-minus"></i>
+        {{ 'SIGNUP.ALREADY_ACCOUNT' | translate }}
+        <a routerLink="/login">
+          {{ 'SIGNUP.LOGIN_LINK' | translate }}
+        </a>
+        <i class="pi pi-minus"></i>
+      </p>
     </div>
+
   </div>
 </div>

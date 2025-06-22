@@ -1,0 +1,44 @@
+<!-- src/app/public/pages/pg-subscription/pg-subscription.component.html -->
+<div class="subscription-container">
+  <div class="card-container">
+    <div class="card">
+      <h2>{{ 'SUBSCRIPTION.PLAN_FREE.TITLE' | translate }}</h2>
+      <p>{{ 'SUBSCRIPTION.PLAN_FREE.DRIVERS' | translate }}</p>
+      <p>{{ 'SUBSCRIPTION.PLAN_FREE.VEHICLES' | translate }}</p>
+    </div>
+
+    <div class="card">
+      <h2>{{ 'SUBSCRIPTION.PLAN_UNLIMITED.TITLE' | translate }}</h2>
+      <p>{{ 'SUBSCRIPTION.PLAN_UNLIMITED.DESCRIPTION' | translate }}</p>
+      <p class="motto">
+        {{ 'SUBSCRIPTION.PLAN_UNLIMITED.MOTTO' | translate }}
+      </p>
+    </div>
+  </div>
+
+  <button class="subscribe-button" (click)="openModal()">
+    {{ 'SUBSCRIPTION.UPGRADE_BUTTON' | translate }}
+  </button>
+
+  <div class="modal-backdrop" *ngIf="showModal">
+    <div class="modal">
+      <h3>{{ 'SUBSCRIPTION.MODAL.TITLE' | translate }}</h3>
+      <p>{{ 'SUBSCRIPTION.MODAL.DESCRIPTION' | translate }}</p>
+
+      <input
+        type="text"
+        placeholder="Paste your URL here"
+        [(ngModel)]="subscription.url"
+        class="url-input"
+      />
+
+      <button (click)="sendUrl()" class="send-button">
+        Send URL
+      </button>
+
+      <button class="close-button" (click)="closeModal()">
+        {{ 'SUBSCRIPTION.MODAL.CLOSE_BUTTON' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -6,6 +6,8 @@ export class ShipmentEntity {
   createdAt: Date;
   status: string;
   driverName: string;
+  tempLimit: string;
+
 
   constructor() {
     this.id = 0;
@@ -15,5 +17,6 @@ export class ShipmentEntity {
     this.createdAt = new Date();
     this.status = '';
     this.driverName = '';
+    this.tempLimit = '';
   }
 }
