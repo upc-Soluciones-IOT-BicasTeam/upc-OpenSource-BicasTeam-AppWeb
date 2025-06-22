@@ -27,7 +27,7 @@ export class CreateVehicleComponent {
 
   addVehicle(): void {
     const vehicleData = { ...this.vehicle };
-    vehicleData.vehicleImage = undefined;
+    vehicleData.vehicleImage = null;
 
     if (vehicleData.lastTechnicalInspectionDate) {
       vehicleData.lastTechnicalInspectionDate = new Date(vehicleData.lastTechnicalInspectionDate).toISOString();

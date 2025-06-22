@@ -62,7 +62,7 @@ export class VehiclesApiService {
     "altitude": 60
   }
 ]*/
-  private baseUrl = 'https://vehicles.free.beeceptor.com/api/vehicles';
+  private baseUrl = 'http://localhost:8080/api/vehicles';
 
   constructor(private http: HttpClient) {}
 

@@ -32,11 +32,10 @@
       <div class="vehicle-details-content">
         <p><strong>Placa:</strong> {{ selectedVehicle?.licensePlate }}</p>
         <p><strong>Modelo:</strong> {{ selectedVehicle?.model }}</p>
-        <p><strong>Nombre del Conductor:</strong> {{ selectedVehicle?.driverName }}</p>
+        <p><strong>Nombre del Conductor:</strong> {{ selectedVehicle?.driverId }}</p>
         <p><strong>Color:</strong> {{ selectedVehicle?.color }}</p>
         <h3><i class="pi pi-chart-line"></i> Monitoreo en Tiempo Real</h3>
-        <p><strong>CurrentTemperature</strong> {{ selectedVehicle?.currentTemperature }}°C</p>
-        <p><strong>CabinTemperature</strong>{{ selectedVehicle?.cabinTemperature }}°C</p>
+        <p><strong>CurrentTemperature</strong> {{ selectedVehicle?.temperature}}°C</p>
         <p><strong>Humidity</strong>{{ selectedVehicle?.humidity }}%</p>
         <p><strong>Coordenadas:</strong></p>
         <p><strong>Latitude</strong> {{ selectedVehicle?.latitude | number:'1.6-6' }}</p>

@@ -19,14 +19,13 @@
         <p><strong>Placa:</strong> {{ vehicle.licensePlate }}</p>
         <p><strong>Modelo:</strong> {{ vehicle.model }}</p>
         <p><strong>Color:</strong> {{ vehicle.color }}</p>
-        <p><strong>Conductor:</strong> {{ vehicle.driverName }}</p>
+        <p><strong>Conductor:</strong> {{ vehicle.managerId }}</p>
         <p><strong>Última Inspección:</strong> {{ vehicle.lastTechnicalInspectionDate | date }}</p>
       </div>
 
       <div class="detail-group">
         <h2>Monitoreo en Tiempo Real</h2>
-        <p><strong>Temperatura Actual:</strong> {{ vehicle.currentTemperature }}°C</p>
-        <p><strong>Temperatura Cabina:</strong> {{ vehicle.cabinTemperature }}°C</p>
+        <p><strong>Temperatura Actual:</strong> {{ vehicle.temperature }}°C</p>
         <p><strong>Humedad:</strong> {{ vehicle.humidity }}%</p>
       </div>
 

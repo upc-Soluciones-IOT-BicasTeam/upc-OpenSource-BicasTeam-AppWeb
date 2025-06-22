@@ -10,7 +10,7 @@
         <h2 class="vehicle-title">{{ vehicle.model }}</h2>
         <p class="vehicle-subtitle"><strong>License Plate:</strong> {{ vehicle.licensePlate }}</p>
         <div class="vehicle-stats">
-          <p><strong>Driver:</strong> {{ vehicle.driverName }}</p>
+          <p><strong>Driver:</strong> {{ vehicle.managerId }}</p>
           <p><strong>Color:</strong> {{ vehicle.color }}</p>
           <p><strong>Last Inspection:</strong> {{ vehicle.lastTechnicalInspectionDate | date: 'mediumDate' }}</p>
         </div>
