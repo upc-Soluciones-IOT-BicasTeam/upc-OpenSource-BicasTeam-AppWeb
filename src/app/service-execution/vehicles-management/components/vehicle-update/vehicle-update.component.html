@@ -1,0 +1,40 @@
+<div class="vehicle-form">
+  <div class="header">
+    <button class="back-button" (click)="cancel()">
+      <i class="pi pi-arrow-left"></i> Volver
+    </button>
+    <h1 class="title">Actualizar Vehículo</h1>
+  </div>
+
+  <div class="update-section">
+    <form (ngSubmit)="updateVehicle()">
+      <div class="update-group">
+        <h2>Datos</h2>
+        <p><strong>Id del Conductor:</strong></p>
+        <input type="text" [(ngModel)]="vehicle.managerId" name="driverName" required />
+
+        <p><strong>Placa:</strong></p>
+        <input type="text" [(ngModel)]="vehicle.licensePlate" name="licensePlate" required />
+
+        <p><strong>Modelo:</strong></p>
+        <input type="text" [(ngModel)]="vehicle.model" name="model" required />
+
+        <p><strong>Color:</strong></p>
+        <input type="text" [(ngModel)]="vehicle.color" name="color" required />
+
+        <p><strong>Última Inspección Técnica:</strong></p>
+        <input type="datetime-local" [(ngModel)]="vehicle.lastTechnicalInspectionDate" name="lastTechnicalInspectionDate" />
+
+      </div>
+
+      <div class="update-group">
+        <h2>Imagen</h2>
+        <input type="file" (change)="handleFileInput($event)" accept="image/*" />
+        <div *ngIf="uploadedImageUrl">
+          <img [src]="uploadedImageUrl" alt="Previsualización" width="600"/>
+        </div>
+      </div>
+      <button type="submit" class="save-button">Guardar</button>
+    </form>
+  </div>
+</div>

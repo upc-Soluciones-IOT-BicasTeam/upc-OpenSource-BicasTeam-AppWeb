@@ -1,15 +1,7 @@
 <div class="container">
   <div class="header">
-    <h1 class="title gradient-text">
-      {{ 'VEHICLES.TITLE' | translate }}
-    </h1>
-    <button
-      type="button"
-      class="btn primary-btn hover-scale"
-      (click)="showAddVehicleForm()"
-    >
-      {{ 'VEHICLES.ADD_BUTTON' | translate }}
-    </button>
+    <h1 class="title gradient-text">Gestión de Vehículos</h1>
+    <button type="button" class="btn primary-btn hover-scale" (click)="navigateToCreateVehicle()">Agregar Vehículo</button>
   </div>
 
   <!-- Lista de Vehículos -->
@@ -31,138 +23,14 @@
           {{ vehicle.longitude | number:'1.4-4' }}
         </p>
         <div class="action-buttons">
-          <button
-            type="button"
-            class="btn view-btn hover-scale"
-            (click)="viewVehicleDetails(vehicle)"
-          >
-            {{ 'VEHICLES.VIEW_BUTTON' | translate }}
-          </button>
-          <button
-            type="button"
-            class="btn edit-btn hover-scale"
-            (click)="editVehicle(vehicle)"
-          >
-            {{ 'VEHICLES.EDIT_BUTTON' | translate }}
-          </button>
-          <button
-            type="button"
-            class="btn delete-btn hover-scale"
-            (click)="deleteVehicle(vehicle.id)"
-          >
-            {{ 'VEHICLES.DELETE_BUTTON' | translate }}
-          </button>
+          <button type="button" class="btn view-btn hover-scale" (click)="navigateToDetails(vehicle.id)">Ver más</button>
+          <button type="button" class="btn edit-btn hover-scale" (click)="navigateToUpdateVehicle(vehicle.id)">Editar</button>
+          <button type="button" class="btn delete-btn hover-scale" (click)="deleteVehicle(vehicle.id)">Eliminar</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Modal de Formulario para Agregar/Editar Vehículo -->
-  <div class="modal" *ngIf="showForm">
-    <div class="modal-content">
-      <span class="close" (click)="cancelForm()">&times;</span>
-      <h2 class="form-title">
-        {{ isEditing
-        ? ('VEHICLES.MODAL.TITLE_EDIT' | translate)
-        : ('VEHICLES.MODAL.TITLE_ADD'  | translate)
-        }}
-      </h2>
-      <form (ngSubmit)="isEditing ? updateVehicle() : addVehicle()">
-        <div class="input-group">
-          <label for="licensePlate">
-            {{ 'VEHICLES.FORM.LICENSE_PLATE' | translate }}
-          </label>
-          <input
-            type="text"
-            id="licensePlate"
-            [(ngModel)]="vehicle.licensePlate"
-            name="licensePlate"
-            required
-          />
-        </div>
-        <div class="input-group">
-          <label for="model">
-            {{ 'VEHICLES.FORM.MODEL' | translate }}
-          </label>
-          <input
-            type="text"
-            id="model"
-            [(ngModel)]="vehicle.model"
-            name="model"
-            required
-          />
-        </div>
-        <div class="input-group">
-          <label for="driverName">
-            {{ 'VEHICLES.FORM.DRIVER_NAME' | translate }}
-          </label>
-          <input
-            type="text"
-            id="driverName"
-            [(ngModel)]="vehicle.driverName"
-            name="driverName"
-            required
-          />
-        </div>
-        <div class="input-group">
-          <label for="color">
-            {{ 'VEHICLES.FORM.COLOR' | translate }}
-          </label>
-          <input
-            type="text"
-            id="color"
-            [(ngModel)]="vehicle.color"
-            name="color"
-          />
-        </div>
-        <div class="input-group">
-          <label for="lastTechnicalInspectionDate">
-            {{ 'VEHICLES.FORM.LAST_INSPECTION' | translate }}
-          </label>
-          <input
-            type="date"
-            id="lastTechnicalInspectionDate"
-            [(ngModel)]="vehicle.lastTechnicalInspectionDate"
-            name="lastTechnicalInspectionDate"
-          />
-        </div>
-        <label for="vehicleImage">
-          {{ 'VEHICLES.FORM.IMAGE_LABEL' | translate }}
-        </label>
-        <input
-          type="file"
-          id="vehicleImage"
-          (change)="handleFileInput($event)"
-          class="file-input"
-        />
-        <img
-          *ngIf="uploadedImageUrl"
-          [src]="uploadedImageUrl"
-          alt="{{ 'VEHICLES.PREVIEW_ALT' | translate }}"
-          class="preview-image"
-        />
-
-        <div class="form-buttons">
-          <button
-            type="submit"
-            class="btn save-btn hover-scale"
-          >
-            {{ isEditing
-            ? ('VEHICLES.FORM.BUTTON_UPDATE' | translate)
-            : ('VEHICLES.FORM.BUTTON_ADD'    | translate)
-            }}
-          </button>
-          <button
-            type="button"
-            class="btn cancel-btn hover-scale"
-            (click)="cancelForm()"
-          >
-            {{ 'VEHICLES.FORM.BUTTON_CANCEL' | translate }}
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
 
   <!-- Modal para Detalles del Vehículo -->
   <div class="modal" *ngIf="showDetails">
@@ -175,71 +43,17 @@
         class="vehicle-details-image"
       />
       <div class="vehicle-details-content">
-        <p>
-          <strong>{{ 'VEHICLES.DETAILS.LICENSE_PLATE' | translate }}:</strong>
-          {{ selectedVehicle?.licensePlate }}
-        </p>
-        <p>
-          <strong>{{ 'VEHICLES.DETAILS.MODEL' | translate }}:</strong>
-          {{ selectedVehicle?.model }}
-        </p>
-        <p>
-          <strong>{{ 'VEHICLES.DETAILS.ENGINE' | translate }}:</strong>
-          {{ selectedVehicle?.engine }}%
-        </p>
-        <p>
-          <strong>{{ 'VEHICLES.DETAILS.FUEL' | translate }}:</strong>
-          {{ selectedVehicle?.fuel }}%
-        </p>
-        <p>
-          <strong>{{ 'VEHICLES.DETAILS.TIRES' | translate }}:</strong>
-          {{ selectedVehicle?.tires }}%
-        </p>
-        <p>
-          <strong>{{ 'VEHICLES.DETAILS.ELECTRICAL' | translate }}:</strong>
-          {{ selectedVehicle?.electricalSystem }}%
-        </p>
-        <p>
-          <strong>{{ 'VEHICLES.DETAILS.TRANSMISSION_TEMP' | translate }}:</strong>
-          {{ selectedVehicle?.transmissionTemperature }}%
-        </p>
-        <p>
-          <strong>{{ 'VEHICLES.DETAILS.DRIVER_NAME' | translate }}:</strong>
-          {{ selectedVehicle?.driverName }}
-        </p>
-        <p>
-          <strong>{{ 'VEHICLES.DETAILS.COLOR' | translate }}:</strong>
-          {{ selectedVehicle?.color }}
-        </p>
-        <h3>
-          <i class="pi pi-chart-line"></i>
-          {{ 'VEHICLES.DETAILS.REALTIME_MONITORING' | translate }}
-        </h3>
-        <p>
-          <strong>{{ 'VEHICLES.DETAILS.CURRENT_TEMP' | translate }}:</strong>
-          {{ selectedVehicle?.currentTemperature }}°C
-        </p>
-        <p>
-          <strong>{{ 'VEHICLES.DETAILS.CABIN_TEMP' | translate }}:</strong>
-          {{ selectedVehicle?.cabinTemperature }}°C
-        </p>
-        <p>
-          <strong>{{ 'VEHICLES.DETAILS.HUMIDITY' | translate }}:</strong>
-          {{ selectedVehicle?.humidity }}%
-        </p>
-        <p><strong>{{ 'VEHICLES.DETAILS.COORDINATES' | translate }}:</strong></p>
-        <p>
-          <strong>{{ 'VEHICLES.DETAILS.LATITUDE' | translate }}:</strong>
-          {{ selectedVehicle?.latitude | number:'1.6-6' }}
-        </p>
-        <p>
-          <strong>{{ 'VEHICLES.DETAILS.LONGITUDE' | translate }}:</strong>
-          {{ selectedVehicle?.longitude | number:'1.6-6' }}
-        </p>
-        <p>
-          <strong>{{ 'VEHICLES.DETAILS.LAST_INSPECTION' | translate }}:</strong>
-          {{ selectedVehicle?.lastTechnicalInspectionDate | date:'mediumDate' }}
-        </p>
+        <p><strong>Placa:</strong> {{ selectedVehicle?.licensePlate }}</p>
+        <p><strong>Modelo:</strong> {{ selectedVehicle?.model }}</p>
+        <p><strong>Nombre del Conductor:</strong> {{ selectedVehicle?.driverId }}</p>
+        <p><strong>Color:</strong> {{ selectedVehicle?.color }}</p>
+        <h3><i class="pi pi-chart-line"></i> Monitoreo en Tiempo Real</h3>
+        <p><strong>CurrentTemperature</strong> {{ selectedVehicle?.temperature}}°C</p>
+        <p><strong>Humidity</strong>{{ selectedVehicle?.humidity }}%</p>
+        <p><strong>Coordenadas:</strong></p>
+        <p><strong>Latitude</strong> {{ selectedVehicle?.latitude | number:'1.6-6' }}</p>
+        <p><strong>Longitude</strong> {{ selectedVehicle?.longitude | number:'1.6-6' }}</p>
+        <p><strong>Última Inspección Técnica:</strong> {{ selectedVehicle?.lastTechnicalInspectionDate | date: 'mediumDate' }}</p>
 
         <h3>
           <i class="pi pi-map-marker"></i>

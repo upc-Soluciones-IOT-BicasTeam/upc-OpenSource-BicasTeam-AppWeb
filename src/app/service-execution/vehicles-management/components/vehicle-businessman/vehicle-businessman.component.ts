@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { VehiclesApiService } from '../../services/vehicles-api.service';
 import { VehicleEntity } from '../../model/vehicle.entity';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import * as  L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -23,7 +23,7 @@ export class VehicleBusinessmanComponent implements OnInit, OnDestroy {
 
   @ViewChild('mapContainer') mapContainer: ElementRef | undefined;
 
-  constructor(private vehiclesApi: VehiclesApiService, private router: Router) {}
+  constructor(private vehiclesApi: VehiclesApiService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.loadVehicles();
@@ -62,6 +62,19 @@ export class VehicleBusinessmanComponent implements OnInit, OnDestroy {
     }
   }
 
+  navigateToDetails(vehicleId: number) {
+    console.log('Botón clickeado, ID:', vehicleId);
+    this.router.navigate([':id/vehicles-details-businessman', vehicleId]);
+  }
+
+  navigateToCreateVehicle() {
+    this.router.navigate([':id/create-vehicle-businessman']);
+  }
+
+  navigateToUpdateVehicle(vehicleId: number) {
+    this.router.navigate([':id/vehicles-update', vehicleId]);
+  }
+/*
   addVehicle(): void {
     // Prepara los datos para enviar, estableciendo `vehicleImage` como `undefined`
     const vehicleData = { ...this.vehicle };
@@ -84,7 +97,7 @@ export class VehicleBusinessmanComponent implements OnInit, OnDestroy {
       }
     );
   }
-
+*/
   editVehicle(vehicle: VehicleEntity): void {
     this.vehicle = { ...vehicle }; // Clona el vehículo para evitar modificaciones directas
     this.uploadedImageUrl = vehicle.vehicleImage || null; // Muestra la imagen actual, si existe
@@ -92,32 +105,61 @@ export class VehicleBusinessmanComponent implements OnInit, OnDestroy {
     this.showForm = true;
   }
 
-  updateVehicle(): void {
-    if (this.vehicle.id) {
-      const vehicleData = { ...this.vehicle };
-      delete vehicleData.vehicleImage;
+  updateVehicle(vehicle: VehicleEntity): void { // O el nombre de tu método que tiene el error
+    const vehicleData: Partial<VehicleEntity> = { ...vehicle };
 
-      vehicleData.lastTechnicalInspectionDate = new Date(vehicleData.lastTechnicalInspectionDate).toISOString();
-      this.vehiclesApi.updateVehicle(this.vehicle.id, vehicleData).subscribe(
-        (data: VehicleEntity) => {
-          console.log('Vehículo actualizado exitosamente:', data);
-          this.loadVehicles();
-          this.showForm = false;
-        },
-        (error) => {
-          console.error('Error al actualizar vehículo:', error);
+    // **INICIO DE LA CORRECCIÓN DEL ERROR TS2769**
+    if (vehicleData.lastTechnicalInspectionDate) {
+      // Solo intenta crear un objeto Date si la propiedad NO es null.
+      try {
+        // El formato que tu backend aceptó en Postman era ISO (con T y Z)
+        // vehicleData.lastTechnicalInspectionDate al venir de un input type="datetime-local" será "YYYY-MM-DDTHH:mm"
+        // El .toISOString() lo convertirá a "YYYY-MM-DDTHH:mm:ss.sssZ" que tu backend ya ha demostrado aceptar.
+        const date = new Date(vehicleData.lastTechnicalInspectionDate);
+
+        // Verificamos si la fecha es válida después de la creación
+        if (!isNaN(date.getTime())) {
+          vehicleData.lastTechnicalInspectionDate = date.toISOString(); // Genera el formato ISO que tu backend aceptó
+        } else {
+          // Si la fecha no es válida (ej. el string no se pudo parsear),
+          // asignamos null o un valor por defecto si es necesario.
+          console.error('La fecha de inspección técnica no es válida:', vehicleData.lastTechnicalInspectionDate);
+          vehicleData.lastTechnicalInspectionDate = null;
         }
-      );
+      } catch (e) {
+        // Captura cualquier error durante la creación del objeto Date
+        console.error('Error al procesar lastTechnicalInspectionDate:', e);
+        vehicleData.lastTechnicalInspectionDate = null;
+      }
+    } else {
+      // Si vehicleData.lastTechnicalInspectionDate es null (o undefined si no se maneja así),
+      // simplemente lo enviamos como null al backend.
+      vehicleData.lastTechnicalInspectionDate = null;
     }
+    // **FIN DE LA CORRECCIÓN DEL ERROR TS2769**
+
+
+    // ... (resto de tu lógica, como managerId, etc.)
+
+    this.vehiclesApi.updateVehicle(vehicle.id, vehicleData as VehicleEntity).subscribe(
+      (updatedVehicle: VehicleEntity) => {
+        console.log('Vehículo actualizado exitosamente:', updatedVehicle);
+        // ...
+      },
+      error => {
+        console.error('Error al actualizar vehículo:', error);
+        // ...
+      }
+    );
   }
 
-  viewVehicleDetails(vehicle: VehicleEntity): void {
+  /*viewVehicleDetails(vehicle: VehicleEntity): void {
     this.selectedVehicle = vehicle;
     this.showDetails = true;
     setTimeout(() => {
       this.initMap();
     }, 0);
-  }
+  }*/
 
   closeDetails(): void {
     this.showDetails = false;

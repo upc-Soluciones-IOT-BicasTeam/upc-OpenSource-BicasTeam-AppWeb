@@ -42,19 +42,16 @@ import { ShipmentBusinessmanComponent } from './service-execution/shipment-manag
 import { PgShipmentBusinessmanComponent } from './public/pages/pg-shipment-businessman/pg-shipment-businessman.component';
 import { ReportViewComponent } from './service-execution/reports-management/report-view/report-view.component';
 import { PgReportBusinessmanComponent } from './public/pages/pg-report-businessman/pg-report-businessman.component';
-import { SubscriptionComponent } from './subscription&payments/components/subscription/subscription.component';
-import { PgSubscriptionComponent } from './public/pages/pg-subscription/pg-subscription.component';
-import { PlatformStaffHomeComponent } from './subscription&payments/components/platform-staff-home/platform-staff-home.component';
-import { PgStaffHomeComponent } from './public/pages/pg-staff-home/pg-staff-home.component';
-import { SidebarStaffComponent } from './public/components/sidebar-staff/sidebar-staff.component';
-import { PgAnalyticsComponent } from './public/pages/pg-analytics/pg-analytics.component';
-import { AnalyticsComponent } from './analytics/components/analytics/analytics.component';
-import {MatCard, MatCardContent, MatCardHeader, MatCardSubtitle, MatCardTitle} from "@angular/material/card";
-import {MatButton} from "@angular/material/button";
-import {MatDividerModule} from "@angular/material/divider";
-import {MatIconModule} from "@angular/material/icon";
-import {MatListModule} from "@angular/material/list";
-import {MatSidenavModule} from "@angular/material/sidenav";
+import { PgReportCarrierComponent } from './public/pages/pg-report-carrier/pg-report-carrier.component';
+import { VehicleDetailsComponent } from './service-execution/vehicles-management/components/vehicle-details/vehicle-details.component';
+import { PgVehiclesDetailsBusinessmanComponent } from './public/pages/pg-vehicles-details-businessman/pg-vehicles-details-businessman.component';
+import { CreateVehicleComponent } from './service-execution/vehicles-management/components/create-vehicle/create-vehicle.component';
+import { PgCreateVehicleComponent } from './public/pages/pg-create-vehicle/pg-create-vehicle.component';
+import { VehicleUpdateComponent } from './service-execution/vehicles-management/components/vehicle-update/vehicle-update.component';
+import { PgVehiclesUpdateComponent } from './public/pages/pg-vehicles-update/pg-vehicles-update.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -82,13 +79,13 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     PgShipmentBusinessmanComponent,
     ReportViewComponent,
     PgReportBusinessmanComponent,
-    SubscriptionComponent,
-    PgSubscriptionComponent,
-    PlatformStaffHomeComponent,
-    PgStaffHomeComponent,
-    SidebarStaffComponent,
-    PgAnalyticsComponent,
-    AnalyticsComponent,
+    PgReportCarrierComponent,
+    VehicleDetailsComponent,
+    PgVehiclesDetailsBusinessmanComponent,
+    CreateVehicleComponent,
+    PgCreateVehicleComponent,
+    VehicleUpdateComponent,
+    PgVehiclesUpdateComponent,
   ],
   imports: [
     BrowserModule,

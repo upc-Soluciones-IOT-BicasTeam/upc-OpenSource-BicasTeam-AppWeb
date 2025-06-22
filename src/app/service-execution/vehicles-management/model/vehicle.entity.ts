@@ -1,46 +1,42 @@
 export class VehicleEntity {
   id: number;
-  userId: number;
+  managerId: number; // Coincide con 'idManager' del backend
   licensePlate: string;
+  brand: string; // Nuevo campo que estaba en el backend
   model: string;
-  engine: number;
-  fuel: number;
-  tires: number;
-  electricalSystem: number;
-  transmissionTemperature: number;
-  driverName: string;
+  temperature: number; // Coincide con 'temperature' del backend
+  humidity: number;
+  maxLoad: number; // Nuevo campo que estaba en el backend
+  driverId: number; // Coincide con 'driverId' del backend (antes 'driverName' en el frontend)
   vehicleImage?: string | null; // Permite que sea opcional o `null`
   color: string;
-  lastTechnicalInspectionDate: string;
-  createdAt: string;
-
-  currentTemperature: number;       // Temperatura ambiente en °C
-  cabinTemperature: number;        // Temperatura interior en °C
-  humidity: number;                // Humedad relativa en %
-  latitude: number;
-  longitude: number;
-  altitude?: number;
+  lastTechnicalInspectionDate: string | null; // Se mantiene como string para las fechas (formato "yyyy-MM-dd HH:mm:ss")
+  latitude: number ; // Puede ser null en el backend, permitimos null aquí
+  longitude: number ; // Puede ser null en el backend, permitimos null aquí
+  altitude: number | null; // Puede ser null en el backend, permitimos null aquí
+  speed: number | string |  null; // Nuevo campo que estaba en el backend, puede ser null
+  createdAt: string; // Se mantiene como string para las fechas
+  GPSDateTime: string; // Nuevo campo que estaba en el backend, para la fecha/hora de la última actualización GPS
 
   constructor() {
     // Inicializa valores por defecto si es necesario
     this.id = 0;
-    this.userId = 0;
+    this.managerId = 0;
     this.licensePlate = '';
+    this.brand = '';
     this.model = '';
-    this.engine = 0;
-    this.fuel = 0;
-    this.tires = 0;
-    this.electricalSystem = 0;
-    this.transmissionTemperature = 0;
-    this.driverName = '';
-    this.vehicleImage = null; // Puede ser `null` por defecto
-    this.color = '';
-    this.lastTechnicalInspectionDate = '';
-    this.createdAt = '';
-    this.currentTemperature = 0;
-    this.cabinTemperature = 0;
+    this.temperature = 0;
     this.humidity = 0;
-    this.latitude = 0;
-    this.longitude = 0;
+    this.maxLoad = 0;
+    this.driverId = 0;
+    this.vehicleImage = ''; // Puede ser `null` por defecto
+    this.color = '';
+    this.lastTechnicalInspectionDate = null; // Se inicializa como string vacío
+    this.latitude = 0; // Puede ser `null` por defecto
+    this.longitude = 0; // Puede ser `null` por defecto
+    this.altitude = 0; // Puede ser `null` por defecto
+    this.speed = null; // Puede ser `null` por defecto
+    this.createdAt = ''; // Se inicializa como string vacío
+    this.GPSDateTime = ''; // Se inicializa como string vacío
   }
 }
