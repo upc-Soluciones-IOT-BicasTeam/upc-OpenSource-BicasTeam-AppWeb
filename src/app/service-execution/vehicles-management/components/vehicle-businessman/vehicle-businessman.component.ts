@@ -2,8 +2,6 @@ import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core
 import { VehiclesApiService } from '../../services/vehicles-api.service';
 import { VehicleEntity } from '../../model/vehicle.entity';
 import {ActivatedRoute, Router} from '@angular/router';
-import * as  L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
 
 @Component({
   selector: 'app-vehicle-businessman',
@@ -18,8 +16,6 @@ export class VehicleBusinessmanComponent implements OnInit, OnDestroy {
   showDetails: boolean = false;
   vehicle: VehicleEntity = new VehicleEntity();
   uploadedImageUrl: string | null = null;
-  private map: L.Map | null = null;
-  private marker: L.Marker | null = null;
 
   @ViewChild('mapContainer') mapContainer: ElementRef | undefined;
 
@@ -30,7 +26,6 @@ export class VehicleBusinessmanComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroyMap();
   }
 
   loadVehicles(): void {
@@ -73,36 +68,6 @@ export class VehicleBusinessmanComponent implements OnInit, OnDestroy {
 
   navigateToUpdateVehicle(vehicleId: number) {
     this.router.navigate([':id/vehicles-update', vehicleId]);
-  }
-/*
-  addVehicle(): void {
-    // Prepara los datos para enviar, estableciendo `vehicleImage` como `undefined`
-    const vehicleData = { ...this.vehicle };
-    vehicleData.vehicleImage = undefined; // Esto omite la propiedad al enviarla
-
-    if (vehicleData.lastTechnicalInspectionDate) {
-      vehicleData.lastTechnicalInspectionDate = new Date(vehicleData.lastTechnicalInspectionDate).toISOString();
-    }
-
-    this.vehiclesApi.addVehicle(vehicleData).subscribe(
-      (data: VehicleEntity) => {
-        console.log('Vehículo agregado exitosamente:', data);
-        // Agregar manualmente la imagen cargada a la lista de vehículos solo en el frontend
-        data.vehicleImage = this.uploadedImageUrl;
-        this.vehicles.push(data);
-        this.showForm = false;
-      },
-      (error) => {
-        console.error('Error al agregar vehículo:', error);
-      }
-    );
-  }
-*/
-  editVehicle(vehicle: VehicleEntity): void {
-    this.vehicle = { ...vehicle }; // Clona el vehículo para evitar modificaciones directas
-    this.uploadedImageUrl = vehicle.vehicleImage || null; // Muestra la imagen actual, si existe
-    this.isEditing = true;
-    this.showForm = true;
   }
 
   updateVehicle(vehicle: VehicleEntity): void { // O el nombre de tu método que tiene el error
@@ -153,44 +118,11 @@ export class VehicleBusinessmanComponent implements OnInit, OnDestroy {
     );
   }
 
-  /*viewVehicleDetails(vehicle: VehicleEntity): void {
-    this.selectedVehicle = vehicle;
-    this.showDetails = true;
-    setTimeout(() => {
-      this.initMap();
-    }, 0);
-  }*/
-
   closeDetails(): void {
     this.showDetails = false;
     this.selectedVehicle = null;
-    this.destroyMap();
   }
 
-  private initMap(): void {
-    if (this.selectedVehicle && this.mapContainer?.nativeElement && !this.map) {
-      this.map = L.map(this.mapContainer.nativeElement).setView([this.selectedVehicle.latitude, this.selectedVehicle.longitude], 15);
-
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(this.map);
-
-      this.marker = L.marker([this.selectedVehicle.latitude, this.selectedVehicle.longitude]).addTo(this.map);
-      this.marker.bindPopup(`<b>${this.selectedVehicle.licensePlate}</b>`).openPopup();
-    } else if (this.selectedVehicle && this.map && this.marker) {
-      this.map.setView([this.selectedVehicle.latitude, this.selectedVehicle.longitude], 15);
-      this.marker.setLatLng([this.selectedVehicle.latitude, this.selectedVehicle.longitude]);
-      this.marker.bindPopup(`<b>${this.selectedVehicle.licensePlate}</b>`).openPopup();
-    }
-  }
-
-  private destroyMap(): void {
-    if (this.map) {
-      this.map.remove();
-      this.map = null;
-      this.marker = null;
-    }
-  }
 
   deleteVehicle(id: number): void {
      {

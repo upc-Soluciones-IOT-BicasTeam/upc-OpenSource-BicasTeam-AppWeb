@@ -11,9 +11,10 @@ export class VehicleEntity {
   vehicleImage?: string | null; // Permite que sea opcional o `null`
   color: string;
   lastTechnicalInspectionDate: string | null; // Se mantiene como string para las fechas (formato "yyyy-MM-dd HH:mm:ss")
-  latitude: number ; // Puede ser null en el backend, permitimos null aquí
-  longitude: number ; // Puede ser null en el backend, permitimos null aquí
+  latitude?: number ; // Puede ser null en el backend, permitimos null aquí
+  longitude?: number ; // Puede ser null en el backend, permitimos null aquí
   altitude: number | null; // Puede ser null en el backend, permitimos null aquí
+  location?: string;
   speed: number | string |  null; // Nuevo campo que estaba en el backend, puede ser null
   createdAt: string; // Se mantiene como string para las fechas
   GPSDateTime: string; // Nuevo campo que estaba en el backend, para la fecha/hora de la última actualización GPS

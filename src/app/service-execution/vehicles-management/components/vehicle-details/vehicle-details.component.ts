@@ -1,10 +1,8 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehiclesApiService } from '../../services/vehicles-api.service';
 import { VehicleEntity } from '../../model/vehicle.entity';
-import * as L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-
+declare const google: any;
 
 @Component({
   selector: 'app-vehicle-details',
@@ -13,8 +11,8 @@ import 'leaflet/dist/leaflet.css';
 })
 export class VehicleDetailsComponent implements OnInit, OnDestroy {
   vehicle: VehicleEntity | null = null;
-  private map: L.Map | null = null;
-  private marker: L.Marker | null = null;
+  private map: google.maps.Map | null = null;
+  private marker: google.maps.Marker | null = null;
 
   @ViewChild('mapContainer') mapContainer!: ElementRef;
 
@@ -29,7 +27,8 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroyMap();
+    this.map = null;
+    this.marker = null;
   }
 
   loadVehicleDetails(): void {
@@ -37,8 +36,20 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
     if (vehicleId) {
       this.vehiclesApi.getVehicleById(+vehicleId).subscribe(
         (data: VehicleEntity) => {
+          const coords = this.extractLatLng(data.location);
+          if (coords) {
+            data.latitude = coords.lat;
+            data.longitude = coords.lng;
+          }
+
+          const gpsDate = this.extractGPSDate(data.location);
+          if (gpsDate) {
+            data.GPSDateTime = gpsDate;
+          }
+
           this.vehicle = data;
-          setTimeout(() => this.initMap(), 0); // Espera a que se renderice el mapa
+
+          setTimeout(() => this.initMap(), 0);
         },
         (error) => {
           console.error('Error loading vehicle details:', error);
@@ -46,30 +57,56 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
       );
     }
   }
-
   private initMap(): void {
-    if (this.vehicle && this.mapContainer?.nativeElement && !this.map) {
-      this.map = L.map(this.mapContainer.nativeElement).setView(
-        [this.vehicle.latitude, this.vehicle.longitude],
-        15
-      );
+    if (this.vehicle && this.mapContainer?.nativeElement && this.vehicle.location) {
+      const coords = this.extractLatLng(this.vehicle.location);
+      if (!coords) {
+        console.warn('Coordenadas no válidas en location:', this.vehicle.location);
+        return;
+      }
 
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(this.map);
+      this.map = new google.maps.Map(this.mapContainer.nativeElement, {
+        center: coords,
+        zoom: 15,
+      });
 
-      this.marker = L.marker([this.vehicle.latitude, this.vehicle.longitude])
-        .addTo(this.map)
-        .bindPopup(`<b>${this.vehicle.licensePlate}</b>`)
-        .openPopup();
+      this.marker = new google.maps.Marker({
+        position: coords,
+        map: this.map,
+        title: this.vehicle.licensePlate,
+      });
+    } else {
+      console.warn('No se puede inicializar el mapa: location es undefined');
     }
   }
 
-  private destroyMap(): void {
-    if (this.map) {
-      this.map.remove();
-      this.map = null;
-      this.marker = null;
+  private extractLatLng(location?: string): { lat: number; lng: number } | null {
+    if (!location) return null;
+    try {
+      const latMatch = location.match(/Latitude:\s*(-?\d+\.?\d*)/);
+      const lngMatch = location.match(/Longitude:\s*(-?\d+\.?\d*)/);
+      if (latMatch && lngMatch) {
+        return {
+          lat: parseFloat(latMatch[1]),
+          lng: parseFloat(lngMatch[1]),
+        };
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  }
+
+  private extractGPSDate(location?: string): string | null {
+    if (!location) return null;
+    try {
+      const GPSDateMatch = location.match(/GPS Date&Time:\s*([\d\-:\s]+)/);
+      if (GPSDateMatch && GPSDateMatch[1]) {
+        return GPSDateMatch[1].trim();
+      }
+      return null;
+    } catch {
+      return null;
     }
   }
 
