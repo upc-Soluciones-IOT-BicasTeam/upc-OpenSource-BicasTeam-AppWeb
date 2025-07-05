@@ -85,4 +85,11 @@ export class SidebarPublicComponent implements OnInit {
       this.router.navigate([this.user.id, `shipment-carrier`]);
     }
   }
+
+  goToDrivers(): void {
+    if (this.type === 'Gerente') {
+      this.router.navigate([this.user.id, 'driver-registration']);
+    }
+  }
+
 }
