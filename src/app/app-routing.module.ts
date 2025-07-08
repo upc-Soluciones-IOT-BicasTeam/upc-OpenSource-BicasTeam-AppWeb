@@ -13,7 +13,7 @@ import {PgShipmentCarrierComponent} from "./public/pages/pg-shipment-carrier/pg-
 import {PgShipmentBusinessmanComponent} from "./public/pages/pg-shipment-businessman/pg-shipment-businessman.component";
 import {PgReportBusinessmanComponent} from "./public/pages/pg-report-businessman/pg-report-businessman.component";
 import {PgReportCarrierComponent} from "./public/pages/pg-report-carrier/pg-report-carrier.component";
-import { PgDriverRegistrationComponent } from './public/pages/pg-driver-registration/pg-driver-registration';
+import { PgDriverRegistrationComponent } from './public/pages/pg-driver-registration/pg-driver-registration.component';
 
 
 const routes: Routes = [
