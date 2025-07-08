@@ -62,7 +62,7 @@ export class VehiclesApiService {
     "altitude": 60
   }
 ]*/
-  private baseUrl = 'http://localhost:8080/api/vehicles';
+  private baseUrl = 'https://app-250622151805.azurewebsites.net/api/v1/vehicles';
 
 
   constructor(private http: HttpClient) {}

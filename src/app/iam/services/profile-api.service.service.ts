@@ -9,7 +9,7 @@ import {ProfileEntity} from "../model/profile.entity";
 })
 export class ProfileApiServiceService {
 
-  private baseUrl = 'http://localhost:8080/api/profiles';
+  private baseUrl = 'https://app-250622151805.azurewebsites.net/api/v1/profiles';
 
   constructor(private http: HttpClient) {}
 

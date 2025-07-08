@@ -9,7 +9,7 @@ import {SubsData} from "../model/image.entity";
 })
 export class SubsApiService {
 
-  private baseUrl = 'http://localhost:8080/api/subscriptions';
+  private baseUrl = 'https://app-250622151805.azurewebsites.net/api/v1/subscriptions';
 
   constructor(private http: HttpClient) {}
 //*******

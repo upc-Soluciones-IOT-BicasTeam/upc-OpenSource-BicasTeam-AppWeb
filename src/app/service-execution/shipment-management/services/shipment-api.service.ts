@@ -9,7 +9,7 @@ import { ShipmentEntity } from '../model/shipment.entity';
   providedIn: 'root'
 })
 export class ShipmentApiService {
-  private baseUrl = 'http://localhost:8080/api/shipments';
+  private baseUrl = 'https://app-250622151805.azurewebsites.net/api/v1/shipments';
 
   constructor(private http: HttpClient) {}
 

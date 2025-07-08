@@ -7,7 +7,7 @@ import { UserEntity } from '../model/user.entity';
   providedIn: 'root'
 })
 export class IamApiService {
-  private baseUrl = 'http://localhost:8080/api/users';
+  private baseUrl = 'https://app-250622151805.azurewebsites.net/api/v1/users';
 
   constructor(private http: HttpClient) {}
 
