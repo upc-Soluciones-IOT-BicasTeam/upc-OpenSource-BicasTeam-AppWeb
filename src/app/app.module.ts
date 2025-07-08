@@ -34,21 +34,24 @@ import { PgHomeDriverComponent } from './public/pages/pg-home-driver/pg-home-dri
 import { PgHomeBusinessmanComponent } from './public/pages/pg-home-businessman/pg-home-businessman.component';
 import { VehicleBusinessmanComponent } from './service-execution/vehicles-management/components/vehicle-businessman/vehicle-businessman.component';
 import { PgVehiclesBusinessmanComponent } from './public/pages/pg-vehicles-businessman/pg-vehicles-businessman.component';
-import { VehicleCarrierComponent } from './service-execution/vehicles-management/components/vehicle-carrier/vehicle-carrier.component';
-import { PgVehiclesCarrierComponent } from './public/pages/pg-vehicles-carrier/pg-vehicles-carrier.component';
 import { ProfileEditionComponent } from './profiles-managment/components/profile-edition/profile-edition.component';
 import { PgProfileEditionComponent } from './public/pages/pg-profile-edition/pg-profile-edition.component';
 import { ShipmentBusinessmanComponent } from './service-execution/shipment-management/components/shipment-businessman/shipment-businessman.component';
 import { PgShipmentBusinessmanComponent } from './public/pages/pg-shipment-businessman/pg-shipment-businessman.component';
 import { ReportViewComponent } from './service-execution/reports-management/report-view/report-view.component';
 import { PgReportBusinessmanComponent } from './public/pages/pg-report-businessman/pg-report-businessman.component';
-import { PgReportCarrierComponent } from './public/pages/pg-report-carrier/pg-report-carrier.component';
 import { VehicleDetailsComponent } from './service-execution/vehicles-management/components/vehicle-details/vehicle-details.component';
 import { PgVehiclesDetailsBusinessmanComponent } from './public/pages/pg-vehicles-details-businessman/pg-vehicles-details-businessman.component';
 import { CreateVehicleComponent } from './service-execution/vehicles-management/components/create-vehicle/create-vehicle.component';
 import { PgCreateVehicleComponent } from './public/pages/pg-create-vehicle/pg-create-vehicle.component';
 import { VehicleUpdateComponent } from './service-execution/vehicles-management/components/vehicle-update/vehicle-update.component';
 import { PgVehiclesUpdateComponent } from './public/pages/pg-vehicles-update/pg-vehicles-update.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
+import {MatIconModule} from "@angular/material/icon";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatCard, MatCardContent, MatCardHeader, MatCardSubtitle, MatCardTitle} from "@angular/material/card";
+import {MatButton} from "@angular/material/button";
 
 
 
@@ -71,15 +74,12 @@ import { PgVehiclesUpdateComponent } from './public/pages/pg-vehicles-update/pg-
     PgHomeDriverComponent,
     VehicleBusinessmanComponent,
     PgVehiclesBusinessmanComponent,
-    VehicleCarrierComponent,
-    PgVehiclesCarrierComponent,
     ProfileEditionComponent,
     PgProfileEditionComponent,
     ShipmentBusinessmanComponent,
     PgShipmentBusinessmanComponent,
     ReportViewComponent,
     PgReportBusinessmanComponent,
-    PgReportCarrierComponent,
     VehicleDetailsComponent,
     PgVehiclesDetailsBusinessmanComponent,
     CreateVehicleComponent,
