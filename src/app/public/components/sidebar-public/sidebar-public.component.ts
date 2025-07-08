@@ -74,4 +74,11 @@ export class SidebarPublicComponent implements OnInit {
   goToAnalytics(): void {
     this.router.navigate([this.user.id, 'analytics']);
   }
+
+  goToDrivers(): void {
+    if (this.type === 'Gerente') {
+      this.router.navigate([this.user.id, 'driver-registration']);
+    }
+  }
+
 }

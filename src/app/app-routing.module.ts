@@ -13,6 +13,8 @@ import {PgReportBusinessmanComponent} from "./public/pages/pg-report-businessman
 import {PgVehiclesDetailsBusinessmanComponent} from "./public/pages/pg-vehicles-details-businessman/pg-vehicles-details-businessman.component";
 import {PgCreateVehicleComponent} from "./public/pages/pg-create-vehicle/pg-create-vehicle.component";
 import {PgVehiclesUpdateComponent} from "./public/pages/pg-vehicles-update/pg-vehicles-update.component";
+import {PgReportCarrierComponent} from "./public/pages/pg-report-carrier/pg-report-carrier.component";
+import { PgDriverRegistrationComponent } from './public/pages/pg-driver-registration/pg-driver-registration.component';
 
 
 const routes: Routes = [
@@ -29,6 +31,8 @@ const routes: Routes = [
   {path:':id/vehicles-details-businessman/:id', component: PgVehiclesDetailsBusinessmanComponent},
   {path:':id/create-vehicle-businessman',component: PgCreateVehicleComponent},
   {path:':id/vehicles-update/:id', component: PgVehiclesUpdateComponent},
+  {path:':id/report-carrier',component: PgReportCarrierComponent},
+  { path: ':id/driver-registration', component: PgDriverRegistrationComponent },
   {path: '', redirectTo: 'login', pathMatch: 'full'}
 ];
 
