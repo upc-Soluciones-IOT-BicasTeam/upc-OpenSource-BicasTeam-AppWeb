@@ -35,6 +35,9 @@
           {{ vehicle.latitude | number:'1.6-6' }},
           {{ vehicle.longitude | number:'1.6-6' }}
         </p>
+        <p><strong>Ultima actualización GPS:</strong>
+          {{ vehicle.GPSDateTime }}
+        </p>
         <div #mapContainer id="map" class="map"></div>
       </div>
     </div>
