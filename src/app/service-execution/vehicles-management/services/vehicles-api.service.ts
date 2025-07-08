@@ -62,7 +62,7 @@ export class VehiclesApiService {
     "altitude": 60
   }
 ]*/
-  private baseUrl = 'http://localhost:8080/api/vehicles';
+  private baseUrl = 'http://localhost:8080/api/v1/vehicles';
 
 
   constructor(private http: HttpClient) {}
