@@ -1,73 +1,188 @@
 .sidebar {
-  width: 260px;
+  width: 280px;
   height: 100vh;
-  backdrop-filter: blur(10px); /* Efecto de desenfoque */
-  color: #ECF0F1;
+  background: #8e44ad;
+  color: #ecf0f1;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centramos el contenido horizontalmente */
-  justify-content: space-between; /* Espacio uniforme entre elementos */
-  border-radius: 15px; /* Bordes redondeados */
-  overflow: hidden;
-  transition: all 0.3s ease-in-out;
-  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  border-right: 1px solid #7d3c98;
+  transition: all 0.3s ease;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: #7d3c98;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #a569bd;
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: #bb8fce;
 }
 
 .user-info {
   display: flex;
-  flex-direction: column; /* Cambiar a columna para centrar el contenido */
-  align-items: center; /* Centrado horizontal */
-  text-align: center; /* Centrado del texto */
-  padding: 15px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px 20px;
   cursor: pointer;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid #7d3c98;
+  transition: background-color 0.3s ease;
+  background: transparent;
+  margin: 0;
+}
+
+.user-info:hover {
+  background: #7d3c98;
 }
 
 .user-info img {
   border-radius: 50%;
-  width: 80px; /* Tamaño mayor para mejor visibilidad */
-  height: 80px;
-  margin-bottom: 10px; /* Separación del nombre */
-  border: 2px solid #1B2631;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  width: 90px;
+  height: 90px;
+  margin-bottom: 12px;
+  border: 2px solid #9b59b6;
+  transition: border-color 0.3s ease;
+  object-fit: cover;
 }
 
-.user-info h2, .user-info p {
-  margin: 5px 0;
-  font-size: 1.2em; /* Aumento del tamaño de la fuente */
+.user-info:hover img {
+  border-color: #bb8fce;
+}
+
+.user-name h2 {
+  margin: 8px 0 4px 0;
+  font-size: 1.3em;
+  font-weight: 600;
+  color: #ecf0f1;
+}
+
+.user-name p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #9b59b6;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .menu {
   list-style: none;
   padding: 0;
-  margin: 20px 0;
-  width: 100%; /* Hacer que los elementos ocupen todo el ancho */
-  text-align: center;
+  margin: 0;
+  width: 100%;
+  flex: 1;
+  padding-top: 16px;
 }
 
 .menu li {
   display: flex;
-  justify-content: center; /* Centra los elementos dentro del li */
   align-items: center;
-  padding: 15px; /* Más espacio para mejorar la interactividad */
+  padding: 16px 24px;
   cursor: pointer;
-  border-radius: 10px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  font-size: 1.1em; /* Aumento del tamaño de la fuente */
+  transition: background-color 0.3s ease;
+  font-size: 1em;
+  font-weight: 500;
+  position: relative;
+  margin: 4px 16px;
+  border-radius: 8px;
+  color: #bdc3c7;
 }
 
 .menu li:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  transform: scale(1.05);
+  background: #7d3c98;
+  color: #ecf0f1;
+}
+
+.menu li:hover mat-icon {
+  color: #9b59b6;
 }
 
 .menu li mat-icon {
-  margin-right: 10px;
-  color: #F7B500;
-  font-size: 28px; /* Tamaño mayor de los iconos */
+  margin-right: 16px;
+  color: #7f8c8d;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  transition: color 0.3s ease;
+  min-width: 24px;
+}
+
+.menu li span {
+  font-size: 0.95em;
+  letter-spacing: 0.3px;
 }
 
 .settings-section {
-  width: 100%; /* Mantener el ancho completo */
-  padding-top: 10px;
+  width: 100%;
+  padding: 16px 0 24px 0;
+  border-top: 1px solid #7d3c98;
+  margin-top: auto;
+}
+
+.settings-section .menu li {
+  margin: 4px 16px;
+}
+
+.settings-section .menu li:hover {
+  background: #7d3c98;
+  color: #ecf0f1;
+}
+
+.settings-section .menu li:hover mat-icon {
+  color: #e74c3c;
+}
+
+/* Active menu item styles */
+.menu li.active {
+  background: #9b59b6;
+  color: white;
+}
+
+.menu li.active mat-icon {
+  color: white;
+}
+
+/* Focus states for accessibility */
+.menu li:focus {
+  outline: 2px solid #9b59b6;
+  outline-offset: 2px;
+}
+
+.user-info:focus {
+  outline: 2px solid #9b59b6;
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 260px;
+  }
+
+  .user-info img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .user-name h2 {
+    font-size: 1.1em;
+  }
+
+  .menu li {
+    padding: 12px 20px;
+  }
 }

@@ -9,13 +9,12 @@
     "NO_ACCOUNT": "Don't have an account?",
     "SIGNUP_LINK": "Sign up"
   },
-
   "REGISTER": {
     "TITLE": "Register as",
-    "BUSINESSMAN": "Businessman",
+    "MANAGER": "Manager",
     "CARRIER": "Carrier",
     "ALREADY_ACCOUNT": "Already have an account?",
-    "LOGIN_LINK": "Log in"
+    "LOGIN_LINK": "Sign in"
   },
   "SIGNUP": {
     "TITLE": "Sign Up",
@@ -34,7 +33,7 @@
     "ALREADY_ACCOUNT": "Already have an account?",
     "LOGIN_LINK": "Log in"
   },
-  "REGISTER": {
+  "REGISTER_SUCCESS": {
     "SUCCESS_TITLE": "Successful<br>Registration!",
     "SUCCESS_MESSAGE": "Your account has been successfully registered.",
     "SUCCESS_BUTTON": "Accept"
@@ -77,7 +76,7 @@
   },
   "SIDEBAR": {
     "USER_ICON_ALT": "User Icon",
-    "BUSINESSMAN": "Businessman",
+    "MANAGER": "Manager",
     "CARRIER": "Carrier",
 
     "HOME": "Home",

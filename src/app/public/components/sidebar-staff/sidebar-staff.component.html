@@ -1,4 +1,4 @@
-<!-- src/app/shared/components/sidebar-staff/sidebar-staff.component.html -->
+<!-- src/app/components/sidebar-staff/sidebar-staff.component.html -->
 <div class="sidebar">
   <div class="user-info" (click)="goToChangueCredentials()">
     <img
@@ -12,18 +12,19 @@
   </div>
 
   <ul class="menu">
-    <li (click)="goToHome()">
+    <li (click)="goToHome()" title="{{ 'SIDEBAR.HOME' | translate }}">
       <mat-icon>dashboard</mat-icon>
       <span>{{ "SIDEBAR.HOME" | translate }}</span>
     </li>
-    <li (click)="goToChangueCredentials()">
+    <li (click)="goToChangueCredentials()" title="{{ 'SIDEBAR.PROFILE' | translate }}">
       <mat-icon>person</mat-icon>
       <span>{{ "SIDEBAR.PROFILE" | translate }}</span>
     </li>
   </ul>
+  
   <div class="settings-section">
     <ul class="menu">
-      <li (click)="goTologout()">
+      <li (click)="goTologout()" title="{{ 'SIDEBAR.LOGOUT' | translate }}">
         <mat-icon>logout</mat-icon>
         <span>{{ "SIDEBAR.LOGOUT" | translate }}</span>
       </li>

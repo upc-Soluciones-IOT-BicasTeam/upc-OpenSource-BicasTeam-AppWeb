@@ -53,14 +53,14 @@ export class SidebarPublicComponent implements OnInit {
         next: (profileData: any) => {
           console.log('Profile data loaded:', profileData);
           this.profile = profileData;
-          this.type = 'Manager';
+          this.type = 'MANAGER';
           this.name = profileData.name || 'Manager';
           this.lastName = profileData.lastName || 'User';
         },
         error: (error) => {
           console.error('Error loading profile data:', error);
           // Set default values if profile loading fails
-          this.type = 'Manager';
+          this.type = 'MANAGER';
           this.name = 'Manager';
           this.lastName = 'User';
         },

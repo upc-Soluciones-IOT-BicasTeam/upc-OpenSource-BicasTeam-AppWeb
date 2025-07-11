@@ -11,7 +11,7 @@
   },
   "REGISTER": {
     "TITLE": "Registrar como",
-    "BUSINESSMAN": "Empresario",
+    "MANAGER": "Gerente",
     "CARRIER": "Transportista",
     "ALREADY_ACCOUNT": "¿Ya tienes una cuenta?",
     "LOGIN_LINK": "Inicia sesión"
@@ -76,7 +76,7 @@
   },
   "SIDEBAR": {
     "USER_ICON_ALT": "Icono de usuario",
-    "BUSINESSMAN": "Empresario",
+    "MANAGER": "Gerente",
     "CARRIER": "Transportista",
 
     "HOME": "Inicio",
