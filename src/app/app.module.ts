@@ -22,7 +22,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { IamRegisterComponent } from './iam/components/iam-register/iam-register.component';
 import { IamRegisterUserInfoComponent } from './iam/components/iam-register-user-info/iam-register-user-info.component';
 import { IamRegisterSuccessfullyComponent } from './iam/components/iam-register-successfully/iam-register-successfully.component';
-import { IamApiService } from './iam/services/iam-api.service.service';
+import { IamApiService } from './iam/services/iam-api.service';
 import { SidebarPublicComponent } from './public/components/sidebar-public/sidebar-public.component';
 import { PgLoginComponent } from './public/pages/pg-login/pg-login.component';
 import { PgRegisterComponent } from './public/pages/pg-register/pg-register.component';
@@ -46,15 +46,18 @@ import { CreateVehicleComponent } from './service-execution/vehicles-management/
 import { PgCreateVehicleComponent } from './public/pages/pg-create-vehicle/pg-create-vehicle.component';
 import { VehicleUpdateComponent } from './service-execution/vehicles-management/components/vehicle-update/vehicle-update.component';
 import { PgVehiclesUpdateComponent } from './public/pages/pg-vehicles-update/pg-vehicles-update.component';
-import {MatSidenavModule} from "@angular/material/sidenav";
-import {MatListModule} from "@angular/material/list";
-import {MatIconModule} from "@angular/material/icon";
-import {MatDividerModule} from "@angular/material/divider";
-import {MatCard, MatCardContent, MatCardHeader, MatCardSubtitle, MatCardTitle} from "@angular/material/card";
-import {MatButton} from "@angular/material/button";
-
-
-
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import {
+  MatCard,
+  MatCardContent,
+  MatCardHeader,
+  MatCardSubtitle,
+  MatCardTitle,
+} from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -95,8 +98,8 @@ import {MatButton} from "@angular/material/button";
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
     AppRoutingModule,
     FormsModule,
@@ -113,6 +116,6 @@ import {MatButton} from "@angular/material/button";
     ReactiveFormsModule,
   ],
   providers: [provideAnimationsAsync(), IamApiService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

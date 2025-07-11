@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { IamApiService } from '../../services/iam-api.service.service';
+import { IamApiService } from '../../services/iam-api.service';
 import { UserEntity } from '../../model/user.entity';
 
 @Component({
   selector: 'app-iam-register',
   templateUrl: './iam-register.component.html',
-  styleUrls: ['./iam-register.component.css']
+  styleUrls: ['./iam-register.component.css'],
 })
 export class IamRegisterComponent {
   user: UserEntity = new UserEntity();

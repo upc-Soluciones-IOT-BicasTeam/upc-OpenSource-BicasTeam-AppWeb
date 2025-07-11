@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IamApiService } from '../../../iam/services/iam-api.service.service';
+import { IamApiService } from '../../../iam/services/iam-api.service';
 import { UserEntity } from '../../../iam/model/user.entity';
 import { ProfileEntity } from '../../../iam/model/profile.entity';
-import { ProfileApiServiceService } from '../../../iam/services/profile-api.service.service';
+import { ProfileApiService } from '../../../iam/services/profile-api.service';
 import { AppConstants } from '../../../shared/constants/app.constants';
 
 @Component({
@@ -23,7 +23,7 @@ export class SidebarPublicComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private api: IamApiService,
-    private profileApi: ProfileApiServiceService
+    private profileApi: ProfileApiService
   ) {
     this.user.id = this.route.snapshot.params['id'];
   }

@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IamApiService } from '../../services/iam-api.service.service';
+import { IamApiService } from '../../services/iam-api.service';
 import { UserEntity } from '../../model/user.entity';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-iam-login',
   templateUrl: './iam-login.component.component.html',
-  styleUrls: ['./iam-login.component.component.css']
+  styleUrls: ['./iam-login.component.component.css'],
 })
 export class IamLoginComponentComponent implements OnInit, OnDestroy {
   user: UserEntity = new UserEntity();
@@ -29,7 +29,6 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
       (data: any) => {
         console.log(data);
         if (data) {
-
           data.role === 'manager'
             ? this.router.navigate([`${data.id}/profile`])
             : this.router.navigate([`${data.id}/staff-home`]);
@@ -41,7 +40,8 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
       (error) => {
         console.error('Error during login:', error);
         this.error = true;
-        this.error_msg = 'An unexpected error occurred. Please try again later.';
+        this.error_msg =
+          'An unexpected error occurred. Please try again later.';
       }
     );
   }
@@ -52,7 +52,7 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
 
   goToRegisterUserInformation(type: string) {
     this.user.role = type; // Guarda el tipo de usuario
-    console.log(type)
+    console.log(type);
     this.router.navigate([`register/${type}`]);
   }
 }
