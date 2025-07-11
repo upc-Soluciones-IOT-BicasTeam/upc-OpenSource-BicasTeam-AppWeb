@@ -126,10 +126,12 @@ export class AnalyticsComponent implements OnInit {
       (data: VehicleEntity[]) => {
         const grouped: { [driver: string]: VehicleEntity[] } = {};
         data.forEach((vehicle) => {
-          if (!grouped[vehicle.driverName]) {
-            grouped[vehicle.driverName] = [];
+          // Use driverId as the key since we don't have driverName
+          const driverKey = `Driver ${vehicle.driverId}`;
+          if (!grouped[driverKey]) {
+            grouped[driverKey] = [];
           }
-          grouped[vehicle.driverName].push(vehicle);
+          grouped[driverKey].push(vehicle);
         });
         this.vehiclesByDriver = Object.keys(grouped).map((driverName) => ({
           driverName,

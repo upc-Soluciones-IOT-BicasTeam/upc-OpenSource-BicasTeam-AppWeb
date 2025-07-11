@@ -4,6 +4,7 @@ import { IamApiService } from '../../../iam/services/iam-api.service';
 import { UserEntity } from '../../../iam/model/user.entity';
 import { ProfileEntity } from '../../../iam/model/profile.entity';
 import { ProfileApiService } from '../../../iam/services/profile-api.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { AppConstants } from '../../../shared/constants/app.constants';
 
 @Component({
@@ -23,18 +24,48 @@ export class SidebarPublicComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private api: IamApiService,
-    private profileApi: ProfileApiService
+    private profileApi: ProfileApiService,
+    private authService: AuthService
   ) {
     this.user.id = this.route.snapshot.params['id'];
   }
 
   ngOnInit(): void {
-    this.profileApi.findUserById(this.user.id!).subscribe((data: any) => {
-      console.log(data);
-      this.type = 'Manager';
-      this.name = data.name;
-      this.lastName = data.lastName;
-    });
+    // Load current user data from AuthService
+    const currentUser = this.authService.getCurrentUser();
+    if (currentUser) {
+      this.user = currentUser;
+      this.loadProfileData();
+    } else {
+      // If no user in AuthService, try to get from route params
+      const userId = this.route.snapshot.params['id'];
+      if (userId) {
+        this.user.id = parseInt(userId);
+        this.loadProfileData();
+      }
+    }
+  }
+
+  private loadProfileData(): void {
+    if (this.user.id) {
+      // Load profile data using ProfileApiService
+      this.profileApi.findUserById(this.user.id).subscribe({
+        next: (profileData: any) => {
+          console.log('Profile data loaded:', profileData);
+          this.profile = profileData;
+          this.type = 'Manager';
+          this.name = profileData.name || 'Manager';
+          this.lastName = profileData.lastName || 'User';
+        },
+        error: (error) => {
+          console.error('Error loading profile data:', error);
+          // Set default values if profile loading fails
+          this.type = 'Manager';
+          this.name = 'Manager';
+          this.lastName = 'User';
+        },
+      });
+    }
   }
 
   getUserImage(type: string): string {
@@ -50,6 +81,8 @@ export class SidebarPublicComponent implements OnInit {
   }
 
   goTologout(): void {
+    // Use AuthService to logout
+    this.authService.logout();
     this.router.navigate([`login`]);
   }
 

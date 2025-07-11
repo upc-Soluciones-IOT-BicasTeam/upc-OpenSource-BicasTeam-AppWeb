@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
 
 // ngx-translate imports
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -46,6 +47,13 @@ import { CreateVehicleComponent } from './service-execution/vehicles-management/
 import { PgCreateVehicleComponent } from './public/pages/pg-create-vehicle/pg-create-vehicle.component';
 import { VehicleUpdateComponent } from './service-execution/vehicles-management/components/vehicle-update/vehicle-update.component';
 import { PgVehiclesUpdateComponent } from './public/pages/pg-vehicles-update/pg-vehicles-update.component';
+import { PgStaffHomeComponent } from './public/pages/pg-staff-home/pg-staff-home.component';
+import { PgAnalyticsComponent } from './public/pages/pg-analytics/pg-analytics.component';
+import { PgSubscriptionComponent } from './public/pages/pg-subscription/pg-subscription.component';
+import { SidebarStaffComponent } from './public/components/sidebar-staff/sidebar-staff.component';
+import { AnalyticsComponent } from './analytics/components/analytics/analytics.component';
+import { SubscriptionComponent } from './subscription&payments/components/subscription/subscription.component';
+import { PlatformStaffHomeComponent } from './subscription&payments/components/platform-staff-home/platform-staff-home.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
@@ -89,10 +97,18 @@ import { MatButton } from '@angular/material/button';
     PgCreateVehicleComponent,
     VehicleUpdateComponent,
     PgVehiclesUpdateComponent,
+    PgStaffHomeComponent,
+    PgAnalyticsComponent,
+    PgSubscriptionComponent,
+    SidebarStaffComponent,
+    AnalyticsComponent,
+    SubscriptionComponent,
+    PlatformStaffHomeComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    CoreModule,
     // ngx-translate module configuration
     TranslateModule.forRoot({
       loader: {

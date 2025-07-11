@@ -1,26 +1,25 @@
 export class VehicleEntity {
   id: number;
-  managerId: number; // Coincide con 'idManager' del backend
+  managerId: number;
   licensePlate: string;
-  brand: string; // Nuevo campo que estaba en el backend
+  brand: string;
   model: string;
-  temperature: number; // Coincide con 'temperature' del backend
+  temperature: number;
   humidity: number;
-  maxLoad: number; // Nuevo campo que estaba en el backend
-  driverId: number; // Coincide con 'driverId' del backend (antes 'driverName' en el frontend)
-  vehicleImage?: string | null; // Permite que sea opcional o `null`
+  maxLoad: number;
+  driverId: number;
+  vehicleImage?: string | null; 
   color: string;
-  lastTechnicalInspectionDate: string | null; // Se mantiene como string para las fechas (formato "yyyy-MM-dd HH:mm:ss")
-  latitude?: number ; // Puede ser null en el backend, permitimos null aquí
-  longitude?: number ; // Puede ser null en el backend, permitimos null aquí
-  altitude: number | null; // Puede ser null en el backend, permitimos null aquí
+  lastTechnicalInspectionDate: string | null; 
+  latitude?: number; 
+  longitude?: number; 
+  altitude: number | null; 
   location?: string;
-  speed: number | string |  null; // Nuevo campo que estaba en el backend, puede ser null
-  createdAt: string; // Se mantiene como string para las fechas
-  GPSDateTime: string; // Nuevo campo que estaba en el backend, para la fecha/hora de la última actualización GPS
+  speed: number | string | null;
+  createdAt: string;
+  GPSDateTime: string; 
 
   constructor() {
-    // Inicializa valores por defecto si es necesario
     this.id = 0;
     this.managerId = 0;
     this.licensePlate = '';
@@ -30,14 +29,14 @@ export class VehicleEntity {
     this.humidity = 0;
     this.maxLoad = 0;
     this.driverId = 0;
-    this.vehicleImage = ''; // Puede ser `null` por defecto
+    this.vehicleImage = ''; 
     this.color = '';
-    this.lastTechnicalInspectionDate = null; // Se inicializa como string vacío
-    this.latitude = 0; // Puede ser `null` por defecto
-    this.longitude = 0; // Puede ser `null` por defecto
-    this.altitude = 0; // Puede ser `null` por defecto
-    this.speed = null; // Puede ser `null` por defecto
-    this.createdAt = ''; // Se inicializa como string vacío
-    this.GPSDateTime = ''; // Se inicializa como string vacío
+    this.lastTechnicalInspectionDate = null; 
+    this.latitude = 0; 
+    this.longitude = 0; 
+    this.altitude = 0;
+    this.speed = null; 
+    this.createdAt = ''; 
+    this.GPSDateTime = ''; 
   }
 }
