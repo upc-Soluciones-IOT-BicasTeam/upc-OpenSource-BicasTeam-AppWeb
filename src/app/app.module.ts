@@ -3,21 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-
-// ngx-translate imports
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-// Factory function for ngx-translate HTTP loader
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-// Application components & services
 import { IamLoginComponentComponent } from './iam/components/iam-login/iam-login.component.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { IamRegisterComponent } from './iam/components/iam-register/iam-register.component';
@@ -54,6 +49,10 @@ import { SidebarStaffComponent } from './public/components/sidebar-staff/sidebar
 import { AnalyticsComponent } from './analytics/components/analytics/analytics.component';
 import { SubscriptionComponent } from './subscription&payments/components/subscription/subscription.component';
 import { PlatformStaffHomeComponent } from './subscription&payments/components/platform-staff-home/platform-staff-home.component';
+import { VehiclesApiService } from './service-execution/vehicles-management/services/vehicles-api.service';
+import { ShipmentApiService } from './service-execution/shipment-management/services/shipment-api.service';
+import { ReportsApiService } from './service-execution/reports-management/reports-services/report-view.service';
+import { ProfileApiService } from './profiles-managment/services/profile-api.service';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
@@ -109,7 +108,6 @@ import { MatButton } from '@angular/material/button';
     BrowserModule,
     HttpClientModule,
     CoreModule,
-    // ngx-translate module configuration
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -131,7 +129,14 @@ import { MatButton } from '@angular/material/button';
     MatButton,
     ReactiveFormsModule,
   ],
-  providers: [provideAnimationsAsync(), IamApiService],
+  providers: [
+    provideAnimationsAsync(),
+    IamApiService,
+    VehiclesApiService,
+    ShipmentApiService,
+    ReportsApiService,
+    ProfileApiService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

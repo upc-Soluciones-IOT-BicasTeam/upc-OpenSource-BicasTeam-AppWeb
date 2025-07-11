@@ -64,6 +64,18 @@
   "HOME": {
     "WELCOME": "Welcome to Movigestion!",
     "START": "Let's start",
+    "LOADING": "Loading...",
+    "ISSUES": "Issues",
+    "VEHICLES": "Vehicles",
+    "SHIPMENTS": "Shipments",
+    "MANAGE": "Manage",
+    "PENDING_ISSUES": "Pending Issues",
+    "NO_PENDING_ISSUES": "No pending issues",
+    "FLEET_OVERVIEW": "Fleet Overview",
+    "NO_VEHICLES": "No vehicles registered",
+    "PLATE": "Plate",
+    "ACTIVE_SHIPMENTS": "Active Shipments",
+    "NO_SHIPMENTS": "No active shipments",
     "TODAYS_ACTIVITIES": "Today's activities",
     "DELIVERIES_ON_THE_MOVE": "Deliveries on the move",
     "SEE_MORE": "See More",
@@ -293,7 +305,4 @@
       "VEHICLES": "No vehicles available."
     }
   }
-
 }
-
-

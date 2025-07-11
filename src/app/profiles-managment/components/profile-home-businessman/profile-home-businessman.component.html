@@ -1,118 +1,148 @@
-<!-- src/app/public/pages/pg-home-businessman/home-businessman.component.html -->
-<div class="p-5 flex flex-col flex-auto container z-1 main-container">
-  <div class="glass-effect">
-    <div class="w-full align-content-center">
-      <div class="welcome-container">
-        <!-- Título con nombre dinámico -->
-        <h1 class="title gradient-text">
-          {{ 'HOME.WELCOME' | translate }}
-        </h1>
-        <img
-          src="https://i.ibb.co/RCDQZnJ/logo.png"
-          id="icon"
-          alt="Logo"
-          class="custom-image rounded-shadow"
-        />
+<div class="home-container">
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>{{ "HOME.LOADING" | translate }}</p>
+  </div>
+
+  <!-- Main Content -->
+  <div *ngIf="!isLoading">
+    <!-- Header Section -->
+    <header class="welcome-header">
+      <div class="welcome-content">
+        <h1 class="welcome-title">{{ "HOME.WELCOME" | translate }}</h1>
+        <p class="welcome-subtitle">{{ "HOME.START" | translate }}</p>
       </div>
-
-      <p class="subtitle">{{ 'HOME.START' | translate }}</p>
-
-      <div class="card-container">
-        <!-- Actividades -->
-        <div class="card glass-card" *ngIf="activities.length">
-          <h2 class="card-title">
-            <i class="fa fa-list"></i>
-            {{ 'HOME.TODAYS_ACTIVITIES' | translate }}
-          </h2>
-          <div class="card-content">
-            <div
-              class="activity card-hover"
-              *ngFor="let activity of activities.slice(0, 3)"
-            >
-              <div class="card-content1">
-                <h3 class="activity-description">
-                  {{ activity.description }}
-                </h3>
-                <div class="date-time">
-                  <p>{{ activity.type }}</p>
-                  <p>{{ activity.createdAt }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <button
-            class="see-more-button hover-scale"
-            (click)="onSeeMoreActivities()"
-          >
-            {{ 'HOME.SEE_MORE' | translate }}
-          </button>
+      <div class="stats-overview">
+        <div class="stat-card">
+          <span class="stat-number">{{ issues.length }}</span>
+          <span class="stat-label">{{ "HOME.ISSUES" | translate }}</span>
         </div>
-
-        <!-- Entregas -->
-        <div class="card glass-card" *ngIf="deliveries.length">
-          <h2 class="card-title">
-            <i class="fa fa-truck"></i>
-            {{ 'HOME.DELIVERIES_ON_THE_MOVE' | translate }}
-          </h2>
-          <div class="card-content2">
-            <div
-              class="delivery card-hover"
-              *ngFor="let delivery of deliveries.slice(0, 1)"
-            >
-              <h3>{{ delivery.destiny }}</h3>
-              <p>
-                {{ 'HOME.RESPONSIBLE' | translate }}:
-                {{ delivery.description }}
-              </p>
-              <p>
-                {{ 'HOME.START_TIME' | translate }}:
-                {{ delivery.createdAt }}
-              </p>
-              <p>
-                {{ 'HOME.DELIVERY_TIME' | translate }}:
-                {{ delivery.status }}
-              </p>
-            </div>
-          </div>
-          <button
-            class="see-more-button hover-scale"
-            (click)="onSeeMoreDeliveries()"
-          >
-            {{ 'HOME.SEE_MORE' | translate }}
-          </button>
+        <div class="stat-card">
+          <span class="stat-number">{{ vehicles.length }}</span>
+          <span class="stat-label">{{ "HOME.VEHICLES" | translate }}</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">{{ shipments.length }}</span>
+          <span class="stat-label">{{ "HOME.SHIPMENTS" | translate }}</span>
         </div>
       </div>
+    </header>
 
-      <!-- Condiciones -->
-      <div class="card2 glass-card" *ngIf="conditions.length">
-        <h2 class="card-title2">
-          <i class="fa fa-signal"></i>
-          {{ 'HOME.CONDITION_TITLE' | translate }}
-        </h2>
-        <div class="card-content3">
+    <!-- Main Content Grid -->
+    <main class="content-grid">
+      <!-- Issues Management Card -->
+      <section class="card issues-card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <mat-icon>warning</mat-icon>
+            {{ "HOME.PENDING_ISSUES" | translate }}
+          </h2>
+          <button class="action-btn" (click)="onManageIssues()">
+            {{ "HOME.MANAGE" | translate }}
+          </button>
+        </div>
+        <div class="card-content">
+          <div class="issue-item" *ngFor="let issue of issues.slice(0, 3)">
+            <div class="issue-info">
+              <h3 class="issue-title">{{ issue.title }}</h3>
+              <p class="issue-type">{{ issue.category }}</p>
+            </div>
+            <div class="issue-status">
+              <span
+                class="priority-badge"
+                [class]="'priority-' + issue.priority"
+              >
+                {{ issue.priority | uppercase }}
+              </span>
+            </div>
+          </div>
+          <div class="empty-state" *ngIf="issues.length === 0">
+            <mat-icon>check_circle</mat-icon>
+            <p>{{ "HOME.NO_PENDING_ISSUES" | translate }}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Vehicle Fleet Management Card -->
+      <section class="card vehicles-card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <mat-icon>garage</mat-icon>
+            {{ "HOME.FLEET_OVERVIEW" | translate }}
+          </h2>
+          <button class="action-btn" (click)="onManageVehicles()">
+            {{ "HOME.MANAGE" | translate }}
+          </button>
+        </div>
+        <div class="card-content">
           <div
-            class="condition"
-            *ngFor="let condition of conditions.slice(0, 1)"
+            class="vehicle-item"
+            *ngFor="let vehicle of vehicles.slice(0, 3)"
           >
-            <div class="date-time2">
-              <p>
-                {{ 'HOME.MODEL_SERIAL' | translate }}:
-                {{ condition.model }}
-              </p>
-              <p>
-                {{ 'HOME.LICENSE_PLATE' | translate }}:
-                {{ condition.licensePlate }}
+            <div class="vehicle-info">
+              <h3 class="vehicle-model">{{ vehicle.model }}</h3>
+              <p class="vehicle-plate">
+                {{ "HOME.PLATE" | translate }}: {{ vehicle.licensePlate }}
               </p>
             </div>
+            <div class="vehicle-status">
+              <mat-icon
+                class="status-icon"
+                [ngClass]="'status-' + vehicle.status"
+              >
+                {{
+                  vehicle.status === "active"
+                    ? "check_circle"
+                    : vehicle.status === "maintenance"
+                    ? "build"
+                    : "warning"
+                }}
+              </mat-icon>
+            </div>
+          </div>
+          <div class="empty-state" *ngIf="vehicles.length === 0">
+            <mat-icon>garage</mat-icon>
+            <p>{{ "HOME.NO_VEHICLES" | translate }}</p>
           </div>
         </div>
-        <button
-          class="see-more-button2 hover-scale"
-          (click)="onSeeMoreCondition()"
-        >
-          {{ 'HOME.SEE_MORE' | translate }}
-        </button>
-      </div>
-    </div>
+      </section>
+
+      <!-- Shipments Management Card -->
+      <section class="card shipments-card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <mat-icon>inventory</mat-icon>
+            {{ "HOME.ACTIVE_SHIPMENTS" | translate }}
+          </h2>
+          <button class="action-btn" (click)="onManageShipments()">
+            {{ "HOME.MANAGE" | translate }}
+          </button>
+        </div>
+        <div class="card-content">
+          <div
+            class="shipment-item"
+            *ngFor="let shipment of shipments.slice(0, 3)"
+          >
+            <div class="shipment-info">
+              <h3 class="shipment-title">{{ shipment.destination }}</h3>
+              <p class="shipment-description">{{ shipment.description }}</p>
+            </div>
+            <div class="shipment-status">
+              <span
+                class="status-badge"
+                [class]="'status-' + shipment.status.toLowerCase()"
+              >
+                {{ shipment.status | uppercase }}
+              </span>
+            </div>
+          </div>
+          <div class="empty-state" *ngIf="shipments.length === 0">
+            <mat-icon>inventory</mat-icon>
+            <p>{{ "HOME.NO_SHIPMENTS" | translate }}</p>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
 </div>
