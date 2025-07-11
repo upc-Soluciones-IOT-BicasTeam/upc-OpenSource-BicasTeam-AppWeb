@@ -33,8 +33,8 @@ export class SidebarPublicComponent implements OnInit {
       (data: any) => {
         console.log(data);
         this.type = "Manager";
-        this.name = data[0].name;
-        this.lastName = data[0].lastName;
+        this.name = data.name;
+        this.lastName = data.lastName;
       }
     );
   }

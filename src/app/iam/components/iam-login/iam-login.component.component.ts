@@ -31,7 +31,7 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
         if (data) {
 
           data.role === 'manager'
-            ? this.router.navigate([`${data.id}/home-businessman`])
+            ? this.router.navigate([`${data.id}/profile`])
             : this.router.navigate([`${data.id}/staff-home`]);
         } else {
           this.error = true;
@@ -53,6 +53,6 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
   goToRegisterUserInformation(type: string) {
     this.user.role = type; // Guarda el tipo de usuario
     console.log(type)
-    this.router.navigate([`register/${type}`]); // Redirigir al registro exitoso
+    this.router.navigate([`register/${type}`]);
   }
 }
