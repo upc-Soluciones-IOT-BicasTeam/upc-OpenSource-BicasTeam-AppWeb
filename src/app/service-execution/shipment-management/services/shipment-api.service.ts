@@ -4,40 +4,46 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ShipmentEntity } from '../model/shipment.entity';
-import { environment } from '../../../../environments/environment';
+import { BaseService } from '../../../shared/services/base.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ShipmentApiService {
-  private baseUrl = environment.apiBaseUrl + 'api/v1/shipments';
-
-  constructor(private http: HttpClient) {}
+export class ShipmentApiService extends BaseService<ShipmentEntity> {
+  constructor(http: HttpClient) {
+    super(http);
+    this.resourceEndpoint = 'api/v1/shipments';
+  }
 
   getAllShipments(): Observable<ShipmentEntity[]> {
-    return this.http.get<ShipmentEntity[]>(`${this.baseUrl}`);
+    return this.getAll();
   }
 
   getShipmentsByUserId(userId: number): Observable<ShipmentEntity[]> {
-    return this.http.get<ShipmentEntity[]>(`${this.baseUrl}?idUser=${userId}`);
+    return this.http.get<ShipmentEntity[]>(
+      `${this.resourcePath()}?idUser=${userId}`
+    );
   }
 
   getShipmentById(id: number): Observable<ShipmentEntity> {
-    return this.http.get<ShipmentEntity>(`${this.baseUrl}/${id}`);
+    return this.getById(id);
   }
 
   addShipment(shipment: Partial<ShipmentEntity>): Observable<ShipmentEntity> {
-    return this.http.post<ShipmentEntity>(this.baseUrl, shipment);
+    return this.http.post<ShipmentEntity>(this.resourcePath(), shipment);
   }
 
   updateShipment(
     id: number,
     shipment: Partial<ShipmentEntity>
   ): Observable<ShipmentEntity> {
-    return this.http.put<ShipmentEntity>(`${this.baseUrl}/${id}`, shipment);
+    return this.http.put<ShipmentEntity>(
+      `${this.resourcePath()}/${id}`,
+      shipment
+    );
   }
 
   deleteShipment(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.delete(id);
   }
 }

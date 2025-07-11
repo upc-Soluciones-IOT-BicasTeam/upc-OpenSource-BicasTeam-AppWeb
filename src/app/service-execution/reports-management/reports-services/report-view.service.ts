@@ -2,38 +2,39 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ReportEntity } from '../model/reports.entity';
-import { environment } from '../../../../environments/environment';
+import { BaseService } from '../../../shared/services/base.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ReportsApiService {
-  private baseURL = environment.apiBaseUrl + 'api/v1/reports';
-
-  constructor(private http: HttpClient) {}
+export class ReportsApiService extends BaseService<ReportEntity> {
+  constructor(http: HttpClient) {
+    super(http);
+    this.resourceEndpoint = 'api/v1/reports';
+  }
 
   // Obtener todos los informes
   getAllReports(): Observable<ReportEntity[]> {
-    return this.http.get<ReportEntity[]>(`${this.baseURL}`);
+    return this.getAll();
   }
 
   // Obtener un informe por ID
   getReportById(id: number): Observable<ReportEntity> {
-    return this.http.get<ReportEntity>(`${this.baseURL}/${id}`);
+    return this.getById(id);
   }
 
   // Crear un nuevo informe
   createReport(report: ReportEntity): Observable<ReportEntity> {
-    return this.http.post<ReportEntity>(`${this.baseURL}`, report);
+    return this.create(report);
   }
 
   // Actualizar un informe existente
   updateReport(id: number, report: ReportEntity): Observable<ReportEntity> {
-    return this.http.put<ReportEntity>(`${this.baseURL}/${id}`, report);
+    return this.update(id, report);
   }
 
   // Eliminar un informe por ID
   deleteReport(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseURL}/${id}`);
+    return this.delete(id);
   }
 }

@@ -4,12 +4,16 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
-import { catchError, retry, throwError } from 'rxjs';
+import { catchError, retry, throwError, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+  providedIn: 'root',
+})
 export class BaseService<T> {
-  basePath: string = `${environment.apiBaseUrl}`;
-  resourceEndpoint: string = `/resources`;
-  httpOptions = {
+  protected basePath: string = environment.apiBaseUrl;
+  protected resourceEndpoint: string = '';
+  protected httpOptions = {
     headers: new HttpHeaders({
       'content-type': 'application/json',
     }),
@@ -17,52 +21,56 @@ export class BaseService<T> {
 
   constructor(public http: HttpClient) {}
 
-  handleError(error: HttpErrorResponse) {
+  protected handleError = (error: HttpErrorResponse) => {
     if (error.error instanceof ErrorEvent) {
-      console.log(`An error occurred: ${error.error.message}`);
+      console.error(`An error occurred: ${error.error.message}`);
     } else {
-      //Unsuccessful Response Error Code returned from Backend
-      console.log(`Backend returned code ${error.status},
-                  body was ${error.error}`);
+      console.error(
+        `Backend returned code ${error.status}, body was:`,
+        error.error
+      );
     }
     return throwError(
       () => new Error('Something happened with request, please try again later')
     );
-  }
+  };
 
-  private resourcePath() {
+  protected resourcePath(): string {
     return `${this.basePath}${this.resourceEndpoint}`;
   }
 
-  //Create Resource
-  create(item: any) {
+  // Get all resources
+  getAll(): Observable<T[]> {
     return this.http
-      .post<T>(this.resourcePath(), JSON.stringify(item), this.httpOptions)
+      .get<T[]>(this.resourcePath())
       .pipe(retry(2), catchError(this.handleError));
   }
 
-  //Delete Resource
-  delete(id: any) {
+  // Get resource by ID
+  getById(id: number): Observable<T> {
     return this.http
-      .delete(`${this.resourcePath()}/${id}`, this.httpOptions)
+      .get<T>(`${this.resourcePath()}/${id}`)
       .pipe(retry(2), catchError(this.handleError));
   }
 
-  //Update Resource
-  update(id: any, item: any) {
+  // Create new resource
+  create(item: T): Observable<T> {
     return this.http
-      .put<T>(
-        `${this.resourcePath()}/${id}`,
-        JSON.stringify(item),
-        this.httpOptions
-      )
+      .post<T>(this.resourcePath(), item, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 
-  //Get
-  getAll() {
+  // Update resource
+  update(id: number, item: Partial<T>): Observable<T> {
     return this.http
-      .get<T>(this.resourcePath(), this.httpOptions)
+      .put<T>(`${this.resourcePath()}/${id}`, item, this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError));
+  }
+
+  // Delete resource
+  delete(id: number): Observable<void> {
+    return this.http
+      .delete<void>(`${this.resourcePath()}/${id}`)
       .pipe(retry(2), catchError(this.handleError));
   }
 }
