@@ -4,18 +4,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ShipmentEntity } from '../model/shipment.entity';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ShipmentApiService {
-  private baseUrl = 'https://app-250622151805.azurewebsites.net/api/v1/shipments';
+  private baseUrl = environment.apiBaseUrl + 'api/v1/shipments';
 
   constructor(private http: HttpClient) {}
 
   getAllShipments(): Observable<ShipmentEntity[]> {
     return this.http.get<ShipmentEntity[]>(`${this.baseUrl}`);
-
   }
 
   getShipmentsByUserId(userId: number): Observable<ShipmentEntity[]> {
@@ -30,7 +30,10 @@ export class ShipmentApiService {
     return this.http.post<ShipmentEntity>(this.baseUrl, shipment);
   }
 
-  updateShipment(id: number, shipment: Partial<ShipmentEntity>): Observable<ShipmentEntity> {
+  updateShipment(
+    id: number,
+    shipment: Partial<ShipmentEntity>
+  ): Observable<ShipmentEntity> {
     return this.http.put<ShipmentEntity>(`${this.baseUrl}/${id}`, shipment);
   }
 

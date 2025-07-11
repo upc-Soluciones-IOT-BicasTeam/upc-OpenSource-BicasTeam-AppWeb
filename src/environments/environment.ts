@@ -1,3 +1,4 @@
 export const environment = {
-  serverBasePath: undefined
+  production: false,
+  apiBaseUrl: 'https://app-250622151805.azurewebsites.net/',
 };

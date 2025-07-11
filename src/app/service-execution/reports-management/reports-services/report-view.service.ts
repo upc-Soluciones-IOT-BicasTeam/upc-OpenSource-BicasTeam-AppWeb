@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ReportEntity } from '../model/reports.entity';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ReportsApiService {
-  private baseURL = 'https://app-250622151805.azurewebsites.net/api/v1/reports';
+  private baseURL = environment.apiBaseUrl + 'api/v1/reports';
 
   constructor(private http: HttpClient) {}
 

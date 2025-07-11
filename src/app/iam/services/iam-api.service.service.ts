@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Observable, of, throwError} from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { UserEntity } from '../model/user.entity';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class IamApiService {
-  private baseUrl = 'https://app-250622151805.azurewebsites.net/api/v1/users';
+  private baseUrl = environment.apiBaseUrl + 'api/v1/users';
 
   constructor(private http: HttpClient) {}
 
   // Autenticar al usuario con email y password
   authenticateUser(email: string, password: string): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${this.baseUrl}/email/${email}/password/${password}`);
+    return this.http.get<UserEntity>(
+      `${this.baseUrl}/email/${email}/password/${password}`
+    );
   }
 
   // Encontrar un usuario por email
@@ -32,12 +35,16 @@ export class IamApiService {
   }
 
   // Actualizar un usuario usando email y password
-  updateUser(email: string, password: string, userUpdates: Partial<UserEntity>): Observable<UserEntity> {
+  updateUser(
+    email: string,
+    password: string,
+    userUpdates: Partial<UserEntity>
+  ): Observable<UserEntity> {
     const url = `${this.baseUrl}/email/${email}/password/${password}`;
     return this.http.put<UserEntity>(url, userUpdates);
   }
 
-  getAllUsers(){
+  getAllUsers() {
     return this.http.get<UserEntity>(`${this.baseUrl}`);
   }
   // Eliminar un usuario por ID

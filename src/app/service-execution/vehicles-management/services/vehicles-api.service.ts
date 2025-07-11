@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { VehicleEntity } from '../model/vehicle.entity';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VehiclesApiService {
   // Datos de vehículos
@@ -62,14 +63,13 @@ export class VehiclesApiService {
     "altitude": 60
   }
 ]*/
-  private baseUrl = 'https://app-250622151805.azurewebsites.net/api/v1/vehicles';
-
+  private baseUrl = environment.apiBaseUrl + 'api/v1/vehicles';
 
   constructor(private http: HttpClient) {}
 
   // Obtener todos los vehículos
   getAllVehicles(): Observable<VehicleEntity[]> {
-     return this.http.get<VehicleEntity[]>(`${this.baseUrl}`);
+    return this.http.get<VehicleEntity[]>(`${this.baseUrl}`);
   }
 
   // Obtener un vehículo por ID
