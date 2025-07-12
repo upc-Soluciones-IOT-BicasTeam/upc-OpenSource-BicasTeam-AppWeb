@@ -1,32 +1,30 @@
 <!-- src/app/service-execution/shipment-management/components/shipment-businessman/shipment-businessman.component.html -->
 <div class="container">
-
   <header class="header">
-    <img class="logo" src="https://i.ibb.co/RCDQZnJ/logo.png" alt="{{ 'REPORT.HEADER.LOGO_ALT' | translate }}">
-    <h1 class="title">{{ 'SHIPMENTS.TITLE' | translate }}</h1>
+    <h1 class="title">{{ "SHIPMENTS.TITLE" | translate }}</h1>
   </header>
 
   <!-- Controles: filtro por estado + búsqueda + orden por fecha -->
   <div class="controls filters">
     <div class="filter-group">
       <label for="statusFilter">
-        {{ 'SHIPMENTS.FILTER_BY_STATUS' | translate }}
+        {{ "SHIPMENTS.FILTER_BY_STATUS" | translate }}
       </label>
       <select
         id="statusFilter"
         [(ngModel)]="filterStatus"
         (ngModelChange)="onStatusChange($event)"
       >
-        <option value="">{{ 'SHIPMENTS.ALL' | translate }}</option>
+        <option value="">{{ "SHIPMENTS.ALL" | translate }}</option>
         <option *ngFor="let s of statuses" [value]="s">
-          {{ s }}
+          {{ getStatusTranslation(s) }}
         </option>
       </select>
     </div>
 
     <div class="filter-group">
       <label for="searchBox">
-        {{ 'SHIPMENTS.SEARCH_LABEL' | translate }}
+        {{ "SHIPMENTS.SEARCH_LABEL" | translate }}
       </label>
       <input
         id="searchBox"
@@ -38,139 +36,121 @@
     </div>
 
     <button class="btn-add" (click)="openForm()">
-      {{ 'SHIPMENTS.ADD_BUTTON' | translate }}
+      {{ "SHIPMENTS.ADD_BUTTON" | translate }}
     </button>
   </div>
 
-  <!-- Modal de formulario (create/edit) -->
+  <!-- Modal de formulario (solo crear) -->
   <div class="modal-overlay" *ngIf="isFormOpen" (click)="closeForm()">
     <div class="modal-content" (click)="$event.stopPropagation()">
-      <h2>
-        {{ isEditMode
-        ? ('SHIPMENTS.MODAL.EDIT_TITLE' | translate)
-        : ('SHIPMENTS.MODAL.CREATE_TITLE' | translate)
-        }}
-      </h2>
+      <h2>{{ "SHIPMENTS.MODAL.CREATE_TITLE" | translate }}</h2>
       <form [formGroup]="shipmentForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="destiny">{{ 'SHIPMENTS.FORM.DESTINY' | translate }}</label>
+          <label for="destiny">{{
+            "SHIPMENTS.FORM.DESTINY" | translate
+          }}</label>
           <input id="destiny" formControlName="destiny" />
         </div>
         <div class="form-group">
-          <label for="description">{{ 'SHIPMENTS.FORM.DESCRIPTION' | translate }}</label>
+          <label for="description">{{
+            "SHIPMENTS.FORM.DESCRIPTION" | translate
+          }}</label>
           <input id="description" formControlName="description" />
         </div>
 
-
-
         <div class="form-group">
-          <label for="driverName">{{ 'SHIPMENTS.FORM.DRIVER_NAME' | translate }}</label>
+          <label for="driverName">{{
+            "SHIPMENTS.FORM.DRIVER_NAME" | translate
+          }}</label>
           <input id="driverName" formControlName="driverName" />
         </div>
         <div class="form-actions">
-
-          <button
-            type="button"
-            class="btn-cancel"
-            (click)="closeForm()"
-          >
-            {{ 'SHIPMENTS.BUTTON.CANCEL' | translate }}
+          <button type="button" class="btn-cancel" (click)="closeForm()">
+            {{ "SHIPMENTS.BUTTON.CANCEL" | translate }}
           </button>
           <button
             type="submit"
             class="btn-submit"
             [disabled]="shipmentForm.invalid"
           >
-            {{ isEditMode
-            ? ('SHIPMENTS.BUTTON.UPDATE' | translate)
-            : ('SHIPMENTS.BUTTON.CREATE' | translate)
-            }}
+            {{ "SHIPMENTS.BUTTON.CREATE" | translate }}
           </button>
-
         </div>
       </form>
     </div>
   </div>
-
   <!-- Tabla de envíos -->
-
-  <table
-    class="shipment-table"
-    *ngIf="filteredShipments.length; else noShipments"
-  >
-    <thead>
-    <tr>
-      <th>{{ 'SHIPMENTS.TABLE.ID' | translate }}</th>
-      <th>{{ 'SHIPMENTS.TABLE.DESTINY' | translate }}</th>
-      <th>{{ 'SHIPMENTS.TABLE.DESCRIPTION' | translate }}</th>
-      <th>{{ 'SHIPMENTS.TABLE.STATUS' | translate }}</th>
-      <th>{{ 'SHIPMENTS.TABLE.DRIVER' | translate }}</th>
-      <th
-        class="sortable-header"
-        (click)="toggleSortOrder()"
-      >
-        {{ 'SHIPMENTS.TABLE.CREATED_AT' | translate }}
-        <span *ngIf="sortDirection==='desc'">▼</span>
-        <span *ngIf="sortDirection==='asc'">▲</span>
-      </th>
-      <th>{{ 'SHIPMENTS.TABLE.ACTIONS' | translate }}</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let s of filteredShipments">
-      <td>{{ s.id }}</td>
-      <td>{{ s.destiny }}</td>
-      <td>{{ s.description }}</td>
-      <td>
-          <span
-            class="status-badge"
-            [ngClass]="'status-badge--' + s.status.toLowerCase().replace(' ', '-')"
-          >
-            {{ s.status }}
-          </span>
-      </td>
-      <td>{{ s.driverName }}</td>
-      <td>{{ s.createdAt | date: 'dd/MM/yyyy hh:mm a' }}</td>
-      <td class="actions">
-        <!-- Botón editar -->
-        <button class="btn-action" (click)="openForm(s)">
-          ✏️
-        </button>
-        <!-- Botón eliminar -->
-        <button class="btn-action" (click)="openDeleteConfirm(s)">
-          🗑️
-        </button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="table-container">
+    <table
+      class="shipment-table"
+      *ngIf="filteredShipments.length; else noShipments"
+    >
+      <thead>
+        <tr>
+          <th>{{ "SHIPMENTS.TABLE.ID" | translate }}</th>
+          <th>{{ "SHIPMENTS.TABLE.DESTINY" | translate }}</th>
+          <th>{{ "SHIPMENTS.TABLE.DESCRIPTION" | translate }}</th>
+          <th>{{ "SHIPMENTS.TABLE.STATUS" | translate }}</th>
+          <th>{{ "SHIPMENTS.TABLE.DRIVER" | translate }}</th>
+          <th class="sortable-header" (click)="toggleSortOrder()">
+            {{ "SHIPMENTS.TABLE.DATE" | translate }}
+            <span *ngIf="sortDirection === 'desc'">▼</span>
+            <span *ngIf="sortDirection === 'asc'">▲</span>
+          </th>
+          <th>{{ "SHIPMENTS.TABLE.ACTIONS" | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of filteredShipments">
+          <td>
+            <strong>#{{ s.id }}</strong>
+          </td>
+          <td>{{ s.destiny }}</td>
+          <td>{{ s.description }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="'status-' + s.status">
+              {{ getStatusTranslation(s.status) }}
+            </span>
+          </td>
+          <td>{{ s.driverName }}</td>
+          <td>{{ s.createdAt | date : "dd/MM/yyyy" }}</td>
+          <td class="actions">
+            <button
+              class="btn-delete"
+              (click)="openDeleteConfirm(s)"
+              [title]="'SHIPMENTS.DELETE_TOOLTIP' | translate"
+            >
+              🗑️
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <ng-template #noShipments>
-    <p class="no-shipments">
-      {{ 'SHIPMENTS.NO_SHIPMENTS' | translate }}
-    </p>
+    <div class="empty-state">
+      <div class="empty-icon">📦</div>
+      <h3>{{ "SHIPMENTS.EMPTY.TITLE" | translate }}</h3>
+      <p>{{ "SHIPMENTS.EMPTY.MESSAGE" | translate }}</p>
+      <button class="btn-primary" (click)="openForm()">
+        {{ "SHIPMENTS.EMPTY.CREATE_BUTTON" | translate }}
+      </button>
+    </div>
   </ng-template>
 
   <!-- Modal de confirmación de borrado -->
   <div class="confirm-overlay" *ngIf="showConfirmModal">
     <div class="confirm-modal">
-      <p>{{ 'SHIPMENTS.DELETE_CONFIRM.TEXT' | translate }}</p>
+      <h3>{{ "SHIPMENTS.CONFIRM.TITLE" | translate }}</h3>
+      <p>{{ "SHIPMENTS.CONFIRM.MESSAGE" | translate }}</p>
       <div class="confirm-buttons">
-
-        <button
-          class="btn-confirm-no"
-          (click)="cancelDelete()"
-        >
-          {{ 'SHIPMENTS.DELETE_CONFIRM.NO' | translate }}
+        <button class="btn-confirm-no" (click)="cancelDelete()">
+          {{ "SHIPMENTS.CONFIRM.CANCEL" | translate }}
         </button>
-
-        <button
-          class="btn-confirm-yes"
-          (click)="confirmDelete()"
-        >
-          {{ 'SHIPMENTS.DELETE_CONFIRM.YES' | translate }}
+        <button class="btn-confirm-yes" (click)="confirmDelete()">
+          {{ "SHIPMENTS.CONFIRM.DELETE" | translate }}
         </button>
-
       </div>
     </div>
   </div>

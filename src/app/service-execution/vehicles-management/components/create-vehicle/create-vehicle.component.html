@@ -1,39 +1,124 @@
-<div class="vehicle-form">
-  <div class="header">
-    <button class="back-button" (click)="cancel()">
-      <i class="pi pi-arrow-left"></i> Volver
+<div class="container">
+  <header class="header">
+    <button class="btn-back" (click)="cancel()">
+      ← {{ "VEHICLES.FORM.BUTTON_CANCEL" | translate }}
     </button>
-    <h1 class="title">Agregar Vehículo</h1>
-  </div>
+    <h1 class="title">{{ "VEHICLES.MODAL.TITLE_ADD" | translate }}</h1>
+  </header>
 
-  <div class="add-section">
-    <form (ngSubmit)="addVehicle()">
-      <div class="add-group">
-        <h2>Datos</h2>
-        <p><strong>Id del Conductor:</strong></p>
-        <input type="text" [(ngModel)]="vehicle.managerId" name="driverName" required />
+  <div class="form-container">
+    <form (ngSubmit)="addVehicle()" class="vehicle-form">
+      <div class="form-section">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="managerId" class="form-label">
+              {{ "VEHICLES.FORM.DRIVER_NAME" | translate }}
+            </label>
+            <input
+              id="managerId"
+              type="text"
+              class="form-input"
+              [(ngModel)]="vehicle.managerId"
+              name="managerId"
+              placeholder="Ingrese el ID del conductor"
+              required
+            />
+          </div>
 
-        <p><strong>Placa:</strong></p>
-        <input type="text" [(ngModel)]="vehicle.licensePlate" name="licensePlate" required />
+          <div class="form-group">
+            <label for="licensePlate" class="form-label">
+              {{ "VEHICLES.FORM.LICENSE_PLATE" | translate }}
+            </label>
+            <input
+              id="licensePlate"
+              type="text"
+              class="form-input"
+              [(ngModel)]="vehicle.licensePlate"
+              name="licensePlate"
+              placeholder="Ej: ABC-123"
+              required
+            />
+          </div>
 
-        <p><strong>Modelo:</strong></p>
-        <input type="text" [(ngModel)]="vehicle.model" name="model" required />
+          <div class="form-group">
+            <label for="model" class="form-label">
+              {{ "VEHICLES.FORM.MODEL" | translate }}
+            </label>
+            <input
+              id="model"
+              type="text"
+              class="form-input"
+              [(ngModel)]="vehicle.model"
+              name="model"
+              placeholder="Ej: Toyota Hilux"
+              required
+            />
+          </div>
 
-        <p><strong>Color:</strong></p>
-        <input type="text" [(ngModel)]="vehicle.color" name="color" required />
+          <div class="form-group">
+            <label for="color" class="form-label">
+              {{ "VEHICLES.FORM.COLOR" | translate }}
+            </label>
+            <input
+              id="color"
+              type="text"
+              class="form-input"
+              [(ngModel)]="vehicle.color"
+              name="color"
+              placeholder="Ej: Blanco"
+              required
+            />
+          </div>
 
-        <p><strong>Última Inspección Técnica:</strong></p>
-        <input type="date" [(ngModel)]="vehicle.lastTechnicalInspectionDate" name="lastTechnicalInspectionDate" required />
-      </div>
+          <div class="form-group">
+            <label for="lastInspection" class="form-label">
+              {{ "VEHICLES.FORM.LAST_INSPECTION" | translate }}
+            </label>
+            <input
+              id="lastInspection"
+              type="date"
+              class="form-input"
+              [(ngModel)]="vehicle.lastTechnicalInspectionDate"
+              name="lastTechnicalInspectionDate"
+              required
+            />
+          </div>
 
-      <div class="add-group">
-        <h2>Imagen</h2>
-        <input type="file" (change)="handleFileInput($event)" accept="image/*" />
-        <div *ngIf="uploadedImageUrl">
-          <img [src]="uploadedImageUrl" alt="Previsualización" width="600"/>
+          <div class="form-group form-group-full">
+            <label for="vehicleImage" class="form-label">
+              {{ "VEHICLES.FORM.IMAGE_LABEL" | translate }}
+            </label>
+            <div class="file-input-wrapper">
+              <input
+                #fileInput
+                type="file"
+                class="file-input"
+                (change)="handleFileInput($event)"
+                accept="image/*"
+              />
+              <div class="file-input-display" (click)="fileInput.click()">
+                <span class="file-input-text">
+                  Seleccionar imagen
+                </span>
+                <span class="file-input-icon">📁</span>
+              </div>
+            </div>
+            
+            <div class="image-preview" *ngIf="uploadedImageUrl">
+              <img [src]="uploadedImageUrl" alt="Vista previa" class="preview-image"/>
+            </div>
+          </div>
         </div>
       </div>
-      <button type="submit" class="save-button">Guardar</button>
+
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" (click)="cancel()">
+          {{ "VEHICLES.FORM.BUTTON_CANCEL" | translate }}
+        </button>
+        <button type="submit" class="btn-primary" [disabled]="isSubmitting">
+          {{ "VEHICLES.FORM.BUTTON_ADD" | translate }}
+        </button>
+      </div>
     </form>
   </div>
 </div>

@@ -16,12 +16,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class VehicleBusinessmanComponent implements OnInit, OnDestroy {
   vehicles: VehicleEntity[] = [];
+  filteredVehicles: VehicleEntity[] = [];
   selectedVehicle: VehicleEntity | null = null;
   showForm: boolean = false;
   isEditing: boolean = false;
   showDetails: boolean = false;
   vehicle: VehicleEntity = new VehicleEntity();
   uploadedImageUrl: string | null = null;
+  
+  // Filtros
+  searchTerm = '';
 
   @ViewChild('mapContainer') mapContainer: ElementRef | undefined;
 
@@ -41,11 +45,29 @@ export class VehicleBusinessmanComponent implements OnInit, OnDestroy {
     this.vehiclesApi.getAllVehicles().subscribe(
       (data: VehicleEntity[]) => {
         this.vehicles = data;
+        this.applyFilters();
       },
       (error) => {
         console.error('Error loading vehicles:', error);
       }
     );
+  }
+
+  /** Aplica filtros de búsqueda */
+  applyFilters(): void {
+    this.filteredVehicles = this.vehicles
+      .filter(
+        (v) =>
+          !this.searchTerm ||
+          v.licensePlate.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          v.model.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          (v.driverId && v.driverId.toString().toLowerCase().includes(this.searchTerm.toLowerCase()))
+      );
+  }
+
+  onSearch(term: string): void {
+    this.searchTerm = term;
+    this.applyFilters();
   }
 
   showAddVehicleForm(): void {

@@ -1,35 +1,91 @@
 <div class="container">
-  <div class="header">
-    <h1 class="title gradient-text">Gestión de Vehículos</h1>
-    <button type="button" class="btn primary-btn hover-scale" (click)="navigateToCreateVehicle()">Agregar Vehículo</button>
+  <header class="header">
+    <h1 class="title">{{ "VEHICLES.TITLE" | translate }}</h1>
+  </header>
+
+  <!-- Controles y filtros -->
+  <div class="controls filters">
+    <div class="filter-group">
+      <label for="searchBox">
+        {{ "VEHICLES.SEARCH_LABEL" | translate }}
+      </label>
+      <input
+        id="searchBox"
+        type="text"
+        placeholder="{{ 'VEHICLES.SEARCH_PLACEHOLDER' | translate }}"
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="onSearch($event)"
+      />
+    </div>
+
+    <button class="btn-add" (click)="navigateToCreateVehicle()">
+      {{ "VEHICLES.ADD_BUTTON" | translate }}
+    </button>
   </div>
 
-  <!-- Lista de Vehículos -->
-  <div class="vehicle-list">
-    <div class="vehicle-card" *ngFor="let vehicle of vehicles">
-      <img
-        [src]="vehicle.vehicleImage || 'https://via.placeholder.com/400x200'"
-        alt="{{ 'VEHICLES.IMAGE_ALT' | translate }}"
-        class="vehicle-image"
-      />
-      <div class="vehicle-info">
-        <h3 class="vehicle-title">{{ vehicle.licensePlate }}</h3>
-        <p class="vehicle-model">
-          {{ 'VEHICLES.MODEL_LABEL' | translate }}: {{ vehicle.model }}
-        </p>
-        <p class="vehicle-model">
-          {{ 'VEHICLES.LOCATION_LABEL' | translate }}:
-          {{ vehicle.latitude | number:'1.4-4' }},
-          {{ vehicle.longitude | number:'1.4-4' }}
-        </p>
-        <div class="action-buttons">
-          <button type="button" class="btn view-btn hover-scale" (click)="navigateToDetails(vehicle.id)">Ver más</button>
-          <button type="button" class="btn edit-btn hover-scale" (click)="navigateToUpdateVehicle(vehicle.id)">Editar</button>
-          <button type="button" class="btn delete-btn hover-scale" (click)="deleteVehicle(vehicle.id)">Eliminar</button>
-        </div>
-      </div>
-    </div>
+  <!-- Tabla de vehículos -->
+  <div class="table-container">
+    <table
+      class="vehicle-table"
+      *ngIf="filteredVehicles.length; else noVehicles"
+    >
+      <thead>
+        <tr>
+          <th>{{ "VEHICLES.TABLE.LICENSE_PLATE" | translate }}</th>
+          <th>{{ "VEHICLES.TABLE.MODEL" | translate }}</th>
+          <th>{{ "VEHICLES.TABLE.DRIVER" | translate }}</th>
+          <th>{{ "VEHICLES.TABLE.COLOR" | translate }}</th>
+          <th>{{ "VEHICLES.TABLE.LAST_INSPECTION" | translate }}</th>
+          <th>{{ "VEHICLES.TABLE.ACTIONS" | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vehicle of filteredVehicles">
+          <td>
+            <strong>{{ vehicle.licensePlate }}</strong>
+          </td>
+          <td>{{ vehicle.model }}</td>
+          <td>{{ vehicle.driverId || 'No asignado' }}</td>
+          <td>{{ vehicle.color }}</td>
+          <td>{{ vehicle.lastTechnicalInspectionDate | date: 'dd/MM/yyyy' }}</td>
+          <td class="actions">
+            <button
+              class="btn-action btn-view"
+              (click)="navigateToDetails(vehicle.id)"
+              [title]="'VEHICLES.VIEW_TOOLTIP' | translate"
+            >
+              👁️
+            </button>
+            <button
+              class="btn-action btn-edit"
+              (click)="navigateToUpdateVehicle(vehicle.id)"
+              [title]="'VEHICLES.EDIT_TOOLTIP' | translate"
+            >
+              ✏️
+            </button>
+            <button
+              class="btn-action btn-delete"
+              (click)="deleteVehicle(vehicle.id)"
+              [title]="'VEHICLES.DELETE_TOOLTIP' | translate"
+            >
+              🗑️
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
+  <ng-template #noVehicles>
+    <div class="empty-state">
+      <div class="empty-icon">🚛</div>
+      <h3>{{ "VEHICLES.EMPTY.TITLE" | translate }}</h3>
+      <p>{{ "VEHICLES.EMPTY.MESSAGE" | translate }}</p>
+      <button class="btn-primary" (click)="navigateToCreateVehicle()">
+        {{ "VEHICLES.EMPTY.CREATE_BUTTON" | translate }}
+      </button>
+    </div>
+  </ng-template>
 
 
   <!-- Modal para Detalles del Vehículo -->

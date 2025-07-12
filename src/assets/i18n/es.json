@@ -138,14 +138,15 @@
   },
   "SHIPMENTS": {
     "TITLE": "Envíos",
-    "FILTER_BY_STATUS": "Filtrar por estado:",
+    "FILTER_BY_STATUS": "Filtrar por Estado",
     "ALL": "Todos",
-    "SEARCH_LABEL": "Buscar:",
-    "SEARCH_PLACEHOLDER": "Destino o descripción...",
-    "ADD_BUTTON": "Agregar envío",
+    "SEARCH_LABEL": "Buscar",
+    "SEARCH_PLACEHOLDER": "Buscar por destino, descripción o conductor...",
+    "ADD_BUTTON": "Nuevo Envío",
+    "DELETE_TOOLTIP": "Eliminar envío",
     "MODAL": {
       "EDIT_TITLE": "Editar envío",
-      "CREATE_TITLE": "Crear nuevo envío"
+      "CREATE_TITLE": "Crear Nuevo Envío"
     },
     "FORM": {
       "DESTINY": "Destino",
@@ -155,7 +156,7 @@
     },
     "BUTTON": {
       "UPDATE": "Actualizar",
-      "CREATE": "Crear",
+      "CREATE": "Crear Envío",
       "CANCEL": "Cancelar"
     },
     "CURRENT_TITLE": "Envíos actuales",
@@ -165,8 +166,27 @@
       "DESCRIPTION": "Descripción",
       "STATUS": "Estado",
       "DRIVER": "Conductor",
+      "DATE": "Fecha",
       "CREATED_AT": "Creado el",
       "ACTIONS": "Acciones"
+    },
+    "STATUS": {
+      "PENDING": "Pendiente",
+      "IN_PROGRESS": "En Progreso",
+      "IN_TRANSIT": "En Tránsito",
+      "DELIVERED": "Entregado",
+      "CANCELLED": "Cancelado"
+    },
+    "EMPTY": {
+      "TITLE": "No hay envíos",
+      "MESSAGE": "Aún no tienes envíos creados. ¡Crea tu primer envío!",
+      "CREATE_BUTTON": "Crear primer envío"
+    },
+    "CONFIRM": {
+      "TITLE": "Confirmar eliminación",
+      "MESSAGE": "¿Estás seguro de que deseas eliminar este envío?",
+      "CANCEL": "Cancelar",
+      "DELETE": "Eliminar"
     },
     "NO_SHIPMENTS": "No hay envíos disponibles.",
     "DELETE_CONFIRM": {
@@ -176,14 +196,23 @@
     }
   },
   "VEHICLES": {
-    "TITLE": "Gestión de Vehículos",
-    "ADD_BUTTON": "Agregar Vehículo",
-    "IMAGE_ALT": "Imagen del Vehículo",
-    "MODEL_LABEL": "Modelo",
-    "LOCATION_LABEL": "Ubicación",
-    "VIEW_BUTTON": "Ver más",
-    "EDIT_BUTTON": "Editar",
-    "DELETE_BUTTON": "Eliminar",
+    "TITLE": "Vehículos",
+    "FILTER_BY_STATUS": "Filtrar por Estado",
+    "ALL": "Todos",
+    "SEARCH_LABEL": "Buscar",
+    "SEARCH_PLACEHOLDER": "Buscar por placa, modelo o conductor...",
+    "ADD_BUTTON": "Nuevo Vehículo",
+    "VIEW_TOOLTIP": "Ver detalles",
+    "EDIT_TOOLTIP": "Editar vehículo",
+    "DELETE_TOOLTIP": "Eliminar vehículo",
+    "TABLE": {
+      "LICENSE_PLATE": "Placa",
+      "MODEL": "Modelo",
+      "DRIVER": "Conductor",
+      "COLOR": "Color",
+      "LAST_INSPECTION": "Última Inspección",
+      "ACTIONS": "Acciones"
+    },
     "MODAL": {
       "TITLE_ADD": "Agregar Vehículo",
       "TITLE_EDIT": "Editar Vehículo"
@@ -199,7 +228,17 @@
       "BUTTON_UPDATE": "Actualizar",
       "BUTTON_CANCEL": "Cancelar"
     },
-    "PREVIEW_ALT": "Imagen de vista previa",
+    "EMPTY": {
+      "TITLE": "No hay vehículos",
+      "MESSAGE": "Aún no tienes vehículos registrados. ¡Registra tu primer vehículo!",
+      "CREATE_BUTTON": "Registrar primer vehículo"
+    },
+    "CONFIRM": {
+      "TITLE": "Confirmar eliminación",
+      "MESSAGE": "¿Estás seguro de que deseas eliminar este vehículo?",
+      "CANCEL": "Cancelar",
+      "DELETE": "Eliminar"
+    },
     "DETAILS": {
       "TITLE": "Detalles del Vehículo",
       "IMAGE_ALT": "Imagen del vehículo",
