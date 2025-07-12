@@ -275,11 +275,11 @@
         "LICENSE_PLATE": "Placa",
         "MODEL": "Modelo",
         "COLOR": "Color",
-        "ENGINE": "Motor (%)",
-        "FUEL": "Combustible (%)",
-        "TIRES": "Llantas (%)",
-        "ELECTRICAL": "Sistema Eléctrico (%)",
-        "TRANSMISSION": "Temp. Transmisión (%)",
+        "TEMPERATURE": "Temperatura",
+        "HUMIDITY": "Humedad",
+        "MAX_LOAD": "Carga Máxima",
+        "SPEED": "Velocidad",
+        "ALTITUDE": "Altitud",
         "LAST_INSPECTION": "Última Inspección"
       }
     },

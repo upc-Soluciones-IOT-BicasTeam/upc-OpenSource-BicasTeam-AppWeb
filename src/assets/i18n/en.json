@@ -275,11 +275,11 @@
         "LICENSE_PLATE": "License Plate",
         "MODEL": "Model",
         "COLOR": "Color",
-        "ENGINE": "Engine (%)",
-        "FUEL": "Fuel (%)",
-        "TIRES": "Tires (%)",
-        "ELECTRICAL": "Electrical System (%)",
-        "TRANSMISSION": "Transmission Temp (%)",
+        "TEMPERATURE": "Temperature",
+        "HUMIDITY": "Humidity",
+        "MAX_LOAD": "Max Load",
+        "SPEED": "Speed",
+        "ALTITUDE": "Altitude",
         "LAST_INSPECTION": "Last Inspection"
       }
     },
