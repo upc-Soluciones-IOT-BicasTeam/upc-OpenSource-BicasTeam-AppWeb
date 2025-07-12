@@ -31,4 +31,6 @@ export class ProfileApiService {
   getAllProfiles() {
     return this.http.get<ProfileEntity>(`${this.baseUrl}`);
   }
+
+
 }

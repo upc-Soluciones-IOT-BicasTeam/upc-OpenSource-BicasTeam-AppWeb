@@ -19,12 +19,13 @@ export class ProfileCreateCarrierComponent implements OnInit{
   error_msg: string = '';
   privacityPolicy: boolean = false;
   passwordConfirmation: string = '';
+  profiles: ProfileEntity[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private profileApi: ProfileApiService,
     private router: Router,
-    private iamApi: IamApiService
+    private iamApi: IamApiService,
   ) {
     this.user.id = this.route.snapshot.params['id'];
 
@@ -32,6 +33,15 @@ export class ProfileCreateCarrierComponent implements OnInit{
 
   ngOnInit() {
     document.body.style.backgroundColor = '#303841';
+    this.profileApi.getAllProfiles().subscribe((data:any)=>{
+      console.log(data);
+      for (let i = 0; i < data.length; i++) {
+        if(data[i].idCompany == this.user.id){
+          this.profiles.push(data[i]);
+        }
+      }
+    })
+    console.log(this.profiles);
   }
 
   ngOnDestroy() {

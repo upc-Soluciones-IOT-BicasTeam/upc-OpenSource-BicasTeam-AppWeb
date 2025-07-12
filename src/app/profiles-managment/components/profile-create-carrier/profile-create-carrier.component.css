@@ -191,3 +191,72 @@ input[type=submit]:hover {
 .cancel-button:hover {
   background-color: #95a5a6;
 }
+
+
+
+/* Contenedor de la lista */
+.carrier-list-container {
+  border-top: 1px solid #34495e;
+  padding-top: 20px;
+  width: 100%;
+}
+
+.carrier-list-container h2 {
+  color: #F39C12;
+  margin-bottom: 20px;
+}
+
+/* Para asegurar que la tabla no se desborde en pantallas pequeñas */
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* Estilos principales de la tabla */
+.carrier-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  color: #ECF0F1;
+}
+
+/* Regla combinada para TH y TD para asegurar consistencia */
+.carrier-table th, .carrier-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #34495e;
+  vertical-align: middle;
+  text-align: center; /* <<< LA SOLUCIÓN: Centra el texto en ambos */
+}
+
+/* Estilos específicos solo para las cabeceras (th) */
+.carrier-table th {
+  background-color: #34495e;
+  color: #F39C12;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85em;
+}
+
+/* Efecto hover para las filas, para mejorar la interacción */
+.carrier-table tbody tr:hover {
+  background-color: #34495e;
+}
+
+
+/* Efecto hover para las filas, para mejorar la interacción */
+.carrier-table tbody tr:hover {
+  background-color: #34495e;
+}
+
+/* Mensaje para cuando no hay conductores */
+.no-carriers-message {
+  background-color: rgba(46, 62, 78, 0.5);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.no-carriers-message p {
+  margin: 0;
+  color: #bdc3c7;
+  font-style: italic;
+}

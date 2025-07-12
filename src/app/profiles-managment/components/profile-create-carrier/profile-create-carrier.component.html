@@ -1,7 +1,7 @@
 <div class="wrapper fadeInDown">
 
   <div *ngIf="!isFormVisible" class="initial-view">
-    
+
     <button (click)="showRegistrationForm()" class="add-carrier-button">
       <i class="pi pi-plus"></i> {{ 'SIGNUP.BUTTON-CARRIER' | translate }}
     </button>
@@ -9,9 +9,37 @@
 
 
 
-    <div class="carrier-list-placeholder">
+    <div class="carrier-list-container">
       <h2>{{ 'SIGNUP.TITLE-CARRIERS-LIST' | translate }}</h2>
 
+      <!-- CASO 1: Si hay perfiles, muestra la tabla -->
+      <div *ngIf="profiles.length > 0" class="table-responsive">
+        <table class="carrier-table">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>{{ 'SIGNUP.NAME_LABEL' | translate }}</th>
+            <th>{{ 'SIGNUP.LASTNAME_LABEL' | translate }}</th>
+            <th>Telephone</th>
+          </tr>
+          </thead>
+          <tbody>
+          <!-- Usamos *ngFor para crear una fila por cada 'profile' en el arreglo 'profiles' -->
+          <tr *ngFor="let profile of profiles">
+            <td>{{ profile.id }}</td>
+            <td>{{ profile.name }}</td>
+            <td>{{ profile.lastName }}</td>
+            <!-- Mostramos 'N/A' si el teléfono es nulo o no está definido -->
+            <td>{{ profile.telephone || 'N/A' }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- CASO 2: Si no hay perfiles, muestra un mensaje -->
+      <div *ngIf="profiles.length === 0" class="no-carriers-message">
+        <p>No carriers found. Add one to get started!</p>
+      </div>
     </div>
   </div>
 
