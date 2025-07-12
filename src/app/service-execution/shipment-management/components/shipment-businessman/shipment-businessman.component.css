@@ -1,278 +1,676 @@
-/* src/app/service-execution/shipment-management/components/shipment-businessman/shipment-businessman.component.css */
+::ng-deep mat-sidenav-content {
+  padding: 0 !important;
+  background-color: #f8f9fa !important;
+}
 
-/* 1. Importa Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+* {
+  box-sizing: border-box;
+}
 
-/* 2. Host y contenedor principal */
 :host {
   display: block;
-  font-family: 'Poppins', sans-serif;
-  color: #343a40;
-}
-.container {
-  max-width: 1100px;
-  width: 90%;
-  margin: 50px auto;
-  padding: 30px;
-  background-color: #ffffff;  /* o cualquier otro color */
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(15px);
+  background-color: #f8f9fa !important;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* ===== HEADER ===== */
+.container {
+  padding: 24px;
+  background-color: #f8f9fa !important;
+  height: 100vh;
+  width: 100%;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
 .header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  background: transparent;
+  color: #1a1a1a;
+  border-radius: 0;
+  border: none;
+  padding: 0 0 24px 0;
+  margin: 0 0 24px 0;
+  box-shadow: none;
+  display: block;
+  position: static;
+  overflow: visible;
 }
+
+.header::before {
+  display: none;
+}
+
 .logo {
-  width: 40px;
+  display: none;
 }
+
+.header-content {
+  flex: none;
+  z-index: auto;
+}
+
 .title {
-  font-size: 1.75rem;
+  font-size: 2rem;
+  font-weight: 700;
   margin: 0;
-  font-weight: 600;
+  color: #1a1a1a;
+  text-shadow: none;
 }
-/* 4. Controles de filtro y búsqueda */
+
+.subtitle {
+  display: none;
+}
+
+.admin-info {
+  display: none; 
+}
+
 .controls.filters {
+  border-radius: 0;
+  border: none;
+  padding: 20px 24px;
+  margin: 0 0 24px 0;
+  max-width: none;
+  box-shadow: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  align-items: center;
-  margin-bottom: 20px;
+  gap: 20px;
+  align-items: flex-end;
+  justify-content: flex-start;
 }
+
 .filter-group {
   display: flex;
   flex-direction: column;
+  gap: 6px;
 }
+
 .filter-group label {
-  font-weight: 600;
-  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
 }
+
 .filter-group select,
 .filter-group input {
-  padding: 8px 15px;
-  border: 2px solid #E2E8F0;
-  border-radius: 8px;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.3s;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  background: white;
+  min-width: 200px;
+  transition: all 0.2s ease;
 }
+
 .filter-group select:focus,
 .filter-group input:focus {
-  border-color: #F7B500;
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(247, 181, 0, 0.1);
 }
 
-/* 5. Botón "Add Shipment" */
 .btn-add {
-  margin-left: auto;
-  padding: 10px 24px;
-  background: linear-gradient(135deg, #FFEB3B, #FBC02D);
-  color: #fff;
+  background: #3b82f6;
+  color: white;
   border: none;
-  border-radius: 30px;
-  font-size: 1rem;
-  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.875rem;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(41, 182, 246, 0.3);
-  transition: transform 0.2s, background 0.2s;
-}
-.btn-add:hover {
-  background: linear-gradient(135deg, #FBC02D, #F9A825);
-  transform: scale(1.05);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  margin-left: auto;
 }
 
-/* 6. Modal de formulario (Create/Edit) */
+.btn-add:hover {
+  background: #2563eb;
+}
+
 .modal-overlay {
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 1rem;
+  justify-content: center;
   z-index: 1000;
+  padding: 20px;
 }
+
 .modal-content {
-  background: #fff;
+  background: white;
   border-radius: 12px;
   width: 100%;
   max-width: 500px;
-  padding: 2rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  padding: 24px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  max-height: 90vh;
+  overflow-y: auto;
 }
+
 .modal-content h2 {
-  margin: 0 0 1rem;
-  font-size: 1.75rem;
+  margin: 0 0 20px 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
 }
+
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
 }
+
 .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
 }
+
 .form-group input,
-.form-group select {
+.form-group select,
+.form-group textarea {
   width: 100%;
   padding: 10px 12px;
-  border: 2px solid #E2E8F0;
+  border: 1px solid #e5e7eb;
   border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.3s;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  background: white;
 }
+
 .form-group input:focus,
-.form-group select:focus {
-  border-color: #F7B500;
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(247, 181, 0, 0.1);
 }
+
+.status-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background-color: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.status-info .info-icon {
+  font-size: 1rem;
+}
+
+.status-info span {
+  font-size: 0.875rem;
+  color: #0369a1;
+}
+
 .form-actions {
   display: flex;
+  gap: 12px;
   justify-content: flex-end;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
+  margin-top: 24px;
 }
+
 .btn-submit,
 .btn-cancel {
   padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 30px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
-  transition: transform 0.2s, background 0.2s;
-}
-.btn-submit {
-  background: linear-gradient(135deg, #FF7043, #FF5722);
-  color: #fff;
-}
-.btn-submit:hover {
-  background: linear-gradient(135deg, #E64A19, #D84315);
-  transform: scale(1.03);
-}
-.btn-cancel {
-  background: #B0BEC5;
-  color: #fff;
-}
-.btn-cancel:hover {
-  background: #90A4AE;
-  transform: scale(1.03);
+  transition: all 0.2s ease;
 }
 
-/* 7. Tabla de envíos */
+.btn-submit {
+  background: #3b82f6;
+  color: white;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.btn-submit:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.btn-cancel {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.btn-cancel:hover {
+  background: #e5e7eb;
+}
+
+.table-container {
+  background: white;
+  border-radius: 0;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 0;
+  overflow-x: auto;
+}
+
 .shipment-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  font-size: 0.875rem;
 }
-.shipment-table th,
-.shipment-table td {
-  padding: 12px 16px;
-  border-bottom: 1px solid #E0E0E0;
-  text-align: left;
-}
+
 .shipment-table thead {
-  background: #f5f5f5;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e5e7eb;
 }
-.shipment-table thead th {
+
+.shipment-table th {
+  padding: 16px 24px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #374151;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.shipment-table th:last-child {
+  text-align: center;
+  width: 80px;
+}
+
+.shipment-table td {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #1a1a1a;
+  vertical-align: middle;
+  line-height: 1.5;
+}
+
+.shipment-table td:last-child {
+  text-align: center;
+  width: 80px;
+  padding: 16px 8px;
+}
+
+.shipment-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.shipment-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.shipment-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.sortable-header {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.sortable-header:hover {
+  color: #3b82f6;
+}
+
+.sortable-header span {
+  margin-left: 4px;
+  font-size: 0.75rem;
+}
+
+.status-display {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-align: center;
+  min-width: 90px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+
+.status-pending {
+  background-color: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.status-in-progress {
+  background-color: #dbeafe;
+  color: #1e40af;
+  border: 1px solid #93c5fd;
+}
+
+.status-in-transit {
+  background-color: #cffafe;
+  color: #155e75;
+  border: 1px solid #67e8f9;
+}
+
+.status-delivered {
+  background-color: #d1fae5;
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+}
+
+.status-cancelled {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+
+.status-note {
+  color: #6b7280;
+  font-style: italic;
+  font-size: 0.75rem;
+}
+
+.actions {
+  text-align: center;
+  vertical-align: middle;
+  width: 80px;
+}
+
+.btn-delete {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  opacity: 0.6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin: 0 auto;
+}
+
+.btn-delete:hover {
+  background-color: #fee2e2;
+  opacity: 1;
+  transform: scale(1.1);
+  color: #dc2626;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #6b7280;
+  background: white;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  background: white;
+  color: #6b7280;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 24px;
+  opacity: 0.6;
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  color: #374151;
+  margin-bottom: 12px;
   font-weight: 600;
 }
-.shipment-table tbody tr:hover {
-  background: #FAFAFA;
+
+.empty-state p {
+  font-size: 1rem;
+  margin-bottom: 32px;
+  line-height: 1.5;
 }
-.actions {
-  display: flex;
-  gap: 0.5rem;
-}
-.btn-action {
-  background: transparent;
+
+.btn-primary {
+  background: #3b82f6;
+  color: white;
   border: none;
-  font-size: 1.1rem;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 500;
   cursor: pointer;
-  transition: color 0.2s;
-}
-.btn-action:hover {
-  color: #F44336;
+  transition: all 0.2s ease;
 }
 
-
-/* 9. Mensaje "No shipments" */
-.no-shipments {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #666;
-  margin-top: 40px;
+.btn-primary:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
 }
 
-/* 10. Modal de confirmación de borrado */
+.error-message {
+  background-color: #fef2f2;
+  color: #991b1b;
+  padding: 12px 24px;
+  border-radius: 0;
+  margin: 0 0 24px 0;
+  border: none;
+  border-left: 4px solid #ef4444;
+  font-size: 0.875rem;
+}
+
+.success-message {
+  background-color: #d1fae5;
+  color: #065f46;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 0 auto 24px auto;
+  max-width: 1200px;
+  border: 1px solid #6ee7b7;
+  font-size: 0.875rem;
+}
+
+/* ===== CONFIRMATION MODAL ===== */
 .confirm-overlay {
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1100;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
 }
+
 .confirm-modal {
-  background: #fff;
-  padding: 1.5rem;
+  background: white;
   border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-  width: 90%;
-  max-width: 360px;
+  padding: 24px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
+
+.confirm-modal h3 {
+  margin: 0 0 16px 0;
+  color: #374151;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
 .confirm-modal p {
-  margin-bottom: 1rem;
-  font-size: 1rem;
+  margin: 0 0 20px 0;
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
+
 .confirm-buttons {
   display: flex;
-  justify-content: center;
-  gap: 0.5rem;
+  gap: 12px;
+  justify-content: flex-end;
 }
+
 .btn-confirm-yes,
 .btn-confirm-no {
   padding: 8px 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 6px;
   border: none;
-  border-radius: 30px;
-  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
-}
-.btn-confirm-yes {
-  background: #d32f2f;
-  color: #fff;
-}
-.btn-confirm-yes:hover {
-  background: #b71c1c;
-  transform: scale(1.03);
-}
-.btn-confirm-no {
-  background: #757575;
-  color: #fff;
-}
-.btn-confirm-no:hover {
-  background: #424242;
-  transform: scale(1.03);
+  transition: all 0.2s ease;
 }
 
-/* 11. Responsive */
+.btn-confirm-yes {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-confirm-yes:hover {
+  background: #dc2626;
+}
+
+.btn-confirm-no {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.btn-confirm-no:hover {
+  background: #e5e7eb;
+}
+
+.loading-container {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+}
+
+.loading-container i {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-container p {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .header {
+    padding: 0 0 16px 0;
+    margin: 0 0 20px 0;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
   .controls.filters {
     flex-direction: column;
     align-items: stretch;
+    padding: 16px;
   }
-  .btn-add,
+
+  .filter-group select,
+  .filter-group input {
+    min-width: auto;
+  }
+
+  .btn-add {
+    width: 100%;
+  }
+
+  .shipment-table {
+    font-size: 0.75rem;
+  }
+
+  .shipment-table th,
+  .shipment-table td {
+    padding: 12px 8px;
+  }
+
+  .status-badge {
+    min-width: 70px;
+    font-size: 0.6875rem;
+  }
+
+  .btn-delete {
+    width: 28px;
+    height: 28px;
+    font-size: 0.875rem;
+    padding: 6px;
+  }
+
+  .modal-content {
+    padding: 16px;
+    margin: 10px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
   .btn-submit,
   .btn-cancel {
     width: 100%;
-  }
-  .shipment-table th,
-  .shipment-table td {
-    padding: 10px 8px;
   }
 }
