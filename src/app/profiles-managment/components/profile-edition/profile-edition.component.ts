@@ -98,7 +98,7 @@ export class ProfileEditionComponent implements OnInit {
           this.loading = false;
           alert('Profile updated successfully!');
           this.router
-            .navigate([`/profile/${this.user.id}`])
+            .navigate(['/profile-edition', this.user.id])
             .catch((err) => console.error('Navigation error:', err));
         },
         (error) => {

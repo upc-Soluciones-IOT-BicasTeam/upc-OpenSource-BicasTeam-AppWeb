@@ -1,4 +1,11 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehiclesApiService } from '../../services/vehicles-api.service';
 import { VehicleEntity } from '../../model/vehicle.entity';
@@ -7,7 +14,7 @@ declare const google: any;
 @Component({
   selector: 'app-vehicle-details',
   templateUrl: './vehicle-details.component.html',
-  styleUrls: ['./vehicle-details.component.css']
+  styleUrls: ['./vehicle-details.component.css'],
 })
 export class VehicleDetailsComponent implements OnInit, OnDestroy {
   vehicle: VehicleEntity | null = null;
@@ -58,10 +65,17 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
     }
   }
   private initMap(): void {
-    if (this.vehicle && this.mapContainer?.nativeElement && this.vehicle.location) {
+    if (
+      this.vehicle &&
+      this.mapContainer?.nativeElement &&
+      this.vehicle.location
+    ) {
       const coords = this.extractLatLng(this.vehicle.location);
       if (!coords) {
-        console.warn('Coordenadas no válidas en location:', this.vehicle.location);
+        console.warn(
+          'Coordenadas no válidas en location:',
+          this.vehicle.location
+        );
         return;
       }
 
@@ -80,7 +94,9 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  private extractLatLng(location?: string): { lat: number; lng: number } | null {
+  private extractLatLng(
+    location?: string
+  ): { lat: number; lng: number } | null {
     if (!location) return null;
     try {
       const latMatch = location.match(/Latitude:\s*(-?\d+\.?\d*)/);
@@ -111,6 +127,11 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
   }
 
   goBack(): void {
-    this.router.navigate([':id/vehicles-businessman']);
+    const userId = this.route.snapshot.paramMap.get('id');
+    if (userId) {
+      this.router.navigate(['/vehicles-businessman', userId]);
+    } else {
+      this.router.navigate(['/vehicles-businessman']);
+    }
   }
 }

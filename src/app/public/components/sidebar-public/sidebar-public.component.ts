@@ -37,7 +37,6 @@ export class SidebarPublicComponent implements OnInit {
       this.user = currentUser;
       this.loadProfileData();
     } else {
-      // If no user in AuthService, try to get from route params
       const userId = this.route.snapshot.params['id'];
       if (userId) {
         this.user.id = parseInt(userId);
@@ -48,7 +47,6 @@ export class SidebarPublicComponent implements OnInit {
 
   private loadProfileData(): void {
     if (this.user.id) {
-      // Load profile data using ProfileApiService
       this.profileApi.findUserById(this.user.id).subscribe({
         next: (profileData: any) => {
           console.log('Profile data loaded:', profileData);
@@ -59,7 +57,6 @@ export class SidebarPublicComponent implements OnInit {
         },
         error: (error) => {
           console.error('Error loading profile data:', error);
-          // Set default values if profile loading fails
           this.type = 'MANAGER';
           this.name = 'Manager';
           this.lastName = 'User';
@@ -73,36 +70,35 @@ export class SidebarPublicComponent implements OnInit {
   }
 
   goToHome(): void {
-    this.router.navigate([this.user.id, `home-businessman`]);
+    this.router.navigate(['/home-businessman', this.user.id]);
   }
 
   goToProfile(): void {
-    this.router.navigate([this.user.id, `profile`]);
+    this.router.navigate(['/profile', this.user.id]);
   }
 
   goTologout(): void {
-    // Use AuthService to logout
     this.authService.logout();
-    this.router.navigate([`login`]);
+    this.router.navigate(['/login']);
   }
 
   goToVehicles(): void {
-    this.router.navigate([this.user.id, `vehicles-businessman`]);
+    this.router.navigate(['/vehicles-businessman', this.user.id]);
   }
 
   goToReports(): void {
-    this.router.navigate([this.user.id, `report-businessman`]);
+    this.router.navigate(['/report-businessman', this.user.id]);
   }
 
   goToShipments(): void {
-    this.router.navigate([this.user.id, `shipment-businessman`]);
+    this.router.navigate(['/shipment-businessman', this.user.id]);
   }
 
   goToPricing(): void {
-    this.router.navigate([this.user.id, `subscription`]);
+    this.router.navigate(['/subscription', this.user.id]);
   }
 
   goToAnalytics(): void {
-    this.router.navigate([this.user.id, 'analytics']);
+    this.router.navigate(['/analytics', this.user.id]);
   }
 }

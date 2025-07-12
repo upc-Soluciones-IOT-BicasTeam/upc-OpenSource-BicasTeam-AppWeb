@@ -1,22 +1,26 @@
 import { Component } from '@angular/core';
-import {VehicleEntity} from "../../model/vehicle.entity";
-import {VehiclesApiService} from "../../services/vehicles-api.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import { VehicleEntity } from '../../model/vehicle.entity';
+import { VehiclesApiService } from '../../services/vehicles-api.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-vehicle-update',
   templateUrl: './vehicle-update.component.html',
-  styleUrl: './vehicle-update.component.css'
+  styleUrl: './vehicle-update.component.css',
 })
 export class VehicleUpdateComponent {
   vehicle: VehicleEntity = new VehicleEntity();
   uploadedImageUrl: string | null = null;
   vehicleId: number | null = null;
 
-  constructor(private vehiclesApi: VehiclesApiService, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private vehiclesApi: VehiclesApiService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const idParam = params.get('id');
       if (idParam) {
         this.vehicleId = +idParam;
@@ -34,7 +38,10 @@ export class VehicleUpdateComponent {
         this.vehicle = data;
 
         if (typeof this.vehicle.speed === 'string') {
-          const cleanedSpeedString = this.vehicle.speed.replace(' km/h', '').replace('N/A', '0').trim();
+          const cleanedSpeedString = this.vehicle.speed
+            .replace(' km/h', '')
+            .replace('N/A', '0')
+            .trim();
           const tempSpeed = parseFloat(cleanedSpeedString);
           this.vehicle.speed = isNaN(tempSpeed) ? 0 : tempSpeed;
         } else if (typeof this.vehicle.speed === 'number') {
@@ -46,7 +53,7 @@ export class VehicleUpdateComponent {
         if (this.vehicle.lastTechnicalInspectionDate) {
           try {
             const backendDateString = this.vehicle.lastTechnicalInspectionDate;
-            const date = new Date(backendDateString.replace(' ', 'T')); // Reemplazar espacio por 'T' para parsear
+            const date = new Date(backendDateString.replace(' ', 'T')); 
 
             if (!isNaN(date.getTime())) {
               const year = date.getFullYear();
@@ -56,11 +63,17 @@ export class VehicleUpdateComponent {
               const minutes = ('0' + date.getMinutes()).slice(-2);
               this.vehicle.lastTechnicalInspectionDate = `${year}-${month}-${day}T${hours}:${minutes}`;
             } else {
-              console.warn('Fecha de inspección técnica inválida del backend al cargar:', backendDateString);
+              console.warn(
+                'Fecha de inspección técnica inválida del backend al cargar:',
+                backendDateString
+              );
               this.vehicle.lastTechnicalInspectionDate = null;
             }
           } catch (e) {
-            console.error('Error al procesar lastTechnicalInspectionDate del backend al cargar:', e);
+            console.error(
+              'Error al procesar lastTechnicalInspectionDate del backend al cargar:',
+              e
+            );
             this.vehicle.lastTechnicalInspectionDate = null;
           }
         } else {
@@ -72,9 +85,8 @@ export class VehicleUpdateComponent {
         } else {
           this.uploadedImageUrl = null;
         }
-
       },
-      error => {
+      (error) => {
         console.error('Error al cargar datos del vehículo:', error);
         this.router.navigate(['/vehicles-businessman']);
       }
@@ -100,13 +112,19 @@ export class VehicleUpdateComponent {
       try {
         const date = new Date(vehicleData.lastTechnicalInspectionDate);
         if (isNaN(date.getTime())) {
-          console.error('La fecha de inspección técnica no es válida para envío:', vehicleData.lastTechnicalInspectionDate);
+          console.error(
+            'La fecha de inspección técnica no es válida para envío:',
+            vehicleData.lastTechnicalInspectionDate
+          );
           vehicleData.lastTechnicalInspectionDate = null;
         } else {
           vehicleData.lastTechnicalInspectionDate = date.toISOString();
         }
       } catch (e) {
-        console.error('Error al procesar lastTechnicalInspectionDate para envío:', e);
+        console.error(
+          'Error al procesar lastTechnicalInspectionDate para envío:',
+          e
+        );
         vehicleData.lastTechnicalInspectionDate = null;
       }
     } else {
@@ -114,14 +132,16 @@ export class VehicleUpdateComponent {
     }
 
     if (typeof vehicleData.speed === 'string') {
-      const cleanedSpeedString = (vehicleData.speed as string).replace(' km/h', '').replace('N/A', '0').trim();
+      const cleanedSpeedString = (vehicleData.speed as string)
+        .replace(' km/h', '')
+        .replace('N/A', '0')
+        .trim();
       const tempSpeed = parseFloat(cleanedSpeedString);
       vehicleData.speed = isNaN(tempSpeed) ? 0 : tempSpeed;
     } else if (vehicleData.speed === null || vehicleData.speed === undefined) {
       vehicleData.speed = 0;
     }
 
-    // Asegurarse de que `managerId` no sea `null` o `undefined` si es requerido
     if (vehicleData.managerId === undefined || vehicleData.managerId === null) {
       console.error('ID del Manager es requerido.');
       return;
@@ -129,19 +149,31 @@ export class VehicleUpdateComponent {
 
     console.log('JSON a enviar:', vehicleData);
 
-    this.vehiclesApi.updateVehicle(this.vehicle.id, vehicleData as VehicleEntity).subscribe(
-      (data: VehicleEntity) => {
-        console.log('Vehículo actualizado exitosamente:', data);
-        this.router.navigate([':id/vehicles-businessman']); // Navegación corregida
-      },
-      error => {
-        console.error('Error al actualizar vehículo:', error);
-        console.log('Detalles del error del backend:', error.error);
-      }
-    );
+    this.vehiclesApi
+      .updateVehicle(this.vehicle.id, vehicleData as VehicleEntity)
+      .subscribe(
+        (data: VehicleEntity) => {
+          console.log('Vehículo actualizado exitosamente:', data);
+          const userId = this.route.snapshot.paramMap.get('id');
+          if (userId) {
+            this.router.navigate(['/vehicles-businessman', userId]);
+          } else {
+            this.router.navigate(['/vehicles-businessman']);
+          }
+        },
+        (error) => {
+          console.error('Error al actualizar vehículo:', error);
+          console.log('Detalles del error del backend:', error.error);
+        }
+      );
   }
 
   cancel(): void {
-    this.router.navigate([':id/vehicles-businessman']);
+    const userId = this.route.snapshot.paramMap.get('id');
+    if (userId) {
+      this.router.navigate(['/vehicles-businessman', userId]);
+    } else {
+      this.router.navigate(['/vehicles-businessman']);
+    }
   }
 }

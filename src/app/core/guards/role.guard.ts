@@ -33,16 +33,16 @@ export class RoleGuard implements CanActivate {
 
     switch (role) {
       case 'manager':
-        this.router.navigate([`${userId}/profile`]);
+        this.router.navigate(['/profile', userId]);
         break;
       case 'staff':
-        this.router.navigate([`${userId}/staff-home`]);
+        this.router.navigate(['/staff-home', userId]);
         break;
       case 'businessman':
-        this.router.navigate([`${userId}/home-businessman`]);
+        this.router.navigate(['/home-businessman', userId]);
         break;
       case 'driver':
-        this.router.navigate([`${userId}/home-carrier`]);
+        this.router.navigate(['/home-carrier', userId]);
         break;
       default:
         this.router.navigate(['/login']);

@@ -20,94 +20,81 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
 
 const routes: Routes = [
-  // Public routes (no authentication required)
   { path: 'login', component: PgLoginComponent },
   { path: 'register', component: PgRegisterComponent },
   { path: 'register/successfully', component: PgRegisterSuccesComponent },
   { path: 'register/:type', component: PgRegisterInfoComponent },
 
-  // Protected routes - Manager/Businessman
   {
-    path: ':id/home-businessman',
+    path: 'home-businessman/:id',
     component: PgHomeBusinessmanComponent,
     canActivate: [AuthGuard, RoleGuard],
     data: { expectedRole: 'manager' },
   },
   {
-    path: ':id/vehicles-businessman',
+    path: 'vehicles-businessman/:id',
     component: PgVehiclesBusinessmanComponent,
     canActivate: [AuthGuard, RoleGuard],
     data: { expectedRole: 'manager' },
   },
   {
-    path: ':id/shipment-businessman',
+    path: 'shipment-businessman/:id',
     component: PgShipmentBusinessmanComponent,
     canActivate: [AuthGuard, RoleGuard],
     data: { expectedRole: 'manager' },
   },
   {
-    path: ':id/report-businessman',
+    path: 'report-businessman/:id',
     component: PgReportBusinessmanComponent,
     canActivate: [AuthGuard, RoleGuard],
     data: { expectedRole: 'manager' },
   },
   {
-    path: ':id/vehicles-details-businessman/:vehicleId',
+    path: 'vehicles-details-businessman/:id/:vehicleId',
     component: PgVehiclesDetailsBusinessmanComponent,
     canActivate: [AuthGuard, RoleGuard],
     data: { expectedRole: 'manager' },
   },
   {
-    path: ':id/create-vehicle-businessman',
+    path: 'create-vehicle-businessman/:id',
     component: PgCreateVehicleComponent,
     canActivate: [AuthGuard, RoleGuard],
     data: { expectedRole: 'manager' },
   },
   {
-    path: ':id/vehicles-update/:vehicleId',
+    path: 'vehicles-update/:id/:vehicleId',
     component: PgVehiclesUpdateComponent,
     canActivate: [AuthGuard, RoleGuard],
     data: { expectedRole: 'manager' },
   },
   {
-    path: ':id/subscription',
+    path: 'subscription/:id',
     component: PgSubscriptionComponent,
     canActivate: [AuthGuard, RoleGuard],
     data: { expectedRole: 'manager' },
   },
   {
-    path: ':id/analytics',
+    path: 'analytics/:id',
     component: PgAnalyticsComponent,
     canActivate: [AuthGuard, RoleGuard],
     data: { expectedRole: 'manager' },
   },
 
-  // Protected routes - Staff
   {
-    path: ':id/staff-home',
-    component: PgStaffHomeComponent,
-    canActivate: [AuthGuard, RoleGuard],
-    data: { expectedRole: 'staff' },
-  },
-
-  // Protected routes - Driver/Carrier
-  {
-    path: ':id/home-carrier',
+    path: 'home-carrier/:id',
     component: PgHomeDriverComponent,
     canActivate: [AuthGuard, RoleGuard],
     data: { expectedRole: 'driver' },
   },
 
-  // Protected routes - Common (any authenticated user)
   {
-    path: ':id/profile',
+    path: 'profile/:id',
     component: PgProfileEditionComponent,
     canActivate: [AuthGuard],
   },
 
-  // Default redirects
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '**', redirectTo: '/login' }, // Wildcard route for 404s
+  { path: '**', redirectTo: '/login' }, 
 ];
 
 @NgModule({

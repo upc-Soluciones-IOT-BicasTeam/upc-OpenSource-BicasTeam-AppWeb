@@ -18,8 +18,6 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     document.body.style.backgroundColor = '#303841';
-
-    // Check if user is already authenticated
     if (this.authService.isAuthenticated()) {
       this.redirectToUserHome();
     }
@@ -30,18 +28,15 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    // Reset error state
     this.error = false;
     this.isLoading = true;
 
-    // Validate input
     if (!this.user.email || !this.user.password) {
       this.setError('Please enter both email and password');
       this.isLoading = false;
       return;
     }
 
-    // Attempt authentication
     this.authService.login(this.user.email, this.user.password).subscribe({
       next: (authenticatedUser: any) => {
         console.log('Login successful:', authenticatedUser);
@@ -72,23 +67,21 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
     const user = this.authService.getCurrentUser();
     if (!user) return;
 
-    // Redirect based on user role to their main dashboard
     switch (user.role) {
       case 'manager':
-        this.router.navigate([`${user.id}/home-businessman`]);
+        this.router.navigate(['/home-businessman', user.id]);
         break;
       case 'staff':
-        this.router.navigate([`${user.id}/staff-home`]);
+        this.router.navigate(['/staff-home', user.id]);
         break;
       case 'driver':
-        this.router.navigate([`${user.id}/home-carrier`]);
+        this.router.navigate(['/home-carrier', user.id]);
         break;
       case 'businessman':
-        this.router.navigate([`${user.id}/home-businessman`]);
+        this.router.navigate(['/home-businessman', user.id]);
         break;
       default:
-        // Default to profile page if role is unknown
-        this.router.navigate([`${user.id}/profile`]);
+        this.router.navigate(['/profile', user.id]);
         break;
     }
   }
@@ -103,7 +96,7 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
   }
 
   goToRegisterUserInformation(type: string) {
-    this.user.role = type; // Guarda el tipo de usuario
+    this.user.role = type; 
     console.log(type);
     this.router.navigate([`register/${type}`]);
   }

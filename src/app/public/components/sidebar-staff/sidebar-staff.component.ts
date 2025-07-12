@@ -31,14 +31,11 @@ export class SidebarStaffComponent implements OnInit {
   }
   ngOnInit() {
     this.type = 'Staff Platform';
-
-    // Load current user data from AuthService
     const currentUser = this.authService.getCurrentUser();
     if (currentUser) {
       this.user = currentUser;
       this.loadProfileData();
     } else {
-      // If no user in AuthService, try to get from route params
       const userId = this.route.snapshot.params['id'];
       if (userId) {
         this.user.id = parseInt(userId);
@@ -49,7 +46,6 @@ export class SidebarStaffComponent implements OnInit {
 
   private loadProfileData(): void {
     if (this.user.id) {
-      // Load profile data using ProfileApiService
       this.profileApi.findUserById(this.user.id).subscribe({
         next: (profileData: any) => {
           console.log('Profile data loaded:', profileData);
@@ -59,7 +55,6 @@ export class SidebarStaffComponent implements OnInit {
         },
         error: (error) => {
           console.error('Error loading profile data:', error);
-          // Set default values if profile loading fails
           this.name = 'Staff';
           this.lastName = 'Member';
         },
@@ -72,21 +67,19 @@ export class SidebarStaffComponent implements OnInit {
   }
 
   goToChangueCredentials(): void {
-    this.router.navigate([this.user.id, `profile`]);
+    this.router.navigate(['/profile', this.user.id]);
   }
 
   goTologout(): void {
-    // Use AuthService to logout
     this.authService.logout();
-    this.router.navigate([`login`]);
+    this.router.navigate(['/login']);
   }
 
   goToHome(): void {
-    this.router.navigate([this.user.id, `staff-home`]);
+    this.router.navigate(['/staff-home', this.user.id]);
   }
 
   goToPricing(): void {
-    // Staff should go to their main dashboard, not subscription
-    this.router.navigate([this.user.id, `staff-home`]);
+    this.router.navigate(['/staff-home', this.user.id]);
   }
 }

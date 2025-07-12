@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ProfileApiService } from '../../services/profile-api.service';
-import { Activity, Condition, Delivery } from '../../model/profile.entity';
+import { Router, ActivatedRoute } from '@angular/router';
 import { VehiclesApiService } from '../../../service-execution/vehicles-management/services/vehicles-api.service';
 import { VehicleEntity } from '../../../service-execution/vehicles-management/model/vehicle.entity';
 import { ShipmentApiService } from '../../../service-execution/shipment-management/services/shipment-api.service';
@@ -43,35 +41,32 @@ export class ProfileHomeBusinessmanComponent implements OnInit {
   vehicles: Vehicle[] = [];
   shipments: Shipment[] = [];
 
-  activities: Activity[] = [];
-  deliveries: Delivery[] = [];
-  conditions: Condition[] = [];
-
+  // Estado de carga
   isLoading = true;
 
+  // ID del usuario actual
+  private userId: string | null = null;
+
   constructor(
-    private apiService: ProfileApiService,
     private vehiclesApiService: VehiclesApiService,
     private shipmentsApiService: ShipmentApiService,
     private reportsApiService: ReportsApiService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.userId = this.route.snapshot.paramMap.get('id');
     this.loadDashboardData();
   }
 
   private loadDashboardData(): void {
     this.isLoading = true;
 
-    // Cargar todos los datos en paralelo
     forkJoin({
       vehicles: this.vehiclesApiService.getAllVehicles(),
       shipments: this.shipmentsApiService.getAllShipments(),
       reports: this.reportsApiService.getAllReports(),
-      activities: this.apiService.getAllActivities(),
-      deliveries: this.apiService.getAllDeliveries(),
-      conditions: this.apiService.getAllConditions(),
     }).subscribe({
       next: (data) => {
         try {
@@ -87,16 +82,6 @@ export class ProfileHomeBusinessmanComponent implements OnInit {
             ? this.processReportsAsIssues(data.reports)
             : [];
 
-          this.activities = Array.isArray(data.activities)
-            ? data.activities
-            : [];
-          this.deliveries = Array.isArray(data.deliveries)
-            ? data.deliveries
-            : [];
-          this.conditions = Array.isArray(data.conditions)
-            ? data.conditions
-            : [];
-
           console.log('Dashboard data loaded successfully:', {
             vehicles: this.vehicles.length,
             shipments: this.shipments.length,
@@ -107,9 +92,6 @@ export class ProfileHomeBusinessmanComponent implements OnInit {
           this.vehicles = [];
           this.shipments = [];
           this.issues = [];
-          this.activities = [];
-          this.deliveries = [];
-          this.conditions = [];
         } finally {
           this.isLoading = false;
         }
@@ -119,9 +101,6 @@ export class ProfileHomeBusinessmanComponent implements OnInit {
         this.vehicles = [];
         this.shipments = [];
         this.issues = [];
-        this.activities = [];
-        this.deliveries = [];
-        this.conditions = [];
         this.isLoading = false;
       },
     });
@@ -200,7 +179,7 @@ export class ProfileHomeBusinessmanComponent implements OnInit {
       normalizedStatus.includes('finalizado')
     )
       return 'completed';
-    return 'pending'; 
+    return 'pending';
   }
 
   private processReportsAsIssues(reportEntities: ReportEntity[]): Issue[] {
@@ -222,7 +201,7 @@ export class ProfileHomeBusinessmanComponent implements OnInit {
     level: string | null | undefined
   ): 'low' | 'medium' | 'high' {
     if (!level || typeof level !== 'string') {
-      return 'low'; 
+      return 'low';
     }
 
     const normalizedLevel = level.toLowerCase().trim();
@@ -241,29 +220,52 @@ export class ProfileHomeBusinessmanComponent implements OnInit {
     return 'low';
   }
 
- 
   onManageIssues(): void {
-    this.router.navigate(['/reports-businessman']); 
+    if (this.userId) {
+      this.router.navigate(['/report-businessman', this.userId]);
+    } else {
+      console.error('User ID not available for navigation');
+    }
   }
 
   onManageVehicles(): void {
-    this.router.navigate(['/vehicles-businessman']);
+    if (this.userId) {
+      this.router.navigate(['/vehicles-businessman', this.userId]);
+    } else {
+      console.error('User ID not available for navigation');
+    }
   }
 
   onManageShipments(): void {
-    this.router.navigate(['/shipments-businessman']);
+    if (this.userId) {
+      this.router.navigate(['/shipment-businessman', this.userId]);
+    } else {
+      console.error('User ID not available for navigation');
+    }
   }
 
-  onSeeMoreActivities(): void {
-    this.router.navigate(['/activities']); 
+  onManageAnalytics(): void {
+    if (this.userId) {
+      this.router.navigate(['/analytics', this.userId]);
+    } else {
+      console.error('User ID not available for navigation');
+    }
   }
 
-  onSeeMoreDeliveries(): void {
-    this.router.navigate(['/deliveries']); 
+  onManageSubscription(): void {
+    if (this.userId) {
+      this.router.navigate(['/subscription', this.userId]);
+    } else {
+      console.error('User ID not available for navigation');
+    }
   }
 
-  onSeeMoreCondition(): void {
-    this.router.navigate(['/conditions']); 
+  onManageProfile(): void {
+    if (this.userId) {
+      this.router.navigate(['/profile', this.userId]);
+    } else {
+      console.error('User ID not available for navigation');
+    }
   }
 
   refreshData(): void {

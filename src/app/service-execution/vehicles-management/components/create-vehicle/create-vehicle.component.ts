@@ -1,18 +1,22 @@
 import { Component } from '@angular/core';
 import { VehicleEntity } from '../../model/vehicle.entity';
 import { VehiclesApiService } from '../../services/vehicles-api.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-vehicle',
   templateUrl: './create-vehicle.component.html',
-  styleUrls: ['./create-vehicle.component.css']
+  styleUrls: ['./create-vehicle.component.css'],
 })
 export class CreateVehicleComponent {
   vehicle: VehicleEntity = new VehicleEntity();
   uploadedImageUrl: string | null = null;
 
-  constructor(private vehiclesApi: VehiclesApiService, private router: Router) {}
+  constructor(
+    private vehiclesApi: VehiclesApiService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   handleFileInput(event: any): void {
     const file = event.target.files[0];
@@ -30,20 +34,32 @@ export class CreateVehicleComponent {
     vehicleData.vehicleImage = null;
 
     if (vehicleData.lastTechnicalInspectionDate) {
-      vehicleData.lastTechnicalInspectionDate = new Date(vehicleData.lastTechnicalInspectionDate).toISOString();
+      vehicleData.lastTechnicalInspectionDate = new Date(
+        vehicleData.lastTechnicalInspectionDate
+      ).toISOString();
     }
 
     this.vehiclesApi.addVehicle(vehicleData).subscribe(
       () => {
-        this.router.navigate([':id/vehicles-businessman']);
+        const userId = this.route.snapshot.paramMap.get('id');
+        if (userId) {
+          this.router.navigate(['/vehicles-businessman', userId]);
+        } else {
+          this.router.navigate(['/vehicles-businessman']);
+        }
       },
-      error => {
+      (error) => {
         console.error('Error al agregar vehículo:', error);
       }
     );
   }
 
   cancel(): void {
-    this.router.navigate([':id/vehicles-businessman']);
+    const userId = this.route.snapshot.paramMap.get('id');
+    if (userId) {
+      this.router.navigate(['/vehicles-businessman', userId]);
+    } else {
+      this.router.navigate(['/vehicles-businessman']);
+    }
   }
 }
