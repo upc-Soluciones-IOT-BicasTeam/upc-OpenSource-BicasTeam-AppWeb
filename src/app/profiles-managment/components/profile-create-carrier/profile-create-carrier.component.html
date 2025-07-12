@@ -1,6 +1,23 @@
 <div class="wrapper fadeInDown">
-  <div id="formContent">
 
+  <div *ngIf="!isFormVisible" class="initial-view">
+    
+    <button (click)="showRegistrationForm()" class="add-carrier-button">
+      <i class="pi pi-plus"></i> {{ 'SIGNUP.BUTTON-CARRIER' | translate }}
+    </button>
+
+
+
+
+    <div class="carrier-list-placeholder">
+      <h2>{{ 'SIGNUP.TITLE-CARRIERS-LIST' | translate }}</h2>
+
+    </div>
+  </div>
+
+
+
+  <div *ngIf="isFormVisible" id="formContent">
     <div class="fadeIn first">
       <img src="https://i.ibb.co/RCDQZnJ/logo.png" id="icon" alt="Logo" />
     </div>
@@ -104,29 +121,24 @@
         </label>
       </div>
 
-      <!-- Botón de registro -->
-      <input
-        type="submit"
-        class="fadeIn fourth"
-        [value]="'SIGNUP.BUTTON-CARRIER' | translate"
-      />
+      <div class="form-actions">
+        <!-- Botón de registro -->
+        <input
+          type="submit"
+          class="fadeIn fourth"
+          [value]="'SIGNUP.BUTTON-CARRIER' | translate"
+        />
+
+        <button type="button" (click)="hideRegistrationForm()" class="cancel-button fadeIn fourth">
+          {{ 'SIGNUP.TITLE-CARRIER-CANCEL' | translate }}
+        </button>
+      </div>
+
     </form>
 
     <!-- Mensaje de error -->
     <div class="alert alert-danger" *ngIf="error">
       {{ error_msg }}
-    </div>
-
-    <!-- Enlace al login -->
-    <div>
-      <p>
-        <i class="pi pi-minus"></i>
-        {{ 'SIGNUP.ALREADY_ACCOUNT' | translate }}
-        <a routerLink="/login">
-          {{ 'SIGNUP.LOGIN_LINK' | translate }}
-        </a>
-        <i class="pi pi-minus"></i>
-      </p>
     </div>
 
   </div>

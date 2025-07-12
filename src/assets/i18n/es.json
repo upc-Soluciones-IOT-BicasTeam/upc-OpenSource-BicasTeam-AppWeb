@@ -19,6 +19,8 @@
   "SIGNUP": {
     "TITLE": "Registro",
     "TITLE-CARRIER": "Registro de nuevo conductor ",
+    "TITLE-CARRIER-CANCEL": "Cancelar",
+    "TITLE-CARRIERS-LIST": "Mis Conductores",
     "NAME_LABEL": "Nombre",
     "NAME_PLACEHOLDER": "Ingresa tu nombre",
     "LASTNAME_LABEL": "Apellido",

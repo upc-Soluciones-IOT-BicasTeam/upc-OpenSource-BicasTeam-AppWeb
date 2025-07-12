@@ -19,6 +19,8 @@
   "SIGNUP": {
     "TITLE": "Sign Up",
     "TITLE-CARRIER": "Sign Up - Carrier",
+    "TITLE-CARRIER-CANCEL": "Cancel",
+    "TITLE-CARRIERS-LIST": "My Carriers",
     "NAME_LABEL": "Name",
     "NAME_PLACEHOLDER": "Enter your name",
     "LASTNAME_LABEL": "Last Name",

@@ -12,6 +12,7 @@ import {firstValueFrom} from "rxjs";
   styleUrl: './profile-create-carrier.component.css'
 })
 export class ProfileCreateCarrierComponent implements OnInit{
+  isFormVisible = false;
   user: UserEntity = new UserEntity();
   profile: ProfileEntity = new ProfileEntity();
   error: boolean = false;
@@ -117,4 +118,23 @@ export class ProfileCreateCarrierComponent implements OnInit{
       throw new Error('Error creating user');
     }
   }
+
+  showRegistrationForm(): void {
+    this.isFormVisible = true;
+  }
+  hideRegistrationForm(): void {
+    this.isFormVisible = false;
+    this.resetForm(); // Es buena práctica limpiar el formulario al cancelar
+  }
+  private resetForm(): void {
+    this.user = new UserEntity();
+    this.profile = new ProfileEntity();
+    this.passwordConfirmation = '';
+    this.privacityPolicy = false;
+    this.error = false;
+    this.error_msg = '';
+  }
+
+
+
 }
