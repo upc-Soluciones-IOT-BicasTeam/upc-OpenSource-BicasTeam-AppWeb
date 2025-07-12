@@ -18,6 +18,7 @@
   },
   "SIGNUP": {
     "TITLE": "Registro",
+    "TITLE-CARRIER": "Registro de nuevo conductor ",
     "NAME_LABEL": "Nombre",
     "NAME_PLACEHOLDER": "Ingresa tu nombre",
     "LASTNAME_LABEL": "Apellido",
@@ -30,6 +31,7 @@
     "CONFIRM_PASSWORD_PLACEHOLDER": "Reingresa tu contraseña",
     "PRIVACY_POLICY": "He leído y acepto la Política de Privacidad",
     "BUTTON": "Registrarme",
+    "BUTTON-CARRIER": "Registrar nuevo conductor",
     "ALREADY_ACCOUNT": "¿Ya tienes una cuenta?",
     "LOGIN_LINK": "Iniciar sesión"
   },

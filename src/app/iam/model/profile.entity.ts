@@ -4,7 +4,7 @@ export class ProfileEntity {
   lastName: string;
   idCredential: number | null;
   telephone: string | null;
-  idCompany: string | null;
+  idCompany: number | null;
 
 
   constructor() {
@@ -13,6 +13,6 @@ export class ProfileEntity {
     this.lastName = '';
     this.idCredential = null;
     this.telephone = '';
-    this.idCompany = '';
+    this.idCompany = null;
   }
 }
