@@ -74,14 +74,11 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
       case 'staff':
         this.router.navigate(['/staff-home', user.id]);
         break;
-      case 'driver':
-        this.router.navigate(['/home-carrier', user.id]);
-        break;
       case 'businessman':
         this.router.navigate(['/home-businessman', user.id]);
         break;
       default:
-        this.router.navigate(['/profile', user.id]);
+        this.setError('Invalid user role: Drivers only use mobile');
         break;
     }
   }
@@ -96,7 +93,7 @@ export class IamLoginComponentComponent implements OnInit, OnDestroy {
   }
 
   goToRegisterUserInformation(type: string) {
-    this.user.role = type; 
+    this.user.role = type;
     console.log(type);
     this.router.navigate([`register/${type}`]);
   }

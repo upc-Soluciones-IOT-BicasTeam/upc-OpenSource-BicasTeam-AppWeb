@@ -73,13 +73,16 @@ export class ProfileCreateCarrierComponent implements OnInit{
             console.error('Error during profile creation:', error);
             this.error = true;
             this.error_msg = 'Profile creation failed. Please try again later.';
+
           }
         );
       } catch (error) {
         this.error = true;
         this.error_msg = 'Error creating user. Please try again later.';
+
       }
     }
+    window.location.reload();
   }
 
   async validateInputs() {
