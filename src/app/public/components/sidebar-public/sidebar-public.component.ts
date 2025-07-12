@@ -101,4 +101,7 @@ export class SidebarPublicComponent implements OnInit {
   goToAnalytics(): void {
     this.router.navigate(['/analytics', this.user.id]);
   }
+  goToCarriers(){
+    this.router.navigate(['/carriers', this.user.id]);
+  }
 }
