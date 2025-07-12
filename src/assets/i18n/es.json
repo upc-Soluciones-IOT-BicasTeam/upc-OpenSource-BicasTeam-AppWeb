@@ -193,14 +193,23 @@
     }
   },
   "VEHICLES": {
-    "TITLE": "Gestión de Vehículos",
-    "ADD_BUTTON": "Agregar Vehículo",
-    "IMAGE_ALT": "Imagen del Vehículo",
-    "MODEL_LABEL": "Modelo",
-    "LOCATION_LABEL": "Ubicación",
-    "VIEW_BUTTON": "Ver más",
-    "EDIT_BUTTON": "Editar",
-    "DELETE_BUTTON": "Eliminar",
+    "TITLE": "Vehículos",
+    "FILTER_BY_STATUS": "Filtrar por Estado",
+    "ALL": "Todos",
+    "SEARCH_LABEL": "Buscar",
+    "SEARCH_PLACEHOLDER": "Buscar por placa, modelo o conductor...",
+    "ADD_BUTTON": "Nuevo Vehículo",
+    "VIEW_TOOLTIP": "Ver detalles",
+    "EDIT_TOOLTIP": "Editar vehículo",
+    "DELETE_TOOLTIP": "Eliminar vehículo",
+    "TABLE": {
+      "LICENSE_PLATE": "Placa",
+      "MODEL": "Modelo",
+      "DRIVER": "Conductor",
+      "COLOR": "Color",
+      "LAST_INSPECTION": "Última Inspección",
+      "ACTIONS": "Acciones"
+    },
     "MODAL": {
       "TITLE_ADD": "Agregar Vehículo",
       "TITLE_EDIT": "Editar Vehículo"
@@ -216,7 +225,17 @@
       "BUTTON_UPDATE": "Actualizar",
       "BUTTON_CANCEL": "Cancelar"
     },
-    "PREVIEW_ALT": "Imagen de vista previa",
+    "EMPTY": {
+      "TITLE": "No hay vehículos",
+      "MESSAGE": "Aún no tienes vehículos registrados. ¡Registra tu primer vehículo!",
+      "CREATE_BUTTON": "Registrar primer vehículo"
+    },
+    "CONFIRM": {
+      "TITLE": "Confirmar eliminación",
+      "MESSAGE": "¿Estás seguro de que deseas eliminar este vehículo?",
+      "CANCEL": "Cancelar",
+      "DELETE": "Eliminar"
+    },
     "DETAILS": {
       "TITLE": "Detalles del Vehículo",
       "IMAGE_ALT": "Imagen del vehículo",
