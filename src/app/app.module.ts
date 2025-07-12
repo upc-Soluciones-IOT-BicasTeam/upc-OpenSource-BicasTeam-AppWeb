@@ -65,6 +65,8 @@ import {
   MatCardTitle,
 } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
+import { PgCarriersComponent } from './public/pages/pg-carriers/pg-carriers.component';
+import { ProfileCreateCarrierComponent } from './profiles-managment/components/profile-create-carrier/profile-create-carrier.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +105,8 @@ import { MatButton } from '@angular/material/button';
     AnalyticsComponent,
     SubscriptionComponent,
     PlatformStaffHomeComponent,
+    PgCarriersComponent,
+    ProfileCreateCarrierComponent,
   ],
   imports: [
     BrowserModule,

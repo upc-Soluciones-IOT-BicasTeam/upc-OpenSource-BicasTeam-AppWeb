@@ -13,11 +13,11 @@ import { PgReportBusinessmanComponent } from './public/pages/pg-report-businessm
 import { PgVehiclesDetailsBusinessmanComponent } from './public/pages/pg-vehicles-details-businessman/pg-vehicles-details-businessman.component';
 import { PgCreateVehicleComponent } from './public/pages/pg-create-vehicle/pg-create-vehicle.component';
 import { PgVehiclesUpdateComponent } from './public/pages/pg-vehicles-update/pg-vehicles-update.component';
-import { PgStaffHomeComponent } from './public/pages/pg-staff-home/pg-staff-home.component';
 import { PgSubscriptionComponent } from './public/pages/pg-subscription/pg-subscription.component';
 import { PgAnalyticsComponent } from './public/pages/pg-analytics/pg-analytics.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
+import {PgCarriersComponent} from "./public/pages/pg-carriers/pg-carriers.component";
 
 const routes: Routes = [
   { path: 'login', component: PgLoginComponent },
@@ -92,9 +92,15 @@ const routes: Routes = [
     component: PgProfileEditionComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'carriers/:id',
+    component: PgCarriersComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRole: 'manager' },
+  },
 
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '**', redirectTo: '/login' }, 
+  { path: '**', redirectTo: '/login' },
 ];
 
 @NgModule({
